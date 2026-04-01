@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action window -->
+    <record id="legal_contract_amendment_action" model="ir.actions.act_window">
+        <field name="name">Avenants aux Contrats</field>
+        <field name="res_model">legal.contract.amendment</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Ajoutez un avenant à un contrat existant.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue liste -->
+    <record id="legal_contract_amendment_list_view" model="ir.ui.view">
+        <field name="name">legal.contract.amendment.list</field>
+        <field name="model">legal.contract.amendment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="contract_id" readonly="1"/>
+                <!-- Badges de couleurs selon l'étape -->
+                <field name="stage_id"
+                       widget="badge"
+                       decoration-info="stage_id_name == 'Envoyé'"
+                       decoration-success="stage_id_name == 'Signé'"
+                       decoration-muted="stage_id_name == 'Revisé'"
+                       decoration-warning="stage_id_name == 'Brouillon'"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="description" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue Form -->
+    <record id="legal_contract_amendment_form_view" model="ir.ui.view">
+        <field name="name">legal.contract.amendment.form</field>
+        <field name="model">legal.contract.amendment</field>
+        <field name="arch" type="xml">
+            <form string="Avenant au contrat">
+                <header>
+                    <!-- CHAMPS TECHNIQUES (obligatoires pour les boutons) -->
+                    <field name="sign_status" invisible="1"/>
+                    <field name="stage_id_name" invisible="1"/>
+
+                    <!--                    &lt;!&ndash; IMPORTANT : Déclarer le champ utilisé dans l'invisible &ndash;&gt;-->
+                    <!--                    <field name="sign_status" widget="statusbar" options="{'clickable': '1'}"/>-->
+
+                    <button name="action_sign_document"
+                            string="Signer l'Avenant"
+                            type="object"
+                            class="btn-primary"
+                            icon="fa-pencil"
+                            groups="gainde_legal_contract.group_ged_sign_juridique"
+                            invisible="sign_status in ['signed', 'expired']"/>
+
+                    <!-- Bouton Envoyé : Visible si on est en Brouillon ou Revisé -->
+                    <button name="action_set_sent"
+                            type="object"
+                            string="Envoyé pour Signature"
+                            class="btn-primary"
+                            invisible="stage_id_name not in ['Brouillon', 'Revisé']"/>
+
+                    <!-- Bouton Signé : Uniquement si déjà envoyé -->
+                    <button name="action_set_signed"
+                            type="object"
+                            string="Marquer comme Signé"
+                            class="btn-primary"
+                            invisible="stage_id_name != 'Envoyé'"/>
+
+                    <!-- Bouton À Reviser : Possible depuis l'état Envoyé -->
+                    <button name="action_set_revised"
+                            type="object"
+                            string="Renvoyer pour Révision"
+                            class="btn-secondary"
+                            invisible="stage_id_name != 'Envoyé'"/>
+
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title mb-1">
+                        <span class="text-muted fw-light">Avenant de modification</span>
+                        <h5>
+                            <field name="name" placeholder="Ex: Avenant N°1 - Extension de durée" class="text-primary"/>
+                        </h5>
+                    </div>
+                    <group>
+                        <group string="Détails de l'avenant">
+                            <field name="contract_id" options="{'no_create': True}" class="fw-bold"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Résumé">
+                            <field name="description" placeholder="Description des modifications..."/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fichiers" name="documents" icon="fa-paperclip">
+                            <field name="document_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Kanban CORRIGÉE POUR V18 -->
+    <record id="legal_contract_amendment_kanban_view" model="ir.ui.view">
+        <field name="name">legal.contract.amendment.kanban</field>
+        <field name="model">legal.contract.amendment</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="contract_id" class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="contract_id"/>
+                <templates>
+                    <!-- CHANGEMENT ICI : kanban-box au lieu de card -->
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <field name="contract_id"/>
+                                    <br/>
+                                    <field name="date"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

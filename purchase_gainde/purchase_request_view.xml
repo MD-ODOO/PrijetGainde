@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record id="purchase_request_line_tree_inherit_replace_purchase_state" model="ir.ui.view">
+        <field name="name">purchase.request.line.list.inherit.replace.state</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_tree"/>
+        <field name="arch" type="xml">
+            <!-- Replace purchase_state field with state -->
+            <xpath expr="//field[@name='purchase_state']" position="replace">
+            </xpath>
+            <!-- Remove fields from list view -->
+            <xpath expr="//field[@name='request_state']" position="replace" />
+            <xpath expr="//field[@name='assigned_to']" position="replace" />
+            <xpath expr="//field[@name='supplier_id']" position="replace" />
+            <xpath expr="//field[@name='purchased_qty']" position="replace" />
+            <xpath expr="//field[@name='analytic_distribution']" position="replace" />
+
+            <!-- Add state at the end with badge -->
+            <xpath expr="//list" position="inside">
+                <field name="state"
+                       widget="badge"
+                       decoration-success="state in ('approved','to_purchase','done')"
+                       decoration-warning="state in ('to_approve','n1_approval','rnd_pending','rcb_pending','rcg_pending')"
+                       decoration-danger="state == 'rejected'"
+                       decoration-muted="state == 'draft'"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Inherit purchase.request form to add line-level approve/reject buttons -->
+    <record id="purchase_gainde_view_purchase_request_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.form.gainde</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+                    <xpath expr="//header/button[@name='%(purchase_request.action_purchase_request_line_make_purchase_order)d']" position="replace" />
+
+            <!-- Boutons d'approbation/rejet global en en-tête -->
+            <xpath expr="//header/button[@name='button_to_approve']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+             <!-- Hide Approve -->
+            <xpath expr="//header/button[@name='button_draft']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <!-- Hide Approve -->
+            <xpath expr="//header/button[@name='button_approved']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Hide In Progress -->
+            <xpath expr="//header/button[@name='button_in_progress']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            
+            <!-- Hide Done -->
+            <xpath expr="//header/button[@name='button_done']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_rejected']"
+                   position="after">
+                 <button name="%(action_purchase_request_line_make_purchase_order_gainde)d" invisible="state != 'approved'" string="Créer une demande de prix" type="action" />
+            </xpath>
+            <xpath expr="//header/button[@name='button_rejected']"
+                   position="after">
+            <button name="action_n2_line_approved" invisible="state not in ('draft')" string="Approuver" type="object" />
+            </xpath>
+
+            <!-- Hide Reject -->
+            <xpath expr="//header/button[@name='button_rejected']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+           
+              <!-- Hide Assigned To -->
+            <xpath expr="//field[@name='assigned_to']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <!-- Hide Picking Type -->
+            <xpath expr="//field[@name='picking_type_id']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Hide Group -->
+            <xpath expr="//field[@name='group_id']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Hide Source / Origin -->
+            <xpath expr="//field[@name='origin']"
+                   position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+           <!-- <xpath expr="//field[@name='line_ids']/list" position="inside">
+    <field name="is_current_user_coach" invisible="1"/>
+</xpath> -->
+            <xpath expr="//field[@name='line_ids']/list/field[@name='estimated_cost']"
+                         position="attributes">
+                     <attribute name="readonly">state == 'to_purchase' and not can_edit_estimated_cost</attribute>
+                </xpath>
+
+            <!-- analytic_distribution readonly conditionnel -->
+            <xpath expr="//field[@name='line_ids']/list/field[@name='analytic_distribution']"
+                   position="attributes">
+                <attribute name="readonly">not can_edit_analytic_distribution</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list" position="inside">
+                <field name="can_edit_analytic_distribution" invisible="1"/>
+            </xpath>
+ <xpath expr="//field[@name='line_ids']/list/field[@name='product_id']"
+           position="attributes">
+        <attribute name="readonly">state and state not in ('draft')</attribute>
+    </xpath>
+
+        <!-- description -->
+        <xpath expr="//field[@name='line_ids']/list/field[@name='name']"
+               position="attributes">
+            <attribute name="readonly">state and state not in ('draft')</attribute>
+        </xpath>
+
+        <!-- quantity -->
+        <xpath expr="//field[@name='line_ids']/list/field[@name='product_qty']"
+               position="attributes">
+            <attribute name="readonly">state and state not in ('draft')</attribute>
+        </xpath>
+
+        <!-- UoM -->
+        <xpath expr="//field[@name='line_ids']/list/field[@name='product_uom_id']"
+               position="attributes">
+            <attribute name="readonly">state and state not in ('draft')</attribute>
+        </xpath>
+
+        <!-- Hide purchased quantity -->
+        <xpath expr="//field[@name='line_ids']/list/field[@name='purchased_qty']"
+               position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+
+
+
+            <!-- Restreindre les états visibles du statusbar -->
+            <xpath expr="//form/header/field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft,to_approve,partially_approved,approved</attribute>
+            </xpath>
+            <!-- Rendre les lignes en lecture seule lorsque la demande n'est pas en brouillon.
+                 En brouillon (state == 'draft'), la liste reste éditable et permet d'ajouter des lignes. -->
+            <xpath expr="//field[@name='line_ids']" position="attributes">
+                <attribute name="readonly">state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list/field[@name='product_id']" position="before">
+            <!-- Line-level approve / reject buttons, right after state -->
+                        <button name="action_n22_line_approved"
+                type="object"
+                icon="fa-check"
+                string="Approuver"
+                invisible="is_current_user_coach == False"/>
+            <button name="%(purchase_gainde.action_purchase_request_line_reject)d"
+                type="action"
+                icon="fa-times"
+                string="Rejeter"
+                invisible="is_current_user_coach == False"/>
+
+            <button name="action_n22_line_approved"
+                type="object"
+                icon="fa-check"
+                string="Approuver"
+                invisible="state  not in ('n1_approval,rnd_pending,rcb_pending,rcg_pending,to_purchase,rcb_final_approval') or is_current_approver == False"/>
+            <button name="%(purchase_gainde.action_purchase_request_line_reject)d"
+                type="action"
+                icon="fa-times"
+                string="Rejeter"
+                invisible="state  not in ('n1_approval,rnd_pending,rcb_pending,rcg_pending,to_purchase,rcb_final_approval') or is_current_approver == False"/>
+
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/list/field[@name='purchase_state']" position="after">
+              <field name="is_current_user_coach" invisible="1" />
+              <field name="is_current_user_coach_checker" invisible="1" />
+
+            <!-- Line state column -->
+  <field name="state"
+                       widget="badge"
+                       decoration-success="state in ('approved','to_purchase','done')"
+                       decoration-warning="state in ('to_approve','n1_approval','rnd_pending','rcb_pending','rcg_pending')"
+                       decoration-danger="state == 'rejected'"
+                       decoration-muted="state == 'draft'"/>  </xpath>           
+        </field>
+    </record>
+
+    <!-- Supprimer le bloc "Group By..." de la vue de recherche purchase.request -->
+    <record id="purchase_gainde_view_purchase_request_search_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.search.gainde</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter name="my_approvals"
+                        string="Mes approbations"
+                        domain="[('current_approval_stage_id.user_ids', 'in', uid), ('current_approval_stage_id', '!=', False)]"/>
+            </xpath>
+            <!-- On enlève entièrement le group des filtres de regroupement sans utiliser l'attribut 'string' comme sélecteur -->
+            <xpath expr="//search/group[filter[@name='requested_by'] and filter[@name='assigned_to'] and filter[@name='source'] and filter[@name='start_date']]" position="replace"/>
+        </field>
+    </record>
+
+    <!-- Bouton ligne: créer une demande de prix depuis la ligne -->
+    <record id="purchase_gainde_view_purchase_request_line_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.request.line.form.gainde</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header" position="inside">
+                <button name="%(purchase_gainde.action_purchase_request_line_make_purchase_order_gainde)d"
+                        string="Créer une demande de prix"
+                        type="action"
+                        invisible="state != 'approved'"/>
+            </xpath>
+        </field>
+    </record>
+ <record id="purchase_request.purchase_request_form_action" model="ir.actions.act_window">
+    <field name="name">Purchase Requests</field>
+    <field name="context">{}</field>
+</record>
+
+    <!-- Action serveur : appliquer le filtre "Mes approbations" seulement si nécessaire -->
+    <record id="action_purchase_request_my_approvals" model="ir.actions.server">
+        <field name="name">Purchase Requests</field>
+        <field name="model_id" ref="purchase_request.model_purchase_request"/>
+        <field name="state">code</field>
+        <field name="code">action = env['purchase.request'].action_open_requests_with_my_approvals()</field>
+    </record>
+
+    <!-- Remplacer l'action du menu Purchase Requests par l'action serveur -->
+    <record id="purchase_request.menu_purchase_request_act" model="ir.ui.menu">
+        <field name="action" ref="purchase_gainde.action_purchase_request_my_approvals"/>
+    </record>
+    <!-- Nettoyer le context de l'action pour retirer search_default_requested_by -->
+    <!-- <function model="ir.actions.act_window" name="write">
+    <value eval="[ref('purchase_request.purchase_request_form_action'), {'context': {}}]"/>
+    </function> -->
+
+</odoo>

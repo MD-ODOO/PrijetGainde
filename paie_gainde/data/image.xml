@@ -1,0 +1,9 @@
+<odoo>
+    <record id="dgid_logo_attachment" model="ir.attachment">
+        <field name="name">DGID</field>
+        <field name="type">binary</field>
+        <field name="datas" type="base64" file="paie_gainde/static/description/DGID.png"/>
+        <field name="mimetype">image/png</field>
+        <field name="public">True</field>
+    </record>
+</odoo>

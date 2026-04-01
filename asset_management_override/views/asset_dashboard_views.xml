@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Client action OWL pour le tableau de bord -->
+        <record id="action_asset_dashboard" model="ir.actions.client">
+            <field name="name">Tableau de bord Actifs</field>
+            <field name="tag">asset_management_override.asset_dashboard</field>
+        </record>
+    </data>
+</odoo>

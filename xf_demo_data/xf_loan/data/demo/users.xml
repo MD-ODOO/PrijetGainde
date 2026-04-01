@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="base.user_demo" model="res.users">
+            <field name="groups_id" eval="[
+            (3, ref('hr.group_hr_manager')),
+            (3, ref('hr.group_hr_user')),
+            (4, ref('xf_loan.group_xf_loan_employee')),
+            ]"/>
+        </record>
+        <!-- HR Officer-->
+        <record id="xf_demo_data.user_Lory_Weinhold" model="res.users">
+            <field name="groups_id" eval="[
+            (3, ref('hr.group_hr_manager')),
+            (4, ref('xf_loan.group_xf_loan_officer')),
+            (4, ref('hr.group_hr_user')),
+            ]"/>
+        </record>
+        <!-- HR Department Manager -->
+        <record id="xf_demo_data.user_Mira_Tennett" model="res.users">
+            <field name="groups_id" eval="[
+            (4, ref('hr.group_hr_manager')),
+            (4, ref('xf_loan.group_xf_loan_officer')),
+            ]"/>
+        </record>
+    </data>
+</odoo>

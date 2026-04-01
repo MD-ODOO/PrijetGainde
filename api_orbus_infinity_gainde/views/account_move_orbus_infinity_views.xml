@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_move_form_orbus_infinity" model="ir.ui.view">
+            <field name="name">account.move.form.orbus.infinity</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//notebook" position="inside">
+                    <page string="Infinity" name="orbus_infinity">
+                        <group>
+                            <group string="Références">
+                                <field name="orbus_infinity_reference_panier"/>
+                                <field name="orbus_infinity_numero_dossier"/>
+                                <field name="orbus_infinity_numero_paiement"/>
+                                <field name="orbus_infinity_source"/>
+                                <field name="orbus_infinity_payer"/>
+                                <field name="orbus_infinity_date_paiement"/>
+                                <field name="orbus_infinity_date_generate_reference"/>
+                            </group>
+                            <group string="Infos">
+                                <field name="orbus_infinity_destination_pays"/>
+                                <field name="orbus_infinity_transitaire"/>
+                                <field name="orbus_infinity_connaissement"/>
+                                <field name="orbus_infinity_montant_facture"/>
+                                <field name="orbus_infinity_batch_line_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Factures (JSON)">
+                            <field name="orbus_infinity_factures_json" widget="text"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

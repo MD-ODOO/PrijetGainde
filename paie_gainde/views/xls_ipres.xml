@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+<data>
+
+    <!-- Déclaration du rapport IPRES -->
+   
+   
+
+   
+    
+
+    <!-- Action serveur -->
+  
+
+      
+        
+  <record id="view_ipres_export_wizard" model="ir.ui.view">
+    <field name="name">ipres.export.wizard.form</field>
+    <field name="model">ipres.export.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Export IPRES">
+        <group>
+          <field name="export_type"/>
+          <field name="file_data" filename="file_name" invisible="1"/>
+          <field name="file_name" invisible="1"/>
+        </group>
+        <footer>
+          <button string="Exporter"
+                  type="object"
+                  name="action_export"
+                  class="btn-primary"/>
+          <button string="Fermer" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+ 
+  
+  <record id="action_menu_ipres" model="ir.actions.act_window">
+    <field name="name">Déclaration IPRES</field>
+    <field name="res_model">ipres.export.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+  
+ 
+ 
+            
+           
+ 
+ 
+ 
+
+
+
+</data>
+</odoo>

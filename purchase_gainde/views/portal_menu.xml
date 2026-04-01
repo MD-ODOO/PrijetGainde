@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_open_portal_my" model="ir.actions.act_url">
+        <field name="name">Portail</field>
+        <field name="url">/my</field>
+        <field name="target">self</field>
+    </record>
+
+    <menuitem id="menu_portail_apps"
+              name="Portail"
+              parent="base.menu_apps"
+              action="action_open_portal_my"
+              sequence="90"/>
+</odoo>

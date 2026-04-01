@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Vue formulaire pour le wizard -->
+        <record id="view_cerco_payslip_lines_contribution_register" model="ir.ui.view">
+            <field name="name">cerco.payslip.lines.contribution.register.form</field>
+            <field name="model">cerco.payslip.lines.contribution.register</field>
+            <field name="arch" type="xml">
+                <form string="Contribution Register's Payslip Lines">
+                    <group col="4" colspan="6">
+                        <field name="date_from"/>
+                        <newline/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="print_report"
+                                string="Imprimer"
+                                type="object"
+                                class="btn-primary"/>
+                        <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action serveur pour lancer le wizard -->
+        <record id="action_cerco_payslip_lines_contribution_register" model="ir.actions.server">
+            <field name="name">Déclarations des retenues</field>
+            <field name="model_id" ref="model_cerco_payslip_lines_contribution_register"/>
+            <field name="binding_model_id" ref="model_cerco_payslip_lines_contribution_register"/>
+            <field name="state">code</field>
+            <field name="code">
+action = model.open_wizard_function(env, context.get('active_ids'))
+            </field>
+        </record>
+
+        <!-- Bouton dans le menu ou le modèle -->
+        <record id="cerco_payslip_lines_contribution_register_action" model="ir.actions.act_window">
+            <field name="name">Déclarations des retenues</field>
+            <field name="res_model">cerco.payslip.lines.contribution.register</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_cerco_payslip_lines_contribution_register"/>
+        </record>
+
+        <menuitem
+            id="menu__register"
+            name="Déclarations des retenues"
+            parent="hr_payroll.menu_hr_payroll_root"
+            sequence="9"/>
+        <menuitem
+            id="menu_cerco_payslip_lines_contribution_register"
+            name="Retenues"
+            parent="menu__register"
+            action="cerco_payslip_lines_contribution_register_action"
+            sequence="20"/>
+
+    </data>
+</odoo>

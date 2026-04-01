@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_contract_subscription_orbus_insurance">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+
+                    <!-- HEADER COMMUN GAINDE -->
+                    <t t-call="gainde_legal_contract.custom_gainde_header"/>
+
+                    <div class="page"
+                         style="font-family: 'Helvetica', Arial, sans-serif; text-align: justify; font-size: 12pt;">
+
+                        <div class="page gainde_contract">
+                            <!-- BLOC IDENTIFICATION (Présent ici car Marché) -->
+                            <t t-call="gainde_legal_contract.identification_table_block"/>
+                            <t t-call="gainde_legal_contract.identification_activity_block"/>
+                            <t t-call="gainde_legal_contract.identification_comment_block"/>
+
+                            <!-- BLOC PARTIES PRENANTES (Basé sur le texte du PDF page 3 et 4) -->
+                            <!-- 1. AFFICHAGE DE L'EN-TETE EDITE -->
+                            <div class="mb-4">
+                                <t t-out="doc.header_content"/>
+                            </div>
+                            <t t-foreach="doc.article_ids" t-as="art">
+                                <!-- Titre avec soulignement dynamique -->
+                                <h6 class="mt-4 mb-2" style="font-weight: bold;">
+                                    <span class="text-dark border-bottom border-dark pb-1" t-esc="art.name"/>
+                                </h6>
+
+                                <!-- Contenu de l'article (Le texte du CDATA) -->
+                                <div class="ps-3 small text-justify">
+                                    <t t-out="art.content"/>
+                                </div>
+
+                            </t>
+
+                            <!-- SIGNATURES -->
+                            <t t-call="gainde_legal_contract.signatures_block"/>
+                        </div>
+
+                    </div>
+
+                    <!-- FOOTER COMMUN -->
+                    <t t-call="gainde_legal_contract.custom_gainde_footer"/>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

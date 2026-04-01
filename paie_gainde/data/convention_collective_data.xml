@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================= -->
+    <!-- TYPES DE CONTRAT -->
+    <!-- ============================= -->
+   
+
+    <record id="contract_type_cdi" model="hr.contract.type">
+        <field name="name">CDI</field>
+        <field name="code">cdi</field>
+    </record>
+
+
+    <record id="contract_type_cdd" model="hr.contract.type">
+        <field name="name">CDD</field>
+        <field name="code">cdd</field>
+    </record>
+
+    <!-- ============================= -->
+    <!-- SEQUENCES -->
+    <!-- ============================= -->
+
+    <record id="seq_hr_pay_order" model="ir.sequence">
+        <field name="name">Ordre de virement RH</field>
+        <field name="code">hr.pay.order</field>
+        <field name="prefix">VIR/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_hr_pay_lot" model="ir.sequence">
+        <field name="name">Lot Ordre de virement RH</field>
+        <field name="code">hr.pay.batch</field>
+        <field name="padding">4</field>
+        <field name="use_date_range">True</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- ============================= -->
+    <!-- TEMPLATE EMAIL BULLETIN -->
+    <!-- ============================= -->
+
+    
+
+</odoo>

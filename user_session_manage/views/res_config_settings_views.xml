@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.user_session_manage</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="priority" eval="0"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='active_user_setting']" position="after">
+                <div id="user_session_manage_setting" class="o_setting_box col-12 o_searchable_setting">
+                    <div class="fs-3 fw-bold my-2">User Session Manage Settings</div>
+                    <group>
+                        <field name="session_limit_management"/>
+                        <field name="session_limit_configuration"/>
+                    </group>
+                    <group>
+                        <field name="session_expiry_management"/>
+                        <field name="session_expiry_configuration"/>
+                    </group>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

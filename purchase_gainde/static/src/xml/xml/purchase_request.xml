@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Extension du template bf_portal_purchase_request via t-inherit -->
+    <t t-name="purchase_gainde.purchase_request_line_inherit"
+       t-inherit="bf_portal_purchase_request.purchase_request_line"
+       t-inherit-mode="extension">
+        <!-- Remplacer uniquement le champ quantité pour imposer des entiers (step=1, min=1) -->
+        <xpath expr="//input[contains(@class, 'o_input_quantity')]" position="replace">
+            <input type="number" step="1" min="1"  class="form-control o_input_quantity text-end" t-att-value="product_qty"/>
+        </xpath>
+    </t>
+</templates>

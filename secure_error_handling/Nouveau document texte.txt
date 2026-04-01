@@ -1,0 +1,13 @@
+Tu poses le dossier secure_error_handling/ dans ton dossier d’addons custom.
+
+Tu redémarres Odoo.
+
+Tu vas dans Applications, tu installes Secure Error Handling.
+
+Tu vas dans Paramètres → Général (ou équivalent) :
+
+    coche Masquer les détails techniques côté interface
+
+    coche Masquer les détails techniques côté serveur
+
+    adapte le message générique si tu veux.

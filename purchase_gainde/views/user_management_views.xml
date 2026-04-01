@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action serveur qui délègue au bouton Python sur user.management -->
+    <record id="action_gainde_reset_domain_access" model="ir.actions.server">
+        <field name="name">Recharger domaines par défaut</field>
+        <field name="model_id" ref="access_users_manager.model_user_management"/>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_gainde_reset_domain_access()
+        </field>
+    </record>
+
+    <!-- Inhérence de la vue form user.management pour ajouter un bouton de reset des domaines -->
+    <record id="view_user_management_form_gainde_reset_domains" model="ir.ui.view">
+        <field name="name">user.management.form.gainde.reset.domains</field>
+        <field name="model">user.management</field>
+        <!-- Vue form d'origine du module access_users_manager -->
+        <field name="inherit_id" ref="access_users_manager.user_access_management_form"/>
+        <field name="arch" type="xml">
+            <!-- On ajoute un bouton dans la boîte de statistiques (oe_button_box) -->
+            <xpath expr="//div[@class='oe_button_box' and @name='button_box']" position="inside">
+                <button name="%(purchase_gainde.action_gainde_reset_domain_access)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-refresh"
+                        widget="statinfo"
+                        string="Recharger domaines par défaut">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Recharger domaines par défaut</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit access_users_manager users tree view to remove Login button -->
+    <record id="view_users_tree_gainde_remove_login_button" model="ir.ui.view">
+        <field name="name">res.users.tree.gainde.remove.login.button</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="access_users_manager.res_user_tree_inherit"/>
+        <field name="arch" type="xml">
+            <!-- Remove the Login button added after the state field -->
+            <xpath expr="//button[@name='access_action_login_confirm']" position="replace"/>
+        </field>
+    </record>
+
+    <!-- Show profile_type on user.profiles form -->
+    <record id="view_user_profiles_form_gainde" model="ir.ui.view">
+        <field name="name">user.profiles.form.gainde.profile_type</field>
+        <field name="model">user.profiles</field>
+        <field name="inherit_id" ref="access_users_manager.view_res_user_profiles_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']/group" position="inside">
+                <field name="profile_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Show profile_type on user.profiles tree/list -->
+    <record id="view_user_profiles_tree_gainde" model="ir.ui.view">
+        <field name="name">user.profiles.tree.gainde.profile_type</field>
+        <field name="model">user.profiles</field>
+        <field name="inherit_id" ref="access_users_manager.view_res_user_profiles_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="profile_type"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- debut convention collective -->
+       
+          <record id="list_conventionview" model="ir.ui.view">
+            <field name="name">convention.list</field>
+            <field name="model">cerco.convention</field>
+            <field name="arch" type="xml">
+                <list string="Convention" editable="bottom">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="list_convention_lineview" model="ir.ui.view">
+            <field name="name">convention.list.line</field>
+            <field name="model">line.cerco.convention</field>
+            <field name="arch" type="xml">
+                <list string="Convention" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="taux_h"/>
+                    <field name="wage"/>
+                    <field name="conv_id"/>
+                </list>
+            </field>
+        </record>
+        
+        <!-- Action fenêtre -->
+        <record id="action_cerco_convention" model="ir.actions.act_window">
+            <field name="name">Convention collective</field>
+            <field name="res_model">cerco.convention</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+         <record id="action_cerco_convention_line" model="ir.actions.act_window">
+            <field name="name">Convention collective</field>
+            <field name="res_model">line.cerco.convention</field>
+            <field name="view_mode">list</field>
+        </record>
+
+        <!-- Menu -->
+       
+         <menuitem id="menu_conv_line"
+                  name="Convention collective"
+                  parent="hr.menu_human_resources_configuration"
+                  action="action_cerco_convention_line"
+                  sequence="18"/>
+        <!-- fin convention collective -->
+    </data>
+</odoo>

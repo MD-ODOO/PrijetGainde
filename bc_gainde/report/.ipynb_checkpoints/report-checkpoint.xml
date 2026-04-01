@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+    <record id="action_commande_ci" model="ir.actions.report">
+       <field name="name">Commande CI</field>
+       <field name="model">purchase.order</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">opti_baobabci_report.baobab_report</field>
+         <field name="report_file">opti_baobabci_report.baobab_report</field>
+       <field name="print_report_name">'Commande CI - %s' % (object.name)</field>
+      <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+         <!--<field name="binding_type">report</field>-->
+    </record>
+    </data>
+</odoo>
+       

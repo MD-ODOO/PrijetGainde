@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_budget_management_main"
+              name="Gestion budgétaire"
+              sequence="45"
+              groups="purchase_gainde.group_budget_admin_gainde,purchase_gainde.group_budget_user_gainde"
+              web_icon="purchase_gainde,static/description/budget_icon.png"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_budget_configuration"
+              name="Configuration"
+              parent="menu_budget_management_main"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="100"/>
+
+    <!-- Budget Centers -->
+    <record id="action_budget_center" model="ir.actions.act_window">
+        <field name="name">Centres de budget</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_budgetary_center', '=', True)]</field>
+        <field name="context" eval="{'default_is_budgetary_center': True, 'default_plan_id': ref('purchase_gainde.analytic_plan_budget_centers')}"></field>
+        <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un centre de budget
+            </p>
+            <p>
+                Les centres de budget représentent des unités organisationnelles (départements, divisions, etc.)
+                qui gèrent leur propre budget.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_budget_center"
+              name="Centres de budget"
+              parent="menu_budget_configuration"
+              action="action_budget_center"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="10"/>
+
+    <!-- Budget Positions -->
+    <record id="action_budget_position" model="ir.actions.act_window">
+        <field name="name">Postes budgétaires</field>
+        <field name="res_model">account.analytic.account</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_budgetary_poste', '=', True)]</field>
+        <field name="context" eval="{'default_is_budgetary_poste': True, 'default_plan_id': ref('purchase_gainde.analytic_plan_budget_positions')}"></field>
+        <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un poste budgétaire
+            </p>
+            <p>
+                Les postes budgétaires représentent des catégories ou des lignes budgétaires
+                (par ex. Salaires, Déplacements, Équipements, etc.).
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_budget_position"
+              name="Postes budgétaires"
+              parent="menu_budget_configuration"
+              action="action_budget_position"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="20"/>
+ <!-- <menuitem id="menu_purchase_amount_stage_root"
+              name="Seuils de montant HT"
+              parent="menu_budget_configuration"
+              action="action_purchase_amount_stage"
+              sequence="60"/>
+     -->
+    <!-- Operations Menu -->
+    <menuitem id="menu_budget_operations"
+              name="Opérations"
+              parent="menu_budget_management_main"
+              groups="purchase_gainde.group_budget_admin_gainde,purchase_gainde.group_budget_user_gainde"
+              sequence="10"/>
+              
+
+    <!-- Budgets -->
+    <menuitem id="menu_budgets"
+              name="Budgets"
+              parent="menu_budget_operations"
+              action="account_budget.act_budget_analytic_view"
+              groups="purchase_gainde.group_budget_admin_gainde,purchase_gainde.group_budget_user_gainde"
+              sequence="10"/>
+
+    <!-- Budget Lines: consolidated view (confirmed budgets, grouped by budget) -->
+    <record id="action_budget_consolidated_lines" model="ir.actions.act_window">
+        <field name="name">Budget consolidé</field>
+        <field name="res_model">budget.line</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="view_id" eval="False"/>
+        <field name="domain">[("budget_analytic_state", "=", "confirmed")]</field>
+        <field name="context" eval="{'search_default_group_budget_analytic_id': 1}"/>
+        <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+    </record>
+
+    <menuitem id="menu_budget_lines"
+              name="Budget consolidé"
+              parent="menu_budget_operations"
+              action="purchase_gainde.action_budget_consolidated_lines"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="20"/>
+
+    <!-- Purchase Requests -->
+    <!-- <menuitem id="menu_purchase_requests"
+              name="Demandes d'achat"
+              parent="menu_budget_operations"
+              action="purchase_request.purchase_request_form_action"
+              sequence="30"
+              groups="purchase_request.group_purchase_request_user"/> -->
+
+    <!-- Reporting Menu -->
+    <menuitem id="menu_budget_reporting"
+              name="Rapports"
+              parent="menu_budget_management_main"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="50"/>
+
+    <!-- Budget Report -->
+    <menuitem id="menu_budget_report"
+              name="Analyse budgétaire"
+              parent="menu_budget_reporting"
+              action="account_budget.budget_report_action"
+              groups="purchase_gainde.group_budget_admin_gainde"
+              sequence="10"/>
+
+    <record id="account_budget.act_budget_analytic_view" model="ir.actions.act_window">
+        <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde'), ref('purchase_gainde.group_budget_user_gainde')])]"/>
+    </record>
+
+    <record id="account_budget.budget_report_action" model="ir.actions.act_window">
+        <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+    </record>
+
+</odoo>

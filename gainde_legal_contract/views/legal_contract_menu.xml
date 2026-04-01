@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu racine GED / Juridique -->
+    <!-- CORRECTION: Ajout des groupes juridiques ici pour qu'ils puissent voir le menu parent -->
+<!--    <record id="documents.menu_root" model="ir.ui.menu">-->
+<!--        <field name="name">GED GAINDE 2000</field>-->
+<!--    </record>-->
+    <menuitem
+            id="menu_legal_root"
+            name="Juridique"
+            sequence="30"
+            web_icon="gainde_legal_contract,static/description/icon.png"
+            groups="gainde_legal_contract.group_ged_read_juridique,gainde_legal_contract.group_ged_ast_juridique"
+    />
+
+    <!-- Sous-menu : Contrats Juridiques -->
+    <menuitem id="menu_legal_contracts"
+              name="Contrats"
+              parent="menu_legal_root"
+              action="legal_contract_action"
+              sequence="10"
+              groups="gainde_legal_contract.group_ged_read_juridique,gainde_legal_contract.group_ged_ast_juridique"/>
+
+
+    <!-- Sous-menu : Avenants (accès direct si besoin) -->
+    <menuitem
+            id="menu_legal_amendments"
+            name="Avenants"
+            parent="menu_legal_root"
+            action="legal_contract_amendment_action"
+            sequence="15"
+            groups="gainde_legal_contract.group_ged_read_juridique,gainde_legal_contract.group_ged_ast_juridique"
+    />
+
+    <!-- Sous-menu : Contentieux -->
+    <menuitem
+            id="menu_legal_litigations"
+            name="Contentieux"
+            parent="menu_legal_root"
+            action="legal_litigation_action"
+            sequence="20"
+            groups="gainde_legal_contract.group_ged_read_juridique,gainde_legal_contract.group_ged_ast_juridique"
+    />
+
+    <!-- Lien vers les Types de Contrat -->
+    <menuitem
+            id="menu_legal_contract_type"
+            name="Types de Contrat"
+            parent="menu_legal_root"
+            action="action_legal_contract_type"
+            groups="gainde_legal_contract.group_ged_read_juridique,gainde_legal_contract.group_ged_ast_juridique"
+            sequence="25"
+    />
+
+</odoo>

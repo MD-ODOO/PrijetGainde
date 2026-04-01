@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ==============================
+                CATEGORIE
+        =============================== -->
+        <record id="module_category_audit" model="ir.module.category">
+            <field name="name">Audit</field>
+        </record>
+
+        <!-- ==============================
+                GROUPES
+        =============================== -->
+        <record id="audit_gainde.group_manager" model="res.groups">
+            <field name="name">Directeur Audit</field>
+            <field name="category_id" ref="module_category_audit"/>
+        </record>
+
+        <record id="audit_gainde.group_senior" model="res.groups">
+            <field name="name">Auditeur Sénior</field>
+            <field name="category_id" ref="module_category_audit"/>
+        </record>
+
+        <record id="audit_gainde.group_junior" model="res.groups">
+            <field name="name">Auditeur Junior</field>
+            <field name="category_id" ref="module_category_audit"/>
+        </record>
+
+        <!-- ==============================
+                PLAN
+        Directeur full / autres lecture
+        =============================== -->
+        <record id="rule_plan_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_plan"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="rule_plan_read" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_plan"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <!-- ==============================
+                MISSION
+        Directeur + senior write
+        junior lecture
+        =============================== -->
+        <record id="rule_mission_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_mission"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <!-- Senior : peut voir toutes les missions -->
+        <record id="rule_mission_senior_read_all" model="ir.rule">
+            <field name="name">Mission: Senior voit toutes les missions</field>
+            <field name="model_id" ref="model_audit_gainde_mission"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <record id="rule_mission_senior_write_own" model="ir.rule">
+            <field name="name">Mission: Senior modifie SES missions</field>
+            <field name="model_id" ref="model_audit_gainde_mission"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior'))]"/>
+            <field name="domain_force">[('responsible_id', '=', user.id)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+        </record>
+
+        <record id="rule_mission_junior" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_mission"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <!-- ==============================
+        RISK / FINDING / RECOMMANDATION / ACTION / CONTROL
+        Directeur lecture
+        Senior + junior create/write si affecté
+        =============================== -->
+
+        <!-- RISK -->
+        <record id="rule_risk_all_users" model="ir.rule">
+            <field name="name">Risk access all users</field>
+            <field name="model_id" ref="model_audit_gainde_risk"/>
+            <field name="groups" eval="[
+                (4, ref('audit_gainde.group_manager')),
+                (4, ref('audit_gainde.group_senior')),
+                (4, ref('audit_gainde.group_junior'))
+            ]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
+        <!-- FINDING -->
+        <record id="rule_finding_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_finding"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_finding_users" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_finding"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">['|',
+            ('mission_id.responsible_id','=',user.id),
+            ('mission_id.team_ids','in',[user.id])]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <!-- RECOMMANDATION -->
+        <record id="rule_recommandation_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_recommendation"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_recommandation_users" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_recommendation"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">['|',
+            ('mission_id.responsible_id','=',user.id),
+            ('mission_id.team_ids','in',[user.id])]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <!-- CORRECTIVE ACTION -->
+        <record id="rule_corrective_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_corrective_action"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_corrective_users" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_corrective_action"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">['|',
+            ('mission_id.responsible_id','=',user.id),
+            ('mission_id.team_ids','in',[user.id])]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <!-- CONTROL -->
+        <record id="rule_control_manager" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_control"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+        </record>
+
+        <record id="rule_control_users" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_control"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">['|',
+            ('risk_id.mission_ids.responsible_id','=',user.id),
+            ('risk_id.mission_ids.team_ids','in',[user.id])]
+            </field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+        <!-- ==============================
+                DOMAIN & DASHBOARD
+                write pour tous
+        =============================== -->
+        <record id="rule_domain_all" model="ir.rule">
+            <field name="model_id" ref="model_audit_gainde_domain"/>
+            <field name="groups" eval="[(4, ref('audit_gainde.group_manager')),(4, ref('audit_gainde.group_senior')),(4, ref('audit_gainde.group_junior'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+        </record>
+
+
+
+    </data>
+</odoo>

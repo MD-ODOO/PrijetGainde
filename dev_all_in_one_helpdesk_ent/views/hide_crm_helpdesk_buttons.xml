@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue pour masquer les boutons Convert to Lead/Opportunity du module crm_helpdesk -->
+    <record id="view_helpdesk_ticket_hide_convert_buttons" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.hide.convert.buttons</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="crm_helpdesk.helpdesk_ticket_view_form_inherited"/>
+        <field name="arch" type="xml">
+            <!-- Masquer le bouton Convert to Lead -->
+            <xpath expr="//button[@name='action_convert_ticket_to_lead_or_opportunity'][@groups='crm.group_use_lead']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- Masquer le bouton Convert to Opportunity -->
+            <xpath expr="//button[@name='action_convert_ticket_to_lead_or_opportunity'][@groups='!crm.group_use_lead']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

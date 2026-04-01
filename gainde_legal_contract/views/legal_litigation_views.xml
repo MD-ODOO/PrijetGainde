@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="legal_litigation_action" model="ir.actions.act_window">
+        <field name="name">Contentieux</field>
+        <field name="res_model">legal.litigation</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <record id="legal_litigation_kanban_view" model="ir.ui.view">
+        <field name="name">legal.litigation.kanban</field>
+        <field name="model">legal.litigation</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_mobile" sample="1">
+                <field name="stage_id"/>
+                <field name="name"/>
+                <field name="contract_id"/>
+                <field name="partner_ids"/>
+                <field name="provision_amount"/>
+                <field name="currency_id"/> <!-- Requis pour le widget monetary -->
+                <templates>
+                    <!-- Odoo 18 utilise 'card' pour la structure principale -->
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb-2">
+                                <h4 class="o_kanban_record_title fw-bold">
+                                    <field name="name"/>
+                                </h4>
+                            </div>
+                            <div class="o_kanban_record_body shadow-sm p-2 bg-light rounded">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="fa fa-file-text-o me-2 text-muted" title="Document"/>
+                                    <field name="contract_id"/>
+                                </div>
+                                <div class="mb-2">
+                                    <field name="partner_ids" widget="many2many_tags"
+                                           options="{'color_field': 'color'}"/>
+                                </div>
+                                <div class="text-danger fw-bold fs-5">
+                                    <field name="provision_amount" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-3 d-flex justify-content-between align-items-center">
+                                <div class="oe_kanban_bottom_left">
+                                    <!-- Widget de statut moderne Odoo 18 -->
+                                    <field name="stage_id" widget="badge" decoration-info="1"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_legal_litigation_list" model="ir.ui.view">
+        <field name="model">legal.litigation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+
+                <!-- Badges de couleurs selon l'étape -->
+                <field name="stage_id"
+                       widget="badge"
+                       decoration-info="stage_id_name == 'Négociation / Médiation' or stage_id_name == 'Procédure Judiciaire' or stage_id_name == 'Analyse'"
+                       decoration-success="stage_id_name == 'Classé' or stage_id_name == 'Gagné'"
+                       decoration-muted="stage_id_name == 'Annulé' or stage_id_name == 'Perdu'"
+                       decoration-warning="stage_id_name == 'Nouveau' or stage_id_name == 'Appel / Suite'"/>
+                <field name="contract_id"/>
+                <field name="partner_ids" widget="many2many_tags"/>
+                <field name="provision_amount" sum="Total Provisions"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="legal_litigation_form_view" model="ir.ui.view">
+        <field name="name">legal.litigation.form</field>
+        <field name="model">legal.litigation</field>
+        <field name="arch" type="xml">
+            <form string="Dossier de Contentieux">
+                <header>
+                    <!-- CHAMPS TECHNIQUES : Indispensables ici pour les conditions 'invisible' -->
+                    <field name="sign_status" invisible="1"/>
+                    <field name="stage_id_name" invisible="1"/>
+                    <field name="is_folded" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+
+                    <button name="action_sign_document"
+                            type="object"
+                            string="Signer"
+                            class="btn-primary"
+                            groups="gainde_legal_contract.group_ged_sign_juridique"
+                            icon="fa-pencil"
+                            invisible="sign_status in ['sent', 'signed']"/>
+                    <button name="action_set_stage_analysis" type="object" string="Lancer l'Analyse"
+                            class="oe_highlight" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="stage_id_name != 'Nouveau'"/>
+
+                    <button name="action_set_stage_procedure" type="object" string="Engager Procédure"
+                            class="oe_highlight" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="stage_id_name not in ['Analyse', 'Négociation / Médiation']"/>
+
+                    <!-- Actions de Clôture (Groupées quand le dossier est avancé/plié) -->
+                    <!-- On utilise 'is_folded' pour proposer les résultats finaux -->
+                    <button name="action_set_stage_won" type="object" string="Gagné"
+                            class="btn-success" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="not is_folded or stage_id_name in ['Gagné', 'Perdu', 'Classé']"/>
+
+                    <button name="action_set_stage_lost" type="object" string="Perdu"
+                            class="btn-danger" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="not is_folded or stage_id_name in ['Gagné', 'Perdu', 'Classé']"/>
+
+                    <button name="action_set_stage_classified" type="object" string="Classé"
+                            class="btn-secondary" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="not is_folded or stage_id_name in ['Gagné', 'Perdu', 'Classé']"/>
+
+                    <!-- Action de suite (Appel) : Visible seulement si le dossier est déjà "Gagné" ou "Perdu" -->
+                    <button name="action_set_stage_next" type="object" string="Appel / Suite"
+                            class="btn-link" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="stage_id_name not in ['Gagné', 'Perdu']"/>
+
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title mb-1">
+                        <span class="text-muted fw-light">Dossier Litigieux</span>
+                        <h4>
+                            <field name="name" placeholder="Objet du litige..." class="text-danger"/>
+                        </h4>
+                    </div>
+
+                    <group>
+                        <group string="Détails de l'Affaire">
+                            <field name="contract_id" options="{'no_create': True}" class="fw-bold"/>
+                            <field name="partner_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        </group>
+                        <group string="Évaluation du Risque">
+                            <label for="provision_amount"/>
+                            <div class="o_row">
+                                <field name="provision_amount" class="fw-bolder text-danger"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Dossier de Preuves" name="documents" icon="fa-folder-open">
+                            <field name="document_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Impact Comptable" name="accounting" icon="fa-book">
+                            <group>
+                                <field name="journal_entry_id" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Impact Organisationnel" name="impact_org_page">
+                            <group>
+                                <label for="impact_org" class="oe_edit_only" string="Analyse de l'Impact"/>
+                                <div class="o_horizontal_separator fs-4 fw-bold text-primary mb-3">
+                                    <i class="fa fa-sitemap me-2"/>
+                                    Description de l'impact
+                                </div>
+                                <field name="impact_org"
+                                       widget="html"
+                                       class="oe_inline shadow-sm border rounded p-3"
+                                       placeholder="Décrivez ici comment ce contrat impacte les processus internes..."/>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+</odoo>

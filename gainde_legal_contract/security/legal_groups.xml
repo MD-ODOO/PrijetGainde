@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <data>
+        <!-- Catégorie de l'application -->
+        <record id="module_category_ged_custom" model="ir.module.category">
+            <field name="name">Gestion Juridique</field>
+            <field name="description">Droits d'accès pour le module Juridique personnalisé</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- 1. DEPARTEMENT : Base de la pyramide -->
+        <record id="group_ged_dept_juridique" model="res.groups">
+            <field name="name">Departement / Contrats</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="comment">Accès restreint : l'utilisateur ne voit que les contrats liés à son propre
+                département.
+            </field>
+        </record>
+
+        <!-- 2. SIGNATURE STANDARD : Hérite de Departement -->
+        <record id="group_ged_sign_stand" model="res.groups">
+            <field name="name">Signature fichier</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[(4, ref('group_ged_dept_juridique'))]"/>
+            <field name="comment">Autorise la signature électronique des documents de base et fichiers joints.</field>
+        </record>
+
+        <!-- 3. LECTURE GLOBALE : Hérite de Signature Standard -->
+        <record id="group_ged_read_juridique" model="res.groups">
+            <field name="name">GED Audit / Lecture Globale</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[(4, ref('group_ged_sign_stand'))]"/>
+            <field name="comment">Accès en lecture seule à l'intégralité des contrats de la base (Audit).</field>
+        </record>
+
+        <!-- 4. SIGNATURE JURIDIQUE : Hérite de Lecture Globale -->
+        <record id="group_ged_sign_juridique" model="res.groups">
+            <field name="name">Signature Juridique / Contrats</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[(4, ref('group_ged_read_juridique'))]"/>
+            <field name="comment">Droit spécifique pour signer les contrats officiels et valider les étapes
+                juridiques.
+            </field>
+        </record>
+
+        <!-- 5. ASSISTANT : Hérite de Lecture Globale -->
+        <record id="group_ged_ast_juridique" model="res.groups">
+            <field name="name">Assistant Juridique / Contrats</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[(4, ref('group_ged_read_juridique'))]"/>
+            <field name="comment">Peut créer et modifier des contrats, mais uniquement en phase de 'Création'.</field>
+        </record>
+
+        <!-- 6. RESPONSABLE JURIDIQUE : Hérite de Assistant -->
+        <record id="group_ged_resp_juridique" model="res.groups">
+            <field name="name">Responsable Juridique / Manage Contrats</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[
+                    (4, ref('group_ged_ast_juridique')),
+                    (3, ref('base.group_allow_export'))
+             ]"/>
+            <field name="comment">Gestion des contrats : modification autorisée à toutes les étapes du cycle de
+                vie.
+            </field>
+        </record>
+
+        <!-- 7. JURISTE : Hérite de Responsable Juridique -->
+        <record id="group_ged_juridique" model="res.groups">
+            <field name="name">Juriste / Manage Contrats</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[
+                (4, ref('group_ged_resp_juridique')),
+                (4, ref('base.group_allow_export'))
+            ]"/>
+            <field name="comment">Gestion complète des contrats : modification autorisée à toutes les étapes du cycle de
+                vie.
+            </field>
+        </record>
+
+        <!-- 8. MANAGER : Hérite de Juriste -->
+        <record id="group_ged_manager" model="res.groups">
+            <field name="name">Admin Juridique</field>
+            <field name="category_id" ref="module_category_ged_custom"/>
+            <field name="implied_ids" eval="[
+                (4, ref('group_ged_juridique')),
+                (4, ref('group_ged_sign_juridique'))
+            ]"/>
+            <field name="comment">Accès administrateur : configuration du module, suppression de contrats et gestion des
+                droits.
+            </field>
+        </record>
+
+    </data>
+</odoo>

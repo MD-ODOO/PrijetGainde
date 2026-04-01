@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_model_read_gainde,ir.model.read.gainde,base.model_ir_model,base.group_user,1,0,0,0
+access_purchase_request_line_reject_user,purchase.request.line.reject,model_purchase_request_line_reject,purchase_request.group_purchase_request_user,1,1,1,0
+access_purchase_request_line_make_purchase_order_gainde,purchase.request.line.make.purchase.order.gainde,model_purchase_request_line_make_purchase_order_gainde,purchase.group_purchase_user,1,1,1,0
+access_purchase_request_line_make_purchase_order_item_gainde,purchase.request.line.make.purchase.order.item.gainde,model_purchase_request_line_make_purchase_order_item_gainde,purchase.group_purchase_user,1,1,1,1
+access_budget_revise_confirm_wizard,budget.revise.confirm.wizard,model_budget_revise_confirm_wizard,account.group_account_user,1,1,1,0
+access_purchase_amount_stage_manager,purchase.amount.stage,model_purchase_amount_stage,purchase.group_purchase_manager,1,1,1,0
+access_purchase_tdr_manager,purchase.tdr,model_purchase_tdr,purchase.group_purchase_manager,1,1,1,0
+access_budget_analytic_admin_gainde,budget.analytic.admin.gainde,model_budget_analytic,purchase_gainde.group_budget_admin_gainde,1,1,1,0
+access_field_domain_rule_admin,field.domain.rule.admin,model_field_domain_rule,base.group_system,1,1,1,1
+access_field_domain_rule_line_admin,field.domain.rule.line.admin,model_field_domain_rule_line,base.group_system,1,1,1,1

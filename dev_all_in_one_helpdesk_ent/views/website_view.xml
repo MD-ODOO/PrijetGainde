@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <!-- Form view for export.template -->
+    <record id="view_export_template_form" model="ir.ui.view">
+        <field name="name">export.template.form</field>
+        <field name="model">export.template</field>
+        <field name="arch" type="xml">
+            <form string="Export Template">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="model_id"/>
+                    </group>
+                    <notebook>
+		           <page string="Export Template">
+				   <field name="field_ids" >
+					    <list editable='bottom'>
+					    	<field name='sequence' widget="handle"/>
+					    	<field name='field_id' />
+					    	<field name='field_label'/>
+					    </list>
+				   </field> 
+		           </page>
+                   </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="tree_helpdesk_view" model="ir.ui.view">
+        <field name="name">list.helpdesk.view</field>
+        <field name="model">export.template</field>
+        <field name="arch" type="xml">
+            <list string="Export Template">
+                <field name="name" />
+                <field name="model_id"/>  
+                <field name="field_ids"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_export_template" model="ir.actions.act_window">
+        <field name="name">Export Template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">export.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Main menu item for the website -->
+    <menuitem id="website_export_template_menu"
+              name="Export Template"
+              parent="website.menu_website_global_configuration"
+              sequence="50"
+              action="action_export_template"/>
+</odoo>
+
+
+

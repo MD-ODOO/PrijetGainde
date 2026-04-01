@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="asset_management_override.AssetInventoryBarcodeHandler">
+        <div class="d-flex align-items-center gap-3 p-2 border rounded bg-light mb-3">
+            <!-- Bouton caméra -->
+            <button class="btn btn-primary btn-lg" t-on-click="onCameraClick"
+                    title="Ouvrir la caméra pour scanner un code-barres">
+                <i class="fa fa-camera me-2"/>
+                Scanner avec la caméra
+            </button>
+            <!-- Indication douchette -->
+            <div class="text-muted small">
+                <i class="fa fa-wifi me-1"/>
+                Les scans de votre douchette sont automatiquement capturés.
+            </div>
+        </div>
+    </t>
+</templates>

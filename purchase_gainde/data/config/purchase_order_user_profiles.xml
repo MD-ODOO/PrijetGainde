@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="approval_role_ra" model="approval.role">
+            <field name="name">RA</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+        <record id="approval_role_rcb" model="approval.role">
+            <field name="name">RCB</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+        <record id="approval_role_rcb_dag" model="approval.role">
+            <field name="name">RCB DAG</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+        <record id="approval_role_rcb_degm" model="approval.role">
+            <field name="name">RCB DEGM</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+        <record id="approval_role_rcb_deto" model="approval.role">
+            <field name="name">RCB DETO</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+        <record id="approval_role_da" model="approval.role">
+            <field name="name">DA</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- <field name="user_ids" eval="[(6,0,[ref('base.user_admin')])]"/> -->
+        </record>
+
+    </data>
+</odoo>

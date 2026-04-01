@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_contract_nda">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+
+                    <!-- HEADER NDA GAINDE -->
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-6">
+                                <!-- Logo Entreprise ou Logo du Module par défaut -->
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 70px;"/>
+                                <img t-else="" src="/gainde_legal_contract/static/src/img/img.png"
+                                     style="max-height: 70px;"/>
+                            </div>
+                            <div class="col-6 text-end">
+                                <br/>
+                                <span t-field="doc.name"/>
+                            </div>
+                        </div>
+                        <!-- Titre Centré entre lignes bleues -->
+                        <div style="border-bottom: 2px solid #0055A4; margin-top: 10px;"/>
+                        <div class="text-center"
+                             style="padding: 15px 0; font-weight: bold; font-size: 18px; color: #0055A4; text-transform: uppercase;">
+                            ACCORD DE CONFIDENTIALITÉ
+                        </div>
+
+                    </div>
+                    <!-- FIN HEDER NDA -->
+
+                    <div class="page" style="font-family: 'Helvetica'; font-size: 11pt; text-align: justify;">
+
+
+                        <!-- Identification des Parties -->
+                        <!-- 1. AFFICHAGE DE L'EN-TETE EDITE -->
+                        <div class="mb-4">
+                            <t t-out="doc.header_content"/>
+                        </div>
+                        <!-- Debut test boucle pour articles -->
+                        <t t-foreach="doc.article_ids" t-as="art">
+                            <!-- Titre avec soulignement dynamique -->
+                            <h6 class="mt-4 mb-2" style="font-weight: bold;">
+                                <span class="text-dark border-bottom border-dark pb-1" t-esc="art.name"/>
+                            </h6>
+
+                            <!-- Contenu de l'article (Le texte du CDATA) -->
+                            <div class="ps-3 small text-justify">
+                                <t t-out="art.content"/>
+                            </div>
+
+                            <!--                            &lt;!&ndash; Ajout dynamique SI l'article est l'Objet (Exemple) &ndash;&gt;-->
+                            <!--                            <p t-if="'Objet' in art.name" class="ps-3 small">-->
+                            <!--                                Partenaire concerné :-->
+                            <!--                                <strong>-->
+                            <!--                                    <span t-field="doc.partner_id.name"/>-->
+                            <!--                                </strong>-->
+                            <!--                            </p>-->
+                        </t>
+                        <!-- fin test boucle articles -->
+
+                        <!--                        &lt;!&ndash; Articles avec Soulignement Dynamique &ndash;&gt;-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">1. DEFINITIONS</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p>Les termes utilisés dans le présent accord s’entendent comme suit :</p>-->
+                        <!--                        <p class="ps-3 mb-1">-->
+                        <!--                            <strong>L’accord :</strong>-->
+                        <!--                            le présent accord de confidentialité ;-->
+                        <!--                        </p>-->
+                        <!--                        <p class="ps-3 mb-1">-->
+                        <!--                            <strong>Partie émettrice :</strong>-->
+                        <!--                            partie qui transmet/émet l’information ;-->
+                        <!--                        </p>-->
+                        <!--                        <p class="ps-3 mb-1">-->
+                        <!--                            <strong>Partie réceptrice :</strong>-->
+                        <!--                            partie qui reçoit l’information ;-->
+                        <!--                        </p>-->
+                        <!--                        <p class="ps-3 mb-1"><strong>Information confidentielle :</strong>Pour les besoins du présent-->
+                        <!--                            accord, le terme ‘Informations-->
+                        <!--                            Confidentielles’ renvoie à toutes les informations et tous les renseignements transmis ou-->
+                        <!--                            connus de l’une ou des deux des parties, dans le cadre de l’objet et du champ définis aux-->
+                        <!--                            articles ci-dessous. Toutefois, les parties veilleront à estampiller tous les documents-->
+                        <!--                            transmis avec la mention ‘Confidentiel’ ou une marque similaire. Si l’information est-->
+                        <!--                            transmise oralement, la partie émettrice rappelle les présentes dispositions et, délivre-->
+                        <!--                            sans délai, une note dans laquelle elle spécifie le caractère confidentiel de l’information-->
+                        <!--                            ;-->
+                        <!--                        </p>-->
+                        <!--                        <p class="ps-3 mb-1">-->
+                        <!--                            <strong>Tiers :</strong>-->
+                        <!--                            toute personne physique ou morale (autres que les parties) et non visée par le-->
+                        <!--                            présent accord.-->
+                        <!--                        </p>-->
+
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">2. EXCLUSIONS</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Les obligations ne concernent pas les informations connues publiquement,-->
+                        <!--                            découvertes avant divulgation ou divulguées avec consentement écrit.-->
+                        <!--                        </p>-->
+
+                        <!--                        <ol type="a">-->
+                        <!--                            <li>-->
+                        <!--                                <p>sont connues publiquement au moment de la divulgation ou qui tombent-->
+                        <!--                                    subséquemment dans le domaine public par un moyen qui ne soit pas imputable à la-->
+                        <!--                                    partie réceptrice ;-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                            <li>-->
+                        <!--                                <p>sont découvertes ou créées par la partie réceptrice avant qu’elles n’aient été-->
+                        <!--                                    divulguées par la partie émettrice ;-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                            <li>-->
+                        <!--                                <p>sont acquises par la partie réceptrice de manière légitime par des canaux différents-->
+                        <!--                                    que ceux de la partie émettrice ou ses représentants ;-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                            <li>-->
+                        <!--                                <p>sont divulguées par la partie réceptrice avec le consentement par écrit de la partie-->
+                        <!--                                    émettrice ;-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                            <li>-->
+                        <!--                                <p>sont divulguées en vertu d’une obligation légale ou judiciaire.</p>-->
+                        <!--                            </li>-->
+                        <!--                        </ol>-->
+
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">3. OBJET</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le présent accord formalise les négociations en toute confidentialité, convenues-->
+                        <!--                            entre les parties.-->
+                        <!--                        </p>-->
+
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">4. OBLIGATIONS DES PARTIES</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p>Le partenaire est tenu de :</p>-->
+                        <!--                        <ol>-->
+                        <!--                            <li value="4">-->
+                        <!--                                <ol>-->
+                        <!--                                    <li value="1">-->
+                        <!--                                        <p>Négocier avec GAINDE 2000 conformément à l’objet et aux modalités définis-->
+                        <!--                                            dans le présent accord ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="2">-->
+                        <!--                                        <p>Se garder de divulguer à des tiers toutes les informations se rapportant au-->
+                        <!--                                            présent accord et jugées confidentielles. A moins d’y avoir été autorisée-->
+                        <!--                                            préalablement par écrit, interdiction lui est faite d’utiliser à ses propres-->
+                        <!--                                            fins, de publier,-->
+                        <!--                                            de copier, de ermettre l’utilisation par des tiers, à leurs propres profits-->
+                        <!--                                            ou au-->
+                        <!--                                            détriment de GAINDE 2000 toute information confidentielle ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="3">-->
+                        <!--                                        <p>Diligenter toutes les mesures nécessaires aux fins de restreindre-->
+                        <!--                                            l’accès aux informations confidentielles ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="4">-->
+                        <!--                                        <p>Communiquer les dispositions de l’accord aux personnes qui ont accès-->
+                        <!--                                            aux informations confidentielles et/ou leur faire signer des accords-->
+                        <!--                                            similaires;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="5">-->
+                        <!--                                        <p>Mettre à la disposition de GAINDE 2000, dans les délais requis, toutes-->
+                        <!--                                            les informations nécessaires à la réalisation de l’objet de l’accord ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="6">-->
+                        <!--                                        <p>Restituer immédiatement à GAINDE 2000 tous les renseignements, notes,-->
+                        <!--                                            données, imprimés et supports en sa possession et estampillés ‘Informations-->
+                        <!--                                            Confidentielles’ dès que ce dernier en fait la demande par écrit.-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="7">-->
+                        <!--                                        <p>Négocier avec le partenaire conformément à l’objet et aux modalités-->
+                        <!--                                            définis dans le présent accord ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="8">-->
+                        <!--                                        <p>Se garder de divulguer à des tiers toutes les informations se-->
+                        <!--                                            rapportant au présent accord et jugées confidentielles. A moins d’y avoir-->
+                        <!--                                            été-->
+                        <!--                                            autorisée préalablement par écrit, interdiction lui est faite d’utiliser à-->
+                        <!--                                            ses-->
+                        <!--                                            propres fins, de publier, de copier, de permettre l’utilisation par des-->
+                        <!--                                            tiers, à-->
+                        <!--                                            leurs propres profits ou au détriment de GAINDE 2000 toute information-->
+                        <!--                                            confidentielle ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="9">-->
+                        <!--                                        <p>Diligenter toutes les mesures nécessaires aux fins de restreindre-->
+                        <!--                                            l’accès aux informations confidentielles ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="10">-->
+                        <!--                                        <p>Communiquer les dispositions de l’accord aux personnes qui ont accès-->
+                        <!--                                            aux informations confidentielles et/ou leur faire signer des accords-->
+                        <!--                                            similaires;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="11">-->
+                        <!--                                        <p>Mettre à la disposition du partenaire, dans les délais requis, toutes-->
+                        <!--                                            les informations nécessaires à la réalisation de l’objet de l’accord ;-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                    <li value="12">-->
+                        <!--                                        <p>Restituer immédiatement au partenaire tous les renseignements, notes,-->
+                        <!--                                            données, imprimés et supports en sa possession et estampillés ‘Informations-->
+                        <!--                                            Confidentielles’ dès que ce dernier en fait la demande par écrit.-->
+                        <!--                                        </p>-->
+                        <!--                                    </li>-->
+                        <!--                                </ol>-->
+                        <!--                            </li>-->
+                        <!--                        </ol>-->
+
+
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">5. CHAMP DE LA CONFIDENTIALITE</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le champ de la confidentialité couvre toutes les informations, de quelque nature-->
+                        <!--                            et sur quelque support que ce soit (oral, écrit, électronique) et se rapportant à l’objet du-->
+                        <!--                            présent accord.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">6. DUREE</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">L’obligation de confidentialité survit au-delà du terme de l’accord jusqu’à ce-->
+                        <!--                            que:-->
+                        <!--                        </p>-->
+                        <!--                        <ul style="list-style-type: '-' ;">-->
+                        <!--                            <li>-->
+                        <!--                                <p>les informations dites confidentielles ne soient plus classées secret commercial par-->
+                        <!--                                    la partie émettrice ;-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                            <li>-->
+                        <!--                                <p>la partie émettrice envoie une notification écrite à la partie réceptrice la-->
+                        <!--                                    déchargeant de cette obligation.-->
+                        <!--                                </p>-->
+                        <!--                            </li>-->
+                        <!--                        </ul>-->
+
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">7. AVENANT</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le présent accord pourra être amendé, d’un commun accord entre les parties, par-->
+                        <!--                            avenant(s) qui sera (ont) annexé (s) et intégré (s) au présent accord.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">8. RENONCIATION</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le défaut d’exercice de tout ou partie des droits prévus aux termes du présent-->
+                        <!--                            accord ne pourra être assimilé en aucun cas à une renonciation préalable ou subséquente de-->
+                        <!--                            son titulaire.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">9. FORCE EXECUTOIRE</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le présent accord et les obligations qui en découlent ont une force exécutoire-->
+                        <!--                            pour les représentants, les employés ou toute personne habilitée à agir au nom ou pour le-->
+                        <!--                            compte de chaque partie.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">10. GRATUITE</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Aux fins de l’exécution des présentes, chacune des parties prend en charge les-->
+                        <!--                            frais inhérents à l’accomplissement de ses obligations.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">11. SOUS TRAITANCE</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le recours à un ou des sous-traitants par l’une des parties sera soumis à-->
+                        <!--                            l’information préalable de l’autre partie.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">12. RESILIATION</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">La violation par l’une des parties de son (ses) obligation (s) entraine la-->
+                        <!--                            résiliation de plein droit du présent accord, nonobstant le droit à réparation dont dispose-->
+                        <!--                            la partie la plus diligente du fait d’un quelconque préjudice consécutif aux manquements de l’autre partie.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">13. LITIGES</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Tout différend survenant entre les parties, au cours de l’exécution du présent-->
+                        <!--                            accord, sera soumis à l’arbitrage de la Chambre de Commerce et d’Arbitrage de Dakar (CCAD),-->
+                        <!--                            à défaut de règlement à l’amiable. La sentence arbitrale est définitive.-->
+                        <!--                        </p>-->
+                        <!--                        <h6 class="mt-4 mb-2" style="font-weight: bold;">-->
+                        <!--                            <span class="text-dark border-bottom border-dark pb-1">14. ENTREE EN VIGUEUR</span>-->
+                        <!--                        </h6>-->
+                        <!--                        <p class="ps-3">Le présent accord entre en vigueur à compter de la date de sa signature par les-->
+                        <!--                            parties.-->
+                        <!--                        </p>-->
+
+                        <p>Fait à Dakar, le .....................................20........, (En deux (02) exemplaires
+                            originaux).
+                        </p>
+                        <br/>
+                        <br/>
+                        <!-- Zone de Signature -->
+                        <div class="row mt-5" style="page-break-inside: avoid;">
+                            <div class="col-6 text-center">
+                                <strong>
+                                    <u>Pour Le PARTENAIRE</u>
+                                </strong>
+                                <br/>
+                                <br/>
+                                <p>....................</p>
+                                <br/>
+                                <br/>
+                                <p>Le ........................</p>
+                                <br/>
+                                <br/>
+                                <p>Date: ........................</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <strong>Pour GAINDE 2000</strong>
+                                <br/>
+                                <br/>
+                                <p>Ibrahima Nour Eddine DIAGNE</p>
+                                <br/>
+                                <br/>
+                                <p>L’Administrateur Général</p>
+                                <br/>
+                                <br/>
+                                <p>Date: ........................</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOOTER COMMUN -->
+                    <t t-call="gainde_legal_contract.custom_gainde_footer"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

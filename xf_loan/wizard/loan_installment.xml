@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="wizard_employee_loan_installment" model="ir.ui.view">
+            <field name="name">wizard_employee_loan_installment</field>
+            <field name="model">hr.employee.loan.installment.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="loan_installment_id" readonly="True" force_save="True"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Cancel" special="cancel" data-hotkey="z" class="btn btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_employee_loan_installment_paid" model="ir.ui.view">
+            <field name="name">wizard_employee_loan_installment_paid</field>
+            <field name="model">hr.employee.loan.installment.wizard</field>
+            <field name="inherit_id" ref="xf_loan.wizard_employee_loan_installment"/>
+            <field name="mode">primary</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <field name="loan_installment_id" position="after">
+                    <field name="date_payment"/>
+                </field>
+                <xpath expr="//footer/button" position="before">
+                    <button type="object" name="action_paid" string="Mark as Paid" class="btn btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_paid_employee_loan_installment" model="ir.actions.act_window">
+            <field name="name">Pay Loan Installment</field>
+            <field name="res_model">hr.employee.loan.installment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="xf_loan.wizard_employee_loan_installment_paid"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

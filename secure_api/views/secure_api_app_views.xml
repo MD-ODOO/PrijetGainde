@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_app_form_view" model="ir.ui.view">
+            <field name="name">Client Applications</field>
+            <field name="model">secure.api.app</field>
+            <field name="arch" type="xml">
+                <form string="Client Applications">
+                    <header>
+                        <button name="btn_enable_app" type="object"
+                            string="Enable Client App" class="oe_highlight"
+                            invisible="state == 'enabled'"/>
+                        <button name="btn_disable_app" type="object"
+                            string="Disable Client App" class="oe_default"
+                            invisible="state == 'disabled'"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="My Python Client"/></h1>
+                            <label for="mode" string="Mode" class="oe_edit_only"/><h3><field name="mode"/></h3>
+                            <div class="text-muted" invisible="mode != 'test'">Enable Test Mode to use the API in a sandbox environment. No real data or actions will be affected. Perfect for testing and development.</div>
+                        </div>
+                        <group name="app_info">
+                            <group name="app_info_client" string="Client">
+                                <field name="auth_type" widget="radio"/>
+                                <field name="is_jwt_available" invisible="1"/>
+                                <span invisible="(auth_type != 'jwt') or (is_jwt_available == True)" colspan="2" class="o_form_label" style="font-weight: bold; font-style: italic; color: #d9534f;">⚠️ PyJWT library is not installed. JWT authentication will not work. Install it with: pip install PyJWT</span>
+                                <field name="client_id"/>
+                                <field name="client_secret"/>
+                                <field name="security_user_id"/>
+                                <field name="expire_minute"/>
+                                <field name="jwt_secret" invisible="auth_type != 'jwt'" password="True"/>
+                                <field name="jwt_algorithm" invisible="auth_type != 'jwt'"/>
+                                <field name="cmd_token_endpoint" widget="CopyClipboardChar"/>
+                            </group>
+                            <group name="app_info_scope" string="Scope">
+                                <span class="o_form_label" colspan="2">Scope of permissions limit the allowed endpoints for this application.</span>
+                                <group name="app_info_scope_left">
+                                    <field name="scope_create"/>
+                                    <field name="scope_read"/>
+                                    <field name="scope_update"/>
+                                    <field name="scope_delete"/>  
+                                </group>
+                                <group name="app_info_scope_right">
+                                    <field name="scope_search"/>
+                                    <field name="scope_rpc"/>
+                                </group>                                
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="api_apis_endpoints" string="APIs &#38; Enpoints">
+                                <group name="app_apis" string="APIs">
+                                    <field name="api_ids" colspan="2" nolabel="1" options="{'no_create_edit': True, 'no_create': True}">
+                                        <list default_order="create_date desc">
+                                            <field name="create_date" invisible="1"/>
+                                            <field name="name"/>
+                                            <field name="route"/>
+                                            <field name="api_action"/>
+                                            <field name="model_ids" widget="many2many_tags"/>
+                                            <field name="method_ids" widget="many2many_tags"/>
+                                            <field name="rpc_method" optional="hide"/>
+                                            <field name="is_secure_record_id" optional="hide"/>
+                                            <field name="auth" optional="hide"/>
+                                            <field name="cors" optional="hide"/>
+                                            <field name="security_user_id" optional="hide"/>
+                                            <field name="category_id" optional="hide"/>
+                                            <field name="mode"/>
+                                            <field name="state" widget="badge"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group name="app_endpoints" string="Allowed Endpoints">
+                                    <field name="endpoint_ids" colspan="2" nolabel="1" options="{'no_create_edit': True, 'no_create': True}" readonly="1">
+                                        <list string="Endpoints" default_order="secure_api_id desc" create="0" edit="0" delete="0">
+                                            <control>
+                                                <create name="add_line_control" string="Add an endpoint"/>
+                                            </control>
+                                            <field name="secure_api_id"/>
+                                            <field name="http_method_id" readonly="1"/>
+                                            <field name="route" readonly="1"/>
+                                            <field name="data" readonly="1"/>
+                                            <field name="api_action" readonly="1"/>
+                                            <field name="is_bulk_operation" readonly="1"/>
+                                            <!-- <field name="curl" readonly="1" widget="CopyClipboardChar" style="width: 30%%"/> -->
+                                            <!-- <button name="btn_test_endpoint" type="object" string="Test Endpoint" class="oe_highlight"/> -->
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="app_access_token" string="Access Tokens" invisible="auth_type == 'jwt'">
+                                <group name="access_token" string="Access Tokens">
+                                    <field name="access_token_ids" colspan="2" nolabel="1" options="{'no_create_edit': True, 'no_create': True}">
+                                        <list default_order="create_date desc">
+                                            <field name="name"/>
+                                            <field name="create_date"/>
+                                            <field name="expire_date"/>
+                                            <field name="state"/>
+                                        </list>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="secure_api_app_tree_view" model="ir.ui.view">
+            <field name="name">Client Applications</field>
+            <field name="model">secure.api.app</field>
+            <field name="arch" type="xml">
+                <list string="Apps">
+                    <field name="name"/>
+                    <field name="auth_type"/>
+                    <field name="client_id"/>
+                    <field name="client_secret"/>
+                    <field name="security_user_id"/>
+                    <field name="expire_minute"/>
+                    <field name="scope_create"/>
+                    <field name="scope_read"/>
+                    <field name="scope_update"/>
+                    <field name="scope_delete"/>
+                    <field name="scope_search"/>
+                    <field name="scope_rpc"/>
+                    <field name="mode"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="secure_api_app_tree_filter" model="ir.ui.view">
+            <field name="name">secure_api_app_tree_filter</field>
+            <field name="model">secure.api.app</field>
+            <field name="arch" type="xml">
+                <search string="Client Applications">
+                    <field name="name" string="Name"/>
+                    <field name="client_id" string="Client ID or Client Secret" filter_domain="['|',('client_id','ilike',self),('client_secret','ilike',self)]"/>
+                    <separator/>
+                    <filter string="OAuth 2.0" name="filter_oauth2" domain="[('auth_type', '=', 'oauth2')]"/>
+                    <filter string="JWT" name="filter_jwt" domain="[('auth_type', '=', 'jwt')]"/>
+                    <separator/>
+                    <filter string="Test Mode" name="filter_test_mode" domain="[('mode', '=', 'test')]"/>
+                    <filter string="Production Mode" name="filter_production_mode" domain="[('mode', '=', 'prod')]"/>
+                    <filter string="Enabled" name="filter_enabled" domain="[('state', '=', 'enabled')]"/>
+                    <filter string="Disabled" name="filter_disabled" domain="[('state', '=', 'disabled')]"/>
+                    <group>
+                        <filter string="Auth Type" name="grp_auth_type" domain="[]" context="{'group_by': 'auth_type'}"/>
+                        <filter string="Mode" name="grp_mode" domain="[]" context="{'group_by': 'mode'}"/>
+                        <filter string="State" name="grp_state" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter string="Run as User" name="grp_security_user_id" domain="[]" context="{'group_by': 'security_user_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_secure_api_app" model="ir.actions.act_window">
+            <field name="name">Client Applications</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api.app</field>
+            <field name="search_view_id" ref="secure_api_app_tree_filter"/>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('secure_api_app_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('secure_api_app_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_secure_api_secure_api_app"
+            name="Client Applications"
+            action="action_secure_api_app"
+            sequence="40"
+            parent="secure_api.menu_secure_api_configuration"
+            groups="base.group_system"/>
+    </data>
+</odoo>

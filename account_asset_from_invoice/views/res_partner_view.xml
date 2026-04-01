@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_partner_form_gainde_vrs" model="ir.ui.view">
+        <field name="name">res.partner.form.gainde.vrs</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="attributes">
+        <attribute name="string">NINEA</attribute>
+                <attribute name="invisible">is_company == False</attribute>
+
+      </xpath>
+            <field name="vat" position="after">
+                  <field name="cin" invisible="is_company == True"/>
+                  <field name="cofi" invisible="is_company == False"/>
+
+                  <field name="is_cofi_prefix_1" invisible="1"/>
+                  <field name="is_supplier_support_vrs"
+                      invisible="is_company == False or is_cofi_prefix_1 == False"/>
+
+            </field>
+            <!-- <xpath expr="//group[@name='sale']/field[@name='user_id']" position="before">
+                <field name="is_customer"/>
+            </xpath> -->
+             <field name="user_id" position="before">
+                    <field name="is_customer" />
+                    <field name="is_supplier" />
+                </field>
+            <!-- <xpath expr="//group[@name='purchase']/field[@name='buyer_id']" position="before">
+                <field name="is_supplier"/>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

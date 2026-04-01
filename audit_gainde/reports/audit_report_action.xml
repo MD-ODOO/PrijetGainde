@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========================================== -->
+    <!-- RAPPORT PLAN D'AUDIT                      -->
+    <!-- ========================================== -->
+    <record id="action_audit_plan_report" model="ir.actions.report">
+        <field name="name">Rapport Plan</field>
+        <field name="model">audit_gainde.plan</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">audit_gainde.report_plan_template</field>
+        <field name="report_file">audit_gainde.report_plan_template</field>
+        <field name="binding_model_id" ref="audit_gainde.model_audit_gainde_plan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+    <record id="paperformat_mission_report" model="report.paperformat">
+        <field name="name">Mission A4 Portrait</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>  <!-- ← CHANGÉ : Portrait -->
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+
+
+    <!-- RAPPORT MISSION                          -->
+    <record id="action_audit_mission_report" model="ir.actions.report">
+        <field name="name">Rapport Mission</field>
+        <field name="model">audit_gainde.mission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">audit_gainde.report_mission_template</field>
+        <field name="report_file">audit_gainde.report_mission_template</field>
+        <field name="binding_model_id" ref="audit_gainde.model_audit_gainde_mission"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="audit_gainde.paperformat_mission_report"/>
+    </record>
+
+    <!-- BOUTONS RAPPORT dans FORMULAIRES         -->
+    <!-- Bouton Plan
+    <record id="view_audit_plan_form_report" model="ir.ui.view">
+        <field name="name">audit.gainde.plan.form.report</field>
+        <field name="model">audit_gainde.plan</field>
+        <field name="inherit_id" ref="view_audit_gainde_plan_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="%(action_audit_plan_report)d"
+                        string="Rapport Plan"
+                        type="action"
+                        class="btn-primary me-2"/>
+            </header>
+        </field>
+    </record>
+
+    -->
+
+    <!-- Bouton Mission -->
+    <record id="view_audit_mission_form_report" model="ir.ui.view">
+        <field name="name">audit.gainde.mission.form.report</field>
+        <field name="model">audit_gainde.mission</field>
+        <field name="inherit_id" ref="view_audit_gainde_mission_form"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button name="%(action_audit_mission_report)d"
+                        string="Rapport Mission"
+                        type="action"
+                        class="btn-primary"/>
+            </header>
+        </field>
+    </record>
+
+
+</odoo>

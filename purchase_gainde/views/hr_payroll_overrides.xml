@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Surcharge de l'action hr_payroll sans modifier le module standard -->
+        <record id="hr_payroll.act_contribution_reg_payslip_lines" model="ir.actions.act_window">
+            <field name="domain">[('partner_id', '=', context.get('active_id'))]</field>
+            <field name="context">{'default_partner_id': context.get('active_id')}</field>
+        </record>
+    </data>
+</odoo>

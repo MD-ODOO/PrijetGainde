@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+
+    <menuitem name="Knowledge" id="menu_knowledge_root" groups="dev_all_in_one_helpdesk_ent.group_dev_knowledge"/>
+    <menuitem name="Configuration" id="menu_dev_knowledge_configration"
+              parent='menu_knowledge_root' 
+              sequence='100' groups="dev_all_in_one_helpdesk_ent.group_dev_knowledge"/>   
+              
+              
+
+</odoo>

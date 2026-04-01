@@ -1,0 +1,155 @@
+/* Container général avec scroll */
+.exec-dashboard {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    height: 90vh;          /* Hauteur maximale du dashboard */
+    overflow-y: auto;      /* Scroll vertical si contenu trop grand */
+    gap: 30px;
+}
+
+/* KPI globaux */
+.kpi-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.kpi-card {
+    flex: 1 1 150px;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+.kpi-card h2 {
+    font-size: 28px;
+    margin: 0;
+}
+.kpi-card span {
+    display: block;
+    margin-top: 5px;
+}
+
+
+/* Couleurs KPI */
+.kpi-card.blue { background-color: #3498db; }
+.kpi-card.green { background-color: #2ecc71; }
+.kpi-card.red { background-color: #e74c3c; }
+.kpi-card.purple { background-color: #9b59b6; }
+
+/* Top row : top 5 + performance */
+.top-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.top_card {
+    flex: 1 1 250px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 220px;
+}
+.top_card h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+.top_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.top_rank {
+    width: 25px;
+    font-weight: bold;
+}
+.top_content {
+    margin-left: 10px;
+}
+.performance_badge {
+    margin-left: auto;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+    min-width: 40px;
+    text-align: center;
+}
+.badge-green { background-color: #2ecc71; }
+.badge-orange { background-color: #f39c12; }
+.badge-red { background-color: #e74c3c; }
+
+/* Graphiques */
+.chart_grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.chart_card {
+    flex: 1 1 300px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 280px;
+}
+.chart_card h3 { margin-top: 0; font-size: 16px; }
+
+.chart_card canvas {
+    cursor: pointer;
+}
+
+/* Tables */
+.table-scroll {
+    overflow-x: auto;
+}
+.exec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.exec-table th, .exec-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.exec-table th {
+    background-color: #f0f0f0;
+}
+
+/* Gantt */
+.gantt_section {
+    margin-top: 30px;
+}
+.gantt_item {
+    margin-bottom: 10px;
+}
+.gantt_bar {
+    background: #3498db;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Scroll vertical interne si beaucoup de données dans une table ou top_card */
+.top_card, .chart_card, .table-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+}
+/* Conteneur pour afficher tables côte à côte */
+.flex-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* si l’écran est trop petit, les tables passent en dessous */
+}
+
+/* Chaque table dans un "card" scrollable */
+.table-card {
+    flex: 1 1 500px; /* largeur minimale 500px, flexibilité maximale */
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 400px; /* scroll si beaucoup de lignes */
+    overflow-y: auto;
+}

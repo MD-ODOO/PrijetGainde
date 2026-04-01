@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure API - Odoo Module Documentation</title>
+<link href="index-origin-style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="secure-api-docs" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; color: #2d3436; margin: 0 auto; padding: 2rem; line-height: 1.7; font-size: 16px; background: #fff;">
+<!-- Hero Section -->
+<div class="hero" style="text-align: center; padding: 0rem 2rem 3rem 2rem; border-radius: 12px;">
+<h1 style="font-size: 2.5rem; font-weight: 700; color: #212529; margin-bottom: 1rem;">Secure API</h1>
+<p class="tagline" style="font-size: 1.25rem; color: #6c757d; max-width: 600px; margin: 0 auto;">Expose your Odoo data through secure, customizable REST APIs with OAuth 2.0 &amp; JWT authentication.</p>
+</div>
+<!-- Table of Contents -->
+<nav class="toc" id="toc" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2.5rem;">
+<h2 style="font-size: 1.25rem; color: #343a40; margin: 0 0 1rem 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Contents</h2>
+<div class="toc-columns" style="display: flex; gap: 2rem;">
+<ul class="toc-column" style="flex: 1; list-style: none; padding: 0; margin: 0;">
+<li>
+<a href="#section-core" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Core Feature: Secure API Exposure</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Expose Any Model as REST API</li>
+</ul>
+</li>
+<li>
+<a href="#section-auth" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Authentication &amp; Authorization</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">OAuth 2.0 Opaque Tokens</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">JWT (JSON Web Tokens)</li>
+</ul>
+</li>
+<li>
+<a href="#section-security" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Security Features</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Field-Level Access Control</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Domain Filters</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">ID Obfuscation (Hashids)</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Permission Scopes</li>
+</ul>
+</li>
+<li>
+<a href="#section-advanced" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Advanced Features</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">RPC Method Calls</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Default Field Values</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Binary Field Handling</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Bulk Operations</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Field Aliases</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Related Model Fields</li>
+</ul>
+</li>
+<li>
+<a href="#section-export" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>API Export</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Export to Postman Collection</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Export to Swagger/OpenAPI</li>
+</ul>
+</li>
+<li>
+<a href="#section-stats" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Monitoring &amp; Statistics</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">API Usage Statistics</li>
+</ul>
+</li>
+</ul>
+<ul class="toc-column-second" style="flex: 1; list-style: none; padding: 0; margin: 0 auto;">
+<li>
+<a href="#section-org" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Organization &amp; Management</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Categories</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Tags</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">API Lifecycle States</li>
+</ul>
+</li>
+<li>
+<a href="#section-testing" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Testing &amp; Development</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Live API Testing</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Test Mode</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Auto-Generated Endpoints</li>
+</ul>
+</li>
+<li>
+<a href="#section-config" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Configuration Options</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">CORS Configuration</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Multi-Model APIs</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Authentication Modes</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Pagination &amp; Ordering</li>
+</ul>
+</li>
+<li>
+<a href="#section-error" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Error Handling</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Response Types &amp; Status Codes</li>
+</ul>
+</li>
+<li>
+<a href="#section-history" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Update History</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">January 05, 2026 (*.0.0.4)</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">December 21, 2025 (*.0.0.3)</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">December 10, 2025 (*.0.0.2)</li>
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">July 12, 2025 (*.0.0.1)</li>
+</ul>
+</li>
+<li>
+<a href="#section-support" style="color: #495057; text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; font-weight: bold;"><strong>Technical Support</strong></a>
+<ul class="toc-features" style="list-style: none; padding: 0.25rem 0 0 1rem; margin: 0;">
+<li style="padding: 0.15rem 0; color: #6c757d; font-size: 0.85rem;">Contact Information</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<img src="img/api.gif" width="100%"/>
+<p class="image-caption" style="text-align: center; font-style: italic; margin-top: 8px; color: #555;">Dynamically expose API</p>
+<div class="highlight-box hint-box" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-left: 4px solid #adb5bd; padding: 0.75rem 1rem; border-radius: 6px; margin: 1rem 0; font-size: 0.875rem; color: #6c757d;">
+        ▸ Click on the feature to expand or collapse details.
+    </div>
+<!-- Section: Outstanding Feature - Secure API Exposure -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-core" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Core Feature: Secure API Exposure</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Expose Any Model as REST API</strong> — Create secure REST API endpoints for any Odoo model in minutes (include custom models). Full control over which models, fields, and operations are exposed. Each API is configured via form view in Odoo with customizable routes, authentication, and permissions.</summary>
+<div>
+<!-- <p class="description">
+                Create secure REST API endpoints for any Odoo model in minutes. Full control over which models,
+                fields, and operations are exposed. Each API is configured via the <code>secure.api</code> model
+                with customizable routes, authentication, and permissions.
+            </p> -->
+<!-- <div class="highlight-box">
+                <strong>Implementation:</strong> The <code>SecureAPI</code> model (<code>secure_api.py</code>)
+                handles API configuration including routes, authentication modes, allowed HTTP methods,
+                and field exposure settings.
+            </div> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Supported Operations</h3>
+<table class="table table-bordered" style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+<tr>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Operation</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">HTTP Method</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Description</th>
+</tr>
+<tr>
+<td>Search</td>
+<td>GET /route</td>
+<td>Search records with domain filters, pagination, and ordering</td>
+</tr>
+<tr>
+<td>Read</td>
+<td>GET /route/:id</td>
+<td>Retrieve a single record by ID</td>
+</tr>
+<tr>
+<td>Create</td>
+<td>POST /route</td>
+<td>Create new records</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>PATCH /route/:id</td>
+<td>Update existing records</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>DELETE /route/:id</td>
+<td>Remove records</td>
+</tr>
+</table>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Requests</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Authenticate
+curl -X POST -H "Content-Type: application/json" -c cookies.txt \
+    -d '{"jsonrpc": "2.0", "params": {"db": "YOUR_DATABASE", "login": "USER@EXAMPLE.COM", "password": "YOUR_USER_PASSWORD"}}' \
+    https://your-odoo-instance.com/web/session/authenticate
+
+# Search
+curl -s -X GET -H "Content-Type: application/json" -b cookies.txt \
+    -d "domain=[(\"id\",\"&gt;\",0)]&amp;limit=5ℴ=id" \
+    "https://your-odoo-instance.com/api/partner/rest"
+
+# Create
+curl -s -X POST -H "Content-Type: application/json" -b cookies.txt \
+    -d '{"name": "Test Partner (CRUD Demo Bash)"}' \
+    "https://your-odoo-instance.com/api/partner/rest"
+
+# Read
+curl -s -X GET -H "Content-Type: application/json" -b cookies.txt \
+    "https://your-odoo-instance.com/api/partner/rest/NnRZn"
+
+# Update
+curl -s -X PATCH -H "Content-Type: application/json" -b cookies.txt \
+    -d '{"name": "Test Partner (CRUD Demo Bash) (Updated)"}' \
+    "https://your-odoo-instance.com/api/partner/rest/NnRZn"
+
+# Delete
+curl -s -X DELETE -H "Content-Type: application/json" -b cookies.txt \
+    "https://your-odoo-instance.com/api/partner/rest/NnRZn"
+</code></pre>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Reponses</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">// SEARCH Response:
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": {
+        "length": 36,
+        "records": [
+            {
+                "id": "NnRZn",
+                "email": "brandon.freeman55@example.com",
+                "image_128": "/api/image/2/res.partner/NnRZn/image_128",
+                "name": "Brandon Freeman"
+            },
+            ...
+        ]
+    }
+}
+
+// CREATE Response:
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": {
+        "id": "P2y3b",
+        "company_id": [],
+        "email": "",
+        "image_1024": "",
+        "image_128": "",
+        "name": "Test Partner (CRUD Demo Bash)",
+        "phone": ""
+    }
+}
+
+// READ Response:
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": {
+        "id": "8blEP",
+        "company_id": [],
+        "email": "azure.Interior24@example.com",
+        "image_1024": "/api/image/2/res.partner/8blEP/image_1024",
+        "image_128": "/api/image/2/res.partner/8blEP/image_128",
+        "name": "Azure Interior",
+        "phone": "(870)-931-0505"
+    }
+}
+
+// UPDATE Response:
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": {
+        "id": "8blEP",
+        "company_id": [],
+        "email": "azure.Interior24@example.com",
+        "image_1024": "/api/image/2/res.partner/8blEP/image_1024",
+        "image_128": "/api/image/2/res.partner/8blEP/image_128",
+        "name": "Test Partner (CRUD Demo Bash) (Updated)",
+        "phone": "(870)-931-0505"
+    }
+}
+
+// DELETE Response:
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": [
+        "NnRZn"
+    ]
+}
+</code></pre>
+</div>
+</details>
+<img src="img/Usage_1.jpg" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+<p class="image-caption" style="text-align: center; font-style: italic; margin-top: 8px; color: #555;">API configuration interface</p>
+<!-- Section: OAuth 2.0 & JWT Authentication -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-auth" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Authentication &amp; Authorization</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>OAuth 2.0 Opaque Tokens</strong> — Secure your APIs with industry-standard OAuth 2.0 authentication. Create client applications with
+                unique <code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">client_id</code> and <code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">client_secret</code> credentials. Tokens are stored
+                securely and support configurable expiration.</summary>
+<div>
+<!-- <p class="description">
+                Secure your APIs with industry-standard OAuth 2.0 authentication. Create client applications with
+                unique <code>client_id</code> and <code>client_secret</code> credentials. Tokens are stored
+                securely and support configurable expiration.
+            </p> -->
+<!-- <h3>How it Works</h3>
+            <ul class="feature-list">
+                <li>Register a client application in the <code>secure.api.app</code> model</li>
+                <li>Configure token expiry time and permission scopes</li>
+                <li>Exchange credentials for access token via <code>/api/oauth2/token</code></li>
+                <li>Include token in <code>Authorization: Bearer &lt;token&gt;</code> header</li>
+            </ul> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Get Access Token</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Request
+curl -X POST \
+  -F client_id=your_client_id \
+  -F client_secret=your_secret \
+  https://your-odoo-instance.com/api/oauth2/token
+
+# Response
+{
+    "access_token": "q88Oj31Vc9OnpT85X7CjIsHpI4BI36L4Hfv...",
+    "token_type": "Bearer",
+    "expires_in": 1800,
+    "scope": "create read update delete search rpc"
+}</code></pre>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Use Access Token</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Request
+curl -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer q88Oj31Vc9OnpT85X7CjIsHpI4BI36L4Hfv..." \
+  https://your-odoo-instance.com/api/partner/rest
+</code></pre>
+</div>
+</details>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>JWT (JSON Web Tokens)</strong> — For stateless authentication, use JWT tokens. Tokens are signed with configurable algorithms
+                (HS256, HS384, HS512) and contain embedded payload data. No database lookup required for validation.</summary>
+<div>
+<!-- <p class="description">
+                For stateless authentication, use JWT tokens. Tokens are signed with configurable algorithms
+                (HS256, HS384, HS512) and contain embedded payload data. No database lookup required for validation.
+            </p> -->
+<!-- <h3>JWT Configuration Options</h3>
+            <ul class="feature-list">
+                <li>Custom JWT secret key per application</li>
+                <li>Configurable signing algorithm</li>
+                <li>Embedded user ID and scope in payload</li>
+                <li>Automatic token validation on each request</li>
+            </ul> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">JWT Token Endpoint</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Request
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"client_id": "your_client_id", "client_secret": "your_secret"}' \
+  https://your-odoo-instance.com/api/jwt/token
+
+# Response
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "token_type": "Bearer",
+    "expires_in": 1800,
+    "scope": "create read update delete search rpc"
+}</code></pre>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Use Access Token</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Request
+curl -X GET \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
+  https://your-odoo-instance.com/api/partner/rest
+</code></pre>
+</div>
+</details>
+<img src="img/API_4.jpg" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;"/>
+<p class="image-caption" style="text-align: center; font-style: italic; margin-top: 8px; color: #555;">Support standard OAuth2.0 and JWT authentication</p>
+<!-- Section: ID Obfuscation -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-security" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Security Features</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Field-Level Access Control</strong> — Control exactly which fields are exposed. Search fields can be independently configured to limit which
+        fields are available for filtering.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Domain Filters</strong> — Server-side record filtering for restricted access. Users can only
+        access records matching the configured domain, regardless of the domain they provide in requests.</p>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>ID Obfuscation</strong> — Protect sensitive database IDs from enumeration attacks. Integer IDs are automatically encoded
+                into random-looking strings using the Hashids algorithm. API consumers never see the real
+                database IDs, preventing unauthorized guessing of records.</summary>
+<div>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Without ID Obfuscation
+{"id": 42, "name": "John Doe"}
+
+# With ID Obfuscation enabled
+{"id": "gY5kp8", "name": "John Doe"}</code></pre>
+</div>
+</details>
+<!-- Section: Scope Control -->
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Permission Scopes</strong> — Fine-grained permission control for client applications. Each application can be granted
+                specific scopes that determine which operations are allowed.</summary>
+<div>
+<!-- <p class="description">
+                Fine-grained permission control for client applications. Each application can be granted
+                specific scopes that determine which operations are allowed.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Available Scopes</h3>
+<ul class="feature-list" style="list-style: none; padding: 0; margin: 1rem 0;">
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>create</strong> - Create new records</li>
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>read</strong> - Read individual records</li>
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>update</strong> - Update existing records</li>
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>delete</strong> - Delete records</li>
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>search</strong> - Search and list records</li>
+<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;"><strong>rpc</strong> - Call custom methods (RPC)</li>
+</ul>
+</div>
+</details>
+<!-- Section: Bulk Operations -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-advanced" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Advanced Features</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>RPC Method Calls</strong> — Expose custom model methods as API endpoints. Work with custom models as well.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Default Field Values</strong> — Configure default values for fields when creating records via API. Default values are
+                automatically applied if the field is not provided in the request. Supports dynamic
+                values like <code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">fields.Date.today()</code> and record references.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Binary Field Handling</strong> — Return images and files as URLs or Base64</p>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Bulk Operations</strong> — Process multiple records in a single API request. Allow processing multiple records at once,
+                improving efficiency for batch operations.</summary>
+<div>
+<!-- <p class="description">
+                Enable bulk create, read, update, and delete operations with a single API request.
+                Configure <code>is_allow_multi</code> to allow processing multiple records at once,
+                improving efficiency for batch operations.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example: Bulk Create</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Request
+POST /api/partners
+Content-Type: application/json
+
+[
+    {"name": "Partner A", "email": "a@example.com"},
+    {"name": "Partner B", "email": "b@example.com"}
+]
+
+# Response: Array of created records
+[
+    {"id": "abc123", "name": "Partner A", "email": "a@example.com"},
+    {"id": "def456", "name": "Partner B", "email": "b@example.com"}
+]</code></pre>
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example: Bulk Update</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Update multiple records with same values
+PATCH /api/partners
+{"ids": ["abc123", "def456"], "active": false}
+
+# Update multiple records with different values
+PATCH /api/partners
+[
+    {"id": "abc123", "phone": "123-456-7890", "active": false},
+    {"id": "def456", "phone": "098-765-4321", "active": false}
+]</code></pre>
+</div>
+</details>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Field Aliases</strong> — Rename fields in API requests and responses without modifying the underlying model.</summary>
+<div>
+<!-- <p class="description">
+                Rename fields in API requests and responses without modifying the underlying model.
+                Use <code>alias_field_ids</code> to create user-friendly field names for API consumers
+                while keeping internal field names unchanged.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Database field: partner_id
+# Alias: customer
+
+# API Request can use alias:
+POST /api/orders
+{"customer": "gY5kp8", "order_total": 150.00}
+
+# API Response uses alias:
+{"customer": "gY5kp8", "order_total": 150.00}</code></pre>
+</div>
+</details>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Related Model Fields</strong> — Include related model data in API responses. Configure which fields from
+                many2one, one2many, and many2many relations should be expanded and returned with
+                the main record data.</summary>
+<div>
+<!-- <p class="description">
+                Include data from related models in API responses. Configure which fields from
+                many2one, one2many, and many2many relations should be expanded and returned with
+                the main record data.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Without related fields:
+{"id": "abc123", "country_id": 42}
+
+# With related fields configured (country_id fields: name, code):
+{"id": "abc123", "country_id": [42, {"name": "United States", "code": "US"}]}</code></pre>
+</div>
+</details>
+<!-- Section: API Export -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-export" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">API Export</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Export to Postman Collection</strong> — Export your APIs as a Postman Collection JSON file that can be directly imported into Postman.
+                The wizard generates a complete collection with all endpoints, headers, and request templates organized by API folders.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Export to Swagger/OpenAPI</strong> — Export your APIs as an OpenAPI 3.0 specification JSON file. Compatible with Swagger UI, Swagger Editor,
+                and any OpenAPI-compatible tool for documentation and testing.</p>
+<!-- Section: API Statistics -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-stats" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Monitoring &amp; Statistics</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>API Usage Statistics</strong> — Track API usage with built-in statistics. Monitor success rates, error counts,
+                and average execution times for each API endpoint.</p>
+<img src="img/API_3.jpg" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;"/>
+<p class="image-caption" style="text-align: center; font-style: italic; margin-top: 8px; color: #555;">API Usage Statistics</p>
+<!-- Section: API Organization -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-org" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Organization &amp; Management</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Categories</strong> — Organize APIs into logical categories for easier management. Categories help group
+                related APIs and provide quick access</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Tags</strong> — Apply custom tags to APIs for flexible organization and filtering. Tags provide
+                an additional layer of categorization beyond categories.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>API Lifecycle States</strong> —Manage APIs through a clear lifecycle with three states: Draft (development),
+                Active (published and accessible), and Inactive (disabled but preserved).</p>
+<!-- Section: Testing -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-testing" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Testing &amp; Development</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Live API Testing</strong> — Test your APIs directly from the Odoo interface without external tools. The built-in
+                test feature generates cURL commands and displays responses, making development and
+                debugging faster.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Test Mode</strong> — Sandbox environment for development. Enable Test Mode for APIs or client applications to work in a sandbox environment.
+                Perfect for development and testing without affecting production data.</p>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Auto-Generated Endpoints</strong> — When an API is published, endpoints are automatically generated based on the
+                configured operations. Each endpoint can be individually activated or deactivated.</p>
+<!-- Section: Multi-Model Support -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-config" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Configuration Options</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>CORS Configuration</strong> — Configure Cross-Origin Resource Sharing (CORS) per API.</p>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Multi-Model APIs</strong> — Expose multiple models through a single API route. When enabled, the
+                model name becomes part of the URL path, allowing dynamic model selection.</summary>
+<div>
+<!-- <p class="description">
+                Create a single API endpoint that works with multiple models. When enabled, the
+                model name becomes part of the URL path, allowing dynamic model selection.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Example</h3>
+<pre style="color: #dfe6e9; background-color: #2d3436; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.875rem; line-height: 1.5; margin: 1rem 0;"><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;"># Single API for multiple models
+GET /api/:model
+
+# Access different models:
+GET /api/res.partner
+GET /api/sale.order
+GET /api/product.product</code></pre>
+</div>
+</details>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Authentication Modes</strong> — Public or user-based request execution</summary>
+<div>
+<p class="description" style="color: #495057; margin-bottom: 1rem;">
+                Choose between two authentication modes for each API:
+            </p>
+<table class="table table-bordered" style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+<tr>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Mode</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Description</th>
+</tr>
+<tr>
+<td>Public</td>
+<td>Requests execute under a configured "Run as User" account</td>
+</tr>
+<tr>
+<td>User</td>
+<td>Requests require authentication and execute under the authenticated user's permissions</td>
+</tr>
+</table>
+</div>
+</details>
+<details style="margin-bottom: 1.5rem;">
+<summary style="cursor: pointer; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem;"><strong>Pagination &amp; Ordering</strong> — Built-in support for pagination with configurable default limit. Search results
+                include total count and support ordering by any field.</summary>
+<div>
+<!-- <p class="description">
+                Built-in support for pagination with configurable default limit. Search results
+                include total count and support ordering by any field.
+            </p> -->
+<h3 style="font-size: 1.125rem; color: #343a40; margin: 1.5rem 0 1rem 0; font-weight: 600;">Query Parameters</h3>
+<table class="table table-bordered" style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+<tr>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Parameter</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Description</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Example</th>
+</tr>
+<tr>
+<td>domain</td>
+<td>Filter records</td>
+<td><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">[("active","=",True)]</code></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Skip first N records</td>
+<td><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">20</code></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Maximum records to return</td>
+<td><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">10</code></td>
+</tr>
+<tr>
+<td>order</td>
+<td>Sort order</td>
+<td><code style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9em; color: #dfe6e9; background-color: #2d3436;">name asc, id desc</code></td>
+</tr>
+</table>
+</div>
+</details>
+<!-- Section: Error Handling -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-error" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Error Handling</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<p class="no-detail" style="cursor: auto; padding: 1rem; background: none; border-radius: 6px; font-size: 1.1rem; color: #212529; list-style: none; gap: 0.75rem; margin-bottom: 1.5rem;"><strong>Response Types &amp; Status Codes</strong> — Understand API responses and error patterns. Error handling
+                in the API follows two main patterns: HTTP status codes and JSON response structure. A successful
+                request will return a 200 status code with a "result" key in the response data, while errors can
+                manifest either as non-200 HTTP status codes or as 200 responses containing an "error" key instead
+                of a "result" key.</p>
+<div>
+<table class="table table-bordered" style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+<thead>
+<tr>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Response Type</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">HTTP Status</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Response Structure</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">How to Handle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Successful Response</td>
+<td>200 OK</td>
+<td>Contains "result" key with requested data</td>
+<td>Process the data in the "result" object</td>
+</tr>
+<tr>
+<td>Application Error</td>
+<td>200 OK</td>
+<td>Contains "error" key with error details</td>
+<td>Check for "error" key before processing and handle the error message</td>
+</tr>
+<tr>
+<td>HTTP Error</td>
+<td>4xx or 5xx</td>
+<td>May contain error details in response body</td>
+<td>Handle based on status code (401 for authentication, 403 for permissions, 404 for not found, etc.)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Update History Section -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-history" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Update History</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<div class="update-history-container">
+<div class="update-item">
+<div class="update-date"><strong>January 05, 2026 (*.0.0.4)</strong> - New Features</div>
+<ul>
+<li>Added ability to configure field alias in API</li>
+<li>Added support for JWT authentication</li>
+</ul>
+</div>
+<div class="update-item">
+<div class="update-date"><strong>December 21, 2025 (*.0.0.3)</strong> - New Features, Improvements &amp; Bug Fixes</div>
+<ul>
+<li>Added new feature: Export API to Swagger</li>
+<li>Added "api_id" and "app_id" to context</li>
+<li>Improved obfuscated API data decoding to only apply on relation fields</li>
+<li>Improved GET and DELETE requests to no longer require the "Content-Type: application/json" header</li>
+<li>Fixed a command injection vulnerability in the "domain" parameter of search API</li>
+<li>Fixed a bug where data rollback was not working correctly on error</li>
+<li>Fixed bug: nested child data causes error when using "web_search_read" on Odoo 17+</li>
+</ul>
+</div>
+<div class="update-item">
+<div class="update-date"><strong>December 10, 2025 (*.0.0.2)</strong> - Bug Fixes</div>
+<ul>
+<li>Fixed a bug where the API Management menu was missing in Settings on Odoo 17, 18, and 19</li>
+<li>Fixed a coding error in "secure_api/controllers/api_binary.py"</li>
+<li>Fixed a bug where disabled client applications could still generate access tokens</li>
+<li>Fixed an issue where expired access tokens displayed an incorrect state</li>
+</ul>
+</div>
+<div class="update-item">
+<div class="update-date"><strong>July 12, 2025 (*.0.0.1)</strong> - Initial Release</div>
+<ul>
+<li>First version of the addon</li>
+</ul>
+</div>
+</div>
+<!-- Section: Technical Support -->
+<div class="section-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid #e0e0e0;">
+<h2 id="section-support" style="font-size: 1.5rem; color: #212529; margin: 0; padding-bottom: 0.75rem; border-bottom: 2px solid #e9ecef; font-weight: 600; padding: 0; border: none;">Technical Support</h2>
+<a class="back-to-toc" href="#toc" style="display: inline-block; font-size: 0.8rem; color: #6c757d; text-decoration: none; padding: 0.25rem 0.75rem; border: 1px solid #dee2e6; border-radius: 4px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0; margin-left: auto;">Back to Contents</a>
+</div>
+<div class="feature-section" style="margin-bottom: 2.5rem; padding: 1.5rem; background: #fff; border: 1px solid #e9ecef; border-radius: 8px; transition: box-shadow 0.2s ease;">
+<p class="description" style="color: #495057; margin-bottom: 1rem;">
+            Need help with the Secure API module? Contact our technical support team for assistance with installation,
+            configuration, customization, or any questions.
+        </p>
+<p class="description" style="color: #495057; margin-bottom: 1rem;">
+            For test purposes before buying, please contact:
+        </p>
+<table style="width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;">
+<tr>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Channel</th>
+<th style="background: #f8f9fa; font-weight: 600; color: #495057;">Contact</th>
+</tr>
+<tr>
+<td>Email</td>
+<td><a href="mailto:sales@minhng.info">sales@minhng.info</a></td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td><a href="https://t.me/minhng92" target="_blank">@minhng92</a></td>
+</tr>
+</table>
+</div>
+<!-- Footer -->
+<div class="doc-footer" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef; text-align: center; color: #6c757d; font-size: 0.9rem;">
+<p>
+<strong>Secure API</strong> for Odoo — Secure, flexible, and powerful API management.
+        </p>
+</div>
+</img></div>
+</body>
+</html>

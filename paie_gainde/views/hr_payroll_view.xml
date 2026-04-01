@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- ======================================= -->
+    <!-- Vues search / filter pour hr.payslip.line -->
+    <!-- ======================================= -->
+    <record id="view_hr_payslip_line_inherit_filter" model="ir.ui.view">
+      <field name="name">hr.payslip.line.select</field>
+      <field name="model">hr.payslip.line</field>
+      <field name="arch" type="xml">
+        <search string="Search Payslip Lines">
+          <field name="name" string="Payslip Lines" filter_domain="['|',('name','ilike',self),('code','ilike',self)]"/>
+          <field name="amount_select"/>
+          <field name="slip_id"/>
+          <filter string="Date debut" name="payslip_date_from"/>
+          <filter string="Date de fin" name="payslip_date_to"/>
+          <group string="Group By" col="8" colspan="4" expand="0">
+            <filter string="Salary Rule Category" name="category_id" context="{'group_by':'category_id'}"/>
+            <!-- ================<filter string="Contribution Register" name="register_id" context="{'group_by':'register_id'}"/>======================= -->
+            
+            <filter string="Amount Type" name="amount_select" context="{'group_by':'amount_select'}"/>
+            <filter string="Employees" name="employee_id" context="{'group_by':'employee_id'}"/>
+            <filter string="Méthode de paiement" name="payment_type"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <!-- ======================================= -->
+    <!-- Vue tree hr.payslip -->
+    <!-- ======================================= -->
+    <record model="ir.ui.view" id="view_hr_payslip_tree_inherit">
+      <field name="name">hr.payslip.tree.inherit</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+      <field name="arch" type="xml">
+        <field name="employee_id" position="after">
+          <field name="typePaiement" string ='Type de Paiement'/>
+          
+        </field>
+      </field>
+    </record>
+
+    <!-- ======================================= -->
+    <!-- Vue search hr.payslip -->
+    <!-- ======================================= 
+    <record model="ir.ui.view" id="view_hr_payslip_search_inherit">
+      <field name="name">hr.payslip.search.inherit</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+      <field name="arch" type="xml">
+        <filter name="employee_id" position="after">
+           <filter string="Méthode de paiement" name="typePaiement"/> 
+        </filter>
+      </field>
+    </record>
+            -->
+    <!-- ======================================= -->
+    <!-- Vue form hr.payslip -->
+    <!-- ======================================= -->
+    <record model="ir.ui.view" id="view_hr_payslip_form_inherit">
+      <field name="name">hr.payslip.form.inherit</field>
+      <field name="model">hr.payslip</field>
+      <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+      <field name="arch" type="xml">
+        <field name="credit_note" position="after">
+          <field name="typePaiement"/>
+          <!-- <field name="employee_bank_id" domain="[('employee_id','=',employee_id)]"/> -->
+          <field name="seniority_char" string="Ancieneté"/>
+          <field name="nb_part_of_payslip"/>
+          <field name="trimf" string ='Trimf'/>
+         
+          <field name="amount_net"/>
+          <!-- <field name="bank_id"/> -->
+        </field>
+      </field>
+    </record>
+
+    <!-- ======================================= -->
+    <!-- Vue pivot hr.payslip.line -->
+    <!-- ======================================= -->
+    <record id="hr_payslip_pivot" model="ir.ui.view">
+      <field name="name">hr.payslip.pivot</field>
+      <field name="model">hr.payslip.line</field>
+      <field name="arch" type="xml">
+        <pivot string="Analyse de la paie">
+          <field name="employee_id" type="row"/>
+          <field name="total" type="measure"/>
+        </pivot>
+      </field>
+    </record>
+
+    <!-- ======================================= -->
+    <!-- Actions pour le reporting -->
+    <!-- ======================================= -->
+    <record model="ir.actions.act_window" id="action_report_payroll">
+      <field name="name">Analyses de la paie</field>
+      <field name="res_model">hr.payslip.line</field>
+      <field name="view_mode">pivot,graph</field>
+      <field name="search_view_id" ref="view_hr_payslip_line_inherit_filter"/>
+      <field name="context">{'group_by': ['payslip_date_to:month']}</field>
+    </record>
+    
+    
+    
+       
+          <record id="view_hr_company_cfce_tree" model="ir.ui.view">
+            <field name="name">hr.company.cfce.tree</field>
+            <field name="model">company.cfce</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="name"/>
+                    <field name="plafond_cadre"/>
+                    <field name="plafond_general"/>
+                </list>
+            </field>
+        </record>
+        
+         <record id="cfce_action" model="ir.actions.act_window">
+            <field name="name">Données Paie</field>
+            <field name="res_model">company.cfce</field>
+            <field name="view_mode">list</field>
+           
+        </record>
+
+        <!-- ============================= -->
+        <!-- Menus VPI et Catégorie  <field name="view_id" ref="view_hr_company_cfce_tree"/>-->
+        <!-- ============================= -->
+    
+          
+          
+          
+          <record id="view_prime_attribution_tree" model="ir.ui.view">
+    <field name="name">prime.attribution.tree</field>
+    <field name="model">prime.attribution</field>
+    <field name="arch" type="xml">
+        <list  decoration-success="state == 'active'"
+                  decoration-danger="state == 'expired'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="categ_id"/>
+                <field name="type_prime"/>
+                <field name="valeur_prime"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="state"/>
+        </list>
+    </field>
+</record>
+          
+          <record id="view_prime_attribution_form" model="ir.ui.view">
+    <field name="name">prime.attribution.form</field>
+    <field name="model">prime.attribution</field>
+    <field name="arch" type="xml">
+        <form string="Attribution Prime">
+            <header>
+            <button name="action_confirm"
+                            string="Confirmer"
+                            type="object"
+                            class="btn-primary"
+                            invisible="manual_state != 'draft'"/>
+
+                    <!-- Annuler visible sauf si déjà annulé -->
+                    <button name="action_cancel"
+                            string="Annuler"
+                            type="object"
+                            class="btn-danger"
+                            invisible="manual_state == 'cancelled'"/>
+
+                    <!-- Reset visible seulement si annulé -->
+                    <button name="action_reset_draft"
+                            string="Remettre en brouillon"
+                            type="object"
+                            invisible="manual_state != 'cancelled'"/>
+
+                    <!-- Statusbar dynamique -->
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,active,expired,cancelled"/>
+            
+            </header>
+            <sheet>
+                 <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="categ_id"/>
+                            <field name="type_prime"/>
+                        </group>
+                        <group>
+                            <field name="valeur_prime"/>
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                        </group>
+                    </group>
+                    <notebook>
+    <page string="Employés concernés">
+        <field name="employee_line_ids">
+
+            <list >
+
+                <field name="employee_id"/>
+                <field name="contract_id"/>
+
+                <!-- Visible si religieuse -->
+                <field name="prime_religieuse"
+                       invisible="parent.type_prime != 'religieuse'"/>
+
+                <!-- Visible si technique -->
+                <field name="prime_tech"
+                       invisible="parent.type_prime != 'tech'"/>
+
+                <!-- Visible si 13eme -->
+                <field name="trezieme_moi"
+                       invisible="parent.type_prime != '13eme'"/>
+
+            </list>
+
+        </field>
+    </page>
+</notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+        
+        
+          <record id="action_attribution_prime" model="ir.actions.act_window">
+    <field name="name">Attribution Prime</field>
+    <field name="res_model">prime.attribution</field>
+    <field name="view_mode">list,form</field>
+     </record>
+        
+      
+
+    
+  
+  
+     
+          
+          
+          <record id="seq_prime_attribution" model="ir.sequence">
+          <field name="name">Prime Attribution</field>
+          <field name="code">prime.attribution</field>
+          <field name="prefix">PRIME/</field>
+          <field name="padding">4</field>
+      </record>
+    
+
+
+    
+
+  </data>
+</odoo>

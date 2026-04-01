@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- TYPE : PROTOCOLE D’ACCORD -->
+        <record id="type_insurance" model="legal.contract.type">
+            <field name="name">Souscription Orbus Insurance (SOI)</field>
+            <field name="code">SOI-G2K</field>
+            <field name="category">insurance</field>
+            <field name="description">Contrat d'abonnement  entre GAINDE 2000 et ses clients pour Orbus Insurance.</field>
+            <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                   GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    <br/><br/>
+                    ORBUS INSURANCE STATS s’inscrit dans le cadre des téléprocédures. C’est un module de la plateforme ‘ORBUS’ qui se donne comme principal objectif l’accompagnement des compagnies d’assurances et des courtiers d’assurances dans le suivi et la gestion des polices d’assurances des clients.
+                    <br/><br/>
+                    Le Client ayant manifesté la volonté de se doter du service ORBUS INSURANCE STATS;
+                </p>
+                 <p class="mt-3"><strong>Entre les parties, il a été convenu et arrêté ce qui suit :</strong></p>
+
+            ]]></field>
+        </record>
+
+        <!-- Articles du Protocole -->
+        <record id="art_soi_1" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 1 : OBJET</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Dans le cadre des présentes, le Client souscrit aux services de ORBUS INSURANCE STATS de GAINDE 2000 aux
+            termes et conditions ci-après définis.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_2" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 2 : CARACTERISTIQUES ET COMMODITES D’USAGE DE ORBUS INSURANCE STATS</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">ORBUS INSURANCE STATS est un module qui offre la possibilité de consulter
+                l’historique des ressorties de primes. Il permet de faire le récapitulatif des demandes d’attestation
+                d’assurance des clients sur une période donnée .</p>
+                <p>Ses caractéristiques sont les suivantes:</p>
+            <p><strong>2.1.	LES CARACTERISTIQUES DE ORBUS INSURANCE STATS</strong></p>
+                <p class="ps-3 small">Elles sont les suivantes :  </p>
+
+            <p><strong>2.1.1. Une disponibilité 24h/7j. </strong></p>
+            <p class="ps-3 small">ORBUS INSURANCE STATS est une application web client-serveur. Elle bénéficie d’une
+             infrastructure d’hébergement garantissant un maximum de disponibilité.</p>
+
+            <p><strong>2.1.2. La visualisation complète et manipulation parfaite des données </strong></p>
+            <p class="ps-3 small">ORBUS INSURANCE STATS permet d’avoir un aperçu en image des données sous forme de
+            diagrammes, en valeurs, en chiffres etc. L’utilisateur a la possibilité d’effectuer des recherches
+            affinées à partir d’un ensemble d’éléments combinés (date, bénéficiaire, pays, devise, nature opération..)</p>
+
+            <p><strong>2.1.3. L’exportation des tableaux de données sous format Excel, PDF</strong></p>
+            <p class="ps-3 small">Pour une exploitation ultérieure des données, l’utilisateur a la possibilité d’exporter,
+            sous différents formats, les résultats de ses recherches. Les Formats Excel et PDF sont disponibles
+            de même que le CSV. </p>
+
+            <p><strong>2.1.4. La sécurisation des connexions</strong></p>
+            <p class="ps-3 small">La connexion à ORBUS INSURANCE STATS via les protocoles https et
+            SSL (Secure Sockets Layer) qui crée un canal sécurisé entre les machines ajoutent une couche de sécurité
+            aux échanges. Les données étant une matière sensible et essentielle, l’utilisation de protocoles sécurisés
+            devient obligatoire. </p>
+
+            <p><strong>2.1.5. Les réponses instantanées aux requêtes</strong></p>
+            <p class="ps-3 small">Les serveurs du data center de GAINDE 2000 sont dotés de grandes capacités en termes
+            de processeurs et de mémoire RAM et le réseau local bénéficie d’une bande passante largement suffisante
+            pour assurer un service rapide. </p>
+
+            <p><strong>2.1.6. Une large historisation des données</strong></p>
+            <p class="ps-3 small">L’application permet de faire des recherches sur une large plage de données.</p>
+
+
+        <p><strong>2.2.	LES COMMODITES D’USAGE DE ORBUS INSURANCE STATS </strong></p>
+        <p class="ps-3 small">Les commodités liées à l’utilisation de ORBUS INSURANCE STATS sont les suivantes: </p>
+        <ul style="list-style-type: '-' ;">
+               <li><p>Un accès privé et sécurisé à l’historique des opérations;</p></li>
+               <li><p>La mise à disposition d’une base de données de facturation des clients ;</p></li>
+               <li><p>Une meilleure gestion du portefeuille client;</p></li>
+               <li><p>Un meilleur suivi financier.</p></li>
+        </ul>
+
+            ]]></field>
+        </record>
+
+        <record id="art_soi_3" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 3 : OBLIGATIONS DES PARTIES</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p><strong>3.1. Les obligations de GAINDE 2000</strong></p>
+                <p class="ps-3 small">Pour l’exécution des présentes, GAINDE 2000 s’engage à réaliser les prestations
+                suivantes, consécutivement à la souscription du Client à ORBUS INSURANCE STATS :  </p>
+            <ul style="list-style-type: '-' ;">
+               <li><p>Veiller à son bon fonctionnement (intégrité/disponibilité/accessibilité), gage d’une jouissance
+               paisible des commodités sus visées;</p></li>
+               <li><p>Assurer sa maintenance corrective et évolutive;</p></li>
+               <li><p>Accompagner le Client dans l’identification et la satisfaction des prérequis techniques
+               nécessaires à l’accés au module;</p></li>
+               <li><p>Pourvoir à l’hébergement des données du Client traitées au niveau de ORBUS INSURANCE STATS;</p></li>
+               <li><p>Assurer la veille technologique requise pour une bonne sécurisation du module et des données traitées;</p></li>
+               <li><p>Veiller à la bonne appropriation de ORBUS INSURANCE STATS par le Client;</p></li>
+               <li><p>Se conformer aux dispositions de la loi portant sur les données à caractère personnel, relativement
+                au traitement et à la sécurisation des données personnelles du Client.</p></li>
+            </ul>
+
+        <p><strong> 3.2. Les Obligations du Client</strong></p>
+        <p class="ps-3 small">Le Client s’oblige aux prestations suivantes :</p>
+        <ul style="list-style-type: '-' ;">
+               <li><p>la mise aux normes technologiques de ses installations; </p></li>
+               <li><p>la mobilisation et la sensibilisation des parties prenantes et autres agents impliqués dans l’utilisation
+                de la solution;</p></li>
+               <li><p>la promotion de ORBUS INSURANCE STATS auprès de ses clients et/ou fournisseurs/partenaires;</p></li>
+               <li><p>la conservation en toute sécurité et confidentialité des paramètres de connexion remis par
+               GAINDE 2000 (liens, identifiants, mots de passe etc.);</p></li>
+               <li><p>informer GAINDE 2000 sans délai et par tout moyen, de tout cas d’incident de sécurité relevant
+               du fait du Client;</p></li>
+               <li><p>satisfaire aux conditions financières de souscription (cf. Article 5).</p></li>
+
+        </ul>
+            <p><strong> 3.3. Les obligations communes des parties</strong></p>
+            <p class="ps-3 small">En sus de l’obligation de confidentialité qui incombe aux parties, celles-ci
+            conviennent de collaborer de bonne foi aux fins des présente </p>
+            <p>À cet égard, les parties s’interdisent toutes les manœuvres intentionnelles ou délibérées et les
+            pratiques dilatoires de nature à vicier la bonne exécution du contrat.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_4" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 4 : CONDITIONS TECHNIQUES D’ACCES A ORBUS INSURANCE STATS</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Pour accéder aux services de la solution ORBUS INSURANCE STATS, Il suffit à
+            l’utilisateur de disposer d’un navigateur WEB, d’une connexion internet et des outils comme le PC,
+            une tablette ou un smartphone. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_5" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 5 : CONDITIONS FINANCIERES DE SOUSCRIPTION A ORBUS INSURANCE STATS</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">La souscription du Client à ORBUS INSURANCE STATS est subordonnée au paiement
+                d’une redevance annuelle détaillée en annexe 1. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_6" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 6 : RESPONSABILITES</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p><strong> 6.1. Responsabilités de GAINDE 2000</strong></p>
+            <p class="ps-3 small">GAINDE 2000 est responsable de la bonne exécution des prestations listées aux 2.1,
+            2.2, 3.1, 3.3 et 7. Leurs défaillances engagent sa responsabilité pleine et entièr </p>
+            <p>Toutefois, la responsabilité de GAINDE 2000 ne saurait être engagée en cas de d’indisponibilité et/ou
+             de difficultés d’accès liées au réseau de connexion internet et aux installations techniques,
+             ou à une mauvaise conservation des paramètres de connexion</p>
+
+           <p><strong> 6.2. Responsabilités du Client</strong></p>
+            <p class="ps-3 small">Le Client est responsable de la bonne exécution des prestations listées aux 3.2, 3.3,
+            4. et 7. Leurs défaillances engagent sa responsabilité pleine et entière. </p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_soi_7" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 7 : LIMITATIONS</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat vise à mettre en œuvre un partenariat d’affaires entre les parties.
+                À part les obligations découlant des présentes, chaque partie reste indépendante à la fois,
+                de par sa nature juridique, que de par ses règles d’organisation et de fonctionnement.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_8" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 8 : CONFIDENTIALITE</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les termes de ce contrat sont strictement confidentiels.
+                Les parties entendent ne divulguer aucune information ou donnée sans le consentement écrit et préalable
+                de l’autre partie. À cet égard, elles s’engagent à : </p>
+            <ul style="list-style-type: '-' ;">
+               <li> <p>s’abstenir de divulguer à des tiers toute information relative à ce contrat à l’exception de
+                 ses employés qui sont tenus d’en prendre connaissance en raison de leurs fonctions ;</p></li>
+               <li><p>considérer les informations y afférentes comme confidentielles. À moins de requérir
+               l’autorisation écrite préalable de l’autre partie, il est formellement interdit d’utiliser toute
+               information confidentielle relative à ce contrat pour son propre compte ou de favoriser leur utilisation
+                par des tiers, pour leurs propres bénéfices, et au détriment de l’autre partie;</p></li>
+               <li><p>prendre toutes les mesures nécessaires pour restreindre l’accès aux informations confidentielles;</p></li>
+               <li><p>communiquer la présente clause à toute personne qui a accès aux informations confidentielles;</p></li>
+               <li><p>-	restituer immédiatement tous les supports, de quelque nature qu’ils soient
+               (physiques, électroniques) dès que l’autre partie en fait la demande par écrit. </p></li>
+            </ul>
+            <p>L’obligation de confidentialité survit au terme du contrat.</p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_soi_9" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 9 : MODIFICATION (S) - VERSIONNING</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat est un contrat d’adhésion à ORBUS INSURANCE STATS.
+                 GAINDE 2000 se réserve le droit de procéder, à tout moment, à sa modification en fonction de
+                 l’évolution de la nature du service. En pareil cas, le client sera informé dans les meilleurs délais.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_10" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 10 : DUREE</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat entre en vigueur à compter de sa date de signature.
+                Il est conclu pour une durée d’......... renouvelable par tacite reconduction pour des périodes
+                d’égale durée, sauf notification d’un avis de non-renouvellement à l’autre partie,
+                 au moins trois (03) mois avant son terme. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_11" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 11 : RESILIATION</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p>Ce contrat peut être résilié de plein droit :</p>
+            <ul style="list-style-type: '-' ;">
+                <li> <p>en cas de force majeure telle que défini par la jurisprudence ;</p></li>
+                <li> <p>en cas de violation par l’une des parties à ses obligations. Ladite résiliation intervient à
+                l’expiration de la mise en demeure de la partie diligente, restée sans effet, enjoignant la partie
+                défaillante de remédier à ses manquements dans un délai spécifié.</p></li>
+                <li> <p>en cas de redressement judiciaire ou de liquidation des biens d’une des parties</p></li>
+            </ul>
+            <p class="ps-3 small">La décision de résiliation est notifiée par écrit avec accusé de réception.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_12" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 12 : PROPRIETE INTELLECTUELLE</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+            <p><strong> ORBUS INSURANCE STATS</strong> est une propriété exclusive de <strong>GAINDE 2000</strong>.</p>
+             <p class="ps-3 small">Toute représentation ou reproduction, totale ou partielle, permanente ou temporaire,
+              par quelque procédé que ce soit, de l’un ou l’autre de ses composantes, sans l’accord préalable et exprès
+              de GAINDE 2000, emporte la responsabilité pleine et entière de son auteur.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_13" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 13 : CESSION</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Ce contrat est conclu intuitu personae c’est à dire en considération de
+                la capacité et de la nature intrinsèque des parties. Il est incessible, non transférable et inaliénable. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_14" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 14 : DIVISIBILITÉ</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">L’invalidité ou l’illégalité d’une des dispositions de ce présent contrat,
+                dans la mesure où elle n’affecte pas les obligations essentielles des parties, n’a aucune incidence
+                sur la validité des autres dispositions qui seront interprétées au mieux pour répondre à l’intention
+                et à la bonne foi des parties. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_15" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 15 : APPLICABILITE</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat et les obligations qui en découlent ont une force exécutoire
+                pour les parties, leurs représentants, leurs employés ou toute autre personne autorisée à agir
+                 en leur nom et pour leur compte. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_16" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 16 : DIFFEREND</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Tout différend né entre les parties, à propos de l’existence, de la validité,
+                 de l’interprétation, de l’exécution, ou du terme du présent contrat sera soumis à la compétence
+                 du Tribunal du Commerce Hors Classe de Dakar, à défaut de règlement amiable. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_soi_17" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 17 : ELECTION DE DOMICILE</field>
+            <field name="contract_type_id" ref="type_insurance"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les parties élisent domicile à leurs sièges sociaux respectifs désignés supra où
+                toutes les notifications seront adressées.</p>
+            ]]></field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

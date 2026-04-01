@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_gainde_hr_expense_sheet_form_submitter" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.form.submitter.button</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="xf_approval_route_expense.hr_expense_sheet_approval_form"/>
+        <field name="arch" type="xml">
+            <button name="action_submit_sheet" position="attributes">
+                <attribute name="string">Soumettre</attribute>
+                <attribute name="invisible">state != 'draft' or create_uid != uid</attribute>
+            </button>
+        </field>
+    </record>
+</odoo>

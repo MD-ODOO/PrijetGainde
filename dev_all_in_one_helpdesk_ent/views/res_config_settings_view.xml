@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <record id="view_dev_res_config_helpdesk_sub_ticket_form" model="ir.ui.view">
+        <field name="name">view.dev.res.config.helpdesk.sub.ticket.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//form" position="inside">
+             <app data-string="Helpdesk" string="Helpdesk" name="dev_helpdesk">
+                <block title="Helpdesk" name="helpdesk">
+                 <div class="row mt16 o_settings_container">
+                     <div class="col-12 col-lg-6 o_setting_box">
+                         <div class="o_setting_left_pane"/>
+                         <div class="o_setting_right_pane">
+                             <span class="o_form_label">Draft Stage</span>
+                             <div class="text-muted content-group mt16">
+                                <field name="draft_stage_id" class="oe_inline" options="{'no_create': True, 'no_create_edit':True}"/>
+                             </div>
+                             
+                             <span class="o_form_label">Done Stage</span>
+                             <div class="text-muted content-group mt16">
+                                <field name="done_stage_id" class="oe_inline" options="{'no_create': True, 'no_create_edit':True}"/>
+                             </div>
+                             
+                             <span class="o_form_label">Close Stage</span>
+                             <div class="text-muted content-group mt16">
+                                <field name="close_stage_id" class="oe_inline" options="{'no_create': True, 'no_create_edit':True}"/>
+                             </div>
+                             <span class="o_form_label">Cancel Stage</span>
+                             <div class="text-muted content-group mt16">
+                                <field name="cancel_stage_id" class="oe_inline" options="{'no_create': True, 'no_create_edit':True}"/>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 </block> 
+                
+                
+                <block title="Generate Tickets User Notification" name="Generate Tickets User Notification">
+                <div class="row mt16 o_settings_container">
+                     <div class="col-12 col-lg-6 o_setting_box">
+                         <div class="o_setting_left_pane"/>
+                         <div class="o_setting_right_pane">
+                             <span class="o_form_label">Notification User</span>
+                             <div class="text-muted content-group mt16">
+                                 <field name="notification_user_id" class="oe_inline" options="{'no_create': True, 'no_create_edit':True}"/>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                </block>
+                
+                 <block title="Helpdesk Due Reminder" name="Helpdesk Due Reminder">
+                 	<div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="helpdesk_due_reminder">
+                        <div class="o_setting_left_pane">
+                            <field name="helpdesk_due_reminder"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="helpdesk_due_reminder"/>
+                            <div class="text-muted">
+                                Send email to assign user when ticket due.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box" id="helpdesk_due_reminder">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="reminder_stage_ids"/>
+                            <div class="text-muted">
+<!--                                attrs="{'required':[('helpdesk_due_reminder','=',True)]}"-->
+                                <field name="reminder_stage_ids" widget="many2many_tags"
+                                       options="{'no_open':True,'no_create':1,'no_create_edit':1}"
+                                       required="helpdesk_due_reminder == True"
+                                       />
+                            </div>
+                        </div>
+                    </div>
+                 	</div>
+                 </block>
+                 
+                 
+                 <block title="Helpdesk Ticket Multi Users" name="Helpdesk Ticket Multi Users">
+                    <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="helpdesk_product">
+                        <div class="o_setting_left_pane">
+                            <field name="allow_multi_user"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="allow_multi_user"/>
+                            <div class="text-muted">
+                                Add Multi users in helpdesk ticket.
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                 </block>
+                 
+                 
+                 <block title="Create Sub Tickets from Helpdesk Tickets." name="Create Sub Tickets from Helpdesk Tickets.">
+                 	 <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box" id="helpdesk_product">
+                        <div class="o_setting_left_pane">
+                            <field name="helpdesk_subticket"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="helpdesk_subticket"/>
+                            <div class="text-muted">
+                                Add Subticket  in helpdesk ticket.
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                 </block>
+                
+             </app>
+         </xpath>
+            
+            
+        </field>
+    </record>
+</odoo>

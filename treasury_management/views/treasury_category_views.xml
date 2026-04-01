@@ -1,0 +1,62 @@
+<odoo>
+  <record id="action_treasury_category" model="ir.actions.act_window">
+    <field name="name">Catégories</field>
+    <field name="res_model">treasury.category</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <record id="view_treasury_category_list" model="ir.ui.view">
+    <field name="model">treasury.category</field>
+    <field name="arch" type="xml">
+      <list decoration-danger="remaining_amount &lt; 0"
+            decoration-warning="budget_amount and remaining_amount &lt; budget_amount * 0.2 and remaining_amount &gt;= 0"
+            string="Catégories de trésorerie">
+        <field name="name"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="budget_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="spent_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="remaining_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_category_form" model="ir.ui.view">
+    <field name="model">treasury.category</field>
+    <field name="arch" type="xml">
+      <form string="Catégorie de trésorerie">
+        <sheet>
+          <div class="oe_title">
+            <h1><field name="name" placeholder="Nom de la catégorie"/></h1>
+          </div>
+          <group>
+            <group string="Budget">
+              <field name="currency_id" invisible="1"/>
+              <field name="budget_amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"/>
+              <field name="spent_amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}" readonly="1"/>
+              <field name="remaining_amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}" readonly="1"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Décaissements liés">
+              <field name="payment_ids" readonly="1">
+                <list>
+                  <field name="name"/>
+                  <field name="planned_payment_date"/>
+                  <field name="currency_id" invisible="1"/>
+                  <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                  <field name="state" widget="badge"
+                         decoration-success="state == 'paid'"
+                         decoration-warning="state == 'planned'"
+                         decoration-muted="state == 'draft'"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

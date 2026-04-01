@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Forcer les libellés de menus en français -->
+    <record id="purchase_request.menu_purchase_request" model="ir.ui.menu">
+        <field name="name">Demandes d'achat</field>
+    </record>
+    <record id="purchase_request.menu_purchase_request_act" model="ir.ui.menu">
+        <field name="name">Demandes d'achat</field>
+    </record>
+    <record id="purchase_request.menu_purchase_request_pro_mgt" model="ir.ui.menu">
+        <field name="name">Demandes d'achat</field>
+    </record>
+    <record id="purchase_request.parent_menu_purchase_request" model="ir.ui.menu">
+        <field name="name">Demandes d'achat</field>
+    </record>
+</odoo>

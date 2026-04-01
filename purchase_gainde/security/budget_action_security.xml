@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Restreindre les menus budgétaires aux groupes Budget Gainde -->
+        <menuitem id="menu_budget_management_main"
+              groups="purchase_gainde.group_budget_admin_gainde"/>
+
+        <!-- Restreindre les actions sensibles (accès direct par URL) -->
+        <record id="account_budget.budget_report_action" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        </record>
+
+        <record id="account_budget.act_budget_analytic_view" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        </record>
+
+        <record id="action_budget_consolidated_lines" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        </record>
+
+        <record id="action_budget_center" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        </record>
+
+        <record id="action_budget_position" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('purchase_gainde.group_budget_admin_gainde')])]"/>
+        </record>
+    </data>
+</odoo>

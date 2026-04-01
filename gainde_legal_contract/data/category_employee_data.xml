@@ -1,0 +1,125 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data noupdate="1">-->
+<!--        &lt;!&ndash; TYPE : ACCORD DE CONFIDENTIALITÉ (NDA) &ndash;&gt;-->
+<!--        <record id="type_business" model="legal.contract.type">-->
+<!--            <field name="name"> SQQQQQQQ</field>-->
+<!--            <field name="code">AAAAAA-G2K</field>-->
+<!--            <field name="category">SSSSS</field>-->
+<!--            <field name="description">Modèle standard de protection des informations confidentielles.</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Articles du NDA &ndash;&gt;-->
+<!--        <record id="art_business_1" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 1 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record>-->
+
+<!--        <record id="art_business_2" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 2 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_3" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 3 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_3" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 3 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_4" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 4 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_5" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 5 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_6" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 6 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_7" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 7 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_8" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 8 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record><record id="art_business_9" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 9 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record>-->
+
+<!--        <record id="art_business_10" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 10 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record>-->
+<!--        <record id="art_business_11" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 11 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record>-->
+<!--        <record id="art_business_12" model="legal.article.template">-->
+<!--            <field name="sequence">10</field>-->
+<!--            <field name="name">Article 12 : DÉFINITION</field>-->
+<!--            <field name="contract_type_id" ref="type_nda"/>-->
+<!--            <field name="content"><![CDATA[-->
+
+
+<!--            ]]></field>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->

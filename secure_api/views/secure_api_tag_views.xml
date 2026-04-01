@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_tag_tree_view" model="ir.ui.view">
+            <field name="name">Tags</field>
+            <field name="model">secure.api.tag</field>
+            <field name="arch" type="xml">
+                <list string="Tags" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="color" widget="color_picker"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="action_secure_api_tag" model="ir.actions.act_window">
+            <field name="name">Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api.tag</field>
+            <field name="view_ids" eval="[(5, 0, 0),            
+                (0, 0, {'view_mode': 'list', 'view_id': ref('secure_api_tag_tree_view')})]"/>
+        </record>
+
+        <menuitem id="menu_secure_api_secure_api_tag"
+            name="Tags"
+            action="action_secure_api_tag"
+            sequence="30"
+            parent="secure_api.menu_secure_api_configuration"
+            groups="base.group_system"/>
+    </data>
+</odoo>

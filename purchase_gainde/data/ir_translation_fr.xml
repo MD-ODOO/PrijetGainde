@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menus: Purchase Requests -->
+    <record id="tr_menu_purchase_request_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_act_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request_act"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_pro_mgt_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request_pro_mgt"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_parent_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.parent_menu_purchase_request"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+
+    <!-- Menus: Purchase Requests (fr_FR) -->
+    <record id="tr_menu_purchase_request_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_act_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request_act"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_pro_mgt_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.menu_purchase_request_pro_mgt"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+    <record id="tr_menu_purchase_request_parent_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.menu,name</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model</field>
+        <field name="res_id" ref="purchase_request.parent_menu_purchase_request"/>
+        <field name="src">Purchase Requests</field>
+        <field name="value">Demandes d'achat</field>
+    </record>
+
+    <!-- QWeb strings (fr) -->
+    <record id="tr_portal_subject_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_new_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_new_pr_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_readonly_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_readonly_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_list_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_submit_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Submit for approval</field>
+        <field name="value">Soumettre pour approbation</field>
+    </record>
+    <record id="tr_portal_save_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Save</field>
+        <field name="value">Enregistrer</field>
+    </record>
+    <record id="tr_portal_discard_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Discard changes</field>
+        <field name="value">Annuler la modification</field>
+    </record>
+    <record id="tr_portal_status_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_line_head_inherit_state"/>
+        <field name="src">Status</field>
+        <field name="value">Statut</field>
+    </record>
+    <record id="tr_portal_create_request_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_gainde"/>
+        <field name="src">Create a request</field>
+        <field name="value">Créer une demande</field>
+    </record>
+
+    <!-- QWeb strings (fr_FR) -->
+    <record id="tr_portal_subject_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_new_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_new_pr_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_readonly_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_readonly_fields_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_subject_list_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_gainde"/>
+        <field name="src">Subject</field>
+        <field name="value">Objet</field>
+    </record>
+    <record id="tr_portal_submit_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Submit for approval</field>
+        <field name="value">Soumettre pour approbation</field>
+    </record>
+    <record id="tr_portal_save_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Save</field>
+        <field name="value">Enregistrer</field>
+    </record>
+    <record id="tr_portal_discard_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_form_pr_fields_gainde"/>
+        <field name="src">Discard changes</field>
+        <field name="value">Annuler la modification</field>
+    </record>
+    <record id="tr_portal_status_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_line_head_inherit_state"/>
+        <field name="src">Status</field>
+        <field name="value">Statut</field>
+    </record>
+    <record id="tr_portal_create_request_fr_fr" model="ir.translation">
+        <field name="name">ir.ui.view,arch_db</field>
+        <field name="lang">fr_FR</field>
+        <field name="type">model_terms</field>
+        <field name="res_id" ref="purchase_gainde.portal_my_purchase_requests_gainde"/>
+        <field name="src">Create a request</field>
+        <field name="value">Créer une demande</field>
+    </record>
+</odoo>

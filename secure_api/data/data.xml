@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Prevent update from user -->
+    <data noupdate="0">
+        <record id="secure_api_method_get" model="secure.api.method">
+            <field name="name">GET</field>
+        </record>
+        <record id="secure_api_method_post" model="secure.api.method">
+            <field name="name">POST</field>
+        </record>
+        <record id="secure_api_method_put" model="secure.api.method">
+            <field name="name">PUT</field>
+        </record>
+        <record id="secure_api_method_delete" model="secure.api.method">
+            <field name="name">DELETE</field>
+        </record>
+        <record id="secure_api_method_patch" model="secure.api.method">
+            <field name="name">PATCH</field>
+        </record>        
+    </data>
+    <!-- Allow user to update records -->
+    <data noupdate="1">
+        <record id="secure_api_category_default" model="secure.api.category">
+            <field name="name">Default</field>
+        </record>
+        <record id="secure_api_expose_api_route_prefix" model="ir.config_parameter" forcecreate="0">
+            <field name="key">secure_api.expose_api_route_prefix</field>
+            <field name="value">/api/v1</field>
+        </record>
+        <!-- /api/key/authenticate -->
+        <record id="secure_api_api_key_authenticate" model="secure.api">
+            <field name="name">Headless Authentication</field>
+            <field name="route">/api/key/authenticate</field>
+            <field name="api_action">rpc</field>
+            <field name="model_ids" eval="[(6, 0, [ref('secure_api.model_secure_api')])]"/>
+            <field name="rpc_method">api_key_authenticate</field>
+            <field name="method_ids" eval="[(6, 0, [ref('secure_api.secure_api_method_post')])]" />
+            <field name="auth">none</field>
+            <field name="category_id" eval="ref('secure_api.secure_api_category_default')"/>
+            <field name="state">draft</field>
+        </record>
+
+        <function model="res.config.settings" name="_init_random_hashids_salt"/>
+    </data>
+</odoo>

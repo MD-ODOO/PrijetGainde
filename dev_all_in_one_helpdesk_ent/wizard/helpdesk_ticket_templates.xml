@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+  <template id="portal_my_helpdesk_ticket_inherit" inherit_id="portal.portal_searchbar">
+    <xpath expr="//div[@id='o_portal_navbar_content']" position="before">
+        <t t-set="ticket" t-value="request.env['helpdesk.ticket'].search_count([])" />
+        <t t-if="request.httprequest.path.startswith('/my/tickets')">
+            <!-- Trigger the modal with a button -->
+            <div class="text-end my-3" style="margin-left:600px;">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exporthelpdeskticketModal">
+                    Export Helpdesk Ticket
+                </button>
+            </div>
+        </t>
+
+        <!-- Modal -->
+        <div id="exporthelpdeskticketModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form id="export_timesheet_form" method="post" action="/my/ticket/export" enctype="multipart/form-data" class="modal-content">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                        <input type="hidden" name="model_id" value="helpdesk.ticket"/>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Export Helpdesk Ticket </h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="margin-left:53%;">&amp;times;</button>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="start_date" style="margin-left:20px;"><b>Start Date</b></label>
+                                    <input type="date" id="start_date" name="start_date" class="form-control o_website_form_input" t-att-value="start_date" required="1" style="width:230px; margin-left:20px;" t-options='{"widget": "datetime"}'/>
+                                </td>
+                                <td>
+                                    <label for="end_date"><b>End Date</b></label>
+                                    <input type="date" id="end_date" name="end_date" class="form-control o_website_form_input" style="width:230px;" required="1" t-att-value="end_date" t-options='{"widget": "datetime"}'/>
+                                </td>
+                              </tr> 
+                        </table>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary me-2">Export</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </xpath>
+</template>
+</odoo>
+

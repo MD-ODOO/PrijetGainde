@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sign_pincode_wizard_form" model="ir.ui.view">
+        <field name="name">sign.pincode.wizard.form</field>
+        <field name="model">sign.pincode.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Signature Électronique">
+                <!-- PAS DE <sheet> ICI -->
+                <group>
+                    <field name="attachment_id"
+                           domain="[('res_model','=',res_model),('res_id','=',res_id),('mimetype','=','application/pdf')]"
+                           options="{'no_create': True}"/>
+                    <field name="pincode" password="True" placeholder="Entrez votre code PIN"/>
+                    <!-- Ajoute ces deux champs s'ils sont utilisés dans le domain -->
+                    <field name="res_model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_confirm_sign" string="Signer et Classer en GED" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PLAN 1 -->
+    <record id="plan_1_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0001</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">8</field>
+        <field name="strategic_objectives">Verification 100% declarations ORBUS vs Odoo - Controle DAM NCTS DAU conformite Gainde2000</field>
+    </record>
+
+    <!-- PLAN 2 -->
+    <record id="plan_2_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0002</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">4</field>
+        <field name="strategic_objectives">Automatisation taxe 1 cash Loi 2025-17 - Controle POS vs comptabilite SYSCOHADA</field>
+    </record>
+
+    <!-- PLAN 3 -->
+    <record id="plan_3_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0003</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">16</field>
+        <field name="strategic_objectives">16 regles paie IR TRIMF prime anciennete CSS - Conformite CNSS IPRES 63k plafonne</field>
+    </record>
+
+    <!-- PLAN 4 -->
+    <record id="plan_4_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0004</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">6</field>
+        <field name="strategic_objectives">Interface temps reel declarations douanieres Gainde2000 - Test API ORBUS Odoo</field>
+    </record>
+
+    <!-- PLAN 5 -->
+    <record id="plan_5_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0005</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">5</field>
+        <field name="strategic_objectives">Reconciliation 5000 tickets POS vs ecritures comptables - Controle ecarts CA stocks</field>
+    </record>
+
+    <!-- PLAN 6 -->
+    <record id="plan_6_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0006</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">3</field>
+        <field name="strategic_objectives">Formation 25 utilisateurs POS declarations ORBUS - 8h certification conformite</field>
+    </record>
+
+    <!-- PLAN 7 -->
+    <record id="plan_7_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0007</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">5</field>
+        <field name="strategic_objectives">5 dashboards ORBUS DAM BL TVA import export - Rapports DGID mensuels automatises</field>
+    </record>
+
+    <!-- PLAN 8 -->
+    <record id="plan_8_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0008</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">7</field>
+        <field name="strategic_objectives">Audit TVA 18 percent assujettissement importateurs - Controle assiette TVA Gainde</field>
+    </record>
+
+    <!-- PLAN 9 -->
+    <record id="plan_9_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0009</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">9</field>
+        <field name="strategic_objectives">Audit ISO 27001 acces utilisateurs ORBUS - Controle fuites donnees douanieres</field>
+    </record>
+
+    <!-- PLAN 10 -->
+    <record id="plan_10_2026" model="audit_gainde.plan">
+        <field name="name">PLAN0010</field>
+        <field name="year">2026</field>
+        <field name="plan_responsible_id" ref="base.user_admin"/>
+        <field name="planned_missions_count">12</field>
+        <field name="strategic_objectives">Migration fluide 10To donnees sauvegarde complete - Test restauration ORBUS</field>
+    </record>
+</odoo>

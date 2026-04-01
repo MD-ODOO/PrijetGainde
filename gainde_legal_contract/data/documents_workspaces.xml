@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <!-- IMPORTANT : La balise <data> est obligatoire ici -->
+    <data>
+
+        <!-- RACINE COMMUNE -->
+        <record id="folder_ged_root" model="documents.document">
+            <field name="name">GED GAINDE</field>
+            <field name="type">folder</field>
+            <!-- Utilisation du groupe d'accès interne créé dans legal_groups.xml -->
+<!--            <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+        </record>
+
+        <!-- JURIDIQUE -->
+        <record id="folder_juridique" model="documents.document">
+            <field name="name">Direction Juridique</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_juridique"/>
+        </record>
+
+        <!-- COMPTABILITÉ -->
+        <record id="folder_compta" model="documents.document">
+            <field name="name">Finance &amp; Comptabilité</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_compta"/>
+        </record>
+
+        <!-- RESSOURCES HUMAINES -->
+        <record id="folder_rh" model="documents.document">
+            <field name="name">Ressources Humaines</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_rh"/>
+        </record>
+
+        <record id="folder_manager" model="documents.document">
+            <field name="name">Direction Générale</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_manager"/>
+        </record>
+
+        <record id="folder_it" model="documents.document">
+            <field name="name">Systèmes d'Information (IT)</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_it"/>
+        </record>
+
+        <record id="folder_audit" model="documents.document">
+            <field name="name">Audit</field>
+            <field name="type">folder</field>
+            <field name="folder_id" ref="folder_ged_root"/>
+<!--             <field name="access_group_ids" eval="[(4, ref('gainde_legal_contract.document_access_internal'))]"/>-->
+            <field name="department_id" ref="gainde_legal_contract.dep_audit"/>
+        </record>
+
+    </data>
+</odoo>

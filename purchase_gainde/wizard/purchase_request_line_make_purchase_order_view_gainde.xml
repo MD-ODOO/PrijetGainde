@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_purchase_request_line_make_purchase_order_gainde" model="ir.ui.view">
+        <field name="name">Purchase Request Line Make Purchase Order Gainde</field>
+        <field name="model">purchase.request.line.make.purchase.order.gainde</field>
+        <field name="type">form</field>
+          <field name="arch" type="xml">
+              <form string="Créer une demande de devis">
+                <!-- <separator string="Existing RFQ to update:" />
+                <newline />
+                <group>
+                    <field
+                        name="purchase_order_id"
+                        domain="[('partner_id', '=', supplier_id)]"
+                    />
+                    <field name="sync_data_planned" />
+                </group>
+                <newline />
+                <separator string="New PO details:" />
+                <newline />
+                <group>
+                    <field name="supplier_id" />
+                </group>
+                <newline /> -->
+                <group>
+                    <field name="item_ids" nolabel="1" colspan="2">
+                        <list name="Details" create="false" editable="bottom">
+                            <field name="line_id" options="{'no_open': true}" column_invisible="1"/>
+                            <field name="request_id" readonly="1"/>
+                            <field name="product_id"/>
+                             <field name="preferred_vendor_id"/>
+
+                            <field name="name"/>
+                            <field name="product_qty"/>
+                            <field name="estimated_price" readonly="1"/>
+                            <field name="estimated_total" readonly="1"/>
+                             <!-- Montants -->
+                        <!-- <field
+                            name="estimated_price"
+                            widget="monetary"
+                            options="{'currency_field': 'currency_id'}"
+                        />
+                        <field
+                            name="estimated_total"
+                            widget="monetary"
+                            options="{'currency_field': 'currency_id'}"
+                            readonly="1"
+                        /> -->
+                            <field name="product_uom_id" column_invisible="1" groups="!uom.group_uom"/>
+                            <field name="product_uom_id" groups="uom.group_uom"/>
+                            <field name="keep_description"/>
+                        </list>
+                    </field>
+                </group>
+                <newline/>
+                <footer>
+                    <button name="make_purchase_order_grouped_by_preferred_vendor" string="Créer une demande de devis" type="object" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record
+        id="action_purchase_request_line_make_purchase_order_gainde"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Créer une demande de devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request.line.make.purchase.order.gainde</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_purchase_request_line_make_purchase_order_gainde" />
+        <field name="target">new</field>
+        
+    </record>
+    <!-- <field
+            name="binding_model_id"
+            ref="purchase_request.model_purchase_request_line"
+        /> -->
+</odoo>

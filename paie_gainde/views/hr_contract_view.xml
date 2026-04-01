@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="hr_contract_view_form_inherit" model="ir.ui.view">
+    <field name="name">hr.contract.view.form.inherit</field>
+    <field name="model">hr.contract</field>
+    <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+    <field name="arch" type="xml">
+
+        <!-- ========================= -->
+        <!-- HEADER : BOUTON WORKFLOW -->
+        <!-- ========================= -->
+        <header>
+            <button name="action_valider_fin_contrat"
+                    type="object"
+                    string="Valider fin de contrat"
+                    class="btn-primary"
+                    groups="hr_contract.group_hr_contract_manager"/>
+        </header>
+
+        <!-- ===================================== -->
+        <!-- MASQUER contract_type_id ORIGINAL -->
+        <!-- ===================================== -->
+        <xpath expr="//group[@name='top_info_right']//field[@name='contract_type_id']"
+               position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- AFFICHER contract_type_id EN HAUT -->
+        <!-- ===================================== -->
+        <xpath expr="//field[@name='employee_id']" position="before">
+            <field name="contract_type_id"/>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- MASQUER date_end NATIVE -->
+        <!-- ===================================== -->
+        <xpath expr="//field[@name='date_end']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- BLOC FIN DE CONTRAT (piloté par state) -->
+        <!-- ===================================== -->
+        <xpath expr="//group[@name='top_info_right']" position="after">
+            <group string="Fin de contrat" invisible="not show_fin_contrat">
+                <field name="fin_contrat_motif"/>
+                <field name="date_end"/>
+            </group>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- PRÉAVIS (piloté par Python) -->
+        <!-- ===================================== -->
+        <xpath expr="//group[@name='top_info_right']" position="after">
+            <group string="Préavis" invisible="not show_preavis">
+                <field name="date_preavis"/>
+                <field name="duree_preavis" readonly="1"/>
+            </group>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- RENOMMER SALAIRE -->
+        <!-- ===================================== -->
+        <xpath expr="//field[@name='wage']" position="attributes">
+            <attribute name="string">Salaire de base</attribute>
+        </xpath>
+
+        <!-- ===================================== -->
+        <!-- AJOUT CHAMPS APRÈS POSTE -->
+        <!-- ===================================== -->
+        <field name="job_id" position="after">
+            <field name="post_duration"/>
+            <field name="sursalaire"/>
+            <field name="categ_id"/>
+            <field name="regime_type"/>
+        </field>
+
+        <!-- ===================================== -->
+        <!-- ONGLET ÉLÉMENTS DE SALAIRE -->
+        <!-- ===================================== -->
+        <xpath expr="//notebook[last()]" position="inside">
+
+            <page string="Primes et Indemnités">
+                <group>
+                    <group>
+                        <field name="prime_sujetion"/>
+                        <field name="trezieme_moi"/>
+                        <field name="prime_perfom"/>
+                        <field name="forfait_heure_sup"/>
+                    </group>
+                    <group>
+                        <field name="prime_tech"/>
+                        <field name="prime_Special"/>
+                        <field name="indem_fonction"/>
+                        <field name="prime_transport"/>
+                    </group>
+                    <group>
+                        <field name="prime_astreinte"/>
+                        <field name="prime_exc"/>
+                        <field name="prime_anciennete"/>
+                        <field name="bourse_religieuse"/>
+                    </group>
+                    <group>
+                        <field name="prime_technicity"/>
+                        <field name="prime_risque"/>
+                        <field name="prime_logement"/>
+                        <field name="prime_iso"/>
+                    </group>
+                    
+                    <group>
+                        <field name="indemite_kilometrique"/>
+                        <field name="indemn_tel"/>
+                        <field name="prime_caisse"/>
+                    </group>
+                    <group>
+                        <field name="frais_medical"/>
+                    </group>
+                    <group>
+                        <field name="indemite_preavis"/>
+                        <field name="conges_payes"/>
+                    </group>
+                </group>
+            </page>
+
+            <page string="Retenues">
+                <group>
+                    <group>
+                        <field name="retenu_sante"/>
+                        <field name="ret_frais_medicaux"/>
+                        <field name="ret_pretpersonnel"/>
+                        <field name="ret_cotretraite"/>
+                        <field name="ret_epargne_illico"/>
+                        <field name="ret_parcking"/>
+                        <field name="ret_pretvehicul"/>
+                    </group>
+                    <group>
+                        <field name="ret_pretcooperative"/>
+                        <field name="ret_assarvie"/>
+                        <field name="ret_pretEquipement"/>
+                        <field name="ret_pretordinaire"/>
+                        <field name="retenu_avance_conge"/>
+                    </group>
+                    <group>
+                        <field name="ret_avance_sursalaire"/>
+                        <field name="ret_avance_surprime"/>
+                        <field name="ret_avance_14mois"/>
+                        <field name="ret_pretpersonnel"/>
+                    </group>
+                </group>
+            </page>
+
+        </xpath>
+
+    </field>
+</record>
+
+    
+    
+<record id="view_hr_payroll_structure_form_inherit_no_readonly" model="ir.ui.view">
+    <field name="name">hr.payroll.structure.form.inherit.no.readonly</field>
+    <field name="model">hr.payroll.structure</field>
+
+    <!-- Vue d’origine -->
+    <field name="inherit_id" ref="hr_payroll.view_hr_employee_grade_form"/>
+
+    <field name="arch" type="xml">
+
+        <!-- 1️⃣ Supprimer readonly + empêcher l'ouverture du formulaire -->
+        <xpath expr="//field[@name='rule_ids']" position="attributes">
+            <attribute name="editable">bottom</attribute>
+            <attribute name="options">{'no_open': True}</attribute>
+        </xpath>
+
+        <!-- 2️⃣ Remplacer uniquement la vue liste -->
+        <xpath expr="//field[@name='rule_ids']/list" position="replace">
+            <list>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <field name="partner_id"/>
+            </list>
+        </xpath>
+
+    </field>
+</record>
+
+
+ 
+
+
+
+    
+  </data>
+</odoo>

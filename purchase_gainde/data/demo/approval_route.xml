@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Route d'approbation DEMO pour les commandes d'achat (purchase.order) -->
+        <record id="xf_route_purchase_order_default" model="approval.route">
+            <field name="name">Route par défaut - Demandes de prix (DEMO)</field>
+            <field name="model_id" ref="model_purchase_order"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Étapes DEMO : on réutilise les mêmes IDs que les données non-demo
+             afin de surcharger les utilisateurs d'approbation en environnement démo. -->
+
+        <!-- Approbation RA -->
+        <record id="xf_stage_ra_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RA (DEMO)</field>
+            <field name="sequence">5</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_ra'))]"/>
+        </record>
+
+        <!-- Approbations RCB (plusieurs niveaux) -->
+        <record id="xf_stage_rcb_2_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RCB niveau 2 (DEMO)</field>
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_rcb'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_3_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RCB niveau 3 (DEMO)</field>
+            <field name="sequence">3</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_rcb'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_4_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RCB niveau 4 (DEMO)</field>
+            <field name="sequence">4</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_rcb'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_5_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RCB niveau 5 (DEMO)</field>
+            <field name="sequence">5</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_rcb'))]"/>
+        </record>
+
+        <!-- Approbation DA : on laisse l'admin par défaut faute d'utilisateur DEMO dédié -->
+        <record id="xf_stage_da_approval_order" model="approval.route.stage">
+            <field name="name">Approbation DA (DEMO)</field>
+            <field name="sequence">6</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <!-- Approbation finale RCB -->
+        <record id="xf_stage_rcb_final_approval_order" model="approval.route.stage">
+            <field name="name">Approbation finale RCB (DEMO)</field>
+            <field name="sequence">6</field>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('purchase_gainde.user_demo_rcb'))]"/>
+        </record>
+
+        <!-- Lien route par défaut pour les commandes d'achat supprimé ici
+             pour éviter la création de commandes incomplètes (partner_id NULL). -->
+    </data>
+</odoo>

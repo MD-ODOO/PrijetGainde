@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Default approval route for purchase.request -->
+        <record id="xf_route_purchase_order_default" model="approval.route">
+            <field name="name">Route par défaut - Demandes de prix</field>
+            <field name="model_id" ref="model_purchase_order"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Route spécifique quand la commande est liée à au moins une demande d'achat -->
+        <record id="xf_route_purchase_order_with_pr" model="approval.route">
+            <field name="name">Route - Commande issue d'une demande d'achat</field>
+            <field name="model_id" ref="model_purchase_order"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Rôles d'approbation dédiés à la route d'achats -->
+        <record id="approval_role_rcb_purchase_gainde" model="approval.role">
+            <field name="name">RCB Achats (Gainde)</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- Placeholder : au moins un approbateur, sera ajusté fonctionnellement -->
+            <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        </record>
+
+        <record id="approval_role_rcg_purchase_gainde" model="approval.role">
+            <field name="name">RCG (Gainde)</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- Placeholder : au moins un approbateur, sera ajusté fonctionnellement -->
+            <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        </record>
+
+        <record id="approval_role_da_purchase_gainde" model="approval.role">
+            <field name="name">DA (Gainde)</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- Placeholder : au moins un approbateur, sera ajusté fonctionnellement -->
+            <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        </record>
+
+        <!-- Étapes -->
+        <record id="xf_stage_ra_approval_order" model="approval.route.stage">
+            <field name="name">Approbation RCB</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">all</field>
+            <field name="use_custom_conditions" eval="False"/>
+
+            <!-- Fallback pour satisfaire la contrainte "Please set at least one approver!" -->
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <!-- RCB par rôle d'approbation dédié au module purchase_gainde -->
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_rcb_purchase_gainde"/>
+        </record>
+
+        <!-- Étape 2 : Approbation DA (route par défaut) -->
+        <record id="xf_stage_da_approval_order" model="approval.route.stage">
+            <field name="name">Approbation DA</field>
+            <field name="sequence">2</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+
+            <!-- Fallback pour satisfaire la contrainte "Please set at least one approver!" -->
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="approval_route_id" ref="xf_route_purchase_order_default"/>
+            <!-- DA par rôle d'approbation dédié au module purchase_gainde -->
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_da_purchase_gainde"/>
+        </record>
+
+        <!-- =========================== -->
+        <!-- Route "avec PR" : RCG → RCB → DA -->
+        <!-- =========================== -->
+
+        <record id="xf_stage_rcg_approval_order_pr" model="approval.route.stage">
+            <field name="name">Approbation RCG</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="approval_route_id" ref="xf_route_purchase_order_with_pr"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_rcg_purchase_gainde"/>
+        </record>
+
+        <record id="xf_stage_rcb_approval_order_pr" model="approval.route.stage">
+            <field name="name">Approbation RCB</field>
+            <field name="sequence">2</field>
+            <field name="approval_type">all</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="approval_route_id" ref="xf_route_purchase_order_with_pr"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_rcb_purchase_gainde"/>
+        </record>
+
+        <record id="xf_stage_da_approval_order_pr" model="approval.route.stage">
+            <field name="name">Approbation DA</field>
+            <field name="sequence">3</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+            <field name="approval_route_id" ref="xf_route_purchase_order_with_pr"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_da_purchase_gainde"/>
+        </record>
+         
+          
+
+       
+      
+
+        <!-- Étapes -->
+        <!-- <record id="xf_stage_n1_line_approval" model="approval.route.stage">
+            <field name="name">Approbation N+1</field>
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record> -->
+
+
+        <!-- Note: on ne crée plus ici de record purchase.order pour éviter
+             les erreurs de contrainte (partner_id NOT NULL). L'association
+             route/commande est gérée fonctionnellement ailleurs. -->
+
+    </data>
+</odoo>

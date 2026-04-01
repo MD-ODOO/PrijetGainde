@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_res_config_settings_url_firewall" model="ir.ui.view">
+        <field name="name">res.config.settings.url.firewall</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <app string="Sécurité avancée" name="url_firewall" groups="base.group_system">
+                    <block title="Firewall des URLs">
+                        <setting>
+                            <field name="enable_url_firewall"/>
+                            <div class="content-group">
+                                <div class="text-muted">
+                                    Bloque les accès directs aux URLs sensibles sauf administrateurs et utilisateurs autorisés.
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </form>
+        </field>
+    </record>
+</odoo>

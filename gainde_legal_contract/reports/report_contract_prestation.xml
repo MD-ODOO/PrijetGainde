@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_contrat_prestation_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>CONTRAT DE PRESTATION DE SERVICES</h2>
+                        <p>Entre les soussignés :</p>
+
+                        <p><strong>Le client :</strong><br/>
+                        <t t-esc="o.partner_id.name"/><br/>
+                        <t t-esc="o.partner_id.street"/>
+                        </p>
+
+                        <p><strong>Le prestataire :</strong><br/>
+                        <t t-esc="o.company_id.name"/><br/>
+                        <t t-esc="o.company_id.street"/>
+                        </p>
+
+                        <h3>Objet</h3>
+                        <p>Prestation de <t t-esc="o.description or 'services informatiques'"/>.</p>
+
+                        <h3>Durée</h3>
+                        <p>Du <t t-esc="o.date_start"/> au <t t-esc="o.date_end"/>.</p>
+
+                        <h3>Rémunération</h3>
+                        <p>Montant total : <t t-esc="o.amount"/> € HT</p>
+
+                        <p>Fait à <t t-esc="o.company_id.city"/>, le <span t-field="o.create_date" t-options='{"format": "dd/MM/yyyy"}'/></p>
+
+                        <p>Signatures :</p>
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:50%; text-align:center">Le client</td>
+                                <td style="width:50%; text-align:center">Le prestataire</td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+<!--    <record id="action_report_contrat_prestation" model="ir.actions.report">-->
+<!--        <field name="name">Contrat Prestation</field>-->
+<!--        <field name="model">legal.contract</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">gainde_legal_contract.report_contrat_prestation_document</field>-->
+<!--        <field name="binding_model_id" ref="gainde_legal_contract.model_legal_contract"/>-->
+<!--        <field name="binding_type">report</field>-->
+<!--    </record>-->
+</odoo>

@@ -1,0 +1,109 @@
+<odoo>
+  <record id="view_treasury_payroll_disbursement_wizard" model="ir.ui.view">
+    <field name="name">treasury.payroll.disbursement.wizard.form</field>
+    <field name="model">treasury.payroll.disbursement.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Récupération des lots de paie">
+
+        <div class="alert alert-info d-flex gap-2" role="alert">
+          <i class="fa fa-info-circle fa-lg mt-1"/>
+          <div>
+            Cet assistant <strong>récupère les bulletins validés</strong> de la paie pour la période
+            sélectionnée et génère les lots de décaissement (salaires, cotisations, impôts).
+            Chaque lot sera ensuite traité <strong>manuellement</strong> depuis la liste
+            <em>Décaissements paie</em>.
+          </div>
+        </div>
+
+        <!-- Sélection période -->
+        <group string="Période de paie à récupérer">
+          <group>
+            <field name="company_id"/>
+            <field name="period_start" string="Du"/>
+            <field name="period_end" string="Au"/>
+          </group>
+          <group string="Pré-remplir les lots (optionnel)">
+            <field name="partner_id" string="Bénéficiaire par défaut"
+                   placeholder="Laisser vide pour renseigner lot par lot"/>
+            <field name="journal_id" string="Journal par défaut"
+                   domain="[('type','in',('bank','cash'))]"
+                   placeholder="Laisser vide pour renseigner lot par lot"/>
+          </group>
+        </group>
+
+        <!-- Récapitulatif des bulletins -->
+        <group string="Récapitulatif de la période (bulletins validés)">
+          <group>
+            <field name="total_net" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   readonly="1" string="Net salaires à payer"/>
+            <field name="total_ipress" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   readonly="1" string="IPRESS / IPRES"/>
+            <field name="total_cfce" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   readonly="1" string="CFCE"/>
+          </group>
+          <group>
+            <field name="total_family_allowance" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   readonly="1" string="Allocations familiales"/>
+            <field name="total_income_tax" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   readonly="1" string="Impôt sur le revenu"/>
+            <field name="batch_count" readonly="1" string="Lots récupérés"/>
+          </group>
+        </group>
+
+        <!-- Lots récupérés -->
+        <separator string="Lots récupérés (à traiter manuellement)"/>
+        <field name="batch_ids" nolabel="1" readonly="1">
+          <list create="false" edit="false"
+                decoration-success="state == 'paid'"
+                decoration-warning="state == 'validated'"
+                decoration-info="state == 'scheduled'"
+                decoration-muted="state == 'to_pay'">
+            <field name="name" string="Référence"/>
+            <field name="batch_type" string="Type"/>
+            <field name="currency_id" invisible="1"/>
+            <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"
+                   string="Montant"/>
+            <field name="partner_id" string="Bénéficiaire"/>
+            <field name="journal_id" string="Journal"/>
+            <field name="planned_payment_date" string="Date prévue"/>
+            <field name="state" widget="badge"
+                   decoration-success="state == 'paid'"
+                   decoration-warning="state == 'validated'"
+                   decoration-info="state == 'scheduled'"
+                   decoration-muted="state == 'to_pay'"/>
+          </list>
+        </field>
+
+        <footer>
+          <button string="Fermer" class="btn-secondary" special="cancel"/>
+          <button name="action_print_report" type="object" string="Imprimer le rapport"
+                  class="btn-secondary"/>
+          <button name="action_open_batches" type="object"
+                  string="Ouvrir les lots →"
+                  class="btn-secondary"
+                  invisible="not batch_ids"
+                  help="Ouvre la liste des lots pour les traiter manuellement."/>
+          <button name="action_generate_batches" type="object"
+                  string="Récupérer les lots depuis la paie"
+                  class="btn-primary"
+                  help="Génère ou rafraîchit les lots à partir des bulletins validés de la période."/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_treasury_payroll_disbursement_wizard" model="ir.actions.act_window">
+    <field name="name">Assistant décaissement paie</field>
+    <field name="res_model">treasury.payroll.disbursement.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="context">{}</field>
+  </record>
+
+  <menuitem id="menu_treasury_payroll_disbursement"
+            name="Assistant décaissement paie"
+            parent="menu_treasury_operations"
+            action="action_treasury_payroll_disbursement_wizard"
+            sequence="7"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_budget_revise_confirm_wizard" model="ir.ui.view">
+        <field name="name">budget.revise.confirm.wizard.form</field>
+        <field name="model">budget.revise.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirmation">
+                <sheet>
+                    <group>
+                        <p class="o_form_label">Êtes-vous sûr de vouloir créer un budget révisé ?</p>
+                    </group>
+                    <footer>
+                        <button string="Confirmer" type="object" name="action_confirm" class="btn-primary"/>
+                        <button string="Annuler" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_budget_revise_confirm_wizard" model="ir.actions.act_window">
+        <field name="name">Confirmation</field>
+        <field name="res_model">budget.revise.confirm.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_budget_revise_confirm_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

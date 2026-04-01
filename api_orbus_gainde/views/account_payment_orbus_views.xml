@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit default payment form to add Orbus payment type -->
+        <record id="view_account_payment_form_orbus" model="ir.ui.view">
+            <field name="name">account.payment.form.orbus</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <!-- Type de paiement Orbus juste avant le type de paiement standard, puis numéro de dossier -->
+                <xpath expr="//group[@name='group1']/field[@name='payment_type']" position="before">
+                    <field name="orbus_payment_type" widget="radio" options="{'horizontal': True}" readonly="1"/>
+                    <field name="orbus_dossier_number" invisible="orbus_payment_type != 'classic'"/>
+                    <field name="orbus_status_message" readonly="1"/>
+                </xpath>
+
+                <!-- Bandeau d'information Orbus en haut du formulaire -->
+                <xpath expr="//sheet/group[@name='main_group']" position="before">
+                    <div class="alert alert-info" role="alert" invisible="not orbus_status_message">
+                        <field name="orbus_status_message" readonly="1" nolabel="1"/>
+                    </div>
+                </xpath>
+
+                 <!-- Les boutons spécifiques Orbus Classic ne sont plus nécessaires :
+                     le bouton standard "Confirm" (action_post) déclenche désormais
+                     les appels API Orbus Classic / Infinity avant l'enregistrement. -->
+            </field>
+        </record>
+
+        <!-- Actions pour les paiements Orbus -->
+        <record id="action_account_payments_orbus_classic" model="ir.actions.act_window">
+            <field name="name">Paiement Orbus Classic</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">list,kanban,form,graph,activity</field>
+            <field name="context">{
+                'default_orbus_payment_type': 'classic',
+                'display_account_trust': True,
+            }</field>
+            <field name="domain">[('orbus_payment_type', '=', 'classic')]</field>
+            <field name="view_id" ref="account.view_account_payment_tree"/>
+        </record>
+
+        <record id="action_account_payments_orbus_infinity" model="ir.actions.act_window">
+            <field name="name">Paiement Orbus Infinity</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_mode">list,kanban,form,graph,activity</field>
+            <field name="context">{
+                'default_orbus_payment_type': 'infinity',
+                'display_account_trust': True,
+            }</field>
+            <field name="domain">[('orbus_payment_type', '=', 'infinity')]</field>
+            <field name="view_id" ref="account.view_account_payment_tree"/>
+        </record>
+
+          <!-- Menus : Paiement Orbus Classic / Paiement Orbus Infinity (zone Comptabilité / Écritures) -->
+          <menuitem id="menu_orbus_payments_root" name="Paiements Orbus" parent="account.menu_finance_entries" sequence="60"/>
+
+          <menuitem id="menu_action_account_payments_orbus_classic" name="Paiement Orbus Classic"
+              parent="menu_orbus_payments_root" action="action_account_payments_orbus_classic" sequence="1"/>
+
+          <menuitem id="menu_action_account_payments_orbus_infinity" name="Paiement Orbus Infinity"
+              parent="menu_orbus_payments_root" action="action_account_payments_orbus_infinity" sequence="2"/>
+
+          <!-- Duplicata des menus Orbus dans le menu Clients / Paiements -->
+          <menuitem id="menu_action_account_payments_orbus_classic_receivables" name="Paiement Orbus Classic"
+              parent="account.menu_action_account_payments_receivable" action="action_account_payments_orbus_classic" sequence="16"/>
+
+          <menuitem id="menu_action_account_payments_orbus_infinity_receivables" name="Paiement Orbus Infinity"
+              parent="account.menu_action_account_payments_receivable" action="action_account_payments_orbus_infinity" sequence="17"/>
+    </data>
+</odoo>

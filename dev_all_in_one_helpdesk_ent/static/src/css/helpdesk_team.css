@@ -1,0 +1,13 @@
+/* Réduire la taille du checkbox pour allow_multiple_assignment */
+.o_field_widget[name="allow_multiple_assignment"] .form-check-input {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+}
+
+.o_field_widget[name="allow_multiple_assignment"] input[type="checkbox"] {
+    width: 14px !important;
+    height: 14px !important;
+}
+

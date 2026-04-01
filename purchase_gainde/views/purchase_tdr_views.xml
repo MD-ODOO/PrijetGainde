@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vue liste TDR -->
+    <record id="view_purchase_tdr_tree" model="ir.ui.view">
+        <field name="name">purchase.tdr.list</field>
+        <field name="model">purchase.tdr</field>
+        <field name="arch" type="xml">
+            <list string="TDR">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="state"/>
+                <field name="file_name" string="Fichier"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire TDR -->
+    <record id="view_purchase_tdr_form" model="ir.ui.view">
+        <field name="name">purchase.tdr.form</field>
+        <field name="model">purchase.tdr</field>
+        <field name="arch" type="xml">
+            <form string="TDR">
+                <header>
+                    <button name="action_set_draft" type="object" string="Remettre en brouillon"
+                        class="btn btn-secondary px-3 me-2"/>
+                    <button name="action_approve" type="object" string="Approuver"
+                        class="btn btn-primary px-4 me-2"/>
+                    <button name="action_cancel" type="object" string="Annuler"
+                        class="btn btn-secondary px-3"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </group>
+                    <group string="Document TDR">
+                        <field name="file_data" filename="file_name" widget="pdf_viewer"/>
+                        <field name="file_name"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" nolabel="1"/>
+                        </page>
+                        <page string="Commandes d'achat">
+                            <field name="purchase_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour ouvrir les TDR -->
+    <record id="action_purchase_tdr" model="ir.actions.act_window">
+        <field name="name">TDR Achats</field>
+        <field name="res_model">purchase.tdr</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{"search_default_group_state": 1}</field>
+        <field name="help" type="html">
+            <p>
+                Créez et gérez ici les TDR (Terms of Reference) associés aux commandes d'achat importantes.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue recherche TDR (filtres + regroupements) -->
+    <record id="view_purchase_tdr_search" model="ir.ui.view">
+        <field name="name">purchase.tdr.search</field>
+        <field name="model">purchase.tdr</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Référence"/>
+                <field name="date"/>
+
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="approved" string="Approuvé" domain="[('state', '=', 'approved')]"/>
+                <filter name="cancelled" string="Annulé" domain="[('state', '=', 'cancelled')]"/>
+
+                <separator/>
+                <filter name="group_state" string="Regrouper par état" context="{'group_by': 'state'}"/>
+                <filter name="group_date" string="Regrouper par date" context="{'group_by': 'date'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu TDR sous le menu Achats (Configuration) -->
+    <menuitem id="menu_purchase_tdr_root"
+              name="TDR Achats"
+              parent="purchase.menu_purchase_config"
+              action="action_purchase_tdr"
+              groups="purchase.group_purchase_manager"/>
+
+</odoo>

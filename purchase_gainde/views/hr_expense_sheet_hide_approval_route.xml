@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_gainde_hr_expense_sheet_hide_approval_route" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.hide.approval.route</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="xf_approval_route_expense.hr_expense_sheet_approval_form"/>
+        <field name="arch" type="xml">
+            <field name="approval_route_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Holiday email templates -->
+        <record id="holidays_confirmed_template" model="mail.template">
+            <field name="name">Holidays confirmed</field>
+            <field name="model_id" ref="hr.model_hr_holidays"/>
+            <field name="subject">${object.employee_id.name}: demande de type ${object.holiday_status_id.name} du ${object.date_from} au ${object.date_to}</field>
+            <field name="email_from">${object.company_id.email|safe}</field>
+            <field name="email_to">${object.employee_id.parent_id.work_email}</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>
+                    Bonjour,<br/>
+                    <strong>${object.employee_id.name}</strong> a sollicité une demande de type <strong>${object.holiday_status_id.name}</strong> du <strong>${object.date_from}</strong> au <strong>${object.date_to}</strong>.
+                    <br/><a href="${object.id}">Voir les détails</a>
+                </p>
+                ]]>
+            </field>
+        </record>
+
+        <record id="hr_holidays.mt_holidays_confirmed" model="mail.message.subtype">
+            <field name="name">Holidays confirmed</field>
+            <field name="res_model">hr.holidays</field>
+            <field name="default" eval="True"/>
+            <field name="description">Holiday confirmed</field>
+            <field name="template_id" ref="holidays_confirmed_template"/>
+        </record>
+
+        <!-- Autres templates et sous-types (refus, validation, approbation) peuvent être répliqués avec le même pattern -->
+
+    </data>
+</odoo> -->

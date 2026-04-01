@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <!--form view-->
+    <record id="form_survey_template_dev_helpdesk_survey" model="ir.ui.view">
+        <field name="name">form_survey_template_dev_helpdesk_survey_name</field>
+        <field name="model">survey.template</field>
+        <field name="arch" type="xml">
+            <form string="Survey Template">
+                <sheet>
+                    <div class="oe_title">
+                        <h4 class="o_row">
+                            <field name="name" placeholder="Template Name"/>
+                        </h4>
+                    </div>
+                    <separator string="Survey"/>
+                    <field name="survey_ids"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--tree View-->
+    <record id="tree_survey_template_dev_helpdesk_survey" model="ir.ui.view">
+        <field name="name">tree_survey_template_dev_helpdesk_survey_name</field>
+        <field name="model">survey.template</field>
+        <field name="arch" type="xml">
+            <list string="Survey Template">
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!--Action View-->
+    <record id="action_survey_template_dev_helpdesk_survey" model="ir.actions.act_window">
+        <field name="name">Survey Template</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">survey.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!--Menus-->
+    <menuitem name="Survey Template"
+              id="menu_survey_template_dev_helpdesk_survey"
+              parent='helpdesk.helpdesk_menu_config'
+              action="action_survey_template_dev_helpdesk_survey"
+              sequence='10'/>
+</odoo>

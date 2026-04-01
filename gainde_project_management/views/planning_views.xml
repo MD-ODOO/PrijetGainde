@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_planning_slot_list_inherit" model="ir.ui.view">
+        <field name="name">planning.slot.list.inherit</field>
+        <field name="model">planning.slot</field>
+        <field name="inherit_id" ref="planning.planning_view_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='resource_id']" position="after">
+                <field name="workload_percentage" string="Charge (%)" optional="show"
+                       decoration-danger="workload_percentage &gt; 110"
+                       decoration-warning="workload_percentage &gt; 90 and workload_percentage &lt;= 110"
+                       decoration-success="workload_percentage &lt;= 90"/>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_project_project_pivot_gainde" model="ir.ui.view">
+        <field name="name">project.project.pivot.gainde</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse Financière" sample="1">
+                <field name="budget_total" type="measure"/>
+                <field name="engaged_costs" type="measure"/>
+                <field name="realized_costs" type="measure"/>
+                <field name="remaining_budget" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+</odoo>

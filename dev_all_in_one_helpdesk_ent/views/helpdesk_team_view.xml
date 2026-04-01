@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_helpdesk_team_form_profile_type" model="ir.ui.view">
+        <field name="name">helpdesk.team.form.profile.type</field>
+        <field name="model">helpdesk.team</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <label for="profile_id" string="Profil utilisateur"/>
+                <field name="profile_id" 
+                       domain="[('profile_type', 'in', ['helpdesk_level1', 'helpdesk_level2_functional', 'helpdesk_level2_technical', 'helpdesk_manager'])]"
+                       options="{'no_create': True, 'no_open': True}"/>
+                <label for="allow_multiple_assignment" string="Affectation multiple"/>
+                <field name="allow_multiple_assignment" widget="boolean" nolabel="0"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+

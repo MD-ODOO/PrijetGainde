@@ -1,0 +1,224 @@
+<odoo>
+    <template id="portal_my_crm" name="My CRM Opportunities">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="/my/home" class="btn btn-secondary ml-2">Back To Home</a>
+                <h2>My Opportunities</h2>
+                <a class="btn btn-primary mb-3" href="/my/crm/create">Create New Lead</a>
+                </div>
+
+                    <form method="get" class="form-inline mb-3">
+                        <div class="row g-2 align-items-center">
+                            <!-- Date From -->
+                            <div class="col-md-2 col-sm-6">
+                                <input type="text" name="date_start"
+                                       class="form-control"
+                                       t-att-value="date_start or ''"
+                                       placeholder="Date From"
+                                       onfocus="(this.type='date')"
+                                       onblur="if(!this.value)this.type='text'"/>
+                            </div>
+
+                            <!-- Date To -->
+                            <div class="col-md-2 col-sm-6">
+                                <input type="text" name="date_end"
+                                       class="form-control"
+                                       t-att-value="date_end or ''"
+                                       placeholder="Date To"
+                                       onfocus="(this.type='date')"
+                                       onblur="if(!this.value)this.type='text'"/>
+                            </div>
+
+                            <!-- Stage Dropdown -->
+                            <div class="col-md-3 col-sm-6">
+                                <select name="stage_id" class="form-control">
+                                    <option value="">All Stages</option>
+                                    <t t-foreach="stages" t-as="st">
+                                        <option t-att-value="st.id" t-att-selected="str(st.id) == str(stage_id)">
+                                            <t t-esc="st.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                             <!-- Customer Name -->
+                            <div class="col-md-3">
+                                <input type="text" name="customer_name"
+                                       class="form-control"
+                                       t-att-value="customer_name or ''"
+                                       placeholder="Customer Name"/>
+                            </div>
+
+                            <!-- Filter Button -->
+                            <div class="col-md-2 col-sm-6">
+                                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Lead Name</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Expected Revenue</th>
+                            <th>Stage</th>
+                            <th>View/Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="leads" t-as="lead">
+                            <tr>
+                                <td><t t-esc="lead.name"/></td>
+                                <td><t t-esc="lead.partner_id.name"/></td>
+                                <td><t t-esc="lead.email_from"/></td>
+                                <td><t t-esc="lead.phone"/></td>
+                                <td><t t-esc="lead.expected_revenue"/></td>
+                                <td>
+                                    <t t-if="lead.stage_id.is_won == True">
+                                    <span class="badge bg-success">Won</span>
+                                </t>
+                                    <t t-else="">
+                                    <t t-esc="lead.stage_id.name or '-'"/>
+                                    </t>
+                                </td>
+                                <td>
+                                   <a t-att-href="'/my/crm/%s' % lead.id" class="btn btn-sm btn-primary me-1">
+                                        <i class="fa fa-eye"></i> View
+                                    </a>
+                                    <t t-if="lead.stage_id.is_won == False">
+                                    <a t-att-href="'/my/crm/%s/edit' % lead.id" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i> Edit
+                                    </a>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div t-if="pager" class="o_portal_pager d-flex justify-content-center my-3">
+                <t t-call="portal.pager"/>
+            </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_create_lead_form" name="Create Lead Form">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <h2>Create a New Lead</h2>
+                <form action="/my/crm/create" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Lead Name</label>
+                        <input type="text" name="name" class="form-control" required="True"/>
+                    </div>
+
+                    <div class="mb-3">
+                    <label class="form-label">Customer</label>
+                    <input type="text" class="form-control" name="customer_name" required="True"/>
+                </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Expected Revenue</label>
+                        <input type="float" name="expected_revenue" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email_from" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="phone" name="phone" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Create Lead</button>
+                      <a href="/my/crm" class="btn btn-secondary">Back</a>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_view_lead" name="View Lead">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <h3>Lead Details</h3>
+            <table class="table">
+                <tr><th>Name:</th><td><t t-esc="lead.name"/></td></tr>
+                <tr><th>Customer:</th><td><t t-esc="lead.partner_id.name"/></td></tr>
+                <tr><th>Email:</th><td><t t-esc="lead.email_from"/></td></tr>
+                <tr><th>Phone:</th><td><t t-esc="lead.phone"/></td></tr>
+                <tr><th>Expected Revenue:</th><td><t t-esc="lead.expected_revenue"/></td></tr>
+                <tr><th>Description:</th><td><t t-esc="lead.description"/></td></tr>
+            </table>
+            <t t-if="lead.stage_id.is_won == False">
+            <a t-att-href="'/my/crm/%s/edit' % lead.id" class="btn btn-warning">Edit</a>
+            </t>
+            <a href="/my/crm" class="btn btn-secondary">Back</a>
+        </div>
+    </t>
+</template>
+
+    <template id="portal_my_crm_edit"  name="Edit CRM Lead">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <h2>Edit Lead</h2>
+            <form t-att-action="'/my/crm/%d/edit' % lead.id" method="post">
+             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <input type="hidden" name="lead_id" t-att-value="lead.id"/>
+
+                <div class="form-group mb-3">
+                    <label>Lead Name</label>
+                    <input type="text" name="name" t-att-value="lead.name" class="form-control"/>
+                </div>
+
+<!--                <div class="form-group mb-3">-->
+<!--                    <label>Contact Name</label>-->
+<!--                    <input type="text" name="contact_name" t-att-value="lead.contact_name" class="form-control"/>-->
+<!--                </div>-->
+
+                <div class="form-group mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email_from" t-att-value="lead.email_from" class="form-control"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Phone</label>
+                    <input type="phone" name="phone" t-att-value="lead.phone" class="form-control"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Expected Revenue</label>
+                    <input type="float" name="expected_revenue" t-att-value="lead.expected_revenue" class="form-control"/>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Stage</label>
+                    <select name="stage_id" class="form-select">
+                        <option value="">Select Stage</option>
+                        <t t-foreach="stages" t-as="stage">
+                            <option t-att-value="stage.id">
+                                <t t-esc="stage.name"/>
+                            </option>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control"><t t-esc="lead.description"/></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="/my/crm" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </t>
+</template>
+
+</odoo>

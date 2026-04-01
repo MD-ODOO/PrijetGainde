@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_picking_approval_route" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.picking.approval.route</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//block[@name='operations_setting_container']" position="inside">
+                <setting id="use_approval_route_picking"
+                         title="Use Dynamic Approval Route for Transfers. Values set here are company-specific."
+                         help="Use Dynamic Approval Route for Transfers. Values set here are company-specific.">
+                    <field name="use_approval_route_picking" class="o_light_label" widget="radio"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

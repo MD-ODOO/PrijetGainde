@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Restreindre la gestion des profils aux administrateurs système -->
+        <record id="access_users_manager.access_user_management" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_user_profiles" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_user_profile_lines" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_model_access" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_field_access" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_domain_access" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_button_tab_access" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_filter_group_access" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_filter_group_data" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_button_tab_data" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_report_action_data" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_recent_activity" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_global_tracking" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+        <record id="access_users_manager.access_global_tracking_first" model="ir.model.access">
+            <field name="group_id" ref="base.group_system"/>
+        </record>
+
+        <!-- Restreindre l'action "Profile Management" aux administrateurs système -->
+        <record id="access_users_manager.action_user_access_management" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+        <record id="access_users_manager.action_res_user_profiles_tree" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+
+        <!-- Restreindre les menus "Access Manager Ninja" aux administrateurs système -->
+        <record id="access_users_manager.amn_parent_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+        <record id="access_users_manager.menu_user_access_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+        <record id="access_users_manager.menu_action_res_users_profile_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+        <record id="access_users_manager.menu_global_tracking_first_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        </record>
+    </data>
+</odoo>

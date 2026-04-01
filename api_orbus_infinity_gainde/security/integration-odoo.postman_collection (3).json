@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "6d9a6488-da8a-419f-af86-b042738de41b",
+		"name": "integration-odoo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18765495"
+	},
+	"item": [
+		{
+			"name": "details-paniers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6VTlaV0M1N25ydFVFNndOVUpwNnNhTE1nNUZtcGdCN0ZzZmk3WkdzZ0xRIn0.eyJleHAiOjE3NjU1NTQxNTYsImlhdCI6MTc2NTU1Mzg1NiwianRpIjoiYzE0ZDMzOTEtN2VjZC00OTAyLTk2OWItMjk4NDljNjBjYTVhIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLWd1cGUuZ2FpbmRlMjAwMC5zbi9yZWFsbXMvZ3VwZS1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIzMTIxYTZiNy0yOTdkLTQwMTYtYTlkMC03ZGM1NDE5ZmY0YzkiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJndXBlIiwic2Vzc2lvbl9zdGF0ZSI6IjhlMDMzYzBhLWViZDgtNDgyZi1iOGFjLTIzYTllYmQ3ZjU1ZiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9ndXBlLWZyb250LmdhaW5kZTIwMDAuc24iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFHTCIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy13YWxsZXQtcmVhbG0iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjhlMDMzYzBhLWViZDgtNDgyZi1iOGFjLTIzYTllYmQ3ZjU1ZiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiYWdsIGFnbCIsInByZWZlcnJlZF91c2VybmFtZSI6ImFnbCIsImdpdmVuX25hbWUiOiJhZ2wiLCJmYW1pbHlfbmFtZSI6ImFnbCIsImVtYWlsIjoidXNlckBhZ2wuc24ifQ.PQRRl8dzbomfTEWkakWYwKP3IZlhNLwGbk_v9ILUi45PwWoe-TpGVHcawt3dDe1bhX9M1WKy2CPTQ-hkm6IWINRWRW2X9fzz6DujIBgfaf2mg5y9S3HQf1NllG4eYzJ-9vcULma7V054vdPyFqmaclVU4POGMD6HHuTdQxFTm4Br7Uw-3ea_ZGr4RKgyDyfutZ7qy22s7lDW8qeSq90wDkjqgMTf2fyqsVCc-ud2sLQoqf_KIPEumPqAtjY_ZBs4UfblCMRhNsY3__Dsx9jCtjF4PK6mZCkQQpScsk37EDqZottyIX24UNi39EjACPV8rQ8PajKoI6qYopJJHTtBMA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-INTERNAL-SECRET",
+						"value": "MLyfdGiIbPR",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://gupe.gainde2000.sn/backendgateway/integration-odoo/detail-panier?referencePanier=2406202503524016S5",
+					"protocol": "https",
+					"host": [
+						"gupe",
+						"gainde2000",
+						"sn"
+					],
+					"path": [
+						"backendgateway",
+						"integration-odoo",
+						"detail-panier"
+					],
+					"query": [
+						{
+							"key": "connaissement",
+							"value": "239677229",
+							"disabled": true
+						},
+						{
+							"key": "numeroDossier",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "referencePanier",
+							"value": "2406202503524016S5"
+						},
+						{
+							"key": "numeroPaiement",
+							"value": "060920250624105945",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "liste-paniers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6VTlaV0M1N25ydFVFNndOVUpwNnNhTE1nNUZtcGdCN0ZzZmk3WkdzZ0xRIn0.eyJleHAiOjE3NjY0MzE0MDYsImlhdCI6MTc2NjQzMTEwNiwianRpIjoiMjgyN2QwYWQtMWRlMC00MWE3LTkwNjctOThmMDQ1NzExOTMzIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLWd1cGUuZ2FpbmRlMjAwMC5zbi9yZWFsbXMvZ3VwZS1yZWFsbSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4ZTRjZmViOS1mNDEwLTQ0YzgtODBjYy1lODQ3NmE4YjliNmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJndXBlIiwic2Vzc2lvbl9zdGF0ZSI6IjVlNTg1ZDRiLWU1YzEtNDdmMS1hNzJlLWFiNWQ0NjkxYWQ4NyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9ndXBlLWZyb250LmdhaW5kZTIwMDAuc24iXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIk9ET08iLCJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtd2FsbGV0LXJlYWxtIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1ZTU4NWQ0Yi1lNWMxLTQ3ZjEtYTcyZS1hYjVkNDY5MWFkODciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6ImFiZG91bGF5ZSBjYW1hcmEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJvZG9vIiwiZ2l2ZW5fbmFtZSI6ImFiZG91bGF5ZSIsImZhbWlseV9uYW1lIjoiY2FtYXJhIiwiZW1haWwiOiJhYmRvdWxheWUuY2FtYXJhQGtpbGlmYS5mciJ9.QGZSQQUOtY-vzAL9xeK0e_7vLcZyckAsRcKd9mb9W6BknpIJ5uZGOymEAMi6qVRgYyoGmH0ajNS-N-K35b01ogGvlouyaI8VpkP9ivzurziF9ckz21ewlrVnkczPsyqgGvkieR2Qyzu0fZTsqPhyc-LaGpvLuM-u2pYSdq-Of0oKUhJcvZ2oazautL3otwx5ePScG7D0RiAuYMWdl7z-knYAU7re1SDRXFBEhLhJVtUAkLOUi5mc0ncTWw_gfJlPAwxO02OA3qBMPgU_U91XiWrcKzFjx6tz7NW9NvlLlVY1tTmjk81CueAzqBaBfkPjReeXP-Yk0M_Po_4fPLhyew",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-INTERNAL-SECRET",
+						"value": "MLyfdGiIbPR",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://gupe.gainde2000.sn/backendgateway/integration-odoo/list-panier",
+					"protocol": "https",
+					"host": [
+						"gupe",
+						"gainde2000",
+						"sn"
+					],
+					"path": [
+						"backendgateway",
+						"integration-odoo",
+						"list-panier"
+					],
+					"query": [
+						{
+							"key": "connaissement",
+							"value": "239677229",
+							"disabled": true
+						},
+						{
+							"key": "numeroDossier",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "referencePanier",
+							"value": "060920250624105945",
+							"disabled": true
+						},
+						{
+							"key": "numeroPaiement",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "transitaire",
+							"value": "00002",
+							"disabled": true
+						},
+						{
+							"key": "dateGenerateReference",
+							"value": "2025-12-09",
+							"disabled": true
+						},
+						{
+							"key": "lastFetchedDate",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "startDatePaiement",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "endDatePaiement",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "payer",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paiement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"montantFacture\": 35400.0,\r\n    \"referencePanier\": \"2406202503524016S5\",\r\n    \"numeroDossier\": \"GUDE2406202594\",\r\n    \"numeroPaiement\": \"060920250624105945\", /*Source ODOO*/\r\n    \"datePaiement\": \"2025-06-24 11:00:00\", /*Source ODOO*/\r\n    \"agentPayeur\": \"Abdoul Karim DIALLO\", /*Source ODOO*/\r\n    \"bankCode\": \"BNK-ODOO\", /*Source ODOO optionnel*/\r\n    \"payer\": true, /*Source ODOO*/\r\n    \"connaissement\": \"239677229\",\r\n    \"paiementMode\": \"ODOO\", /*Source ODOO optionnel*/\r\n    \"originePaiement\": \"ODOO\", /*Source ODOO onptionnel*/\r\n    \"paiementMoyen\": \"MOBILE_MONEY\" /*Source ODOO optionnel (En compte , Par chec,etc.. )*/\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-gupe.gainde2000.sn/backendgupe/odoo/payer",
+					"protocol": "https",
+					"host": [
+						"api-gupe",
+						"gainde2000",
+						"sn"
+					],
+					"path": [
+						"backendgupe",
+						"odoo",
+						"payer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acces token",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "odoo",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "Integr@tion&Oddo2025",
+							"type": "default"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "default"
+						},
+						{
+							"key": "client_id",
+							"value": "gupe",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://auth-gupe.gainde2000.sn/realms/gupe-realm/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"auth-gupe",
+						"gainde2000",
+						"sn"
+					],
+					"path": [
+						"realms",
+						"gupe-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

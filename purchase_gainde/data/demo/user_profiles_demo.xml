@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Profils démo pour chaque type de profil -->
+
+        <!-- Profil RND -->
+        <record id="user_profile_rnd_demo" model="user.profiles">
+            <field name="name">Profil RND</field>
+            <field name="profile_type">rnd</field>
+        </record>
+
+        <!-- Profil RCB -->
+        <record id="user_profile_rcb_demo" model="user.profiles">
+            <field name="name">Profil RCB</field>
+            <field name="profile_type">rcb</field>
+        </record>
+
+        <!-- Profil RA (achats) -->
+        <record id="user_profile_ra_demo" model="user.profiles">
+            <field name="name">Profil RA</field>
+            <field name="profile_type">ra</field>
+        </record>
+
+        <!-- Profil RCG -->
+        <record id="user_profile_rcg_demo" model="user.profiles">
+            <field name="name">Profil RCG</field>
+            <field name="profile_type">rcg</field>
+        </record>
+
+        <!-- Profil N+1 -->
+        <record id="user_profile_n1_demo" model="user.profiles">
+            <field name="name">Profil N+1</field>
+            <field name="profile_type">n1</field>
+        </record>
+
+        <!-- Profil portail -->
+        <record id="user_profile_portal_demo" model="user.profiles">
+            <field name="name">Profil Portail</field>
+            <field name="profile_type">portal</field>
+        </record>
+    </data>
+</odoo>

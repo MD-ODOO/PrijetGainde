@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_picking_approved_and_validated" model="mail.message.subtype">
+            <field name="name">Transfer Approved and Validated</field>
+            <field name="res_model">stock.picking</field>
+            <field name="default" eval="True"/>
+            <field name="description">Transfer was Approved and Posted</field>
+        </record>
+        <record id="mt_picking_rejected" model="mail.message.subtype">
+            <field name="name">Transfer Rejected</field>
+            <field name="res_model">stock.picking</field>
+            <field name="default" eval="True"/>
+            <field name="description">Transfer was Rejected</field>
+        </record>
+    </data>
+</odoo>

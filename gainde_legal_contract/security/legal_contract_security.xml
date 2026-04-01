@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <!-- RÈGLE GÉNÉRALE : Un utilisateur ne voit que les documents de son groupe GED (qui suit son département) -->
+    <record id="rule_ged_per_department" model="ir.rule">
+        <field name="name">GED : Restriction par Département (Hiérarchique)</field>
+        <field name="model_id" ref="documents.model_documents_document"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        <field name="domain_force">
+            [
+            '|',
+            ('folder_id.department_id', '=', False),
+            '|',
+            ('folder_id.department_id', 'child_of', [user.department_id.id] if user.department_id else []),
+            ('create_uid', '=', user.id)
+            ]
+        </field>
+        <!-- Cette règle s'applique à tous les employés, et filtre dynamiquement par user.department_id -->
+        <!-- NOTE : Pour que 'user.department_id' marche, il faut parfois utiliser un compute domain dans models ou s'assurer que l'utilisateur a un département. -->
+    </record>
+
+    <record id="rule_legal_contract_dept_restriction" model="ir.rule">
+        <field name="name">Contrats : Restriction par Département</field>
+        <field name="model_id" ref="gainde_legal_contract.model_legal_contract"/>
+        <field name="groups" eval="[(4, ref('gainde_legal_contract.group_ged_dept_juridique'))]"/>
+        <!-- L'utilisateur ne voit que les contrats de son département -->
+        <field name="domain_force">[('department_id', '=', user.department_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="rule_legal_contract_full_access" model="ir.rule">
+    <field name="name">Contrats : Accès Global (Audit/Assistant/Juriste/Admin)</field>
+    <field name="model_id" ref="gainde_legal_contract.model_legal_contract"/>
+    <field name="groups" eval="[
+        (4, ref('gainde_legal_contract.group_ged_read_juridique')),
+        (4, ref('gainde_legal_contract.group_ged_ast_juridique')),
+        (4, ref('gainde_legal_contract.group_ged_juridique')),
+        (4, ref('gainde_legal_contract.group_ged_resp_juridique')),
+        (4, ref('gainde_legal_contract.group_ged_manager'))
+    ]"/>
+    <!-- [(1, '=', 1)] signifie "True", donc accès à TOUS les enregistrements -->
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="perm_read" eval="True"/>
+    <field name="perm_write" eval="True"/>
+    <field name="perm_create" eval="True"/>
+    <field name="perm_unlink" eval="True"/>
+</record>
+
+    <!-- Pour les Contrats : l'étape est 'Création' -->
+    <record id="rule_ast_no_edit_contract_post_draft" model="ir.rule">
+        <field name="name">AST: Contrat Modification uniquement en Création</field>
+        <field name="model_id" ref="model_legal_contract"/>
+        <field name="groups" eval="[(4, ref('gainde_legal_contract.group_ged_ast_juridique'))]"/>
+        <!-- On vérifie si l'ID de l'étape du contrat est celui de 'contract_stage_draft' -->
+        <field name="domain_force" eval="[('stage_id', '=', ref('gainde_legal_contract.contract_stage_draft'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <!-- Pour les Litiges : l'étape est 'Nouveau' -->
+    <record id="rule_ast_no_edit_litigation_post_new" model="ir.rule">
+        <field name="name">AST: Litige Modification uniquement en Nouveau</field>
+        <field name="model_id" ref="model_legal_litigation"/>
+        <field name="groups" eval="[(4, ref('gainde_legal_contract.group_ged_ast_juridique'))]"/>
+        <!-- On vérifie si l'ID de l'étape du litige est celui de 'stage_open' -->
+        <field name="domain_force" eval="[('stage_id', '=', ref('gainde_legal_contract.stage_open'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+    <!-- Restriction pour les Avenants (state: 'draft') -->
+    <record id="rule_ast_no_edit_amendment_post_draft" model="ir.rule">
+        <field name="name">AST: Avenant Modification uniquement en Brouillon</field>
+        <field name="model_id" ref="model_legal_contract_amendment"/>
+        <field name="groups" eval="[(4, ref('gainde_legal_contract.group_ged_ast_juridique'))]"/>
+        <field name="domain_force" eval="[('stage_id', '=', ref('gainde_legal_contract.amendment_stage_draft'))]"/>
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+
+    <!-- Règle pour le Manager (Voit tout) -->
+    <record id="rule_folder_manager_all" model="ir.rule">
+        <field name="name">GED : Manager accès total</field>
+        <field name="model_id" ref="documents.model_documents_document"/>
+        <!-- On cherche par le nom 'GED GAINDE' pour coller à votre code Python -->
+        <field name="domain_force">[('folder_id.name', '=', 'GED GAINDE')]</field>
+        <field name="groups"
+               eval="[(4, ref('gainde_legal_contract.group_ged_manager')), (4, ref('base.group_system'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

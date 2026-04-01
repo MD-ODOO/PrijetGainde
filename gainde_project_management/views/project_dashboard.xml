@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue Graphique : Pour visualiser les budgets -->
+    <record id="view_project_project_graph_gainde" model="ir.ui.view">
+        <field name="name">project.project.graph.gainde</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <graph string="Tableau de Bord Financier" type="bar" sample="1">
+                <field name="name"/>
+                <field name="budget_total" type="measure"/>
+                <field name="realized_costs" type="measure"/>
+                <field name="engaged_costs" type="measure"/>
+                <field name="remaining_budget" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue Pivot : C'est ce qui se rapproche le plus d'un Dashboard financier en Community -->
+    <record id="view_project_project_pivot_gainde" model="ir.ui.view">
+        <field name="name">project.project.pivot.gainde</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <pivot string="Vue globale projets">
+                <field name="name" type="row"/>
+                <field name="project_type" type="col"/>
+                <field name="budget_total" type="measure"/>
+                <field name="realized_costs" type="measure"/>
+                <field name="engaged_costs" type="measure"/>
+                <field name="remaining_budget" type="measure"/>
+                <field name="spi" type="measure"/>
+                <field name="cpi" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action : On définit Pivot comme vue par défaut -->
+    <record id="action_project_dashboard_gainde" model="ir.actions.act_window">
+        <field name="name">Tableau de Bord Financier</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="view_id" ref="view_project_project_pivot_gainde"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune donnée pour l'analyse financière.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Menu : Placé dans les analyses de projet -->
+    <menuitem id="menu_project_dashboard_gainde_root"
+              name="Tableau de Bord Financier"
+              parent="project.menu_project_report"
+              action="action_project_dashboard_gainde"
+              sequence="1"/>
+
+</odoo>

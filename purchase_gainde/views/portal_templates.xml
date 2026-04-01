@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Show Purchase Requests menu only for portal employees -->
+    <!-- <template id="portal_my_home_purchase_requests_gainde" inherit_id="bf_portal_purchase_request.portal_my_home_purchase_requests">
+        <xpath expr="//div[@id='portal_client_category']/t" position="attributes">
+            <attribute name="t-if">request.env.user.has_group('purchase_request_gainde.group_portal_employee')</attribute>
+        </xpath>
+    </template> -->
+
+    <!-- Hide Purchase Requests breadcrumb from regular portal users -->
+    <!-- <template id="portal_my_home_menu_purchase_requests_gainde" inherit_id="bf_portal_purchase_request.portal_my_home_menu_purchase_requests">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[1]" position="attributes">
+            <attribute name="t-if">page_name == 'purchase_request' and request.env.user.has_group('purchase_request_gainde.group_portal_employee')</attribute>
+        </xpath>
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[2]" position="attributes">
+            <attribute name="t-if">purchase_request and request.env.user.has_group('purchase_request_gainde.group_portal_employee')</attribute>
+        </xpath>
+        <xpath expr="//ol[hasclass('o_portal_submenu')]/li[3]" position="attributes">
+            <attribute name="t-if">default_requested_by and request.env.user.has_group('purchase_request_gainde.group_portal_employee')</attribute>
+        </xpath>
+    </template> -->
+
+  <template id="purchase_gainde_portal_my_home_remove_security_card"
+              inherit_id="portal.portal_my_home"
+              name="Portal: remove Connection  Security card">
+
+        <!-- Target the docs entry whose url is '/my/security' and remove it -->
+        <xpath expr="//div[@id='portal_common_category']//t[@t-call='portal.portal_docs_entry'][.//t[@t-set='url' and @t-value=&quot;'/my/security'&quot;]]"
+               position="replace"/>
+    </template>
+    
+ <template
+        id="bf_portal_purchase_request_page_no_sidebar"
+        inherit_id="bf_portal_purchase_request.bf_portal_purchase_request_page"
+    >
+        <!-- Completely remove the sidebar -->
+        <xpath expr="//t[@t-call='portal.portal_record_sidebar']" position="replace">
+            <!-- Sidebar intentionally removed -->
+        </xpath>
+
+        <!-- Expand content to full width -->
+        <xpath expr="//div[@id='purchase_request_content']" position="attributes">
+            <attribute name="class">o_portal_content col-12</attribute>
+        </xpath>
+    </template>
+    <!-- Update portal purchase request form to remove nature and seuil fields -->
+    <template id="portal_form_pr_fields_gainde" inherit_id="bf_portal_purchase_request.portal_form_pr_fields">
+       <!-- Add a new column AFTER UoM column -->
+        <xpath expr="//tbody//tr/td[.//span[contains(@class,'o_input_uom')]]"
+               position="after">
+
+            <td  t-if="purchase_request.state != 'draft'" class="text-center align-middle">
+                <span t-attf-class="
+                        badge rounded-pill
+                        #{'text-bg-success' if line.state in ('approved','to_purchase','done')
+                          else 'text-bg-warning' if line.state in ('to_approve','n1_approval','rnd_pending','rcb_pending','rcg_pending')
+                          else 'text-bg-danger' if line.state == 'rejected'
+                          else 'text-bg-secondary'}">
+                    <t t-esc="line.state"/>
+                </span>
+            </td>
+
+        </xpath>
+         <xpath expr="//div[label[@for='company_id']]" position="replace">
+        </xpath> 
+        <xpath expr="//div[label[@for='date_start']]" position="replace">
+        </xpath> 
+ <xpath expr="//div[input[@name='description']]/label" position="replace">
+            <label class="col-form-label fw-bold" for="description">Objet</label>
+        </xpath>
+         <xpath expr="//input[contains(@class,'qty')]" position="attributes">
+             <attribute name="step">1</attribute>
+            <attribute name="min">1</attribute>
+            <attribute name="value">1</attribute>
+        </xpath>
+        <!-- Hide Approver field -->
+        <xpath expr="//div[label[@for='assigned_to']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="assigned_to" t-att-value="assigned_to or (purchase_request.assigned_to and purchase_request.assigned_to.id) or ''"/>
+            </div>
+        </xpath>
+            <xpath expr="//div[contains(@class,'d-md-flex')]" position="replace">
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+
+                <!--  Request approval (FIRST) -->
+                <a t-if="purchase_request.state == 'draft'"
+                   role="button"
+                   class="btn btn-secondary o_purchase_js_approve"
+                   t-att-href="'/my/purchase_requests/approve/%s/%s' % (purchase_request.id, purchase_request.access_token or '')">
+                    <i class="fa fa-file-text-o"/> Soumettre pour approbation
+                </a>
+
+                <!--  Save -->
+                <button t-if="purchase_request.state == 'draft'"
+                        type="submit"
+                        class="btn btn-primary edit_confirm">
+                    <i class="fa fa-fw fa-floppy-o"/> Enregistrer
+                </button>
+
+                <!-- 3️⃣ Discard (LAST) -->
+                <a t-if="purchase_request.state == 'draft'"
+                   role="button"
+                   class="btn btn-secondary"
+                   href="/my/purchase_requests">
+                    <i class="fa fa-fw fa-times"/> Annuler la modification
+                </a>
+
+            </div>
+
+        </xpath>
+        
+        <!-- Hide Source Document field -->
+        <xpath expr="//div[label[@for='origin']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="origin" t-att-value="origin or purchase_request.origin or ''"/>
+            </div>
+        </xpath>
+        
+        <!-- Hide picking_type_id field entirely -->
+        <xpath expr="//div[label[@for='picking_type_id']]" position="replace">
+            <!-- Completely removed -->
+        </xpath>
+         <!-- <xpath expr="//div[label[@for='company_id']]" position="replace">
+        </xpath> -->
+         <!-- <xpath expr="//div[label[@for='date_start']]" position="replace">
+        </xpath> -->
+        
+    </template>
+ <template
+        id="portal_my_purchase_requests_line_head_inherit_state"
+        inherit_id="bf_portal_purchase_request.portal_my_purchase_requests_line_head"
+        name="My Purchase Requests - Add State Column"
+    >
+        <!-- Insert column AFTER UoM -->
+        <xpath expr="//thead/tr/td[last()]" position="after">
+            <td class="col-2 col-sm-2 col-md-2 col-lg-2">
+                <strong>Statut</strong>
+            </td>
+        </xpath>
+
+    </template>
+
+
+    <!-- Remove from new form template -->
+    <template id="portal_form_new_pr_fields_gainde" inherit_id="bf_portal_purchase_request.portal_form_new_pr_fields">
+        <!-- Hide Approver field -->
+        <xpath expr="//div[label[@for='assigned_to']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="assigned_to" value=""/>
+            </div>
+        </xpath>
+   <xpath expr="//div[input[@name='description']]/label" position="replace">
+            <label class="col-form-label fw-bold" for="description">Objet</label>
+        </xpath>
+        
+           <xpath expr="//input[contains(@class,'qty')]" position="attributes">
+             <attribute name="step">1</attribute>
+            <attribute name="min">1</attribute>
+            <attribute name="value">1</attribute>
+        </xpath>
+                
+         <!-- <xpath
+            expr="//label[normalize-space()='Quantity']/following-sibling::input[contains(@class,'qty')]"
+            position="attributes"
+        >
+            <attribute name="step">1</attribute>
+            <attribute name="min">1</attribute>
+            <attribute name="value">1</attribute>
+        </xpath> -->
+        <!-- <xpath expr="//div[label[@for='date_start']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="date_start" value=""/>
+            </div>
+        </xpath>
+         <xpath expr="//div[label[@for='company_id']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="assigned_to" value=""/>
+            </div>
+        </xpath> -->
+        <!-- Hide Source Document field -->
+        <xpath expr="//div[label[@for='origin']]" position="replace">
+            <div style="display: none;">
+                <input type="hidden" name="origin" value=""/>
+            </div>
+        </xpath>
+        
+        <!-- Hide picking_type_id field entirely -->
+        <xpath expr="//div[label[@for='picking_type_id']]" position="replace">
+            <!-- Completely removed -->
+        </xpath>
+         <xpath expr="//div[label[@for='date_start']]" position="replace">
+                     <!-- Completely removed -->
+
+        </xpath> 
+            <xpath expr="//div[label[@for='company_id']]" position="replace">
+        </xpath> 
+         <!-- <xpath expr="//div[label[@for='company_id']]" position="replace">
+        </xpath>
+         <xpath expr="//div[label[@for='date_start']]" position="replace">
+        </xpath> -->
+         <!-- <xpath expr="//div[label[@for='company_id']]" position="replace">
+        </xpath>-->
+        
+    </template>
+
+    <!-- Remove nature and seuil from readonly form -->
+    <template id="portal_form_pr_readonly_fields_gainde" inherit_id="bf_portal_purchase_request.portal_form_pr_readonly_fields">        
+        <!-- Hide Approver field -->
+        <!-- <xpath expr="//div[label[text()='Approver']]" position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath>  -->
+        
+        <!-- Hide Source Document field -->
+        <!-- <xpath expr="//div[label[text()='Source Document']]" position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath> -->
+        
+        <!-- Hide Type operation field -->
+        <!-- <xpath expr="//div[label[text()='Opération de type']]" position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath> -->
+     
+           <!-- Supprimer la classe text-end sur les 2 dernières colonnes (quantité et UoM) en lecture seule -->
+           <xpath expr="//tbody[hasclass('table-body')]//tr/td[3]/p" position="attributes">
+            <attribute name="class"></attribute>
+        </xpath>
+
+        <!-- Masquer le champ société (Company) dans le bloc d'en-tête readonly -->
+        <xpath expr="//div[label[hasclass('col-form-label') and hasclass('fw-bold') and (normalize-space(text())='Company' or normalize-space(text())='Société')]]" position="replace">
+            <div style="display: none;">
+                <div t-esc="purchase_request.company_id.name" />
+            </div>
+        </xpath>
+           <xpath expr="//tbody[hasclass('table-body')]//tr/td[4]/p" position="attributes">
+            <attribute name="class"></attribute>
+        </xpath>
+
+
+                      <xpath expr="//div[div[@t-esc='purchase_request.origin']]" position="replace"/>
+        <xpath expr="//div[div[@t-esc='purchase_request.assigned_to.display_name']]" position="replace"/>
+        <xpath expr="//div[div[@t-esc='purchase_request.picking_type_id.display_name']]" position="replace"/>
+        <xpath expr="//div[div[@t-esc='date_start_formatted']]" position="replace"/>
+
+    <xpath expr="//div[div[@t-esc='purchase_request.description']]/label" position="replace">
+                        <label class="col-form-label fw-bold">Objet</label>
+        </xpath>
+         <!-- Add State column after UoM -->
+        <xpath expr="//t[@t-foreach]/tr/td[last()]" position="after">
+            <td class="text-center">
+                <span
+                    t-field="line.state"
+                    t-attf-class="
+                        badge rounded-pill
+                        #{'text-bg-danger' if line.state == 'rejected'
+                        else 'text-bg-success' if line.state == 'approved'
+                        else 'text-bg-info'}
+                    "
+                />
+            </td>
+        </xpath>
+
+    </template>
+
+    <!-- Liste des demandes : renommer la colonne "Description" en "Objet" -->
+    <template id="portal_my_purchase_requests_gainde" inherit_id="bf_portal_purchase_request.portal_my_purchase_requests">
+        <xpath expr="//thead//th[hasclass('text-end') and hasclass('d-none') and hasclass('d-md-table-cell') and normalize-space()='Description']" position="replace">
+            <th class="text-end d-none d-md-table-cell">Objet</th>
+        </xpath>
+
+        <!-- Ajouter le label "Nouveau" après l'icône + sur le bouton de création -->
+        <xpath expr="//p[hasclass('d-inline-flex') and hasclass('gap-1')]/a[i[hasclass('fa-plus')]]" position="replace">
+            <a href="/my/purchase_requests/new" class="btn btn-primary" aria-label="Edit">
+                <i class="fa fa-plus fa-1g float-sm-none float-md-start" title="Edit"></i>
+                <span>Créer une demande</span>
+            </a>
+        </xpath>
+    </template>
+
+    <!-- Fix AccessError on res.currency in web.frontend_layout by using sudo -->
+    <template id="web_frontend_layout_gainde_fix_currency" inherit_id="web.frontend_layout">
+        <xpath expr="//t[contains(@t-out, 'get_frontend_session_info')]" position="replace">
+            <t t-out="json.dumps(request.env['ir.http'].sudo().get_frontend_session_info())"/>
+        </xpath>
+    </template>
+</odoo>

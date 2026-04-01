@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+        <record id="stock_picking_approval_form" model="ir.ui.view">
+            <field name="name">stock.picking.approval.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="after">
+                    <button name="button_approve" string="Approve" type="object" class="oe_highlight"
+                            invisible="not is_current_approver"/>
+                    <button name="button_reject" string="Reject" type="object"
+                            invisible="not is_current_approver"/>
+                    <button name="button_draft" string="Reset to Draft" type="object"
+                            invisible="state != 'rejected'"/>
+                </button>
+
+                <xpath expr='//button[@name="button_validate"][1]' position="attributes">
+                    <attribute name="invisible">state in ('draft', 'confirmed', 'to approve', 'approved', 'rejected', 'done', 'cancel')</attribute>
+                </xpath>
+                <xpath expr='//button[@name="button_validate"][2]' position="attributes">
+                    <attribute name="invisible">state in ('waiting', 'assigned', 'to approve', 'approved', 'rejected', 'done', 'cancel')</attribute>
+                </xpath>
+
+                <xpath expr="//group/group/field[@name='picking_type_id']" position="after">
+                    <field name="use_approval_route" invisible="True"/>
+                    <field name="approval_route_id"
+                           readonly="state != 'draft'"
+                           invisible="use_approval_route == 'no'"
+                           required="use_approval_route == 'required'"/>
+                </xpath>
+                <xpath expr="//sheet/notebook" position="inside">
+                    <page name="approval_route" string="Approval Route"
+                          invisible="state in ['draft'] or not approval_route_id">
+                        <field name="approval_route_stage_ids">
+                            <list>
+                                <field name="sequence" invisible="True" widget="handle"/>
+                                <field name="name"/>
+                                <field name="user_ids" widget="many2many_avatar_user"/>
+                                <field name="state"/>
+                                <field name="decisions_summary"/>
+                            </list>
+                        </field>
+                        <field name="is_current_approver" invisible="True"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_internal_search_extend_state_filters" model="ir.ui.view">
+            <field name="name">view_picking_internal_search_extend_state_filters</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <filter name="draft" position="after">
+                    <filter string="To Approve" name="state_to_approve" domain="[('state', '=', 'to approve')]"/>
+                    <filter string="Approved" name="state_approved" domain="[('state', '=', 'approved')]"/>
+                    <filter string="Rejected" name="state_rejected" domain="[('state', '=', 'rejected')]"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

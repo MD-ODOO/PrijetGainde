@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ===========================================
+             MODÈLE DOMAINE AUDIT (paramétrable)
+        ============================================ -->
+        <record id="model_audit_gainde_domain" model="ir.model">
+            <!-- Auto-généré par _name='audit_gainde.domain' -->
+        </record>
+
+        <!-- DOMAINE FINANCIER -->
+        <record id="domain_financial" model="audit_gainde.domain">
+            <field name="name">Financier</field>
+        </record>
+
+        <!-- DOMAINE RH -->
+        <record id="domain_hr" model="audit_gainde.domain">
+            <field name="name">RH</field>
+        </record>
+
+        <!-- DOMAINE IT -->
+        <record id="domain_it" model="audit_gainde.domain">
+            <field name="name">IT</field>
+        </record>
+
+        <!-- DOMAINE OPÉRATIONNEL -->
+        <record id="domain_operational" model="audit_gainde.domain">
+            <field name="name">Opérationnel</field>
+        </record>
+
+        <!-- DOMAINE CONFORMITÉ -->
+        <record id="domain_compliance" model="audit_gainde.domain">
+            <field name="name">Conformité</field>
+        </record>
+
+        <!-- DOMAINE AUTRE -->
+        <record id="domain_other" model="audit_gainde.domain">
+            <field name="name">Autre</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<odoo>
+  <record id="view_treasury_cash_search" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <search string="Caisse dépenses">
+        <filter name="to_pay" string="À payer"
+                domain="[('state','=','planned')]"
+                help="Décaissements à payer (planifiés)."/>
+        <filter name="draft" string="Non planifié"
+                domain="[('state','=','draft')]"
+                help="Décaissements non planifiés."/>
+        <filter name="state_planned" string="Planifié" domain="[('state', '=', 'planned')]" help="Décaissements en attente de paiement"/>
+        <filter name="state_paid" string="Payé" domain="[('state', '=', 'paid')]" help="Décaissements déjà réglés"/>
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="planned_payment_date"/>
+        <group expand="0" string="Group By">
+          <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
+          <filter name="group_payment_type" string="Type" context="{'group_by': 'payment_type'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="action_treasury_cash" model="ir.actions.act_window">
+    <field name="name">Caisse dépenses</field>
+    <field name="res_model">treasury.payment</field>
+    <field name="view_mode">list,form</field>
+    <!-- Affiche tous les paiements de 1 à 100 000 + ceux >100 000 uniquement s'ils sont planifiés -->
+    <field name="domain">[('amount','&gt;=',1),'|',('amount','&lt;=',100000),'&amp;',('amount','&gt;',100000),('state','=','planned')]</field>
+    <field name="search_view_id" ref="treasury_management.view_treasury_cash_search"/>
+    <field name="context">{
+        "search_default_to_pay": 1,
+        "search_default_order_by_due_date": 1
+      }</field>
+  </record>
+
+  <record id="view_treasury_cash_list" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <list decoration-danger="is_overdue"
+            decoration-warning="priority in ('2','3')"
+            decoration-success="state == 'paid'"
+            decoration-info="state == 'planned'"
+            decoration-muted="state == 'draft'"
+            string="Caisse dépenses">
+        <field name="name"/>
+        <field name="beneficiary_display"/>
+        <field name="planned_payment_date"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="payment_channel"/>
+        <field name="priority" widget="badge" options="{'color': 'priority_color'}"/>
+        <field name="state" widget="badge"
+               decoration-success="state == 'paid'"
+               decoration-warning="state == 'planned'"
+               decoration-danger="is_overdue"
+               decoration-muted="state == 'draft'"/>
+        <button name="action_pay" type="object" string="Payer"/>
+        <button name="action_print_payment_voucher" type="object" string="Imprimer"
+                class="btn-primary"/>
+      </list>
+    </field>
+  </record>
+</odoo>

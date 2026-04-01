@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Ajout état d'approbation + bouton sur les partenaires -->
+    <record id="view_partner_form_gainde_approval" model="ir.ui.view">
+        <field name="name">res.partner.form.gainde.approval</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Header personnalisé : état + bouton d'approbation -->
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="approval_state" widget="statusbar" invisible="is_supplier == False"/>
+                 <button name="button_approve" type="object" id="a" string="Demander approbation" class="oe_highlight btn btn-primary px-4 me-2" invisible="approval_state != 'draft' or is_supplier == False"/>
+
+                    <button name="button_approve" type="object" string="Approuver" class="oe_highlight btn btn-success px-4" invisible="approval_state != 'to_approve' or is_current_approver == False or is_supplier == False"/>
+          
+                </header>
+            </xpath>
+            <!-- Onglet Parcours d'approbation après la page Internal Notes -->
+            <xpath expr="//notebook/page[@name='internal_notes']" position="after">
+                    <page name="approval_route" string="Parcours d'approbation"
+                        invisible="approval_route_id == False or is_supplier == False">
+                    <field name="approval_route_id" string="Parcours d'approbation"/>
+                    <field name="approval_route_stage_ids" widget="one2many_list" >
+                        <list>
+                            <field name="sequence" invisible="1"/>
+                            <field name="name" string="Étapes"/>
+                            <field name="user_ids" widget="many2many_avatar_user" string="Approvers"/>
+                            <field name="state"/>
+                            <field name="decisions_summary"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <!-- TVA obligatoire dès que le partenaire n'est plus en brouillon -->
+            <!-- <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="required">approval_state != 'draft'</attribute>
+            </xpath> -->
+        </field>
+    </record>
+
+    <!-- Ajout état d'approbation + bouton sur les articles -->
+    <record id="view_product_template_form_gainde_approval" model="ir.ui.view">
+        <field name="name">product.template.form.gainde.approval</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter état + bouton dans le header du produit -->
+            <xpath expr="//header" position="inside">
+                <field name="approval_state" widget="statusbar"/>
+                 <button name="button_approve" type="object" id="a" string="Demander approbation" class="oe_highlight btn btn-primary px-4 me-2" invisible="approval_state != 'draft' "/>
+
+                    <button name="button_approve" type="object" string="Approuver" class="oe_highlight btn btn-success px-4" invisible="approval_state != 'to_approve' or is_current_approver == False"/>
+          
+            </xpath>
+            <!-- Onglet Parcours d'approbation pour les articles -->
+            <xpath expr="//notebook" position="inside">
+                <page name="approval_route" string="Parcours d'approbation"
+                      invisible="approval_route_id == False">
+                    <field name="approval_route_id" string="Parcours d'approbation"/>
+                    <field name="approval_route_stage_ids" widget="one2many_list" >
+                        <list>
+                            <field name="sequence" invisible="1"/>
+                            <field name="name" string="Étapes"/>
+                            <field name="user_ids" widget="many2many_avatar_user" string="Approvers"/>
+                            <field name="state"/>
+                            <field name="decisions_summary"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <!-- catégorie obligatoire et éditable uniquement pour l'approbateur courant à l'étape 2 -->
+            <xpath expr="//field[@name='categ_id']" position="attributes">
+                <attribute name="modifiers">{"required": [["current_approval_stage_id.sequence", "=", 2]], "readonly": [["current_approval_stage_id", "!=", false], "|", ["is_current_approver", "=", false], ["current_approval_stage_id.sequence", "!=", 2]]}</attribute>
+            </xpath>
+            <!-- comptes revenus / charges obligatoires et éditables uniquement pour l'approbateur courant à l'étape 2,
+                 en fonction des flags vente/achat -->
+            <xpath expr="//field[@name='property_account_income_id']" position="attributes">
+                <attribute name="modifiers">{"required": [["current_approval_stage_id.sequence", "=", 2], ["sale_ok", "=", true]], "readonly": [["current_approval_stage_id", "!=", false], "|", ["is_current_approver", "=", false], ["current_approval_stage_id.sequence", "!=", 2]]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+                <attribute name="modifiers">{"required": [["current_approval_stage_id.sequence", "=", 2], ["purchase_ok", "=", true]], "readonly": [["current_approval_stage_id", "!=", false], "|", ["is_current_approver", "=", false], ["current_approval_stage_id.sequence", "!=", 2]]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_product_template_only_form_gainde_approval" model="ir.ui.view">
+        <field name="name">product.template.only.form.gainde.approval</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!-- catégorie obligatoire uniquement à l'étape 2 -->
+            <xpath expr="//field[@name='categ_id']" position="attributes">
+                <attribute name="modifiers">{"required": [["current_approval_stage_id.sequence", "=", 2]], "readonly": [["current_approval_stage_id", "!=", false], "|", ["is_current_approver", "=", false], ["current_approval_stage_id.sequence", "!=", 2]]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Override: rendre approval_route_stage_ids toujours en readonly sur partenaires -->
+    <record id="view_partner_form_gainde_approval_readonly" model="ir.ui.view">
+        <field name="name">res.partner.form.gainde.approval.readonly</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="purchase_gainde.view_partner_form_gainde_approval"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='approval_route_stage_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Override: rendre approval_route_stage_ids toujours en readonly sur produits -->
+    <record id="view_product_template_form_gainde_approval_readonly" model="ir.ui.view">
+        <field name="name">product.template.form.gainde.approval.readonly</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="purchase_gainde.view_product_template_form_gainde_approval"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='approval_route_stage_ids']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

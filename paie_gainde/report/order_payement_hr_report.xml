@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+       
+
+        <!-- ===============================
+             ACTION REPORT
+        ================================ -->
+        <record id="action_report_ordre_virement_hr" model="ir.actions.report">
+            <field name="name">Ordre de Virement</field>
+            <field name="model">wizard.ordre.virement.hr</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">paie_gainde.report_pay_order</field>
+            <field name="report_file">paie_gainde.report_pay_order</field>
+            <field name="binding_model_id" ref="paie_gainde.model_wizard_ordre_virement_hr"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!-- ===============================
+             QWEB TEMPLATE
+        ================================ -->
+    <template id="report_pay_order">
+    <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+            <div class="page">
+
+                <h3 style="text-align:center;">ORDRE DE VIREMENT</h3>
+
+                <p>
+                    <strong>Période :</strong>
+                    <t t-esc="date_start"/> au
+                    <t t-esc="date_stop"/>
+                </p>
+
+                <table class="table table-bordered" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Employé</th>
+                            <th>Banque</th>
+                            <th>Compte</th>
+                            <th>Libellé</th>
+                            <th style="text-align:right;">Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="lines" t-as="l">
+                            <tr>
+                                <td><t t-esc="l['employee_name']"/></td>
+                                <td><t t-esc="l['bank_name']"/></td>
+                                <td><t t-esc="l['account_number']"/></td>
+                                <td><t t-esc="l['libelle']"/></td>
+                                <td style="text-align:right;">
+                                    <t t-esc="'{0:,.0f}'.format(l['amount']).replace(',', ' ')"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" style="text-align:right;">TOTAL</th>
+                            <th style="text-align:right;">
+                                <t t-esc="'{0:,.0f}'.format(total_amount).replace(',', ' ')"/>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </t>
+    </t>
+</template>
+
+
+
+    <!-- ACTION SERVEUR : ENVOI GROUPÉ
+    <record id="view_hr_payslip_form_inherit_email" model="ir.ui.view">
+        <field name="name">hr.payslip.form.email.send</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <button name="action_send_payslip_email"
+                        type="object"
+                        string="Envoyer par email"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', 'not in', ('paid','done'))]}"/>
+            </xpath>
+
+        </field>
+    </record> 
+     <record id="email_template_payslip"
+            model="mail.template"
+            noupdate="1">
+
+        <field name="name">Bulletin de paie</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+
+        <field name="subject">
+            Bulletin de paie - {{ object.employee_id.name }}
+        </field>
+
+        <field name="email_from">
+            {{ user.email or 'noreply@entreprise.com' }}
+        </field>
+
+        <field name="email_to">
+            {{ object.employee_id.work_email }}
+        </field>
+
+        <field name="body_html" type="html">
+            <![CDATA[
+            <p>Bonjour {{ object.employee_id.name }},</p>
+            <p>
+                Veuillez trouver ci-joint votre bulletin de paie
+                pour la période <strong>{{ object.date_from }} - {{ object.date_to }}</strong>.
+            </p>
+            <p>
+                Cordialement,<br/>
+                <strong>Le service RH</strong>
+            </p>
+            ]]>
+        </field>
+
+        <field name="report_template" ref="hr_payroll.action_report_payslip"/>
+        <field name="report_name">
+            Bulletin_{{ object.employee_id.name }}_{{ object.date_to }}
+        </field>
+
+    </record> -->
+    
+   
+    
+
+
+
+
+
+    </data>
+
+</odoo>

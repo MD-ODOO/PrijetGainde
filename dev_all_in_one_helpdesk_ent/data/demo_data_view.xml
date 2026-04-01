@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+       
+       <record id="category_1" model="dev.knowledge.category">
+		    <field name="name">Technical</field>
+       </record>
+       <record id="category_2" model="dev.knowledge.category">
+		    <field name="name">Functional</field>
+       </record>
+       <record id="category_3" model="dev.knowledge.category">
+		    <field name="name">Support</field>
+       </record>
+       
+       <record id="tag_1" model="dev.knowledge.tags">
+		    <field name="name">Bug</field>
+       </record>
+       <record id="tag_2" model="dev.knowledge.tags">
+		    <field name="name">Issue</field>
+       </record>
+       <record id="tag_3" model="dev.knowledge.tags">
+		    <field name="name">Product</field>
+       </record>
+       
+</odoo>

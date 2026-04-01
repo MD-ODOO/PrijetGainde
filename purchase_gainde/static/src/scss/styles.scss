@@ -1,0 +1,34 @@
+/* Purchase Request Gainde Backend Styles */
+.o_purchase_request_gainde {
+    .approval-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        
+        &.draft {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        
+        &.n1_validation {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        &.rcb_validation {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        &.approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        &.rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    }
+}

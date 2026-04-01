@@ -1,0 +1,156 @@
+<odoo>
+    <!-- HEADER -->
+    <template id="custom_gainde_header">
+        <div class="header">
+            <div class="row">
+                <div class="col-6">
+                    <!-- Logo Entreprise ou Logo du Module par défaut -->
+                    <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                         style="max-height: 70px;"/>
+                    <img t-else="" src="/gainde_legal_contract/static/src/img/img.png"
+                         style="max-height: 70px;"/>
+                </div>
+                <div class="col-6 text-end">
+                    <br/>
+                    <span t-field="doc.name"/>
+                </div>
+            </div>
+            <div style="border-bottom: 2px solid #0055A4; margin-top: 10px;"/>
+
+            <div class="text-center" style="width: 100%; font-weight: bold; text-color: #0055A4; font-size: 18px; padding: 10px 0;">
+                CONTRAT
+            </div>
+            <div style="border-bottom: 2px solid #0055A4; margin-bottom: 10px;"/>
+
+        </div>
+    </template>
+
+    <!-- TABLEAU IDENTIFICATION -->
+    <template id="identification_table_block">
+    <div style="border: 1px solid #333; margin-bottom: 20px;">
+        <table class="table table-sm mb-0">
+            <thead>
+                <tr style="background-color: #EEE;">
+                    <!-- Header unique fusionné sur 2 colonnes -->
+                    <th colspan="2" class="text-center" style="border-bottom: 1px solid #333;">
+                        <strong>IDENTIFICATION DU DOCUMENT</strong>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 30%; font-weight: bold;">Titre</td>
+                    <td style="width: 70%;"><span t-field="doc.title"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Objet</td>
+                    <td><span t-field="doc.object"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Prestataire</td>
+                    <td><span t-field="doc.partner_id.name"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Version</td>
+                    <td><span t-field="doc.version"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Rédacteur</td>
+                    <td><span t-field="doc.writer"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Date de signature</td>
+                    <td><span t-field="doc.signature_date"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Référence</td>
+                    <td><span t-field="doc.reference"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Diffusion</td>
+                    <td><span t-field="doc.diffusion"/></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">Durée</td>
+                    <td><span t-field="doc.duration_text"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
+    <template id="identification_activity_block">
+        <div style="border: 1px solid black; margin-bottom: 20px;">
+            <table class="table table-sm mb-0">
+                <thead>
+                <tr style="background-color: #EEE;">
+                    <strong>ACTIVITE / SECTEUR</strong>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="height: 30px;">
+                    <td>
+                        <span t-field="doc.activity"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <template id="identification_comment_block">
+        <div style="border: 1px solid black; margin-bottom: 20px;">
+            <table class="table table-sm mb-0">
+                <thead>
+                <tr style="background-color: #EEE;">
+                    <strong>COMMENTAIRES</strong>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="height: 60px;">
+                    <td>
+                        <span t-field="doc.comments" />
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </template>
+
+
+    <!-- SIGNATURES -->
+    <template id="signatures_block">
+        <div class="row mt-5" style="page-break-inside: avoid;">
+            <div class="col-6 text-center">
+                <strong>Pour GAINDE 2000</strong>
+                <br/>
+                <br/>L'Administrateur Général
+            </div>
+            <div class="col-6 text-center">
+                <strong>Pour
+                   <t t-if="doc.partner_id.is_company">
+                    <t t-esc="doc.partner_id.name"/>
+                    </t>
+                    <t t-if="not doc.partner_id.is_company">
+                    Le Prestataire
+                    </t>
+                </strong>
+                <br/>
+                <br/>
+                <span t-field="doc.representative_name"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_gainde_footer">
+        <div class="footer" style="border-top: 1px solid #ccc; font-size: 8pt; text-align: center; color: #666;">
+            <span t-field="doc.company_id.street"/>
+            -
+            <span t-field="doc.company_id.city"/>
+            <br/>
+            Page
+            <span class="page"/>
+            /
+            <span class="topage"/>
+        </div>
+    </template>
+</odoo>

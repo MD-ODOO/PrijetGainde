@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="hr_payslip_run_form_inherit_batch_pay" model="ir.ui.view">
+      <field name="name">hr.payslip.run.form.inherit.batch.pay</field>
+      <field name="model">hr.payslip.run</field>
+      <field name="inherit_id" ref="om_hr_payroll.hr_payslip_run_form"/>
+      <field name="arch" type="xml">
+
+        <!-- Ajouter le champ payslip_period_id avant date_start -->
+        <field name="date_start" position="before">
+          <field name="payslip_period_id"/>
+        </field>
+
+        <!-- Ajouter un bouton "Confirmer" après le 3ème bouton dans le header -->
+        <xpath expr="//form/header/button[3]" position="after">
+          <button name="pay_payslip"
+                  type="object"
+                  string="Confirmer"
+                  states="draft"
+                  class="oe_highlight"/>
+        </xpath>
+
+      </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Header CSS -->
+    <template id="header_new">
+      <style type="text/css">
+        /* --- Logo et header --- */
+        #logo-company-name {
+          font-size: 25px;
+          width:46%;
+          display: table-cell;
+          padding: 0px;
+        }
+        #logo-company-name img {
+          padding: 0px;
+          max-height: 110px;
+          max-width: 250px;
+        }
+
+        /* Table et zebrures */
+        .bpro-zebrure:nth-child(odd) {
+          background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+          height: 18px;
+        }
+
+        .bpro_header_left {
+          border: 1px solid black;
+          width: 55%;
+          height: 320px;
+          float:left;
+          margin-bottom:1%;
+        }
+
+        .bpro_header_right {
+          border: 1px solid black;
+          width: 43%;
+          height: 320px;
+          margin-left: 10px;
+          float: right;
+          margin-bottom:1%;
+        }
+
+        .bpro_contained {
+          border-collapse: collapse;
+          border: 1px solid black;
+        }
+
+        .bpro_border_left {
+          border-left: 1px solid;
+        }
+
+        .bpro_head {
+          text-align: center;
+        }
+
+        .bpro_padding_left {
+          text-align: left;
+        }
+
+        .bpro_text_italic {
+          font-style: italic;
+        }
+
+        .bpro-width {
+          width: 100%;
+        }
+
+        .bpro-background {
+          background-color: #C0C0C0;
+        }
+
+        .bpro_footer_table_second {
+          border-collapse: collapse;
+          height: 70px;
+        }
+
+        .bpro_font_balance {
+          font-weight: bold;
+        }
+
+        .sous-totaux {
+          font-weight: bold;
+          height: 10px;
+        }
+
+        .bpro_blank_line {
+          color: white;
+        }
+      </style>
+    </template>
+
+    <!-- Layout sans header -->
+    <template id="headerless_layout">
+      <!-- Multicompany -->
+      <t t-if="o and 'company_id' in o">
+        <t t-set="company" t-value="o.company_id"/>
+      </t>
+      <t t-if="not o or not 'company_id' in o">
+        <t t-set="company" t-value="res_company"/>
+      </t>
+      <t t-raw="0"/>
+      <t t-call="report.external_layout_footer"/>
+    </template>
+
+  </data>
+</odoo>

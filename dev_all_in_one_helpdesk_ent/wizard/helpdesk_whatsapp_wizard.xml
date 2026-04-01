@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <!--WIZARD FORMAT-->
+    <record id="helpdesk_whatsapp_wizard_view" model="ir.ui.view">
+        <field name="name">helpdesk.whatsapp.wizard.view</field>
+        <field name="model">helpdesk.whatsapp.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Helpdesk whatsapp Message ">
+                <group>
+                    <group>
+                        <field name="partner_id" readonly="1"/>
+                        <field name="mobile" readonly="1"/>
+                        <field name="whatsapp_template_id" required="1"/>
+                    </group>
+                </group>
+                <group string="Whatsapp Message"/>
+                <field name="whatsapp_message" widget='html' />
+                <footer>
+                    <button string="Send" name="send_wha_message" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--WIZARD ACTION-->
+    <record id="action_whatsapp_wizard" model="ir.actions.act_window">
+        <field name="name">whatsapp Send Message </field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.whatsapp.wizard</field>
+        <field name="view_id" ref="helpdesk_whatsapp_wizard_view"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

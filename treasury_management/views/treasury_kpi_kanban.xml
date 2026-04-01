@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_treasury_kpi_kanban" model="ir.ui.view">
+        <field name="name">treasury.kpi.kanban</field>
+        <field name="model">treasury.kpi</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard o_kanban_small_column">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record o_kanban_card" style="background:linear-gradient(135deg,#f7f9fc 0%,#eef3ff 100%);border:1px solid #e1e6f5;border-radius:14px;box-shadow:0 6px 16px rgba(15,23,42,0.06);">
+                            <field name="currency_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="date_from" invisible="1"/>
+                            <field name="date_to" invisible="1"/>
+                            <field name="payroll_batch_id" invisible="1"/>
+                            <div class="o_kanban_header o_align_items_center o_justify_content_between o_mb8">
+                                <div class="o_row o_gap_2">
+                                    <div><strong>Période</strong> : <t t-esc="record.date_from.value"/> → <t t-esc="record.date_to.value"/></div>
+                                    <div t-if="record.payroll_batch_id.value"><strong>Lot</strong> : <t t-esc="record.payroll_batch_id.display_name"/></div>
+                                </div>
+                            </div>
+
+                            <div class="o_row o_gap_2 o_mb12">
+                                <div class="o_col-6 o_card" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#e9f6ff;">
+                                    <div class="o_stat_title">Règlement fournisseurs</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="text-muted" style="min-width:48px;"><t t-esc="(record.supplier_payment_rate.raw_value || 0).toFixed(0)"/>%</div>
+                                        <field name="supplier_payment_rate" widget="progressbar" options="{'max_value': 100}"/>
+                                    </div>
+                                </div>
+                                <div class="o_col-6 o_card" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#fff4e5;">
+                                    <div class="o_stat_title">Recouvrement clients</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="text-muted" style="min-width:48px;"><t t-esc="(record.customer_collection_rate.raw_value || 0).toFixed(0)"/>%</div>
+                                        <field name="customer_collection_rate" widget="progressbar" options="{'max_value': 100}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_row o_gap_2">
+                                <div class="o_col-6 o_card" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#e6f7ed;">
+                                    <div class="o_stat_title">Montant global à décaisser</div>
+                                    <div class="o_kpi_value o_kpi_value_lg">
+                                        <field name="total_to_disburse" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    </div>
+                                </div>
+                                <div class="o_col-6 o_card" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#fffaf0;">
+                                    <div class="o_stat_title">Encaissements prévus</div>
+                                    <div class="o_kpi_value o_kpi_value_lg">
+                                        <field name="total_receipt_forecast" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_row o_gap_2 o_mt8">
+                                <div class="o_col-6 o_card status-tile" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#e9f2ff;">
+                                    <div class="o_stat_title">Fournisseurs</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="o_kpi_value"><field name="total_supplier" widget="monetary" options="{'currency_field': 'currency_id'}"/></div>
+                                        <span class="badge bg-light text-muted"
+                                              t-esc="(record.total_to_disburse.raw_value || 0) ? Math.round(((record.total_supplier.raw_value || 0) / record.total_to_disburse.raw_value) * 100) + '%' : '0%'"/>
+                                    </div>
+                                </div>
+                                <div class="o_col-6 o_card status-tile" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#f5fff3;">
+                                    <div class="o_stat_title">Salaires</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="o_kpi_value"><field name="total_salary" widget="monetary" options="{'currency_field': 'currency_id'}"/></div>
+                                        <span class="badge bg-light text-muted"
+                                              t-esc="(record.total_to_disburse.raw_value || 0) ? Math.round(((record.total_salary.raw_value || 0) / record.total_to_disburse.raw_value) * 100) + '%' : '0%'"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_row o_gap_2 o_mt8">
+                                <div class="o_col-6 o_card status-tile" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#fff;">
+                                    <div class="o_stat_title">Primes</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="o_kpi_value"><field name="total_bonus" widget="monetary" options="{'currency_field': 'currency_id'}"/></div>
+                                        <span class="badge bg-light text-muted"
+                                              t-esc="(record.total_to_disburse.raw_value || 0) ? Math.round(((record.total_bonus.raw_value || 0) / record.total_to_disburse.raw_value) * 100) + '%' : '0%'"/>
+                                    </div>
+                                </div>
+                                <div class="o_col-6 o_card status-tile" style="border:1px solid #e6e9f0;border-radius:12px;padding:12px;background:#fff;">
+                                    <div class="o_stat_title">Impôts &amp; taxes</div>
+                                    <div class="o_row o_align_items_center o_gap_2">
+                                        <div class="o_kpi_value"><field name="total_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/></div>
+                                        <span class="badge bg-light text-muted"
+                                              t-esc="(record.total_to_disburse.raw_value || 0) ? Math.round(((record.total_tax.raw_value || 0) / record.total_to_disburse.raw_value) * 100) + '%' : '0%'"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

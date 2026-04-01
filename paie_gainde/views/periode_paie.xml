@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== -->
+    <!-- MENU -->
+    <!-- ===================== -->
+    
+
+    <!-- ===================== -->
+    <!-- FISCAL YEAR -->
+    <!-- ===================== -->
+    <record id="view_hr_fiscalyear_form" model="ir.ui.view">
+        <field name="name">hr.fiscalyear.form</field>
+        <field name="model">hr.fiscalyear</field>
+        <field name="arch" type="xml">
+            <form string="Exercice fiscal">
+                <header>
+                    <button name="create_period"
+                            type="object"
+                            class="btn-primary"
+                            string="Créer les périodes"
+                            modifiers="{'invisible': [('state','!=','draft')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_stop"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Périodes">
+                            <field name="period_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="date_start"/>
+                                    <field name="date_stop"/>
+                                    <field name="special"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_fiscalyear_tree" model="ir.ui.view">
+        <field name="name">hr.fiscalyear.tree</field>
+        <field name="model">hr.fiscalyear</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_hr_fiscalyear" model="ir.actions.act_window">
+        <field name="name">Exercices fiscaux</field>
+        <field name="res_model">hr.fiscalyear</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    
+
+    <!-- ===================== -->
+    <!-- PERIOD -->
+    <!-- ===================== -->
+    <record id="view_hr_period_form" model="ir.ui.view">
+        <field name="name">hr.period.form</field>
+        <field name="model">hr.period</field>
+        <field name="arch" type="xml">
+            <form string="Période">
+                <header>
+                    <button name="action_cloture"
+                            type="object"
+                            class="btn-primary"
+                            string="Clôturer"
+                            modifiers="{'invisible': [('state','!=','draft')]}"/>
+
+                    <button name="action_draft"
+                            type="object"
+                            string="Rouvrir"
+                            modifiers="{'invisible': [('state','!=','done')]}"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="special"/>
+                        </group>
+                        <group>
+                            <field name="fiscalyear_id"/>
+                            <field name="company_id"/>
+                            <field name="date_start"/>
+                            <field name="date_stop"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_period_tree" model="ir.ui.view">
+        <field name="name">hr.period.tree</field>
+        <field name="model">hr.period</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="date_start"/>
+                <field name="date_stop"/>
+                <field name="special"/>
+                <field name="company_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_hr_period" model="ir.actions.act_window">
+        <field name="name">Périodes</field>
+        <field name="res_model">hr.period</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+   
+    <!-- ==========<menuitem id="menu_hr_period_root"
+              parent="hr_payroll.menu_hr_payroll_root"
+              name="Periodes de paie"
+              sequence="10"/>
+               <menuitem id="menu_hr_period"
+             name="Périodes "
+              parent="menu_hr_period_root"
+              action="action_hr_period"/>
+              <menuitem id="menu_hr_fiscalyear"
+            name="Année Fiscal"
+              parent="menu_hr_period_root"
+              action="action_hr_fiscalyear"/>=========== -->
+    
+</odoo>

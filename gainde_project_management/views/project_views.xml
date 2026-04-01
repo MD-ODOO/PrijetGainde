@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_project_gantt_enhanced" model="ir.ui.view">
+        <field name="name">project.project.gantt.enhanced</field>
+        <field name="model">project.project</field>
+        <!-- On cible la vue Gantt officielle du module project_enterprise -->
+        <field name="inherit_id" ref="project_enterprise.project_project_view_gantt"/>
+        <field name="arch" type="xml">
+            <!-- Modification des attributs de la balise principale -->
+            <xpath expr="//gantt" position="attributes">
+                <attribute name="progress">milestone_progress</attribute>
+                <attribute name="color">last_update_status</attribute>
+            </xpath>
+
+            <!-- Insertion des champs nécessaires au calcul -->
+            <xpath expr="//gantt" position="inside">
+                <field name="spi"/>
+                <field name="cpi"/>
+                <field name="eac"/>
+                <field name="estimated_end_date"/>
+            </xpath>
+
+            <xpath expr="//div[@t-name='gantt-popover']" position="replace">
+                <div t-name="gantt-popover" class="p-2">
+                    <!-- Titre du projet (Non présent dans l'original, on l'ajoute) -->
+                    <strong class="d-block mb-1">
+                        <t t-esc="name"/>
+                    </strong>
+
+                    <div t-if="user_id">
+                        <strong>Chef de Projet:</strong>
+                        <t t-esc="user_id[1]"/>
+                    </div>
+                    <div t-if="partner_id">
+                        <strong>Client:</strong>
+                        <t t-esc="partner_id[1]"/>
+                    </div>
+
+                    <div class="mb-2">
+                        <t t-esc="date_start.toFormat('D ')"/>
+                        <i class="fa fa-long-arrow-right" title="Arrow"/>
+                        <t t-esc="date.toFormat(' D')"/>
+                    </div>
+
+                    <!-- Insertion des KPIs avec conditions de couleur -->
+                    <div class="border-top pt-2 mt-2">
+                        <div class="d-flex justify-content-between" style="gap: 10px;">
+                            <span t-att-class="spi &lt; 1 ? 'text-danger' : 'text-success'">
+                                <strong>SPI:</strong>
+                                <t t-esc="spi"/>
+                            </span>
+                            <span t-att-class="cpi &lt; 1 ? 'text-danger' : 'text-success'">
+                                <strong>CPI:</strong>
+                                <t t-esc="cpi"/>
+                            </span>
+                            <span>
+                                <strong>EAC:</strong>
+                                <t t-esc="eac"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_project_project_list_inherited" model="ir.ui.view">
+        <field name="name">project.project.list.inherit</field>
+        <field name="model">project.project</field>
+        <!-- ID technique exact pour la liste des projets en Odoo 18 -->
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <!-- Insertion après le nom du projet -->
+            <xpath expr="//field[@name='name']" position="after">
+<!--                <field name="milestone_progress" widget="progressbar" string="Progression" optional="show"/>-->
+
+                <!-- KPIs Performance SPI/CPI -->
+                <field name="spi" widget="badge"
+                       decoration-success="spi >= 1"
+                       decoration-warning="spi &lt; 1 and spi >= 0.8"
+                       decoration-danger="spi &lt; 0.8"
+                       string="SPI"/>
+
+                <field name="cpi" widget="badge"
+                       decoration-success="cpi >= 1"
+                       decoration-warning="cpi &lt; 1 and cpi >= 0.8"
+                       decoration-danger="cpi &lt; 0.8"
+                       string="CPI"/>
+
+                <field name="last_update_status" widget="badge"
+                       decoration-success="last_update_status == 'on_track'"
+                       decoration-warning="last_update_status == 'at_risk'"
+                       decoration-danger="last_update_status == 'off_track'"
+                       optional="show"/>
+            </xpath>
+
+            <!-- Insertion des données financières en fin de ligne (après user_id ou à l'intérieur de list) -->
+            <xpath expr="//list" position="inside">
+                <field name="date" widget="remaining_days" string="Échéance" optional="show"/>
+                <field name="delay_days" decoration-danger="delay_days &gt; 0" widget="integer" optional="show"/>
+                <field name="budget_total" sum="Total Budget" widget="monetary" optional="hide"/>
+                <field name="remaining_budget" sum="Total Restant" widget="monetary"
+                       decoration-danger="remaining_budget &lt; 0" optional="show"/>
+                <field name="eac" widget="monetary" optional="show" string="EAC"/>
+                <field name="vac" widget="monetary" optional="show" decoration-danger="vac &lt; 0" string="VAC"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Vue Simplifiée (Création rapide) -->
+    <record id="view_project_form_simplified_inherit" model="ir.ui.view">
+        <field name="name">project.project.form.simplified.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <group class="fs-5 mt-3">
+                    <field name="project_type" string="Type de Projet" required="1"/>
+                    <field name="budget_total" force_save="1"
+                           string="Budget Total"
+                           invisible="project_type == 'poc'"/>
+                    <field name="scope_description"
+                           string="Description du Scope"/>
+                    <field name="date_start"
+                           string="Date de début"
+                           invisible="project_type == 'poc'"/>
+                    <field name="date"
+                           string="Date de fin"
+                           invisible="project_type == 'poc'"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//form" position="inside">
+                <div class="alert alert-info mt-3" role="alert">
+                    <i class="fa fa-info-circle me-2"/>
+                    Après création, ouvrez le projet pour accéder à la planification et aux documents.
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue Formulaire Standard -->
+    <record id="view_project_form_inherit_gainde" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.gainde</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+
+            <!-- Ajout des champs techniques nécessaires pour les conditions invisible -->
+            <xpath expr="//sheet" position="before">
+                <field name="currency_id" invisible="1"/>
+                <field name="billing_method" invisible="1"/>
+                <field name="project_type" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="action_create_invoice"
+                        type="object"
+                        string="Facturer le temps"
+                        class="oe_highlight"
+                        invisible="billing_method != 'timesheet' or project_type == 'poc'"/>
+
+                <button name="action_invoice_project"
+                        type="object"
+                        string="Facturer Jalons / Prix Fixe"
+                        class="oe_highlight"
+                        invisible="billing_method == 'timesheet'"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_purchases"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-shopping-cart">
+                    <field name="purchase_count" widget="statinfo" string="Achats liés"/>
+                </button>
+                <button name="action_create_purchase_request"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        groups="project.group_project_manager">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Nouv. Demande</span>
+                    </div>
+                </button>
+                <button name="action_view_purchase_request"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list">
+                    <field name="purchase_request_count" widget="statinfo"
+                           string="Nbre demandes d'Achat"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="billing_method"
+                       invisible="project_type == 'poc'"
+                       required="project_type != 'poc'"/>
+
+                <field name="date_start"
+                       invisible="project_type == 'poc'"
+                       required="project_type != 'poc'"/>
+
+                <field name="date" string="Date limite"
+                       invisible="project_type == 'poc'"/>
+            </xpath>
+            <xpath expr="//field[@name='label_tasks']" position="after">
+
+                <field name="project_type" required="1"/>
+                <field name="scope_description"
+                       invisible="project_type == 'poc'"
+                       required="project_type != 'poc'"/>
+
+                <field name="budget_total" force_save="1"
+                       invisible="project_type == 'poc'"
+                       required="project_type != 'poc'"/>
+
+            </xpath>
+            <!--     -->
+
+            <!--            <xpath expr="//field[@name='allocated_hours']" position="attributes">-->
+            <!--                &lt;!&ndash; L'aide s'affichera au survol de la souris &ndash;&gt;-->
+            <!--                <attribute name="help">Nombre total d'heures planifiées pour ce projet. Calculé à partir des-->
+            <!--                    prévisions.-->
+            <!--                </attribute>-->
+            <!--                &lt;!&ndash; Modifier le placeholder (au cas où il est éditable) &ndash;&gt;-->
+            <!--                <attribute name="placeholder">Ex: 160</attribute>-->
+            <!--            </xpath>-->
+
+            <!--            &lt;!&ndash; Optionnel : Ajouter un texte explicatif sous le champ pour être sûr que l'utilisateur le voit &ndash;&gt;-->
+            <!--            <xpath expr="//field[@name='allocated_hours']" position="after">-->
+            <!--                <div class="text-muted" colspan="2">-->
+            <!--                    <i class="fa fa-lightbulb-o"/>-->
+            <!--                    Note : Ce total inclut les heures de planning.-->
+            <!--                </div>-->
+            <!--            </xpath>-->
+
+            <!--      -->
+            <!-- Champ Département : visible seulement si PAS externe -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="department_id"
+                       invisible="project_type == 'external'"/>
+            </xpath>
+
+            <!-- Champ Partenaire (Client) : invisible si interne -->
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">project_type != 'external'</attribute>
+                <attribute name="required">project_type == 'external'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='allocated_hours']" position="attributes">-->
+            <!--                <attribute name="placeholder">Ex: 100</attribute>-->
+            <!--                <attribute name="help">Indiquez le volume horaire total prévu pour ce projet.</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//page[@name='analytic']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+
+                <page string="Planification" name="planification">
+                    <field name="task_ids" readonly="1">
+                        <list edit="false" create="false">
+                            <field name="name"/>
+                            <field name="user_ids" widget="many2many_avatar_user"/>
+                            <field name="date_deadline"/>
+                            <field name="state" widget="badge"/>
+                        </list>
+                    </field>
+                </page>
+                <page string="Achats">
+                    <field name="purchase_order_ids" nolabel="1">
+                        <list edit="false" create="false">
+                            <field name="name"/>
+                            <field name="partner_id" widget="many2one_avatar_user"/>
+                            <field name="date_order"/>
+                            <field name="state" widget="badge"/>
+                            <field name="amount_total" sum="Total"/>
+                        </list>
+                    </field>
+                </page>
+                <page string="Équipe projet" name="equipe">
+                    <group name="roles_management">
+                        <group string="Rôles clés" name="key_roles">
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="po_ids" widget="many2many_tags_avatar" options="{'no_create': True}"/>
+                            <field name="director_project_ids" widget="many2many_tags_avatar"/>
+                            <field name="sponsor_ids" widget="many2many_tags_avatar"/>
+                        </group>
+
+                        <group string="Rôles techniques" name="tech_roles">
+                            <field name="resp_tech_ids" widget="many2many_tags_avatar"/>
+                            <field name="tech_lead_ids" widget="many2many_tags_avatar"/>
+                            <field name="dev_ids" widget="many2many_tags_avatar"/>
+                            <field name="resp_methodo_ids" widget="many2many_tags_avatar"/>
+                        </group>
+                    </group>
+                </page>
+                <!--                <page string="Documents" name="documents">-->
+                <!--                    <group>-->
+                <!--                        <field name="document_folder_id" options="{'no_create': True}"/>-->
+                <!--                    </group>-->
+                <!--                </page>-->
+                <page string="Bilan">
+                    <group string="Résumé financier">
+                        <group>
+                            <field name="budget_total" widget="monetary"/>
+                            <!--                            <field name="budget_imputed" widget="monetary" />-->
+                            <field name="engaged_costs" widget="monetary"
+                                   decoration-danger="engaged_costs &gt; budget_total"/>
+                            <field name="realized_costs" widget="monetary"
+                                   decoration-danger="realized_costs &gt; budget_total"/>
+                            <!--                            <field name="remaining_budget" widget="monetary"-->
+                            <!--                                   decoration-danger="remaining_budget &lt; 0"/>-->
+                        </group>
+                    </group>
+                    <group string="Indicateurs EVM" name="evm_indicators">
+                        <!-- Champ SPI -->
+                        <label for="spi" string="Indicateur de Performance Délais (SPI)"/>
+                        <div class="o_row">
+                            <field name="spi" widget="badge"
+                                   decoration-success="spi_status == 'green'"
+                                   decoration-warning="spi_status == 'yellow'"
+                                   decoration-danger="spi_status == 'red'"/>
+
+                            <field name="spi_status" invisible="1"/> <!-- Requis pour les conditions -->
+
+                            <span class="text-success" invisible="spi_status != 'green'">(Bon)</span>
+                            <span class="text-warning" invisible="spi_status != 'yellow'">(Attention)</span>
+                            <span class="text-danger" invisible="spi_status != 'red'">(Critique)</span>
+                        </div>
+
+                        <!-- Champ CPI -->
+                        <label for="cpi" string="Indicateur de Performance Coûts (CPI)"/>
+                        <div class="o_row">
+                            <field name="cpi" widget="badge"
+                                   decoration-success="cpi_status == 'green'"
+                                   decoration-warning="cpi_status == 'yellow'"
+                                   decoration-danger="cpi_status == 'red'"/>
+
+                            <field name="cpi_status" invisible="1"/>
+
+                            <span class="text-success" invisible="cpi_status != 'green'">(Bon)</span>
+                            <span class="text-warning" invisible="cpi_status != 'yellow'">(Attention)</span>
+                            <span class="text-danger" invisible="cpi_status != 'red'">(Critique)</span>
+                        </div>
+                    </group>
+
+
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_kanban_inherited" model="ir.ui.view">
+        <field name="name">project.project.kanban.inherited</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <!-- 1. Insertion des indicateurs juste avant le footer -->
+            <xpath expr="//t[@t-name='card']//footer" position="before">
+                <div class="mt-2 border-top pt-2 px-2" style="font-size: 0.85rem;">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-muted fw-bold">SPI:
+                            <field name="spi"/>
+                        </span>
+                        <field name="spi_status" widget="badge"
+                               decoration-success="spi_status == 'green'"
+                               decoration-warning="spi_status == 'yellow'"
+                               decoration-danger="spi_status == 'red'"
+                               nolabel="1"/>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted fw-bold">CPI:
+                            <field name="cpi"/>
+                        </span>
+                        <field name="cpi_status" widget="badge"
+                               decoration-success="cpi_status == 'green'"
+                               decoration-warning="cpi_status == 'yellow'"
+                               decoration-danger="cpi_status == 'red'"
+                               nolabel="1"/>
+                    </div>
+                </div>
+            </xpath>
+
+            <!-- 2. Optionnel : Ajout des champs invisibles si nécessaire pour les décorations -->
+            <xpath expr="//field[@name='allow_milestones']" position="before">
+                <field name="spi_status" invisible="1"/>
+                <field name="cpi_status" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_project_list_indicators" model="ir.ui.view">
+        <field name="name">project.project.list.indicators</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <list string="Bilan Projets"
+                  decoration-danger="spi_status == 'red' or cpi_status == 'red'"
+                  decoration-warning="spi_status == 'yellow' or cpi_status == 'yellow'">
+                <field name="name"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="spi" avg="Moyenne SPI"/>
+                <field name="spi_status" widget="badge" decoration-success="spi_status == 'green'"
+                       decoration-warning="spi_status == 'yellow'" decoration-danger="spi_status == 'red'"/>
+                <field name="cpi" avg="Moyenne CPI"/>
+                <field name="cpi_status" widget="badge" decoration-success="cpi_status == 'green'"
+                       decoration-warning="cpi_status == 'yellow'" decoration-danger="cpi_status == 'red'"/>
+                <field name="budget_total" sum="Budget Total"/>
+                <field name="realized_costs" sum="Coûts Réels"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_task_kanban_inherit_gainde" model="ir.ui.view">
+        <field name="name">project.task.kanban.inherit.gainde</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='user_ids']" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <!-- 2. On ajoute le domaine pour inclure les User Portals (share = True) -->
+                <attribute name="domain">['|', ('share', '=', False), ('share', '=', True)]</attribute>
+                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_task_form2_inherit_gainde" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.gainde</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_ids']" position="attributes">
+                <!-- Ce domaine autorise les utilisateurs internes ET les portails -->
+                <attribute name="domain">['|', ('share', '=', False), ('share', '=', True)]</attribute>
+                <attribute name="options">{'no_create': True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

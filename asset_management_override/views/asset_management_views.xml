@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="asset_management_form_status_buttons" model="ir.ui.view">
+            <field name="name">asset.management.form.status.buttons</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header/button[@name='action_open_label_layout']" position="replace"/>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="context">{'default_model_type': 'single'}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='asset_type_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="brand"/>
+                    <field name="asset_model"/>
+                </xpath>
+                <xpath expr="//field[@name='asset_type_id']" position="after">
+                    <field name="barcode" readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="date_reception"/>
+                </xpath>
+                <!-- Remplacer le groupe Maintenance Information par le groupe Affectation -->
+                <xpath expr="//field[@name='total_maintenance_amount']/.." position="replace">
+                    <group string="Affectation">
+                        <field name="assigne_a"/>
+                        <field name="date_assignation"/>
+                        <field name="assigne_par"/>
+                        <field name="localisation"/>
+                    </group>
+                    <group string="Comptabilité">
+                        <field name="account_asset_id"/>
+                        <field name="book_value" readonly="1" widget="monetary"/>
+                    </group>
+                </xpath>
+                <!-- Ajouter le champ maintenance_request_id dans le groupe Vendor And Warranty -->
+                <xpath expr="//field[@name='vendor_id']" position="after">
+                    <field name="maintenance_request_id" readonly="1"/>
+                </xpath>
+                <!-- Renommer le groupe Documentation en Pièces jointes -->
+                <xpath expr="//field[@name='document_ids']/.." position="attributes">
+                    <attribute name="string">Pièces jointes</attribute>
+                </xpath>
+                <!-- Remplacer le champ document_ids pour changer son label -->
+                <xpath expr="//field[@name='document_ids']" position="replace">
+                    <field name="document_ids" widget="many2many_binary" string="Pièces jointes" placeholder="Ajouter des pièces jointes..."/>
+                </xpath>
+                <xpath expr="//form/header" position="inside">
+                            <!-- Bouton Retour (invisible) -->
+                            <button name="action_set_status_return" type="object" string="Retour"
+                                invisible="1"/>
+                            
+                            <!-- Bouton En attente (visible quand status = return) -->
+                            <button name="action_set_status_on_hold" type="object" string="En attente"
+                                invisible="status != 'return'"/>
+                            
+                            <!-- Bouton Disponible (visible quand status = on_hold) -->
+                            <button name="action_set_status_in_warehouse" type="object" string="Disponible"
+                                invisible="status != 'on_hold'"/>
+                            
+                            <!-- Bouton Mettre en maintenance (visible sauf pour draft, destroyed, repair) -->
+                            <button name="action_set_status_repair" type="object" string="Mettre en maintenance"
+                                class="oe_highlight"
+                                invisible="status in ('draft', 'destroyed', 'repair')"/>
+                            
+                            <!-- Bouton Retourner en entrepôt (visible uniquement quand status = repair) -->
+                            <button name="action_set_status_in_warehouse" type="object" string="Retourner en entrepôt"
+                                class="oe_highlight"
+                                invisible="status != 'repair'"/>
+                            
+                            <!-- Bouton Sortir (visible pour in_warehouse, assign, repair) -->
+                            <button name="action_confirm_sortie" type="object" string="Sortir"
+                                class="btn-danger"
+                                invisible="status not in ('in_warehouse', 'assign', 'repair')"/>
+                            
+                            <!-- Bouton Réinit (invisible) -->
+                            <button name="action_set_status_assign" type="object" string="Réinit (Affecté)"
+                                invisible="1"/>
+                </xpath>
+                <xpath expr="//form/header/field[@name='status']" position="replace">
+                          <field name="status" widget="statusbar" readonly="1"
+                              options="{'clickable': '0'}"
+                              statusbar_visible="draft,assign,in_warehouse,repair,destroyed"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_type_form_hide_fields" model="ir.ui.view">
+            <field name="name">asset.type.form.hide.fields</field>
+            <field name="model">asset.type</field>
+            <field name="inherit_id" ref="asset_management.view_asset_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="replace">
+                    <group>
+                        <field name="name"/>
+                        <field name="color" widget="color_picker"/>
+                        <field name="account_immo"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_type_tree_hide_fields" model="ir.ui.view">
+            <field name="name">asset.type.tree.hide.fields</field>
+            <field name="model">asset.type</field>
+            <field name="inherit_id" ref="asset_management.view_asset_type_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="replace">
+                    <list>
+                        <field name="name"/>
+                        <field name="color" widget="color_picker"/>
+                        <field name="account_immo"/>
+                    </list>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="asset_management_tree_custom_label_button" model="ir.ui.view">
+            <field name="name">asset.management.tree.custom.label.button</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/header/button[@name='action_open_label_layout']" position="replace"/>
+                <xpath expr="//list/header" position="inside">
+                    <button string="Imprimer etiquette" name="action_print_label_2x7"
+                            type="object" icon="fa-print"
+                            groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_management_hide_transfer_count" model="ir.ui.view">
+            <field name="name">asset.management.hide.transfer.count</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_form"/>
+            <field name="arch" type="xml">
+                <!-- Masquer transfer_count dans la vue formulaire -->
+                <xpath expr="//field[@name='transfer_count']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_management_tree_hide_transfer_count" model="ir.ui.view">
+            <field name="name">asset.management.tree.hide.transfer.count</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_tree"/>
+            <field name="arch" type="xml">
+                <!-- Masquer transfer_count dans la vue liste -->
+                <xpath expr="//field[@name='transfer_count']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_management_kanban_hide_transfer_count" model="ir.ui.view">
+            <field name="name">asset.management.kanban.hide.transfer.count</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Masquer transfer_count dans la vue kanban -->
+                <xpath expr="//field[@name='transfer_count']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="asset_management_kanban_hide_remaining_warranty" model="ir.ui.view">
+            <field name="name">asset.management.kanban.hide.remaining.warranty</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Masquer le div contenant remaining_warranty dans la vue kanban -->
+                <xpath expr="//div[@t-if='record.remaining_warranty.raw_value']" position="replace"/>
+            </field>
+        </record>
+
+        <record id="asset_management_kanban_hide_current_amount" model="ir.ui.view">
+            <field name="name">asset.management.kanban.hide.current.amount</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Masquer le div contenant current_amount dans la vue kanban -->
+                <xpath expr="//div[@t-if='record.current_amount.raw_value']" position="replace"/>
+            </field>
+        </record>
+
+        <record id="asset_management_kanban_translate_labels" model="ir.ui.view">
+            <field name="name">asset.management.kanban.translate.labels</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Remplacer Purchase Price: par Coût d'achat: -->
+                <xpath expr="//div[@t-if='record.amount.raw_value']" position="replace">
+                    <div class="d-flex justify-content-between align-items-center" t-if="record.amount.raw_value">
+                        <span class="text-muted small">
+                            <i class="fa fa-dollar-sign me-1"></i>Coût d'achat:
+                        </span>
+                        <strong><field name="amount" widget="monetary"/></strong>
+                    </div>
+                </xpath>
+
+                <!-- Remplacer Purchase: par Acquis le: -->
+                <xpath expr="//div[@t-if='record.invoice_date.raw_value']" position="replace">
+                    <div t-if="record.invoice_date.raw_value" class="text-muted">
+                        <i class="fa fa-calendar me-1"></i>
+                        Acquis le: <field name="invoice_date"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
+
+
+

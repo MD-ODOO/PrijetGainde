@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. TEMPLATE : PERSONNES PHYSIQUES (RH) -->
+    <template id="report_contract_employee_body">
+        <h3 class="text-center">CONTRAT DE TRAVAIL</h3>
+        <h4>ARTICLE 1 : POSTE ET ATTRIBUTIONS</h4>
+        <p>Le Salarié est recruté en qualité de <strong t-field="doc.job_id.name"/>. Il exercera ses fonctions sous l'autorité de la Direction.</p>
+        <h4>ARTICLE 2 : RÉMUNÉRATION</h4>
+        <p>En contrepartie, GAINDE 2000 versera un salaire brut mensuel de <strong t-field="doc.salary_gross" t-options='{"widget": "monetary", "display_currency": doc.company_id.currency_id}'/> (<span t-field="doc.salary_in_words"/>).</p>
+        <h4>ARTICLE 3 : PÉRIODE D'ESSAI</h4>
+        <p>Le présent contrat est assorti d'une période d'essai de <span t-field="doc.trial_period"/> jours.</p>
+    </template>
+
+    <!-- 2. TEMPLATE : MARCHÉ / PRESTATIONS (MORALES) -->
+    <template id="report_contract_market_body">
+        <h3 class="text-center">CONTRAT DE MARCHÉ</h3>
+        <h4>ARTICLE 1 : OBJET DU MARCHÉ</h4>
+        <p>Le présent marché a pour objet : <span t-field="doc.type_id.name"/>. Le prestataire s'engage à fournir les livrables décrits en annexe.</p>
+        <h4>ARTICLE 2 : VALEUR ET CAUTION</h4>
+        <p>Le montant total du marché est de <strong t-field="doc.market_value" t-options='{"widget": "monetary", "display_currency": doc.company_id.currency_id}'/>. Une caution de <span t-field="doc.guarantee_amount"/> est exigée.</p>
+        <h4>ARTICLE 3 : MODALITÉS DE PAIEMENT</h4>
+        <p>Le règlement s'effectuera à <span t-field="doc.payment_terms"/> après réception de facture.</p>
+    </template>
+
+    <!-- 3. TEMPLATE : CONFIDENTIALITÉ (NDA) -->
+    <template id="report_contract_nda_body">
+        <h3 class="text-center">ACCORD DE CONFIDENTIALITÉ</h3>
+        <h4>ARTICLE 1 : DÉFINITION DES INFORMATIONS</h4>
+        <p>Sont considérées comme confidentielles toutes les informations techniques, financières ou commerciales transmises par GAINDE 2000.</p>
+        <h4>ARTICLE 2 : DURÉE DU SECRET</h4>
+        <p>Cet engagement survit à la fin des relations contractuelles pour une durée de <span t-field="doc.secrecy_years"/> ans.</p>
+    </template>
+
+    <!-- 4. TEMPLATE : PROTOCOLE D'ACCORD -->
+    <template id="report_contract_protocol_body">
+        <h3 class="text-center">PROTOCOLE D'ACCORD</h3>
+        <p>Les parties conviennent de collaborer dans le cadre du projet : <span t-field="doc.type_id.name"/>.</p>
+        <h4>ARTICLE 1 : ENGAGEMENTS RÉCIPROQUES</h4>
+        <p>Chaque partie s'engage à mettre en œuvre les moyens nécessaires pour la réussite du partenariat.</p>
+    </template>
+</odoo>

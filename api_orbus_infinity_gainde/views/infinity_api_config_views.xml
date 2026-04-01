@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List + form views for Orbus Infinity API configuration -->
+        <record id="view_orbus_infinity_api_config_list" model="ir.ui.view">
+            <field name="name">orbus.infinity.api.config.list</field>
+            <field name="model">orbus.infinity.api.config</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="auth_url"/>
+                    <field name="gateway_url"/>
+                    <field name="backendgupe_url"/>
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_orbus_infinity_api_config_form" model="ir.ui.view">
+            <field name="name">orbus.infinity.api.config.form</field>
+            <field name="model">orbus.infinity.api.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuration API Orbus Infinity">
+                    <header>
+                        <button name="%(api_orbus_infinity_gainde.action_orbus_infinity_panier_batch_wizard)d"
+                                type="action"
+                                string="Importer un lot"
+                                class="btn-primary"/>
+                        <button name="action_import_batch_from_local_json"
+                                type="object"
+                                string="Charger JSON (data)"
+                                class="btn-secondary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group string="URLs">
+                            <field name="auth_url"/>
+                            <field name="gateway_url"/>
+                            <field name="backendgupe_url"/>
+                        </group>
+                        <group string="SSL">
+                            <field name="verify_ssl"/>
+                            <field name="ca_cert_path"/>
+                        </group>
+                        <group string="Identifiants" colspan="2">
+                            <field name="client_id"/>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                            <field name="grant_type"/>
+                        </group>
+                        <group string="Token actuel" colspan="2">
+                            <field name="access_token" readonly="1"/>
+                            <field name="token_expiration" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_orbus_infinity_api_config" model="ir.actions.act_window">
+            <field name="name">Configuration API Orbus Infinity</field>
+            <field name="res_model">orbus.infinity.api.config</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Menus sous le menu Orbus API existant -->
+        <menuitem id="menu_orbus_infinity_api_config"
+                  name="Configuration API Orbus Infinity"
+                  parent="api_orbus_gainde.menu_orbus_api_config_root"
+                  action="action_orbus_infinity_api_config"
+                  sequence="2"/>
+    </data>
+</odoo>

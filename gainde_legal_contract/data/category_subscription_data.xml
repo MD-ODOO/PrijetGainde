@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- TYPE : PROTOCOLE D’ACCORD -->
+        <record id="type_subscription" model="legal.contract.type">
+            <field name="name">Souscription Vierge</field>
+            <field name="code">SV-G2K</field>
+            <field name="category">subscription</field>
+            <field name="description">Cadre de collaboration stratégique entre GAINDE 2000 et ses partenaires.</field>
+        </record>
+
+        <!-- Articles du Protocole -->
+        <record id="art_sv_1" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 1 : Objet</field>
+            <field name="contract_type_id" ref="type_subscription"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">
+                Le présent protocole d’accord a pour objet de définir les modalités de
+                collaboration entre GAINDE 2000 et le partenaire.
+            </p>
+
+        ]]></field>
+        </record>
+
+        <record id="art_sv_2" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 2 : Objectif</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">L’objectif visé par les parties est de formaliser leurs intentions de collaborer et d’établir un
+                cadre de concertation en vue d’identifier et d’explorer des opportunités de projets de GAINDE 2000 en
+                relation avec les domaines d’expertise du partenaire </p>
+            ]]></field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

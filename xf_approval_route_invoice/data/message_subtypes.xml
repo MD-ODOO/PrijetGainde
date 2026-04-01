@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_invoice_cancelled" model="mail.message.subtype">
+            <field name="name">Invoice Cancelled</field>
+            <field name="res_model">account.move</field>
+            <field name="default" eval="True"/>
+            <field name="description">Invoice was Cancelled</field>
+        </record>
+        <record id="mt_invoice_approved_and_posted" model="mail.message.subtype">
+            <field name="name">Invoice Approved and Posted</field>
+            <field name="res_model">account.move</field>
+            <field name="default" eval="True"/>
+            <field name="description">Invoice was Approved and Posted</field>
+        </record>
+        <record id="mt_invoice_rejected" model="mail.message.subtype">
+            <field name="name">Invoice Rejected</field>
+            <field name="res_model">account.move</field>
+            <field name="default" eval="True"/>
+            <field name="description">Invoice was Rejected</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,5 @@
+El error: Uncaught Promise > '13/01/2024' is not a correct date or datetime.
+    <t t-set='date_start_formatted'><t t-options='{"widget": "date"}' t-esc="purchase_request.date_start"/></t>
+        <input type="text" data-widget="datetime-picker" data-widget-type="date" name="date_start" t-attf-class="form-control datetimepicker-input date_start #{error.get('date_start') and 'is-invalid' or ''}" t-att-value="date_start or date_start_formatted" t-att-disabled="None if can_edit else '1'"/>
+Se presenta por el cambio de idioma
+para solucionar se tiene que borrar cache

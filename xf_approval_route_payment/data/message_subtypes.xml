@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_payment_approved" model="mail.message.subtype">
+            <field name="name">Payment Approved</field>
+            <field name="res_model">account.payment</field>
+            <field name="default" eval="True"/>
+            <field name="description">Payment was Approved</field>
+        </record>
+        <record id="mt_payment_rejected" model="mail.message.subtype">
+            <field name="name">Payment Rejected</field>
+            <field name="res_model">account.payment</field>
+            <field name="default" eval="True"/>
+            <field name="description">Payment was Rejected</field>
+        </record>
+        <record id="mt_payment_cancelled" model="mail.message.subtype">
+            <field name="name">Payment Cancelled</field>
+            <field name="res_model">account.payment</field>
+            <field name="default" eval="True"/>
+            <field name="description">Payment was Cancelled</field>
+        </record>
+    </data>
+</odoo>

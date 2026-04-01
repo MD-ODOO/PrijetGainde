@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vue formulaire -->
+    <record id="view_purchase_amount_stage_form" model="ir.ui.view">
+        <field name="name">purchase.amount.stage.form</field>
+        <field name="model">purchase.amount.stage</field>
+        <field name="arch" type="xml">
+            <form string="Seuil de montant HT">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="amount_limit"/>
+                        <field name="currency_id"/>
+                        <field name="comparator"/>
+                        <field name="treatment_type"/>
+                    </group>
+                    <group>
+                        <field name="sequence"/>
+                    </group>
+                    <group>
+                        <field name="message" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste -->
+    <record id="view_purchase_amount_stage_tree" model="ir.ui.view">
+        <field name="name">purchase.amount.stage.tree</field>
+        <field name="model">purchase.amount.stage</field>
+        <field name="arch" type="xml">
+            <list string="Seuils de montant HT" editable="bottom">
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="amount_limit"/>
+                <field name="currency_id"/>
+                <field name="comparator"/>
+                <field name="treatment_type"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_purchase_amount_stage" model="ir.actions.act_window">
+        <field name="name">Seuils de montant HT</field>
+        <field name="res_model">purchase.amount.stage</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>
+                Configurez des seuils sur le montant hors taxes afin de
+                contrôler la confirmation des commandes d'achat.
+            </p>
+        </field>
+    </record>
+
+    <!-- Élément de menu sous le menu des demandes d'achat -->
+    <!-- <menuitem id="menu_purchase_amount_stage_root"
+              name="Seuils de montant HT"
+              parent="purchase_request.menu_purchase_request"
+              action="action_purchase_amount_stage"
+              sequence="60"/> -->
+</odoo>

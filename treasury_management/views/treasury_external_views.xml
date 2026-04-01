@@ -1,0 +1,38 @@
+<odoo>
+  <record id="view_vendor_bills_schedule_list" model="ir.ui.view">
+    <field name="model">account.move</field>
+    <field name="arch" type="xml">
+      <list default_order="invoice_date_due asc"
+            decoration-danger="vendor_is_overdue"
+            decoration-warning="vendor_due_soon"
+            decoration-info="treasury_payment_priority in ('2','3')">
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="invoice_date"/>
+        <field name="invoice_date_due"/>
+        <field name="vendor_due_display" widget="badge" options="{'color_field': 'vendor_due_color'}"/>
+        <field name="amount_total"/>
+        <field name="amount_residual"/>
+        <field name="payment_state"/>
+        <field name="treasury_planned_payment_date"/>
+        <field name="treasury_payment_channel"/>
+        <field name="treasury_payment_priority"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="action_treasury_vendor_bills" model="ir.actions.act_window">
+    <field name="name">Échéancier fournisseurs</field>
+    <field name="res_model">account.move</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="treasury_management.view_vendor_bills_schedule_list"/>
+    <field name="domain">[("move_type","=","in_invoice"),("state","=","posted")]</field>
+    <field name="context">{"search_default_unpaid": 1}</field>
+  </record>
+
+  <record id="action_treasury_bank_statements" model="ir.actions.act_window">
+    <field name="name">Relevés bancaires</field>
+    <field name="res_model">account.bank.statement</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

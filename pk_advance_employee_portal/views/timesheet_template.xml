@@ -1,0 +1,254 @@
+<odoo>
+    <template id="portal_my_timesheets" name="My Timesheets">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="/my/home" class="btn btn-secondary ml-2">Back To Home</a>
+                    <h2>My Timesheets</h2>
+                    <a class="btn btn-primary mb-3" href="/my/ts/create">Create Timesheet</a>
+                </div>
+
+                <!-- Filter Form -->
+                <form method="get" class="form-inline mb-3">
+                    <div class="row g-2 align-items-center">
+
+                        <!-- Date From -->
+                        <div class="col-md-2 col-sm-6">
+                            <input type="text" name="date_start"
+                                   class="form-control"
+                                   t-att-value="date_start or ''"
+                                   placeholder="Date From"
+                                   onfocus="(this.type='date')"
+                                   onblur="if(!this.value)this.type='text'"/>
+                        </div>
+
+                        <!-- Date To -->
+                        <div class="col-md-2 col-sm-6">
+                            <input type="text" name="date_end"
+                                   class="form-control"
+                                   t-att-value="date_end or ''"
+                                   placeholder="Date To"
+                                   onfocus="(this.type='date')"
+                                   onblur="if(!this.value)this.type='text'"/>
+                        </div>
+
+                        <!-- Project Dropdown -->
+                        <div class="col-md-3 col-sm-6">
+                            <select name="project_id" class="form-control">
+                                <option value="">All Projects</option>
+                                <t t-foreach="projects" t-as="p">
+                                    <option t-att-value="p.id" t-att-selected="p.id == project_id">
+                                        <t t-esc="p.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+
+                        <!-- Description Search -->
+                        <div class="col-md-3">
+                            <input type="text" name="task"
+                                   class="form-control"
+                                   t-att-value="task_id or ''"
+                                   placeholder="Task"/>
+                        </div>
+
+                        <!-- Filter Button -->
+                        <div class="col-md-2 col-sm-6">
+                            <button type="submit" class="btn btn-primary w-100">Filter</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Timesheet Table -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Project</th>
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>Hours</th>
+                            <th>View/Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="timesheets" t-as="line">
+                            <tr>
+                                <td><t t-esc="line.date"/></td>
+                                <td><t t-esc="line.project_id.name or '-'"/></td>
+                                <td><t t-esc="line.task_id.name or '-'"/></td>
+                                <td><t t-esc="line.name"/></td>
+                                <td><t t-esc="line.unit_amount"/></td>
+                                <td>
+                                    <a t-att-href="'/my/ts/%s' % line.id" class="btn btn-sm btn-primary me-1">
+                                        <i class="fa fa-eye"></i> View
+                                    </a>
+<!--                                    <t t-if="line.validated_status == 'draft'">-->
+                                    <a t-att-href="'/my/ts/%s/edit' % line.id" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i> Edit
+                                    </a>
+<!--                                    </t>-->
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-if="not timesheets">
+                            <tr>
+                                <td colspan="5" class="text-center">No timesheets found.</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+                <div t-if="pager" class="o_portal_pager d-flex justify-content-center my-3">
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+<!--    create template-->
+ <template id="portal_create_timesheet" name="Create Timesheet">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="/my/timesheet" class="btn btn-secondary">Back To Timesheets</a>
+                </div>
+
+                <form method="post" class="form-horizontal">
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required="true"/>
+                    </div>
+
+                    <!-- Project Dropdown -->
+                    <div class="form-group mb-3">
+                        <label>Project</label>
+                        <select name="project_id" class="form-control" onchange="window.location.href='/my/ts/create?project_id=' + this.value">
+                            <option value="">Select Project</option>
+                            <t t-foreach="projects" t-as="p">
+                                <option t-att-value="p.id"
+                                        t-att-selected="p.id == selected_project_id">
+                                    <t t-esc="p.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <!-- Task Dropdown -->
+                    <div class="form-group mb-3">
+                        <label>Task</label>
+                        <select name="task_id" class="form-control" required="required">
+                            <option value="">Select Task</option>
+                            <t t-foreach="tasks" t-as="t">
+                                <option t-att-value="t.id">
+                                    <t t-esc="t.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" required="true"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="hours" class="form-label">Hours</label>
+                        <input type="number" step="0.01" class="form-control" id="hours" name="hours" required="true"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Timesheet</button>
+                <a href="/my/timesheet" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </t>
+    </template>
+
+<!--    view template-->
+<template id="portal_view_timesheet" name="View Timesheet">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="/my/timesheet" class="btn btn-secondary">Back to Timesheets</a>
+                <a t-att-href="'/my/ts/%d/edit' % timesheet.id" class="btn btn-primary">Edit</a>
+            </div>
+
+            <div class="card p-4 shadow-sm">
+                <div class="mb-3">
+                    <strong>Date:</strong>
+                    <span t-esc="timesheet.date"/>
+                </div>
+                <div class="mb-3">
+                    <strong>Project:</strong>
+                    <span t-esc="timesheet.project_id.name or '-'"/>
+                </div>
+                <div class="mb-3">
+                    <strong>Task:</strong>
+                    <span t-esc="timesheet.task_id.name or '-'"/>
+                </div>
+                <div class="mb-3">
+                    <strong>Description:</strong>
+                    <span t-esc="timesheet.name or '-'"/>
+                </div>
+                <div class="mb-3">
+                    <strong>Hours:</strong>
+                    <span t-esc="timesheet.unit_amount or 0.0"/> hrs
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+
+<!--    edit template-->
+<template id="portal_edit_timesheet" name="Edit Timesheet">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="/my/timesheet" class="btn btn-secondary">Back To Timesheets</a>
+                <h2>Edit Timesheet</h2>
+            </div>
+
+            <form method="post" class="form-horizontal">
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required="true" t-att-value="timesheet.date"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="project_id" class="form-label">Project</label>
+                    <select class="form-control" name="project_id" id="project_id" required="true">
+                        <option value="">Select Project</option>
+                        <t t-foreach="projects" t-as="p">
+                            <option t-att-value="p.id" t-att-selected="p.id == selected_project_id"><t t-esc="p.name"/></option>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="task_id" class="form-label">Task</label>
+                    <select class="form-control" name="task_id" id="task_id" required="true">
+                        <option value="">Select Task</option>
+                        <t t-foreach="tasks" t-as="t">
+                            <option t-att-value="t.id" t-att-selected="t.id == timesheet.task_id.id"><t t-esc="t.name"/></option>
+                        </t>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" required="true" t-att-value="timesheet.name"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="hours" class="form-label">Hours</label>
+                    <input type="number" step="0.01" class="form-control" id="hours" name="hours" required="true" t-att-value="timesheet.unit_amount"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/my/timesheet" class="btn btn-secondary">Back</a>
+            </form>
+        </div>
+    </t>
+</template>
+
+</odoo>

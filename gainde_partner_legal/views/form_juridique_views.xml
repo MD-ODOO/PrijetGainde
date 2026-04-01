@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Forme Juridique: list view -->
+    <record id="view_form_juridique_list" model="ir.ui.view">
+        <field name="name">form.juridique.list</field>
+        <field name="model">form.juridique</field>
+        <field name="arch" type="xml">
+            <list string="Formes juridiques">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Forme Juridique: form view -->
+    <record id="view_form_juridique_form" model="ir.ui.view">
+        <field name="name">form.juridique.form</field>
+        <field name="model">form.juridique</field>
+        <field name="arch" type="xml">
+            <form string="Forme juridique">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_form_juridique" model="ir.actions.act_window">
+        <field name="name">Formes juridiques</field>
+        <field name="res_model">form.juridique</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez une forme juridique.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_form_juridique"
+              name="Formes juridiques"
+              parent="purchase.menu_purchase_config"
+              action="action_form_juridique"
+              sequence="65"
+              groups="purchase.group_purchase_manager"/>
+
+    <!-- res.partner: fields -->
+    <record id="view_partner_form_gainde_rccm" model="ir.ui.view">
+        <field name="name">res.partner.form.gainde.rccm</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="rccm" placeholder="/ si non applicable" string="RCCM" invisible="is_company == False"/>
+                <field name="form_juridique_id" invisible="is_company == False"/>
+            </field>
+        </field>
+    </record>
+</odoo>

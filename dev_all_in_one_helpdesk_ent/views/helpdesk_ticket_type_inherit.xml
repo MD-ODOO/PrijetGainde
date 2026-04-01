@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <!-- Ajouter le champ ticket_type_id dans la vue formulaire -->
+    <record id="view_helpdesk_ticket_type_id_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.id.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Remplacer le champ name par ticket_type_id -->
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="ticket_type_id" 
+                       string="Type de réclamation" 
+                       placeholder="e.g. Could not signed specifimend documents"
+                       options="{'no_create': True, 'no_create_edit': True}"
+                       required="1"/>
+            </xpath>
+            
+            <!-- Ajouter le champ name en invisible pour le stockage -->
+            <xpath expr="//field[@name='ticket_type_id']" position="after">
+                <field name="name" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Ajouter le champ ticket_type_id dans la vue tree -->
+    <record id="view_helpdesk_ticket_type_id_tree" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.id.tree</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="ticket_type_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Ajouter le champ ticket_type_id dans la vue search -->
+    <record id="view_helpdesk_ticket_type_id_search" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.id.search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="ticket_type_id"/>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <report
+        id="action_ipres_xlsx"
+        model="cerco.payslip.lines.cotisation.ipres"
+        string="Déclaration IPRES (Excel)"
+        report_type="xlsx"
+        name="paie_gainde.ipres_xlsx"
+        file="declaration_ipres"
+    />
+    <record id="action_report_ipres_xlsx" model="ir.actions.report">
+    <field name="name">IPRES (Excel)</field>
+    <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+    <field name="report_type">xlsx</field>
+    <field name="report_name">paie_gainde.report_ipress</field>
+    <field name="report_file">IPRES</field>
+    <field name="print_report_name">'IPRES_' + object.date_from.strftime('%Y_%m')</field> -->
+<!-- </record> -->
+</odoo>

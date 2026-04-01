@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Étapes par défaut pour les contentieux -->
+    <data noupdate="1">
+        <record id="stage_open" model="legal.litigation.stage">
+            <field name="name">Nouveau</field>
+            <field name="sequence">1</field>
+            <field name="fold">False</field>
+        </record>
+
+        <record id="stage_analysis" model="legal.litigation.stage">
+            <field name="name">Analyse</field>
+            <field name="sequence">2</field>
+            <field name="fold">False</field>
+        </record>
+
+        <record id="stage_negotiation" model="legal.litigation.stage">
+            <field name="name">Négociation / Médiation</field>
+            <field name="sequence">3</field>
+            <field name="fold">False</field>
+        </record>
+
+        <record id="stage_procedure" model="legal.litigation.stage">
+            <field name="name">Procédure Judiciaire</field>
+            <field name="sequence">4</field>
+            <field name="fold">False</field>
+        </record>
+
+        <record id="stage_closed_won" model="legal.litigation.stage">
+            <field name="name">Gagné</field>
+            <field name="sequence">5</field>
+            <field name="fold">True</field>
+        </record>
+
+        <record id="stage_closed_classified" model="legal.litigation.stage">
+            <field name="name">Classé</field>
+            <field name="sequence">6</field>
+            <field name="fold">True</field>
+        </record>
+
+        <record id="stage_closed_lost" model="legal.litigation.stage">
+            <field name="name">Perdu</field>
+            <field name="sequence">7</field>
+            <field name="fold" eval="True"/>
+        </record>
+
+        <record id="stage_closed_next" model="legal.litigation.stage">
+            <field name="name">Appel / Suite</field>
+            <field name="sequence">8</field>
+            <field name="fold" eval="True"/>
+        </record>
+
+        <record id="stage_cancelled" model="legal.litigation.stage">
+            <field name="name">Annulé</field>
+            <field name="sequence">99</field>
+            <field name="fold" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo Tags -->
+    <data noupdate="1">
+        <record id="secure_api_tag_demo" model="secure.api.tag">
+            <field name="name">demo</field>
+            <field name="color">7</field>
+        </record>
+        <record id="secure_api_tag_public" model="secure.api.tag">
+            <field name="name">public</field>
+            <field name="color">3</field>
+        </record>
+        <record id="secure_api_tag_internal" model="secure.api.tag">
+            <field name="name">internal</field>
+            <field name="color">1</field>
+        </record>
+        <record id="secure_api_tag_mobile" model="secure.api.tag">
+            <field name="name">mobile</field>
+            <field name="color">4</field>
+        </record>
+        <record id="secure_api_tag_ecommerce" model="secure.api.tag">
+            <field name="name">ecommerce</field>
+            <field name="color">2</field>
+        </record>
+        
+        <!-- Demo Categories -->
+        <record id="secure_api_category_public" model="secure.api.category">
+            <field name="name">Public APIs</field>
+            <field name="sequence">10</field>
+            <field name="color">3</field>
+        </record>
+        <record id="secure_api_category_internal" model="secure.api.category">
+            <field name="name">Internal APIs</field>
+            <field name="sequence">20</field>
+            <field name="color">1</field>
+        </record>
+        <record id="secure_api_category_mobile" model="secure.api.category">
+            <field name="name">Mobile APIs</field>
+            <field name="sequence">30</field>
+            <field name="color">4</field>
+        </record>
+        <record id="secure_api_category_ecommerce" model="secure.api.category">
+            <field name="name">E-commerce APIs</field>
+            <field name="sequence">40</field>
+            <field name="color">2</field>
+        </record>
+        
+        <!-- Demo Client Application -->
+        <record id="secure_api_app_demo" model="secure.api.app">
+            <field name="name">Python client integration</field>
+            <field name="mode">prod</field>
+            <field name="state">enabled</field>
+            <field name="auth_type">oauth2</field>
+        </record>
+
+        <record id="secure_api_app_auth_with_jwt_demo" model="secure.api.app">
+            <field name="name">Client JWT Auth</field>
+            <field name="mode">prod</field>
+            <field name="state">enabled</field>
+            <field name="auth_type">jwt</field>
+        </record>
+        
+        <!-- Published APIs -->        
+        <record id="secure_api_res_partner_rest" model="secure.api">
+            <field name="name">API Partner REST</field>
+            <field name="route">/api/partner/rest</field>
+            <field name="mode">prod</field>
+            <field name="api_action">rest</field>
+            <field name="is_secure_record_id" eval="True"/>
+            <field name="is_allow_multi" eval="True"/>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_partner')])]" />
+            <field name="auth">user</field>
+            <field name="allowed_field_type">specific</field>
+            <field name="field_ids" eval="[(6, 0, [
+                ref('base.field_res_partner__id'),
+                ref('base.field_res_partner__name'),
+                ref('base.field_res_partner__email'),
+                ref('base.field_res_partner__phone'),
+                ref('base.field_res_partner__company_id'),
+                ref('base.field_res_partner__image_128'),
+                ref('base.field_res_partner__image_1024')
+            ])]"/>
+            <field name="search_field_ids" eval="[(6, 0, [
+                ref('base.field_res_partner__id'),
+                ref('base.field_res_partner__name'),
+                ref('base.field_res_partner__email'),
+                ref('base.field_res_partner__image_128')
+            ])]"/>
+            <field name="category_id" eval="ref('secure_api.secure_api_category_default')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_demo'), ref('secure_api_tag_public')])]" />
+            <field name="app_ids" eval="[(6, 0, [ref('secure_api_app_demo'), ref('secure_api_app_auth_with_jwt_demo')])]" />
+            <field name="state">published</field>
+            <field name="note">Demo API for partners with REST interface</field>
+        </record>
+        <record id="secure_api_related_company" model="secure.api.rfield">
+            <field name="model_id" eval="ref('base.model_res_company')"/>
+            <field name="field_ids" eval="[(6, 0, [
+                ref('base.field_res_company__id'),
+                ref('base.field_res_company__name'),
+                ref('base.field_res_company__logo')
+            ])]"/>
+            <field name="secure_api_id" eval="ref('secure_api_res_partner_rest')"/>
+        </record>
+        
+        <record id="secure_api_res_company_rest" model="secure.api">
+            <field name="name">API Company REST</field>
+            <field name="route">/api/company/rest</field>
+            <field name="api_action">rest</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_company')])]" />
+            <field name="auth">none</field>
+            <field name="category_id" eval="ref('secure_api.secure_api_category_default')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_demo'), ref('secure_api_tag_public')])]" />
+            <field name="app_ids" eval="[(6, 0, [ref('secure_api_app_demo'), ref('secure_api_app_auth_with_jwt_demo')])]" />
+            <field name="state">published</field>
+            <field name="note">Demo API for companies with REST interface</field>
+        </record>
+        <record id="secure_api_mobile_users" model="secure.api">
+            <field name="name">Mobile Users API</field>
+            <field name="route">/api/mobile/users</field>
+            <field name="api_action">search</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_users')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api_category_mobile')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_mobile')])]" />
+            <field name="state">published</field>
+            <field name="note">API for mobile app to list users</field>
+            <field name="listing_limit">20</field>
+        </record>
+        <record id="secure_api_ecommerce_contacts" model="secure.api">
+            <field name="name">E-commerce Contacts API</field>
+            <field name="route">/api/ecommerce/contacts</field>
+            <field name="api_action">rest</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_partner')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api_category_ecommerce')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_ecommerce')])]" />
+            <field name="state">published</field>
+            <field name="note">API for e-commerce platform to manage contacts</field>
+        </record>
+        <record id="secure_api_client_application_search" model="secure.api">
+            <field name="name">API Client Application Search</field>
+            <field name="route">/api/client/app/search</field>
+            <field name="mode">prod</field>
+            <field name="api_action">search</field>
+            <field name="is_secure_record_id" eval="True"/>
+            <field name="is_allow_multi" eval="False"/>
+            <field name="model_ids" eval="[(6, 0, [ref('secure_api.model_secure_api_app')])]" />
+            <field name="auth">none</field>
+            <field name="domain">[]</field>
+            <field name="listing_limit">10</field>
+            <field name="allowed_field_type">specific</field>
+            <field name="field_ids" eval="[(6, 0, [
+                ref('secure_api.field_secure_api_app__id'),
+                ref('secure_api.field_secure_api_app__name'),
+                ref('secure_api.field_secure_api_app__client_id'),
+                ref('secure_api.field_secure_api_app__client_secret'),
+                ref('secure_api.field_secure_api_app__auth_type'),
+            ])]"/>
+            <field name="search_field_ids" eval="[(6, 0, [
+                ref('secure_api.field_secure_api_app__id'),
+                ref('secure_api.field_secure_api_app__name'),
+                ref('secure_api.field_secure_api_app__client_id'),
+                ref('secure_api.field_secure_api_app__client_secret'),
+                ref('secure_api.field_secure_api_app__auth_type'),
+            ])]"/>
+            <field name="category_id" eval="ref('secure_api.secure_api_category_default')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_demo'), ref('secure_api_tag_public')])]" />
+            <field name="state">published</field>
+            <field name="note">Demo API for OAuth2.0 client applications with search interface</field>
+        </record>
+
+        <!-- Draft APIs -->
+        <record id="secure_api_internal_groups" model="secure.api">
+            <field name="name">Internal Groups API</field>
+            <field name="route">/api/internal/groups</field>
+            <field name="api_action">search</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_groups')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api_category_internal')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_internal')])]" />
+            <field name="state">draft</field>
+            <field name="note">Draft API for internal groups directory</field>
+        </record>
+        <record id="secure_api_mobile_countries" model="secure.api">
+            <field name="name">Mobile Countries API</field>
+            <field name="route">/api/mobile/countries</field>
+            <field name="api_action">search</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_country')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api_category_mobile')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_mobile')])]" />
+            <field name="state">draft</field>
+            <field name="note">Draft API for mobile app to list countries</field>
+        </record>
+        
+        <!-- Inactive APIs -->
+        <record id="secure_api_deprecated_customers" model="secure.api">
+            <field name="name">Deprecated Customers API</field>
+            <field name="route">/api/v1/customers</field>
+            <field name="api_action">rest</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_partner')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api.secure_api_category_default')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_demo')])]" />
+            <field name="state">deactivated</field>
+            <field name="note">Deprecated API - replaced by newer version</field>
+        </record>
+        <record id="secure_api_inactive_currencies" model="secure.api">
+            <field name="name">Inactive Currencies API</field>
+            <field name="route">/api/currencies/list</field>
+            <field name="api_action">rest</field>
+            <field name="model_ids" eval="[(6, 0, [ref('base.model_res_currency')])]" />
+            <field name="auth">user</field>
+            <field name="category_id" eval="ref('secure_api_category_internal')"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('secure_api_tag_internal')])]" />
+            <field name="state">deactivated</field>
+            <field name="note">Temporarily deactivated currencies API</field>
+        </record>
+    </data>
+</odoo>

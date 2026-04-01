@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="xf_demo_data.user_Elena_Winters" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Gerald_Schaefer" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Kristina_Ayala" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Tim_Fox" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Damion_Efland" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Gary_Goetzmann" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Larhonda_Goodale" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Mira_Tennett" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Noble_Wojno" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Rolf_Baus" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Sheree_Elfstrom" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+        <record id="xf_demo_data.user_Shila_Shavers" model="res.users">
+            <field eval="[(4, ref('purchase.group_purchase_user'))]" name="groups_id"/>
+        </record>
+    </data>
+</odoo>

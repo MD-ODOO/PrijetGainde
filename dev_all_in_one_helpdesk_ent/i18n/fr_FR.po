@@ -1,0 +1,1768 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dev_all_in_one_helpdesk_ent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20260119\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-17 09:56+0000\n"
+"PO-Revision-Date: 2026-02-17 10:00+0000\n"
+"Last-Translator: Projet Gainde2000 <info@gainde2000.sn>\n"
+"Language-Team: French (France) <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Language: fr_FR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/js/dashboard.js:0
+msgid " All Tickets"
+msgstr " Tous les tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+msgid "&amp;times;"
+msgstr "&amp;times;"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.report,print_report_name:dev_all_in_one_helpdesk_ent.ticket_menu_template
+msgid "('Ticket - %s' % (object.name))"
+msgstr "('Ticket - %s' % (object.name))"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Customer</b>"
+msgstr "<b>Client</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Email</b>"
+msgstr "<b>E-mail</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+msgid "<b>End Date</b>"
+msgstr "<b>Date de fin</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Phone</b>"
+msgstr "<b>Téléphone</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Priority</b>"
+msgstr "<b>Priorité</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Source</b>"
+msgstr "<b>Source</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+msgid "<b>Start Date</b>"
+msgstr "<b>Date de début</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Team Head</b>"
+msgstr "<b>Responsable d'équipe</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "<b>Team</b>"
+msgstr "<b>Équipe</b>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,body_html:dev_all_in_one_helpdesk_ent.dev_helpdesk_tickit_reminder_template
+msgid ""
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;\">\n"
+"               \t<p>Dear <t t-out=\"object.user_id.name\">,</t></p>\n"
+"               \t<p>This bellow Ticket are due on <b> <t t-out=\"object.get_due_date()\"/></b> Date,</p>\n"
+"               \t\n"
+"               \t<b>Name</b> : <t t-out=\"object.name\"> <br/>\n"
+"               \t<b>State</b> : <t t-out=\"object.stage_id.name\">  \n"
+"           </t></t></div>\n"
+"                \n"
+"                "
+msgstr ""
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;\">\n"
+"               \t<p>Bonjour <t t-out=\"object.user_id.name\">,</t></p>\n"
+"               \t<p>Le ticket ci-dessous est dû le <b> <t t-out=\"object.get_due_date()\"/></b>,</p>\n"
+"               \t\n"
+"               \t<b>Nom</b> : <t t-out=\"object.name\"> <br/>\n"
+"               \t<b>État</b> : <t t-out=\"object.stage_id.name\">  \n"
+"           </t></t></div>\n"
+"                \n"
+"                "
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,body_html:dev_all_in_one_helpdesk_ent.template_start_survey_dev_helpdesk_survey
+msgid ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Dear,\n"
+"                    <b>\n"
+"                        <t t-out=\"object.ticket_id and object.ticket_id.partner_id and object.ticket_id.partner_id.name or ''\"/>\n"
+"                    </b>\n"
+"                    <br/>\n"
+"                    <br/>\n"
+"                    We are conducting a survey of\n"
+"                    <strong t-out=\"object.survey_id and object.survey_id.title or ''\"/>\n"
+"                    and your response would be appreciated.\n"
+"                    <br/><br/>\n"
+"                    </p><div>\n"
+"                        <a t-attf-href=\"{{object.get_survey_url()}}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color : #fff; border-radius: 5px; font-size:13px;\">\n"
+"                            Start Survey\n"
+"                        </a>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    Thank you for your interest.\n"
+"                \n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Bonjour,\n"
+"                    <b>\n"
+"                        <t t-out=\"object.ticket_id and object.ticket_id.partner_id and object.ticket_id.partner_id.name or ''\"/>\n"
+"                    </b>\n"
+"                    <br/>\n"
+"                    <br/>\n"
+"                    Nous menons une enquête sur\n"
+"                    <strong t-out=\"object.survey_id and object.survey_id.title or ''\"/>\n"
+"                    et votre avis nous serait très précieux.\n"
+"                    <br/><br/>\n"
+"                    </p><div>\n"
+"                        <a t-attf-href=\"{{object.get_survey_url()}}\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color : #fff; border-radius: 5px; font-size:13px;\">\n"
+"                            Démarrer l'enquête\n"
+"                        </a>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    Merci de l'intérêt que vous nous portez.\n"
+"                \n"
+"            </div>\n"
+"        "
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "<i class=\"fa fa-check\"/> Sign &amp; Accept"
+msgstr "<i class=\"fa fa-check\"/> Signer &amp; Accepter"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "<i class=\"fa fa-download\"/> Downloadss"
+msgstr "<i class=\"fa fa-download\"/> Télécharger"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "<i class=\"fa fa-print\"/> Print"
+msgstr "<i class=\"fa fa-print\"/> Imprimer"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,body_html:dev_all_in_one_helpdesk_ent.mail_template_user_notification
+msgid ""
+"<p><b>Dear</b>,</p>\n"
+"            \t<p/>\n"
+"            \t<p> new ticket is created with  <b><i> <span t-esc=\"object.ticket_sequnce\"/></i></b></p>\n"
+"            \t<p>Please Check ticket</p>\n"
+"            \t<p/>\n"
+"            \t<b>Regards,</b><br/>\n"
+"            \t<span t-esc=\"object.company_id.name\"/>\n"
+"                "
+msgstr ""
+"<p><b>Bonjour</b>,</p>\n"
+"            \t<p/>\n"
+"            \t<p> Un nouveau ticket a été créé avec la référence <b><i> <span t-esc=\"object.ticket_sequnce\"/></i></b></p>\n"
+"            \t<p>Veuillez consulter le ticket</p>\n"
+"            \t<p/>\n"
+"            \t<b>Cordialement,</b><br/>\n"
+"            \t<span t-esc=\"object.company_id.name\"/>\n"
+"                "
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "<span class=\"o_form_label\">Cancel Stage</span>"
+msgstr "<span class=\"o_form_label\">Étape d'annulation</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "<span class=\"o_form_label\">Close Stage</span>"
+msgstr "<span class=\"o_form_label\">Étape de clôture</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "<span class=\"o_form_label\">Done Stage</span>"
+msgstr "<span class=\"o_form_label\">Étape terminée</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "<span class=\"o_form_label\">Draft Stage</span>"
+msgstr "<span class=\"o_form_label\">Étape brouillon</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "<span class=\"o_form_label\">Notification User</span>"
+msgstr "<span class=\"o_form_label\">Utilisateur de notification</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Address</strong>"
+msgstr "<strong>Adresse</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Customer</strong>"
+msgstr "<strong>Client</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Status</strong>"
+msgstr "<strong>Statut</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Ticket Name</strong>"
+msgstr "<strong>Nom du ticket</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Ticket Number</strong>"
+msgstr "<strong>Numéro de ticket</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Tracking Information: Ticket Not Found</strong><br/><br/>"
+msgstr "<strong>Informations de suivi : Ticket introuvable</strong><br/><br/>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "<strong>Tracking Information:</strong>"
+msgstr "<strong>Informations de suivi :</strong>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Add Multi users in helpdesk ticket."
+msgstr "Ajouter plusieurs utilisateurs dans le ticket d'assistance."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Add Subticket  in helpdesk ticket."
+msgstr "Ajouter un sous-ticket dans le ticket d'assistance."
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All"
+msgstr "Tous"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All Partner"
+msgstr "Tous les partenaires"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All Stages"
+msgstr "Toutes les étapes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/js/dashboard.js:0
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All Team"
+msgstr "Toutes les équipes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All Ticket"
+msgstr "Tous les tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/js/dashboard.js:0
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All Tickets"
+msgstr "Tous les tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "All User"
+msgstr "Tous les utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_mass_assign_ticket
+msgid "Allow Assign Mass Ticket"
+msgstr "Autoriser l'affectation de masse de tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_dev_helpdesk_maintenance
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_dev_helpdesk_maintenance
+msgid "Allow Helpdesk Maintenance"
+msgstr "Autoriser la maintenance du helpdesk"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_dev_helpdesk_task
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_dev_helpdesk_task
+msgid "Allow Helpdesk Task"
+msgstr "Autoriser les tâches du helpdesk"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_mass_update_ticket
+msgid "Allow Mass Update Tickets"
+msgstr "Autoriser la mise à jour en masse des tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__allow_multi_user
+msgid "Allow Multi User"
+msgstr "Autoriser plusieurs utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_dev_knowledge
+msgid "Allow Odoo Knowledge"
+msgstr "Autoriser la base de connaissance Odoo"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__allow_subticket
+msgid "Allow Subticket"
+msgstr "Autoriser les sous-tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_mass_assign_ticket
+msgid "Allow to assign mass tickets"
+msgstr "Autoriser l'affectation en masse des tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_expense_helpdesk_ticket
+msgid "Allow to create Expense ticket"
+msgstr "Autoriser la création de tickets de note de frais"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_crm_helpdesk_ticket
+msgid "Allow to create crm ticket"
+msgstr "Autoriser la création de tickets CRM"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.can_allow_export_purchase_portal
+msgid "Allow to export Purchase Orders report from portal"
+msgstr "Autoriser l'export des rapports de bons de commande depuis le portail"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,comment:dev_all_in_one_helpdesk_ent.group_mass_update_ticket
+msgid "Allow to mass update tickets"
+msgstr "Autoriser la mise à jour en masse des tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__survey_answer_id
+msgid "Answer"
+msgstr "Réponse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_filter
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_form
+msgid "Archived"
+msgstr "Archivé"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__multi_user_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__multi_user_ids
+msgid "Assign Multi Users"
+msgstr "Affecter plusieurs utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__allow_multi_user
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__allow_multi_user
+msgid "Assign multi users"
+msgstr "Affecter plusieurs utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Assigned"
+msgstr "Affecté"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__assing_user_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__assing_user_id
+msgid "Assigned To"
+msgstr "Affecté à"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__user_id
+msgid "Assigned to"
+msgstr "Affecté à"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Bar"
+msgstr "Barres"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:helpdesk.stage,legend_blocked:dev_all_in_one_helpdesk_ent.stage_close
+msgid "Blocked"
+msgstr "Bloqué"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_crm_helpdesk_ticket
+msgid "CRM Helpdesk Ticket"
+msgstr "Ticket CRM Helpdesk"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_whatsapp_wizard_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.mass_ticket_tags_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__cancel_stage_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__cancel_stage_id
+msgid "Cancel Stage"
+msgstr "Étape d'annulation"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_knowledge_category
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__category_id
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_knowledge_category
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.tree_knowledge_category_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_filter
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Chart Type"
+msgstr "Type de graphique"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_update_ticket_from
+msgid "Close"
+msgstr "Fermer"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__close_stage_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__close_stage_id
+msgid "Close Stage"
+msgstr "Étape de clôture"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Close Tickets"
+msgstr "Tickets clôturés"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_ticket_assign_from
+msgid "Close Window"
+msgstr "Fermer la fenêtre"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+#: model:helpdesk.stage,name:dev_all_in_one_helpdesk_ent.stage_close
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__color
+msgid "Color"
+msgstr "Couleur"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_dev_knowledge_configration
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "Confirm Authentication"
+msgstr "Confirmer l'authentification"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "Contact"
+msgstr "Contact"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Create Expense"
+msgstr "Créer une note de frais"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Create Leads"
+msgstr "Créer des opportunités"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Create Maintenance"
+msgstr "Créer une demande de maintenance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Create Sub Tickets from Helpdesk Tickets."
+msgstr "Créer des sous-tickets à partir des tickets d'assistance."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Create Task"
+msgstr "Créer une tâche"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.form_expense_dev_expense_helpdesk_inherited
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_crm_lead_form
+msgid "Create Ticket"
+msgstr "Créer un ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__create_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__create_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__partner_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__partner_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "Customer"
+msgstr "Client"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.helpdesk_menu_open_Dashboard
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Date"
+msgstr "Date"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Date Filter"
+msgstr "Filtre par date"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__description
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_template_main
+msgid "Description"
+msgstr "Description"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__display_name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Display all created tickets of customer."
+msgstr "Afficher tous les tickets créés pour le client."
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Display closing tickets based on expected date."
+msgstr "Afficher les tickets à clôturer selon la date prévue."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__document
+msgid "Document"
+msgstr "Document"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Documents"
+msgstr "Documents"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Done"
+msgstr "Terminé"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__done_stage_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__done_stage_id
+msgid "Done Stage"
+msgstr "Étape terminée"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Done Tickets"
+msgstr "Tickets terminés"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Doughnut"
+msgstr "Anneau"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__draft_stage_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__draft_stage_id
+msgid "Draft Stage"
+msgstr "Étape brouillon"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__due_date
+msgid "Due Date"
+msgstr "Date d'échéance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,name:dev_all_in_one_helpdesk_ent.dev_helpdesk_tickit_reminder_template
+msgid "Due Ticket Notification"
+msgstr "Notification de ticket arrivant à échéance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__end_date
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "Enter Ticket Number"
+msgstr "Saisir le numéro de ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__excel_file
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__file_name
+msgid "Excel File"
+msgstr "Fichier Excel"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__date_deadline
+msgid "Expected Closing"
+msgstr "Clôture prévue"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/dev_helpdesk_ticket.py:0
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_hr_expense
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__expense_count
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__expense_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_helpdesk_ticket_sequence_filter
+msgid "Expense"
+msgstr "Note de frais"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_expense_helpdesk_ticket
+msgid "Expense Helpdesk Ticket"
+msgstr "Ticket de note de frais Helpdesk"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__expense_ticket_flag
+msgid "Expense Ticket Flag"
+msgstr "Indicateur ticket note de frais"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+msgid "Export"
+msgstr "Exporter"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.portal_my_helpdesk_ticket_inherit
+msgid "Export Helpdesk Ticket"
+msgstr "Exporter le ticket d'assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_export_template
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_export_template
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__export_template_id
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.website_export_template_menu
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.tree_helpdesk_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_export_template_form
+msgid "Export Template"
+msgstr "Modèle d'export"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_export_template_line
+msgid "Export Template Line"
+msgstr "Ligne de modèle d'export"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__field_id
+msgid "Field"
+msgstr "Champ"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__field_label
+msgid "Field Label"
+msgstr "Libellé du champ"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__field_ids
+msgid "Fields"
+msgstr "Champs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__signature_name
+msgid "Full Name"
+msgstr "Nom complet"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Generate Tickets User Notification"
+msgstr "Générer une notification utilisateur pour les tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_filter
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Group By Priority"
+msgstr "Regrouper par priorité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Group By Source"
+msgstr "Regrouper par source"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Group By Stages"
+msgstr "Regrouper par étapes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Group By Team"
+msgstr "Regrouper par équipe"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Helpdesk"
+msgstr "Assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.server,name:dev_all_in_one_helpdesk_ent.cron_company_helpdesk_ticket_due_remidner_ir_actions_server
+msgid "Helpdesk : Ticket Due Reminder"
+msgstr "Assistance : Rappel d'échéance de ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.client,name:dev_all_in_one_helpdesk_ent.action_open_dashboard_helpdesk
+msgid "Helpdesk Dashboard"
+msgstr "Tableau de bord Assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__helpdesk_due_reminder
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__helpdesk_due_reminder
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Helpdesk Due Reminder"
+msgstr "Rappel d'échéance Assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_helpdesk_stage
+msgid "Helpdesk Stage"
+msgstr "Étape d'assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_helpdesk_ticket
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__ticket_id
+msgid "Helpdesk Ticket"
+msgstr "Ticket d'assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Helpdesk Ticket Multi Users"
+msgstr "Ticket d'assistance multi-utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_report_dev_helpdesk_report_ticket_template
+msgid "Helpdesk Ticket Report"
+msgstr "Rapport de ticket d'assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_whatsapp_wizard_view
+msgid "Helpdesk whatsapp Message"
+msgstr "Message WhatsApp Assistance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields.selection,name:dev_all_in_one_helpdesk_ent.selection__dev_mass_update_ticket__priority__2
+msgid "High"
+msgstr "Élevée"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:helpdesk.stage,legend_normal:dev_all_in_one_helpdesk_ent.stage_close
+msgid "In Progress"
+msgstr "En cours"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/portal.py:0
+msgid "Invalid Ticket."
+msgstr "Ticket invalide."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,subject:dev_all_in_one_helpdesk_ent.template_start_survey_dev_helpdesk_survey
+msgid "Invitation to attend online survey"
+msgstr "Invitation à participer à une enquête en ligne"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_stage__is_solve
+msgid "Is Solve"
+msgstr "Est résolu"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_dev_knowledge
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_knowledge
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_knowledge_main
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_knowledge_root
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_tree
+msgid "Knowledge"
+msgstr "Base de connaissances"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_knowledge_category
+msgid "Knowledge Category"
+msgstr "Catégorie de la base de connaissances"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_knowledge_tags
+msgid "Knowledge Tags"
+msgstr "Étiquettes de la base de connaissances"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Last 28 Days"
+msgstr "28 derniers jours"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Last 365 Days"
+msgstr "365 derniers jours"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Last 7 Days"
+msgstr "7 derniers jours"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Last 90 Days"
+msgstr "90 derniers jours"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Last Stage Update"
+msgstr "Dernière mise à jour d'étape"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__write_uid
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_solution_document__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__write_date
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__lead_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_helpdesk_ticket_sequence_filter
+msgid "Lead"
+msgstr "Opportunité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__lead_count
+msgid "Lead Orders"
+msgstr "Nombre d'opportunités"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__lead_ticket_flag
+msgid "Lead Ticket Flag"
+msgstr "Indicateur ticket opportunité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Prospect/Opportunité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/dev_helpdesk_ticket.py:0
+msgid "Leads"
+msgstr "Opportunités"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Lifetime"
+msgstr "Toute la période"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Line"
+msgstr "Courbe"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields.selection,name:dev_all_in_one_helpdesk_ent.selection__dev_mass_update_ticket__priority__0
+msgid "Low"
+msgstr "Faible"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__main_request_count
+msgid "Maintenance Count"
+msgstr "Nombre de demandes de maintenance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/dev_helpdesk_ticket.py:0
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_maintenance_request
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Maintenance Request"
+msgstr "Demande de maintenance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_mass_assign_user
+msgid "Mass Assign User"
+msgstr "Affectation en masse d'utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.mass_ticket_tags_view
+msgid "Mass Ticket Tags"
+msgstr "Étiquettes en masse de tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_mass_update_ticket
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_ticket_assign_from
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_update_ticket_from
+msgid "Mass Update"
+msgstr "Mise à jour en masse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_mass_ticket_tags
+msgid "Mass Update Tags"
+msgstr "Mise à jour des étiquettes en masse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_mass_ticket_assign
+msgid "Mass Update Team"
+msgstr "Mise à jour de l'équipe en masse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_mass_update_ticket
+msgid "Mass Update Tickets"
+msgstr "Mise à jour des tickets en masse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields.selection,name:dev_all_in_one_helpdesk_ent.selection__dev_mass_update_ticket__priority__1
+msgid "Medium"
+msgstr "Moyenne"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__whatsapp_message
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__whatsapp_message
+msgid "Message"
+msgstr "Message"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_whatsapp_message_template
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_whatsapp_message_template_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.whatsapp_message_template_tree
+msgid "Message Template"
+msgstr "Modèle de message"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__mobile
+msgid "Mobile"
+msgstr "Téléphone mobile"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__model_id
+msgid "Model"
+msgstr "Modèle"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/__init__.py:0
+msgid "Module not support Odoo version 18.0"
+msgstr "Ce module n'est pas compatible avec la version 18.0 d'Odoo"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__allow_multi_user
+msgid "Multi Users"
+msgstr "Plusieurs utilisateurs"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_helpdesk_source__name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_category__name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge_tags__name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template__name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__name
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_whatsapp_message_template__name
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_filter
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.whatsapp_message_template_tree
+msgid "Name"
+msgstr "Nom"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,subject:dev_all_in_one_helpdesk_ent.mail_template_user_notification
+msgid "New Ticket Generated: {{object.ticket_sequnce}}"
+msgstr "Nouveau ticket créé : {{object.ticket_sequnce}}"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,name:dev_all_in_one_helpdesk_ent.mail_template_user_notification
+msgid "New Ticket User Notification"
+msgstr "Notification utilisateur nouveau ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Newest"
+msgstr "Plus récent"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/ticket_survey.py:0
+msgid "No Answer found for '%s' Survey"
+msgstr "Aucune réponse trouvée pour l'enquête '%s'"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "None"
+msgstr "Aucun"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__notification_user_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__notification_user_id
+msgid "Notification User"
+msgstr "Utilisateur de notification"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__ticket_sequnce
+msgid "Number"
+msgstr "Numéro"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:res.groups,name:dev_all_in_one_helpdesk_ent.group_dev_knowledge
+msgid "Odoo Knowledge"
+msgstr "Base de connaissances Odoo"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Open Tickets"
+msgstr "Tickets ouverts"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Opened"
+msgstr "Ouvert"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Page"
+msgstr "Page"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__parent_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_helpdesk_ticket_sequence_filter
+msgid "Parent"
+msgstr "Parent"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Partner Filter"
+msgstr "Filtre partenaire"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Pie"
+msgstr "Camembert"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Please Select Stages in Configuration Settings"
+msgstr "Veuillez sélectionner les étapes dans les paramètres de configuration"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/wizard/helpdesk_whatsapp_wizard.py:0
+msgid "Please specify Phone number for : %s"
+msgstr "Veuillez renseigner le numéro de téléphone pour : %s"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Print Last Answer"
+msgstr "Imprimer la dernière réponse"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__priority
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__name
+msgid "Question"
+msgstr "Question"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:helpdesk.stage,legend_done:dev_all_in_one_helpdesk_ent.stage_close
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Reminder Due Date"
+msgstr "Rappel de date d'échéance"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__reminder_stage_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__reminder_stage_ids
+msgid "Reminder Stage"
+msgstr "Étape de rappel"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Search <span class=\"nolabel\"> (in Content)</span>"
+msgstr "Rechercher <span class=\"nolabel\"> (dans le contenu)</span>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Search in Assigned to"
+msgstr "Rechercher dans Affecté à"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Search in Messages"
+msgstr "Rechercher dans les messages"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Search in Reference"
+msgstr "Rechercher dans la référence"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Search in Stage"
+msgstr "Rechercher dans l'étape"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/ticket_survey.py:0
+msgid "Select Customer into Ticket"
+msgstr "Sélectionner le client dans le ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_whatsapp_wizard_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Send"
+msgstr "Envoyer"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_res_config_helpdesk_sub_ticket_form
+msgid "Send email to assign user when ticket due."
+msgstr "Envoyer un e-mail à l'utilisateur affecté lorsque le ticket arrive à échéance."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Send whatsapp"
+msgstr "Envoyer via WhatsApp"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_export_template_line__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__signature
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Signature"
+msgstr "Signature"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__signature_date
+msgid "Signature Date"
+msgstr "Date de signature"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/portal.py:0
+msgid "Signature is missing."
+msgstr "La signature est manquante."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__solution
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__solution_description
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_form
+msgid "Solution"
+msgstr "Solution"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.dev_helpdesk_portal_solution
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Solution Attachment"
+msgstr "Pièce jointe de la solution"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_ticket_solution_document
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__solution_document_ids
+msgid "Solution Document"
+msgstr "Document de solution"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_source_view
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__source_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__source_id
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_source
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.tree_source_view
+msgid "Source"
+msgstr "Source"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Stage"
+msgstr "Étape"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Stages Filter"
+msgstr "Filtre par étapes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Start"
+msgstr "Démarrer"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket_excel_wizard_portal__start_date
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__sub_ticket_count
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_company__helpdesk_subticket
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_res_config_settings__helpdesk_subticket
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Sub Tickets"
+msgstr "Sous-tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Subject"
+msgstr "Objet"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__ticket_survey_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_survey_template__survey_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__survey_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.form_survey_template_dev_helpdesk_survey
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Survey"
+msgstr "Enquête"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_survey_template_dev_helpdesk_survey
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_survey_template
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__survey_template_id
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_survey_template_dev_helpdesk_survey
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.form_survey_template_dev_helpdesk_survey
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.tree_survey_template_dev_helpdesk_survey
+msgid "Survey Template"
+msgstr "Modèle d'enquête"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_knowledge_tags
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_knowledge__tag_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_mass_ticket_tags__tags_ids
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_knowledge_tags
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.tree_knowledge_tags_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_knowledge_filter
+msgid "Tags"
+msgstr "Étiquettes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_project_task
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_helpdesk_project_task_form
+msgid "Task"
+msgstr "Tâche"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__task_count
+msgid "Task Count"
+msgstr "Nombre de tâches"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__team_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__team_id
+msgid "Team"
+msgstr "Équipe"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Team Filter"
+msgstr "Filtre par équipe"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_whatsapp_wizard__whatsapp_template_id
+msgid "Template"
+msgstr "Modèle"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.form_survey_template_dev_helpdesk_survey
+msgid "Template Name"
+msgstr "Nom du modèle"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,help:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__source_id
+msgid ""
+"This is the source of the link, e.g. Search Engine, another domain, or name "
+"of email list"
+msgstr ""
+"Il s'agit de la source du lien, par exemple un moteur de recherche, un autre domaine ou "
+"le nom d'une liste de diffusion"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/crm_lead.py:0
+#: code:addons/dev_all_in_one_helpdesk_ent/models/dev_helpdesk_ticket.py:0
+#: code:addons/dev_all_in_one_helpdesk_ent/models/expense.py:0
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_crm_lead__ticket_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_hr_expense__ticket_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_ticket_survey__ticket_id
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.form_expense_dev_expense_helpdesk_inherited
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_crm_lead_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_maintenance_request_helpdesk_ticket_form
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_project_task_helpdesk_ticket_form
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "Ticket - Tracking"
+msgstr "Ticket - Suivi"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,name:dev_all_in_one_helpdesk_ent.template_start_survey_dev_helpdesk_survey
+msgid "Ticket : Start Survey"
+msgstr "Ticket : Démarrer l'enquête"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_maintenance_request__ticket_count
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_project_task__ticket_count
+msgid "Ticket Count"
+msgstr "Nombre de tickets"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.report,name:dev_all_in_one_helpdesk_ent.ticket_menu_template
+msgid "Ticket Details"
+msgstr "Détails du ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_crm_lead__ticket_count
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_hr_expense__ticket_count
+msgid "Ticket Orders"
+msgstr "Tickets associés"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_ticket_survey
+msgid "Ticket Survey"
+msgstr "Enquête de ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/models/dev_helpdesk_ticket.py:0
+msgid "Ticket Task"
+msgstr "Tâche du ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:website.menu,name:dev_all_in_one_helpdesk_ent.helpdesk_ticket_tracking_menu
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid "Ticket Tracking"
+msgstr "Suivi de ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_maintenance_request__ticket_id
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_project_task__ticket_id
+msgid "Tiket"
+msgstr "Ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.ticket_tracking_page
+msgid ""
+"Track\n"
+"\t\t\t\t\t\t\t\t\t<i class=\"fa fa-ticket\"/>"
+msgstr ""
+"Suivre\n"
+"\t\t\t\t\t\t\t\t\t<i class=\"fa fa-ticket\"/>"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-python
+#: code:addons/dev_all_in_one_helpdesk_ent/controller/helpdesk_ticket_controller.py:0
+msgid "Unassigned"
+msgstr "Non affecté"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Upcoming Closing Tickets"
+msgstr "Tickets à clôturer prochainement"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_ticket_assign_from
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_dev_mass_update_ticket_from
+msgid "Update"
+msgstr "Mettre à jour"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__update_priority
+msgid "Update Priority"
+msgstr "Mettre à jour la priorité"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__update_source
+msgid "Update Source"
+msgstr "Mettre à jour la source"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.mass_ticket_tags_view
+msgid "Update Tags"
+msgstr "Mettre à jour les étiquettes"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__update_user
+msgid "Update Team/User"
+msgstr "Mettre à jour l'équipe/l'utilisateur"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "User Filter"
+msgstr "Filtre utilisateur"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields.selection,name:dev_all_in_one_helpdesk_ent.selection__dev_mass_update_ticket__priority__3
+msgid "Very High"
+msgstr "Très élevée"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_maintenance_request_helpdesk_ticket_form
+msgid "View Ticket"
+msgstr "Voir le ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "Welcome to your Helpdesk Dashboard."
+msgstr "Bienvenue sur votre tableau de bord d'assistance."
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_whatsapp_wizard_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_whatsapp_message_template_form
+msgid "Whatsapp Message"
+msgstr "Message WhatsApp"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.ui.menu,name:dev_all_in_one_helpdesk_ent.menu_wha_message_template
+msgid "Whatsapp Message Template"
+msgstr "Modèle de message WhatsApp"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_helpdesk_ticket_excel_wizard_portal
+msgid "helpdesk.ticket.excel.wizard.portal"
+msgstr "helpdesk.ticket.excel.wizard.portal"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_helpdesk_whatsapp_wizard
+msgid "helpdesk.whatsapp.wizard"
+msgstr "helpdesk.whatsapp.wizard"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_mass_ticket_tags
+msgid "mass.ticket.tags"
+msgstr "mass.ticket.tags"
+
+#. module: dev_all_in_one_helpdesk_ent
+#. odoo-javascript
+#: code:addons/dev_all_in_one_helpdesk_ent/static/src/xml/dashboard_templates.xml:0
+msgid "of"
+msgstr "sur"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_whatsapp_wizard_view
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.mass_ticket_tags_view
+msgid "or"
+msgstr "ou"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_dev_helpdesk_source
+msgid "source"
+msgstr "source"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_ticket_assign__team_user_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_dev_mass_update_ticket__team_user_ids
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__team_user_ids
+msgid "team Users"
+msgstr "Utilisateurs de l'équipe"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.actions.act_window,name:dev_all_in_one_helpdesk_ent.action_whatsapp_wizard
+msgid "whatsapp Send Message "
+msgstr "Envoyer un message WhatsApp"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model,name:dev_all_in_one_helpdesk_ent.model_whatsapp_message_template
+msgid "whatsapp.message.template"
+msgstr "whatsapp.message.template"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:mail.template,subject:dev_all_in_one_helpdesk_ent.dev_helpdesk_tickit_reminder_template
+msgid "{{(object.name)}} Ticket Due Notification"
+msgstr "{{(object.name)}} - Notification d'échéance de ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__ticket_type_id
+msgid "Type de réclamation"
+msgstr "Type de réclamation"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.view_helpdesk_ticket_type_id_form
+msgid "e.g. Could not signed specifimend documents"
+msgstr "ex. Impossible de signer les documents spécifiques"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__type_reclamation_display
+msgid "Type de réclamation"
+msgstr "Type de réclamation"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_ticket__ticket_type_id
+msgid "Réclamations"
+msgstr "Réclamations"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model_terms:ir.ui.view,arch_db:dev_all_in_one_helpdesk_ent.helpdesk_ticket_view_form_inherit_cancel
+msgid "Enregistrer"
+msgstr "Enregistrer"
+
+#. module: dev_all_in_one_helpdesk_ent
+msgid "Enregistrer les modifications du ticket"
+msgstr "Enregistrer les modifications du ticket"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,field_description:dev_all_in_one_helpdesk_ent.field_helpdesk_team__allow_multiple_assignment
+msgid "Affectation multiple"
+msgstr "Affectation multiple"
+
+#. module: dev_all_in_one_helpdesk_ent
+#: model:ir.model.fields,help:dev_all_in_one_helpdesk_ent.field_helpdesk_team__allow_multiple_assignment
+msgid "Permet d'affecter plusieurs utilisateurs à un ticket de cette équipe"
+msgstr "Permet d'affecter plusieurs utilisateurs à un ticket de cette équipe"
+

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="mail_template_user_notification" model="mail.template">
+            <field name="name">New Ticket User Notification</field>
+            <field name="email_from">{{(object.company_id.email and '%s &lt;%s&gt;' % (object.company_id.name, object.company_id.email) or '')}}</field>
+            <field name="subject">New Ticket Generated: {{object.ticket_sequnce}}</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+            	<p><b>Dear</b>,</p>
+            	<p></p>
+            	<p> new ticket is created with  <b><i> <span t-esc="object.ticket_sequnce"/></i></b Number></p>
+            	<p>Please Check ticket</p>
+            	<p></p>
+            	<b>Regards,</b><br/>
+            	<span t-esc="object.company_id.name"/>
+                ]]></field>
+         </record>
+         
+         
+         
+         <record id="dev_helpdesk_tickit_reminder_template" model="mail.template">
+            <field name="name">Due Ticket Notification</field>
+            <field name="email_from">{{(object.company_id.email and '%s &lt;%s&gt;' % (object.company_id.name, object.company_id.email) or '')}}</field>
+            <field name="subject">{{(object.name)}} Ticket Due Notification</field>
+            <field name="partner_to">{{object.user_id.partner_id.id }}</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+
+               <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 14px; color: rgb(34, 34, 34); background-color: #FFF;">
+               	<p>Dear <t t-out="object.user_id.name">,</p>
+               	<p>This bellow Ticket are due on <b> <t t-out="object.get_due_date()"></b> Date,</p>
+               	
+               	<b>Name</b> : <t t-out="object.name"> <br/>
+               	<b>State</b> : <t t-out="object.stage_id.name"> </p> 
+           </div>
+                
+                ]]></field>
+         </record>
+</odoo>
+        
+        
+        
+      
+        
+        
+    

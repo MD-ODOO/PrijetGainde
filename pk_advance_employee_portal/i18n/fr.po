@@ -1,0 +1,2036 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pk_advance_employee_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20251222\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-28 16:04+0000\n"
+"PO-Revision-Date: 2026-01-29 10:00+0000\n"
+"Last-Translator: Issakha \n"
+"Language-Team: Français\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid ""
+",\n"
+"                    color: \"#4CAF50\"\n"
+"                }"
+msgstr ""
+",\n"
+"                    color: \"#4CAF50\"\n"
+"                }"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid ""
+",\n"
+"                    end:"
+msgstr ""
+",\n"
+"                    fin :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid ""
+",\n"
+"                    start:"
+msgstr ""
+",\n"
+"                    début :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid ""
+"<i class=\"fa \"/>\n"
+"                        Analytics"
+msgstr ""
+"<i class=\"fa \"/>\n"
+"                        Analytiques"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                                        Back"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                                        Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                                Back to Task List"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                                Retour à la liste des tâches"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                            Back"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                            Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.no_employee_found_template
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                        Back"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                        Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                        Back to Profile"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                        Retour au profil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                    Back"
+msgstr ""
+"<i class=\"fa fa-arrow-left me-1\"/>\n"
+"                    Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid "<i class=\"fa fa-arrow-left me-1\"/> Back"
+msgstr "<i class=\"fa fa-arrow-left me-1\"/> Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid ""
+"<i class=\"fa fa-arrow-left\"/>\n"
+"                    Back to Orders"
+msgstr ""
+"<i class=\"fa fa-arrow-left\"/>\n"
+"                    Retour aux commandes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid ""
+"<i class=\"fa fa-arrow-right me-1\"/>\n"
+"                        Back"
+msgstr ""
+"<i class=\"fa fa-arrow-right me-1\"/>\n"
+"                        Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<i class=\"fa fa-calendar me-1\"/> Team Calendar"
+msgstr "<i class=\"fa fa-calendar me-1\"/> Calendrier d'équipe"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "<i class=\"fa fa-check me-1\"/>Update and Submit"
+msgstr "<i class=\"fa fa-check me-1\"/>Mettre à jour et soumettre"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid ""
+"<i class=\"fa fa-check-circle\"/>\n"
+"                                            View Orders"
+msgstr ""
+"<i class=\"fa fa-check-circle\"/>\n"
+"                                            Voir les commandes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-coffee me-1\"/>\n"
+"                                        Lunch Out"
+msgstr ""
+"<i class=\"fa fa-coffee me-1\"/>\n"
+"                                        Sortie déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "<i class=\"fa fa-download me-1\"/>Download PDF"
+msgstr "<i class=\"fa fa-download me-1\"/>Télécharger le PDF"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                        Edit Profile"
+msgstr ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                        Modifier le profil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                     Experience"
+msgstr ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                     Expérience"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                     Skills"
+msgstr ""
+"<i class=\"fa fa-edit me-1\"/>\n"
+"                     Compétences"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "<i class=\"fa fa-edit\"/> Action"
+msgstr "<i class=\"fa fa-edit\"/> Action"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "<i class=\"fa fa-edit\"/> Edit"
+msgstr "<i class=\"fa fa-edit\"/> Modifier"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid ""
+"<i class=\"fa fa-eye\"/>\n"
+"                                            View Details"
+msgstr ""
+"<i class=\"fa fa-eye\"/>\n"
+"                                            Voir les détails"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "<i class=\"fa fa-eye\"/> View"
+msgstr "<i class=\"fa fa-eye\"/> Voir"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-filter me-1\"/>\n"
+"                                    Filter"
+msgstr ""
+"<i class=\"fa fa-filter me-1\"/>\n"
+"                                    Filtrer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "<i class=\"fa fa-plus me-1\"/>Add Attachment"
+msgstr "<i class=\"fa fa-plus me-1\"/>Ajouter une pièce jointe"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "<i class=\"fa fa-plus me-1\"/>Add Receipt"
+msgstr "<i class=\"fa fa-plus me-1\"/>Ajouter un justificatif"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid ""
+"<i class=\"fa fa-plus\"/>\n"
+"                        New Expense"
+msgstr ""
+"<i class=\"fa fa-plus\"/>\n"
+"                        Nouvelle note de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid ""
+"<i class=\"fa fa-plus\"/>\n"
+"                        New Request"
+msgstr ""
+"<i class=\"fa fa-plus\"/>\n"
+"                        Nouvelle demande"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid ""
+"<i class=\"fa fa-plus\"/>\n"
+"                       New Quotation"
+msgstr ""
+"<i class=\"fa fa-plus\"/>\n"
+"                       Nouveau devis"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<i class=\"fa fa-plus\"/> New Request"
+msgstr "<i class=\"fa fa-plus\"/> Nouvelle demande"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "<i class=\"fa fa-plus\"> </i> Add Product"
+msgstr "<i class=\"fa fa-plus\"> </i> Ajouter un article"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+msgid ""
+"<i class=\"fa fa-save me-1\"/>\n"
+"                                        Update Task"
+msgstr ""
+"<i class=\"fa fa-save me-1\"/>\n"
+"                                        Mettre à jour la tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-sign-in-alt me-1\"/>\n"
+"                                        Check In"
+msgstr ""
+"<i class=\"fa fa-sign-in-alt me-1\"/>\n"
+"                                        Pointer entrée"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-sign-out-alt me-1\"/>\n"
+"                                        Check Out"
+msgstr ""
+"<i class=\"fa fa-sign-out-alt me-1\"/>\n"
+"                                        Pointer sortie"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+msgid ""
+"<i class=\"fa fa-tasks me-2\"/>\n"
+"                                Task:"
+msgstr ""
+"<i class=\"fa fa-tasks me-2\"/>\n"
+"                                Tâche :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "<i class=\"fa fa-times me-1\"/>Cancel"
+msgstr "<i class=\"fa fa-times me-1\"/>Annuler"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid ""
+"<i class=\"fa fa-times-circle\"/>\n"
+"                                            View Cancelled"
+msgstr ""
+"<i class=\"fa fa-times-circle\"/>\n"
+"                                            Voir les annulées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "<i class=\"fa fa-undo me-1\"/>Refuse"
+msgstr "<i class=\"fa fa-undo me-1\"/>Refuser"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "<i class=\"fa fa-undo me-1\"/>Reset to Draft"
+msgstr "<i class=\"fa fa-undo me-1\"/>Remettre en brouillon"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"<i class=\"fa fa-utensils me-1\"/>\n"
+"                                        Lunch In"
+msgstr ""
+"<i class=\"fa fa-utensils me-1\"/>\n"
+"                                        Retour déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "<option value=\"\">-- Select Nationality --</option>"
+msgstr "<option value=\"\">-- Sélectionner la nationalité --</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "<option value=\"\">All Projects</option>"
+msgstr "<option value=\"\">Tous les projets</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "<option value=\"\">All Stages</option>"
+msgstr "<option value=\"\">Toutes les étapes</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "<option value=\"\">All States</option>"
+msgstr "<option value=\"\">Tous les statuts</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "<option value=\"\">All States</option>"
+msgstr "<option value=\"\">Tous les états</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "<option value=\"\">Select Company</option>"
+msgstr "<option value=\"\">Sélectionner une société</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "<option value=\"\">Select Customer</option>"
+msgstr "<option value=\"\">Sélectionner un client</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+msgid "<option value=\"\">Select Project</option>"
+msgstr "<option value=\"\">Sélectionner un projet</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "<option value=\"\">Select Role</option>"
+msgstr "<option value=\"\">Sélectionner un rôle</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "<option value=\"\">Select Stage</option>"
+msgstr "<option value=\"\">Sélectionner une étape</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+msgid "<option value=\"\">Select Task</option>"
+msgstr "<option value=\"\">Sélectionner une tâche</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "<option value=\"\">Select Type</option>"
+msgstr "<option value=\"\">Sélectionner un type</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+msgid "<option value=\"\">Select a skill</option>"
+msgstr "<option value=\"\">Sélectionner une compétence</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+msgid "<option value=\"\">Select a type</option>"
+msgstr "<option value=\"\">Sélectionner un type</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "<option value=\"\">Select an expense type</option>"
+msgstr "<option value=\"\">Sélectionner un type de dépense</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "<option value=\"\">Select product</option>"
+msgstr "<option value=\"\">Sélectionner un article</option>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid ""
+"<select name=\"request_unit_half\" id=\"request_unit_half\" class=\"form-control\">\n"
+"                                <option value=\"morning\">Morning</option>\n"
+"                                <option value=\"afternoon\">Afternoon</option>\n"
+"                            </select>"
+msgstr ""
+"<select name=\"request_unit_half\" id=\"request_unit_half\" class=\"form-control\">\n"
+"                                <option value=\"morning\">Matin</option>\n"
+"                                <option value=\"afternoon\">Après-midi</option>\n"
+"                            </select>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid ""
+"<small class=\"form-text text-muted\">\n"
+"                            Optional. Click \"Add Attachment\" to select files. Accepted formats: PDF, Word, Excel, Images, Text (Max 10MB per file)\n"
+"                        </small>"
+msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                            Facultatif. Cliquez sur « Ajouter une pièce jointe » pour sélectionner des fichiers. Formats acceptés : PDF, Word, Excel, Images, Texte (Max 10 Mo par fichier)\n"
+"                        </small>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid ""
+"<small class=\"form-text text-muted\">\n"
+"                        Optional. Click \"Add Receipt\" to select files. Accepted formats: PDF, JPG, PNG (Max 10MB per file)\n"
+"                    </small>"
+msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                        Facultatif. Cliquez sur « Ajouter un justificatif » pour sélectionner des fichiers. Formats acceptés : PDF, JPG, PNG (Max 10 Mo par fichier)\n"
+"                    </small>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid ""
+"<small class=\"form-text text-muted\">\n"
+"                        Optional. Click \"Add Receipt\" to select new files. Accepted formats: PDF, JPG, PNG (Max 10MB per file)\n"
+"                    </small>"
+msgstr ""
+"<small class=\"form-text text-muted\">\n"
+"                        Facultatif. Cliquez sur « Ajouter un justificatif » pour ajouter de nouveaux fichiers. Formats acceptés : PDF, JPG, PNG (Max 10 Mo par fichier)\n"
+"                    </small>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-danger\">Cancelled</span>"
+msgstr "<span class=\"badge bg-danger\">Annulée</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-danger\">Refused</span>"
+msgstr "<span class=\"badge bg-danger\">Refusée</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-danger\">Rejected</span>"
+msgstr "<span class=\"badge bg-danger\">Rejetée</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-primary\">In Process</span>"
+msgstr "<span class=\"badge bg-primary\">En cours de traitement</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-primary\">Ongoing</span>"
+msgstr "<span class=\"badge bg-primary\">En cours</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-secondary\">Used</span>"
+msgstr "<span class=\"badge bg-secondary\">Utilisé</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-success\">Approved</span>"
+msgstr "<span class=\"badge bg-success\">Approuvée</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "<span class=\"badge bg-success\">Completed</span>"
+msgstr "<span class=\"badge bg-success\">Terminée</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-success\">Upcoming</span>"
+msgstr "<span class=\"badge bg-success\">À venir</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "<span class=\"badge bg-success\">Won</span>"
+msgstr "<span class=\"badge bg-success\">Gagné</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "<span class=\"badge bg-warning\">In Progress</span>"
+msgstr "<span class=\"badge bg-warning\">En cours</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "<span class=\"badge bg-warning\">Pending</span>"
+msgstr "<span class=\"badge bg-warning\">En attente</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "<span class=\"text-muted\">Not checked out</span>"
+msgstr "<span class=\"text-muted\">Non pointé sortie</span>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "<strong>Customer: </strong>"
+msgstr "<strong>Client : </strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Date :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "<strong>Description:</strong>"
+msgstr "<strong>Description :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "<strong>Hours:</strong>"
+msgstr "<strong>Heures :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.no_employee_found_template
+msgid ""
+"<strong>No Employee Record:</strong>\n"
+"                    We could not find an employee record linked to your account.\n"
+"                    Please contact HR."
+msgstr ""
+"<strong>Aucun dossier employé trouvé :</strong>\n"
+"                    Nous n'avons pas trouvé de dossier employé associé à votre compte.\n"
+"                    Veuillez contacter le service RH."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "<strong>Project:</strong>"
+msgstr "<strong>Projet :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "<strong>Status:</strong>"
+msgstr "<strong>Statut :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "<strong>Task:</strong>"
+msgstr "<strong>Tâche :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "<strong>Tax:</strong>"
+msgstr "<strong>Taxes :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "<strong>Total (Incl. Tax):</strong>"
+msgstr "<strong>Total (TTC) :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "<strong>Untaxed Amount:</strong>"
+msgstr "<strong>Montant HT :</strong>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Action"
+msgstr "Action"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Add Experience"
+msgstr "Ajouter une expérience"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Add Product"
+msgstr "Ajouter un article"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid "Add Skill"
+msgstr "Ajouter une compétence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Additional Notes"
+msgstr "Notes complémentaires"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "Allocated Time"
+msgstr "Temps alloué"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Amount"
+msgstr "Montant"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Amount *"
+msgstr "Montant *"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Assignees"
+msgstr "Personnes assignées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model,name:pk_advance_employee_portal.model_hr_attendance
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Attendance"
+msgstr "Présences"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "Ava Qty"
+msgstr "Qté disp."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Back"
+msgstr "Retour"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid ""
+"Back\n"
+"                            <i class=\"fa fa-arrow-right me-1\"/>"
+msgstr ""
+"Retour\n"
+"                            <i class=\"fa fa-arrow-right me-1\"/>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid ""
+"Back\n"
+"                    <i class=\"fa fa-fw fa-caret-right\"/>"
+msgstr ""
+"Retour\n"
+"                    <i class=\"fa fa-fw fa-caret-right\"/>"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "Back To Home"
+msgstr "Retour à l'accueil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+msgid "Back To Timesheets"
+msgstr "Retour aux feuilles de temps"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Back to Quotations"
+msgstr "Retour aux devis"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Bank Account"
+msgstr "Compte bancaire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Birthday"
+msgstr "Date de naissance"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "CRM"
+msgstr "CRM"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "Cancel Leave"
+msgstr "Annuler la congé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Cancelled Orders"
+msgstr "Commandes annulées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Certificate"
+msgstr "Diplôme / Certificat"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Certificate Level"
+msgstr "Niveau du diplôme"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Check In"
+msgstr "Pointer entrée"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Check Out"
+msgstr "Pointer sortie"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Cohabitant"
+msgstr "Conjoint / Concubin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "Company"
+msgstr "Société"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Confirmed Sales"
+msgstr "Ventes confirmées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Contact Name"
+msgstr "Nom du contact"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Contact Phone"
+msgstr "Téléphone du contact"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Country of Birth"
+msgstr "Pays de naissance"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+msgid "Create Lead"
+msgstr "Créer une piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "Create New Lead"
+msgstr "Créer une nouvelle piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "Create New Quotation"
+msgstr "Créer un nouveau devis"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "Create Quotation"
+msgstr "Créer le devis"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+msgid "Create a New Lead"
+msgstr "Créer une nouvelle piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Create Timesheet"
+msgstr "Créer une feuille de temps"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_attendance_access
+msgid "Custom Portal - Attendance Access"
+msgstr "Portail personnalisé - Accès Présences"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_crm
+msgid "Custom Portal - CRM Access"
+msgstr "Portail personnalisé - Accès CRM"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_expenses
+msgid "Custom Portal - Expenses Access"
+msgstr "Portail personnalisé - Accès Notes de frais"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_emp_profile
+msgid "Custom Portal - My Profile Access"
+msgstr "Portail personnalisé - Accès Mon profil"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_payroll
+msgid "Custom Portal - Payroll Access"
+msgstr "Portail personnalisé - Accès Paie"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_sales
+msgid "Custom Portal - Sales Access"
+msgstr "Portail personnalisé - Accès Ventes"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_tasks
+msgid "Custom Portal - Tasks Access"
+msgstr "Portail personnalisé - Accès Tâches"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_leaves
+msgid "Custom Portal - Time Off Access"
+msgstr "Portail personnalisé - Accès Congés"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_timesheets
+msgid "Custom Portal - Timesheets Access"
+msgstr "Portail personnalisé - Accès Feuilles de temps"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.unhide_odoo_portal_app
+msgid "Custom Portal - Unhide Odoo Portal Apps Access"
+msgstr "Portail personnalisé - Accès Affichage des applications portail Odoo"
+
+#. module: pk_advance_employee_portal
+#: model:res.groups,name:pk_advance_employee_portal.ad_group_portal_schedule
+msgid "Custom Portal - Weekly Schedule Access"
+msgstr "Portail personnalisé - Accès Planning hebdomadaire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "Customer"
+msgstr "Client"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "Customer Name"
+msgstr "Nom du client"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Customer:"
+msgstr "Client :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Date"
+msgstr "Date"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Date End"
+msgstr "Date de fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Date From"
+msgstr "Date début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Date Start"
+msgstr "Date de début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Date To"
+msgstr "Date fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Date of Birth"
+msgstr "Date de naissance"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Date From"
+msgstr "Date début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Date To"
+msgstr "Date fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Deadline"
+msgstr "Date limite"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Department"
+msgstr "Département"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Description"
+msgstr "Description"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Description *"
+msgstr "Description *"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Description:"
+msgstr "Description :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Display Type"
+msgstr "Type d'affichage"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Draft Quotations"
+msgstr "Devis brouillons"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "Duration"
+msgstr "Durée"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "Edit Expense"
+msgstr "Modifier la note de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Edit Lead"
+msgstr "Modifier la piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Edit My Profile"
+msgstr "Modifier mon profil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Edit Quotation:"
+msgstr "Modifier le devis :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+msgid "Edit Timesheet"
+msgstr "Modifier la feuille de temps"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "Edit/Pay"
+msgstr "Modifier/Payer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Education"
+msgstr "Formation"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Email"
+msgstr "Email"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Email:"
+msgstr "Email :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Emergency"
+msgstr "Urgence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Emergency Contact"
+msgstr "Contact d'urgence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Emergency Phone"
+msgstr "Téléphone d'urgence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Employee"
+msgstr "Employé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.weekly_schedule_list_view_temp_id
+msgid "Employee Name"
+msgstr "Nom de l'employé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "Existing Receipts"
+msgstr "Justificatifs existants"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Expected Revenue"
+msgstr "Chiffre d'affaires attendu"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Expected Revenue:"
+msgstr "Chiffre d'affaires attendu :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Expense Type *"
+msgstr "Type de dépense *"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Expenses"
+msgstr "Notes de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Family Status"
+msgstr "Situation familiale"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Female"
+msgstr "Femme"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Field of Study"
+msgstr "Domaine d'études"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Filter"
+msgstr "Filtrer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "From"
+msgstr "Du"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "From Date"
+msgstr "Date de début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "From Date Time"
+msgstr "Date et heure de début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "From Time"
+msgstr "Heure de début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Gender"
+msgstr "Genre"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Half Day"
+msgstr "Demi-journée"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Back To Home"
+msgstr "Retour à l'accueil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Home-Work Distance"
+msgstr "Distance domicile-travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Hours"
+msgstr "Heures"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Hours Worked"
+msgstr "Heures travaillées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Identification No"
+msgstr "Numéro d'identification"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Job Title"
+msgstr "Poste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "KB)"
+msgstr "Ko)"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Lead Details"
+msgstr "Détails de la piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Lead Name"
+msgstr "Nom de la piste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "Leave Status"
+msgstr "Statut du congé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Leave Type"
+msgstr "Type de congé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Lunch Hours"
+msgstr "Heures de pause déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model.fields,field_description:pk_advance_employee_portal.field_hr_attendance__lunch_in
+msgid "Lunch In"
+msgstr "Début pause déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model.fields,field_description:pk_advance_employee_portal.field_hr_attendance__lunch_out
+msgid "Lunch Out"
+msgstr "Fin pause déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "My Timesheets"
+msgstr "Ma feuille de temps"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Male"
+msgstr "Homme"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Manager"
+msgstr "Manager"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Marital Status"
+msgstr "Situation matrimoniale"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Married"
+msgstr "Marié(e)"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Milestone"
+msgstr "Jalon"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Monthly Revenue"
+msgstr "Chiffre d'affaires mensuel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "My Attendance"
+msgstr "Mes présences"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "My Attendance Records"
+msgstr "Mes pointages"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "My Expenses"
+msgstr "Mes notes de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "My Leave Summary"
+msgstr "Mon solde de congés"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+msgid "My Opportunities"
+msgstr "Mes opportunités"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "My Payslips"
+msgstr "Mes bulletins de paie"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "My Profile"
+msgstr "Mon profil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid "My Skills"
+msgstr "Mes compétences"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "My Tasks"
+msgstr "Mes tâches"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Name"
+msgstr "Nom"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Name:"
+msgstr "Nom :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Nationality"
+msgstr "Nationalité"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Net Hours"
+msgstr "Heures nettes"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model.fields,field_description:pk_advance_employee_portal.field_hr_attendance__net_hours
+msgid "Net Working Hours"
+msgstr "Heures de travail nettes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "No Approved Record found."
+msgstr "Aucun planning approuvé trouvé."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "No Picture"
+msgstr "Aucune photo"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "No Record found."
+msgstr "Aucun enregistrement trouvé."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid ""
+"No attendance records\n"
+"                                                found."
+msgstr ""
+"Aucun pointage\n"
+"                                                trouvé."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "No leave Data found."
+msgstr "Aucune donnée de congé trouvée."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Number of Children"
+msgstr "Nombre d'enfants"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Number of Dependent Children"
+msgstr "Nombre d'enfants à charge"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "Order"
+msgstr "Commande"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Ordered"
+msgstr "Commandé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Orders that were cancelled"
+msgstr "Commandes annulées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Other"
+msgstr "Autre"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Paid By"
+msgstr "Payé par"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Paid By *"
+msgstr "Payé par *"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Paid by Company"
+msgstr "Payé par la société"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Paid by Employee"
+msgstr "Payé par l'employé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "No timesheets found."
+msgstr "Aucune feuille de temps trouvée."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Passport No"
+msgstr "Numéro de passeport"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Payroll"
+msgstr "Paie"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Pending customer approval"
+msgstr "En attente d'approbation client"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_lead_form
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_lead
+msgid "Phone:"
+msgstr "Téléphone :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Place of Birth"
+msgstr "Lieu de naissance"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Position Name"
+msgstr "Intitulé du poste"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Private Car Plate"
+msgstr "Immatriculation véhicule personnel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Private Email"
+msgstr "Email personnel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Private Information"
+msgstr "Informations privées"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Private Phone"
+msgstr "Téléphone personnel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Product"
+msgstr "Article"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Products"
+msgstr "Articles"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Project"
+msgstr "Projet"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Project Name"
+msgstr "Nom du projet"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+msgid "Quotation Date"
+msgstr "Date du devis"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Quotation:"
+msgstr "Devis :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Reason"
+msgstr "Motif"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Reason..."
+msgstr "Motif..."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "Remaining Leave Balances"
+msgstr "Soldes de congés restants"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Remove"
+msgstr "Supprimer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Request New Leave"
+msgstr "Demander un nouveau congé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "Request New Schedule"
+msgstr "Demander un nouveau planning"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "Request Status"
+msgstr "Statut de la demande"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "Resource"
+msgstr "Ressource"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "Back To Timesheets"
+msgstr "Retour aux feuilles de temps"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Revenue this month"
+msgstr "Chiffre d'affaires ce mois"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "Role"
+msgstr "Rôle"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "SSN No"
+msgstr "Numéro de sécurité sociale"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "Sale Orders"
+msgstr "Commandes de vente"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Sales Dashboard"
+msgstr "Tableau de bord des ventes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+msgid "Save"
+msgstr "Enregistrer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Save/Pay"
+msgstr "Enregistrer/Payer"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "School"
+msgstr "École / Université"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "School / University"
+msgstr "École / Université"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Search"
+msgstr "Rechercher"
+
+#. module: pk_advance_employee_portal
+#. odoo-python
+#: code:addons/pk_advance_employee_portal/controllers/project_tasks.py:0
+msgid "Search by Assignee"
+msgstr "Rechercher par assigné"
+
+#. module: pk_advance_employee_portal
+#. odoo-python
+#: code:addons/pk_advance_employee_portal/controllers/project_tasks.py:0
+msgid "Search by Milestone"
+msgstr "Rechercher par jalon"
+
+#. module: pk_advance_employee_portal
+#. odoo-python
+#: code:addons/pk_advance_employee_portal/controllers/project_tasks.py:0
+msgid "Search by Project"
+msgstr "Rechercher par projet"
+
+#. module: pk_advance_employee_portal
+#. odoo-python
+#: code:addons/pk_advance_employee_portal/controllers/project_tasks.py:0
+msgid "Search by Task"
+msgstr "Rechercher par tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Search..."
+msgstr "Rechercher..."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Single"
+msgstr "Célibataire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid "Skill"
+msgstr "Compétence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid "Skill Level"
+msgstr "Niveau de compétence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_skills_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_skills_template
+msgid "Skill Type"
+msgstr "Type de compétence"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "Slip No"
+msgstr "N° bulletin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm_edit
+msgid "Stage"
+msgstr "Étape"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+msgid "Start Date"
+msgstr "Date de début"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_attendance_view
+msgid "Status"
+msgstr "Statut"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Submit Expense"
+msgstr "Soumettre la note de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "Submit Leave Request"
+msgstr "Soumettre la demande de congé"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Submit New Expense"
+msgstr "Soumettre une nouvelle note de frais"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "Submit Request"
+msgstr "Soumettre la demande"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Subtotal"
+msgstr "Sous-total"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Successfully converted orders"
+msgstr "Commandes converties avec succès"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model,name:pk_advance_employee_portal.model_project_task
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_create_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_edit_timesheet
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "Task"
+msgstr "Tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Task Description"
+msgstr "Description de la tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+msgid "Task Detail"
+msgstr "Détails de la tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_task_view
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "Task Name"
+msgstr "Nom de la tâche"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Tasks"
+msgstr "Tâches"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid "Team Time Off Calendar"
+msgstr "Calendrier des congés de l'équipe"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "There are no Payslip Found."
+msgstr "Aucun bulletin de paie trouvé."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.weekly_schedule_list_view_temp_id
+msgid "There are no Record Found."
+msgstr "Aucun enregistrement trouvé."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Time Off"
+msgstr "Congés"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Timesheets"
+msgstr "Feuilles de temps"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "To"
+msgstr "Au"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule__template
+msgid "To Date"
+msgstr "Date de fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "To Date Time"
+msgstr "Date et heure de fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_leave_create_template
+msgid "To Time"
+msgstr "Heure de fin"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_payslips_template
+msgid "Total"
+msgstr "Total"
+
+#. module: pk_advance_employee_portal
+#: model:ir.model.fields,field_description:pk_advance_employee_portal.field_hr_attendance__lunch_hours
+msgid "Total Lunch Hours"
+msgstr "Total heures de pause déjeuner"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "Total:"
+msgstr "Total :"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.edit_experience_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.my_experience_template
+msgid "Type"
+msgstr "Type"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_create_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_quotation_detail_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_customer_edit_template
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "Unknown"
+msgstr "Inconnu"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_edit_form
+msgid "Upload Additional Receipts (PDF/JPG/PNG)"
+msgstr "Téléverser des justificatifs supplémentaires (PDF/JPG/PNG)"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_expense_submission_form
+msgid "Upload Receipts (PDF/JPG/PNG)"
+msgstr "Téléverser les justificatifs (PDF/JPG/PNG)"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_project_tasks_temp_id
+msgid "View"
+msgstr "Voir"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_crm
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_my_timesheets
+msgid "View/Edit"
+msgstr "Voir / Modifier"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Visa Expiration Date"
+msgstr "Date d'expiration du visa"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Visa Expiry"
+msgstr "Expiration du visa"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Visa No"
+msgstr "N° de visa"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.pk_advance_portal_my_home
+msgid "Weekly Schedule"
+msgstr "Planning hebdomadaire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_weekly_schedule_form_view_temp_id
+msgid "Weekly Schedules"
+msgstr "Plannings hebdomadaires"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.weekly_schedule_list_view_temp_id
+msgid "Weekly Shift"
+msgstr "Horaire hebdomadaire"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Widower"
+msgstr "Veuf(ve)"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Work Email"
+msgstr "Email professionnel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Work Permit"
+msgstr "Permis de travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+msgid "Work Permit Expiration"
+msgstr "Expiration du permis de travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Work Permit Expiration Date"
+msgstr "Date d'expiration du permis de travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_edit_template
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Work Permit No"
+msgstr "N° de permis de travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Work Phone"
+msgstr "Téléphone professionnel"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_my_profile_tem_id
+msgid "Working Hours"
+msgstr "Horaires de travail"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_my_expenses
+msgid "You don't have any Expense yet."
+msgstr "Vous n'avez pas encore de note de frais."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_portal_sale_order_template
+msgid "You don't have any sale orders yet."
+msgstr "Vous n'avez pas encore de commande de vente."
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_sales_dashboard
+msgid "Your sales performance at a glance"
+msgstr "Votre performance commerciale en un coup d'œil"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.ad_employee_leave_form_view_temp_id
+msgid "days remaining"
+msgstr "jours restants"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_view_timesheet
+msgid "hrs"
+msgstr "h"
+
+#. module: pk_advance_employee_portal
+#: model_terms:ir.ui.view,arch_db:pk_advance_employee_portal.portal_timeoff_calendar_template
+msgid ""
+"{\n"
+"                    title:"
+msgstr ""
+"{\n"
+"                    titre:"

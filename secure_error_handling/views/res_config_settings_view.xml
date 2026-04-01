@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_secure_error" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.secure.error</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <app string="Sécurité" name="secure_error_handling">
+                    <block title="Messages d'erreur">
+                        <setting>
+                            <field name="secure_error_enable_js_mask"/>
+                            <div class="content-group">
+                                <div class="text-muted">
+                                    Masque les stacktraces et détails techniques dans les popups du webclient
+                                </div>
+                            </div>
+                        </setting>
+                        <setting>
+                            <field name="secure_error_generic_message" class="oe_inline"/>
+                            <div class="content-group">
+                                <div class="text-muted">
+                                    Message affiché à l'utilisateur en cas d'erreur interne
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </form>
+        </field>
+    </record>
+</odoo>

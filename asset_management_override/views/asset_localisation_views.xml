@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue formulaire pour asset.localisation -->
+        <record id="view_asset_localisation_form" model="ir.ui.view">
+            <field name="name">asset.localisation.form</field>
+            <field name="model">asset.localisation</field>
+            <field name="arch" type="xml">
+                <form string="Localisation">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="adresse"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue liste pour asset.localisation -->
+        <record id="view_asset_localisation_tree" model="ir.ui.view">
+            <field name="name">asset.localisation.tree</field>
+            <field name="model">asset.localisation</field>
+            <field name="arch" type="xml">
+                <list string="Localisations">
+                    <field name="name"/>
+                    <field name="adresse"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action pour asset.localisation -->
+        <record id="action_asset_localisation" model="ir.actions.act_window">
+            <field name="name">Localisations</field>
+            <field name="res_model">asset.localisation</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle localisation
+                </p>
+                <p>
+                    Gérez les localisations physiques de vos actifs.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
+

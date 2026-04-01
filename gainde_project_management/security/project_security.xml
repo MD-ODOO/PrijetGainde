@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Catégorie pour regrouper les groupes dans l'interface Utilisateurs -->
+    <record model="ir.module.category" id="module_category_gainde_project">
+        <field name="name">Gestion de Projets gainde</field>
+        <field name="description">Groupes pour la gestion avancée des projets</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Groupe de base : Collaborateur Projet -->
+    <record id="group_project_user" model="res.groups">
+        <field name="name">Collaborateur Projet</field>
+        <field name="category_id" ref="module_category_gainde_project"/>
+        <field name="comment">Accès basique aux tâches et timesheets assignées</field>
+        <field name="implied_ids" eval="[(4, ref('project.group_project_user'))]"/>  <!-- Hérite du groupe natif Project/User -->
+    </record>
+
+    <!-- Chef de Projet : hérite du précédent + plus de droits -->
+    <record id="group_project_manager" model="res.groups">
+        <field name="name">Chef de Projet</field>
+        <field name="category_id" ref="module_category_gainde_project"/>
+        <field name="implied_ids" eval="[(4, ref('gainde_project_management.group_project_user'))]"/>
+        <field name="comment">Gestion complète des projets assignés + validation</field>
+        <!-- Hérite aussi du natif si besoin -->
+        <field name="implied_ids" eval="[(4, ref('project.group_project_manager'))]"/>
+    </record>
+
+    <!-- Facturation / Analytique -->
+    <record id="group_project_billing" model="res.groups">
+        <field name="name">Facturation Projets</field>
+        <field name="category_id" ref="module_category_gainde_project"/>
+        <field name="implied_ids" eval="[(4, ref('account.group_account_invoice'))]"/>  <!-- Accès factures -->
+        <field name="comment">Accès aux coûts, timesheets, facturation projets</field>
+    </record>
+
+    <!-- Admin global projets -->
+    <record id="group_project_admin" model="res.groups">
+        <field name="name">Administrateur Projets</field>
+        <field name="category_id" ref="module_category_gainde_project"/>
+        <field name="implied_ids" eval="[(4, ref('gainde_project_management.group_project_manager'))]"/>
+        <field name="comment">Contrôle total sur tous les projets et configurations</field>
+    </record>
+
+    <!-- Règles d'accès record-level (optionnel pour restreindre par utilisateur/projet) -->
+    <!-- Exemple : voir seulement ses projets pour les simples users -->
+    <record id="rule_project_user_own_projects" model="ir.rule">
+        <field name="name">Projets : voir seulement ceux où je suis impliqué</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="groups" eval="[(4, ref('gainde_project_management.group_project_user'))]"/>
+        <field name="domain_force">
+            ['|', ('user_id', '=', user.id), ('message_partner_ids', 'child_of', [user.partner_id.id])]
+        </field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Pour tasks : voir/éditer seulement assignées -->
+    <record id="rule_task_user_assigned" model="ir.rule">
+        <field name="name">Tâches : voir/éditer seulement assignées</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="groups" eval="[(4, ref('gainde_project_management.group_project_user'))]"/>
+        <field name="domain_force">[('user_ids', 'in', [user.id])]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+</odoo>

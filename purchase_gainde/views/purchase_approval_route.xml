@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- <record id="purchase_order_approval_form" model="ir.ui.view">
+            <field name="name">purchase.order.approval.form</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+
+                <button name="button_approve" position="attributes">
+                    <attribute name="groups"></attribute>
+                    <attribute name="invisible">state != 'to approve' or is_current_approver == False</attribute>
+                </button>
+                           
+                <field name="currency_id" position="after">
+                    <field name="use_approval_route" invisible="True"/>
+                    
+                    
+                    <field name="approval_route_id"
+                           readonly="state != 'draft'"
+                       />
+                </field>
+
+                <notebook position="inside">
+                    <page name="approval_route" string="Approval Route"
+                          invisible="state in ['draft', 'sent'] or approval_route_id == False">
+                        <field name="approval_route_stage_ids">
+                            <list>
+                                <field name="sequence" invisible="True" widget="handle"/>
+                                <field name="name"/>
+                                <field name="user_ids" widget="many2many_avatar_user"/>
+                                <field name="state"/>
+                                <field name="decisions_summary"/>
+                                
+                            </list>
+                        </field>
+                        <field name="is_current_approver" invisible="True"/>
+                    </page>
+                </notebook>
+            </field>
+        </record> -->
+<!-- Inherit purchase.request form to add approval UI and control visibility of N+1 button -->
+        <!-- <record id="purchase_request_approval_form" model="ir.ui.view">
+            <field name="name">purchase.request.approval.form</field>
+            <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                      <button name="action_n2_approved" invisible="state  not in ('n1_approval,rcb_pending,rcg_pending,to_purchase,rcb_approval') or is_current_approver == False" string="Approuver" type="object" class="oe_highlight"/>  -->
+
+                 <!-- <xpath expr="//header/button[@name='button_approve']" position="after"> -->
+
+   <!-- <button
+                        name="action_n2_approved"
+                        string="Approuver"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state  != ('n1_approval') or is_current_approver == False"   
+                        groups="purchase_request.group_purchase_request_manager"
+                    /> -->
+                    <!-- <attribute name="invisible">x_split_parent or state != 'to_approve'</attribute> -->
+                <!-- </xpath> -->
+
+                <!-- <xpath expr="//field[@name='currency_id']" position="after">
+                   <field name="use_approval_route" invisible="1"/>
+                    <field name="approval_route_id" string="Parcours d'approbation" />
+                </xpath>  -->
+
+                  <!-- <xpath expr="//header/button[@name='action_n1_approved']" position="after">
+               <button
+                        name="action_n2_approved"
+                        invisible="state  in ('draft', 'to_approve')"
+                        string="Approver Testeur N+2"
+                        type="object"
+                        class="oe_highlight"
+                        groups="purchase_request.group_purchase_request_manager"
+                    />
+                </xpath> 
+
+                <xpath expr="//notebook" position="inside">
+                       <page name="approval_route" string="Parcours d'approbation"
+                          invisible="approval_route_id == False">
+
+                       
+                                              <field name="approval_route_id" string="Parcours d'approbation" />
+
+                        <field name="approval_route_stage_ids" widget="one2many_list" readonly="is_admin_ui == False">
+                            <list>
+                                <field name="sequence" invisible="1"/>
+                                <field name="name" string="Étapes"/>
+                                <field name="user_ids" widget="many2many_avatar_user" string="Approvers"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="action_assign_default_route_ui" type="object"
+                            class="btn btn-secondary"
+                            string="Appliquer route défaut (migration)"
+                            groups="base.group_system"/>
+                </xpath> 
+            </field>
+        </record> -->
+
+        <!-- Inherit purchase.order approval form from xf_approval_route_purchase
+             to hide approval_route_id (we map it automatically in Python) -->
+        <record id="purchase_order_approval_form_inherit_gainde" model="ir.ui.view">
+            <field name="name">purchase.order.approval.form.inherit.gainde</field>
+            <field name="inherit_id" ref="xf_approval_route_purchase.purchase_order_approval_form"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='approval_route_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="required">0</attribute>
+                </xpath>
+
+                <!-- Restreindre l'affichage des étapes aux étapes en attente / futures
+                     et marquer l'édition des approbateurs avec un context spécifique
+                     pour pouvoir contrôler/ notifier côté Python. -->
+                <xpath expr="//page[@name='approval_route']/field[@name='approval_route_stage_ids']" position="replace">
+                    <field name="approval_route_stage_ids"
+                >
+                        <list>
+                            <field name="sequence" invisible="True" widget="handle"/>
+                            <field name="name" readonly="1"/>
+                            <field name="user_ids" widget="many2many_avatar_user"/>
+                            <field name="state" readonly="1"/>
+                            <field name="decisions_summary" readonly="1"/>
+                        </list>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit purchase.request.line form to add approval route panel -->
+        <record id="purchase_request_line_approval_form" model="ir.ui.view">
+            <field name="name">purchase.request.line.approval.form</field>
+            <field name="inherit_id" ref="purchase_request.purchase_request_line_form"/>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='analytic_distribution']" position="attributes">
+                    <attribute name="readonly">not can_edit_analytic_distribution</attribute>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="approval_route" string="Parcours d'approbation"
+                          invisible="approval_route_id == False">
+                        <field name="approval_route_id" string="Parcours d'approbation" />
+                        <field name="approval_route_stage_ids" widget="one2many_list">
+                            <list>
+                                <field name="sequence" invisible="1"/>
+                                <field name="name" string="Étapes"/>
+                                <field name="user_ids" widget="many2many_avatar_user" string="Approvers"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+
+                <!-- Masquer les onglets "Purchase Order Lines" et "Allocations" sur la ligne de demande d'achat -->
+                <xpath expr="//page[@name='purchase_lines']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='allocations']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Override: rendre approval_route_stage_ids toujours en readonly sur la vue d'approbation PO -->
+        <record id="purchase_order_approval_form_inherit_gainde_readonly" model="ir.ui.view">
+            <field name="name">purchase.order.approval.form.inherit.gainde.readonly</field>
+            <field name="inherit_id" ref="purchase_gainde.purchase_order_approval_form_inherit_gainde"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='approval_route_stage_ids']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Override: rendre approval_route_stage_ids toujours en readonly sur la vue d'approbation PR line -->
+        <record id="purchase_request_line_approval_form_readonly" model="ir.ui.view">
+            <field name="name">purchase.request.line.approval.form.readonly</field>
+            <field name="inherit_id" ref="purchase_gainde.purchase_request_line_approval_form"/>
+            <field name="model">purchase.request.line</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='approval_route_stage_ids']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

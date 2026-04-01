@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Action utilitaire: nettoyer les workflows d'approbation sur les clients -->
+        <record id="server_action_cleanup_partner_approval_clients" model="ir.actions.server">
+            <field name="name">Nettoyer approbation (clients)</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code">env['res.partner'].action_gainde_cleanup_partner_approval_for_clients()</field>
+        </record>
+
+        <!-- Rôle d'approbation pour contrôleur d'article -->
+        <record id="approval_role_product_controller_gainde" model="approval.role">
+            <field name="name">Contrôleur article (Gainde)</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- Placeholder: admin par défaut, à ajuster fonctionnellement -->
+            <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        </record>
+
+        <!-- Rôle d'approbation pour responsables comptables -->
+        <record id="approval_role_account_manager_gainde" model="approval.role">
+            <field name="name">Responsable comptable (Gainde)</field>
+            <field name="company_id" ref="base.main_company"/>
+            <!-- Placeholder: admin par défaut, à ajuster fonctionnellement -->
+            <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        </record>
+
+        <!-- Route d'approbation par défaut pour les partenaires -->
+        <record id="xf_route_res_partner_default" model="approval.route">
+            <field name="name">Route par défaut - Partenaires</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Étape 1: RA Achats (utilisateurs RA) -->
+        <!-- <record id="xf_stage_partner_ra" model="approval.route.stage">
+            <field name="name">Approbation RA Achats</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="approval_route_id" ref="xf_route_res_partner_default"/>
+             On met un approbateur placeholder pour satisfaire la contrainte
+            <field name="custom_user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record> -->
+
+        <!-- Étape 2: Responsable comptable -->
+        <record id="xf_stage_partner_account_manager" model="approval.route.stage">
+            <field name="name">Approbation Service comptable</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="approval_route_id" ref="xf_route_res_partner_default"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_account_manager_gainde"/>
+        </record>
+
+        <!-- Route d'approbation par défaut pour les articles -->
+        <record id="xf_route_product_template_default" model="approval.route">
+            <field name="name">Route par défaut - Articles</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Étape 1: RA Achats pour article (responsable achats initie) -->
+        <!-- <record id="xf_stage_product_ra" model="approval.route.stage">
+            <field name="name">Approbation RA Achats</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="approval_route_id" ref="xf_route_product_template_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record> -->
+
+        <!-- Étape 2: Contrôleur article (vérifie existence / poste budgétaire) -->
+        <record id="xf_stage_product_controller" model="approval.route.stage">
+            <field name="name">Contrôle RCG</field>
+            <field name="sequence">1</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="approval_route_id" ref="xf_route_product_template_default"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_product_controller_gainde"/>
+        </record>
+
+        <!-- Étape 3: Responsable comptable pour article (renseigne compte tiers) -->
+        <record id="xf_stage_product_account_manager" model="approval.route.stage">
+            <field name="name">Approbation Service comptable</field>
+            <field name="sequence">2</field>
+            <field name="approval_type">one</field>
+            <field name="use_custom_conditions" eval="False"/>
+            <field name="approval_route_id" ref="xf_route_product_template_default"/>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_account_manager_gainde"/>
+        </record>
+    </data>
+</odoo>

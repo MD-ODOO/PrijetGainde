@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PLAN0001 : Conformite ORBUS Import Export 2026 - 8 MISSIONS -->
+
+    <record id="mission_1_1" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-01</field>
+        <field name="name">Verification declarations ORBUS Odoo</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">1</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-03-15</field>
+        <field name="period_end">2026-03-20</field>
+        <field name="objective">Comparer 100 percent declarations ORBUS vs Odoo - Taux erreur inferieur 0.5 percent</field>
+    </record>
+
+    <record id="mission_1_2" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-02</field>
+        <field name="name">Controle DAM NCTS DAU Gainde2000</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">2</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-03-22</field>
+        <field name="period_end">2026-03-25</field>
+        <field name="objective">Valider conformite DAM NCTS DAU - Zero rejet DGID Q1 2026</field>
+    </record>
+
+    <record id="mission_1_3" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-03</field>
+        <field name="name">Audit declarations import BL</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">3</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-03-29</field>
+        <field name="period_end">2026-04-02</field>
+        <field name="objective">Controler 500 BL import vs ORBUS - Assiette douaniere correcte</field>
+    </record>
+
+    <record id="mission_1_4" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-04</field>
+        <field name="name">Validation export NCTS</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">2</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-05</field>
+        <field name="period_end">2026-04-08</field>
+        <field name="objective">Verifier 200 NCTS export - Documents douaniers complets</field>
+    </record>
+
+    <record id="mission_1_5" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-05</field>
+        <field name="name">Controle regime suspensif</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">5</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-12</field>
+        <field name="period_end">2026-04-15</field>
+        <field name="objective">Auditer entrepot suspensif DAU - Stocks coherents ORBUS</field>
+    </record>
+
+    <record id="mission_1_6" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-06</field>
+        <field name="name">Reconciliation TVA import</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">2</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-19</field>
+        <field name="period_end">2026-04-22</field>
+        <field name="objective">Controler TVA 18 percent import - Declarations coherentes</field>
+    </record>
+
+    <record id="mission_1_7" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-07</field>
+        <field name="name">Test procedures douanieres</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">3</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-01-01</field>
+        <field name="period_end">2026-01-04</field>
+        <field name="objective">Simuler 50 procedures import export - Delai conforme 24h</field>
+    </record>
+
+    <record id="mission_1_8" model="audit_gainde.mission">
+        <field name="reference">AUD/2026/0008</field>
+        <field name="name">Rapport conformite ORBUS Q1</field>
+        <field name="plan_id" ref="plan_1_2026"/>
+        <field name="domain">4</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-30</field>
+        <field name="period_end">2026-05-03</field>
+        <field name="objective">Consolider rapport Q1 DGID - Taux conformite superieur 98 percent</field>
+    </record>
+    
+    <!-- PLAN0002 -->
+    
+    <record id="mission_2_1" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-09</field>
+        <field name="name">Controle regime suspensif</field>
+        <field name="plan_id" ref="plan_2_2026"/>
+        <field name="domain">5</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-12</field>
+        <field name="period_end">2026-04-15</field>
+        <field name="objective">Auditer entrepot suspensif DAU - Stocks coherents ORBUS</field>
+    </record>
+
+    <record id="mission_2_2" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-10</field>
+        <field name="name">Reconciliation TVA import</field>
+        <field name="plan_id" ref="plan_2_2026"/>
+        <field name="domain">2</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-19</field>
+        <field name="period_end">2026-04-22</field>
+        <field name="objective">Controler TVA 18 percent import - Declarations coherentes</field>
+    </record>
+
+    <record id="mission_2_3" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-11</field>
+        <field name="name">Test procedures douanieres</field>
+        <field name="plan_id" ref="plan_2_2026"/>
+        <field name="domain">3</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-01-01</field>
+        <field name="period_end">2026-01-04</field>
+        <field name="objective">Simuler 50 procedures import export - Delai conforme 24h</field>
+    </record>
+
+    <record id="mission_2_4" model="audit_gainde.mission">
+        <field name="reference">AUD-2026-12</field>
+        <field name="name">Rapport conformite ORBUS Q1</field>
+        <field name="plan_id" ref="plan_2_2026"/>
+        <field name="domain">4</field>
+        <field name="responsible_id" ref="base.user_admin"/>
+        <field name="state">planned</field>
+        <field name="period_start">2026-04-30</field>
+        <field name="period_end">2026-05-03</field>
+        <field name="objective">Consolider rapport Q1 DGID - Taux conformite superieur 98 percent</field>
+    </record>
+</odoo>

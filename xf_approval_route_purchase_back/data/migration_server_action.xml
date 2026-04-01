@@ -1,0 +1,25 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Server action to trigger migration -->
+        <record id="action_assign_default_approval_route_server" model="ir.actions.server">
+            <field name="name">Assigner route d'approbation par défaut (PR)</field>
+            <field name="model_id" ref="purchase_request.model_purchase_request"/>
+            <field name="state">code</field>
+            <field name="code">
+def action(self):
+    action = self.env['some.model'].do_something()
+    return True
+</field>
+        </record>
+
+        <!-- Menu item (admin only) under Purchase Requests -->
+        <record id="menu_assign_default_approval_route" model="ir.ui.menu">
+            <field name="name">Appliquer route d'approbation par défaut</field>
+            <field name="parent_id" ref="purchase_request.menu_purchase_request"/>
+            <field name="action" ref="action_assign_default_approval_route_server"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+       
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+<odoo>
+  <record id="seq_treasury_receipt" model="ir.sequence">
+    <field name="name">Treasury Receipt</field>
+    <field name="code">treasury.receipt</field>
+    <field name="prefix">TR/</field>
+    <field name="padding">5</field>
+  </record>
+</odoo>

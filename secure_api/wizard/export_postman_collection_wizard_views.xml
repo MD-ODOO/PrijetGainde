@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_export_postman_collection_wizard" model="ir.ui.view">
+        <field name="name">view_export_postman_collection_wizard</field>
+        <field name="model">export.postman.collection.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Postman Collection Wizard">
+                <group string="Postman Collection">
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <group/>
+                </group>
+                <p>
+                    <i>
+                        Clicking 'Download' will download the collection JSON, which you can directly import into Postman.
+                    </i>
+                </p>         
+                <p>
+                    Do you want to export a Postman Collection for the selected API(s)?
+                </p>
+                <footer>
+                    <button string="Download" name="download_postman_collection" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_export_postman_collection_wizard" model="ir.actions.act_window">
+        <field name="name">Export to Postman Collection</field>
+        <field name="res_model">export.postman.collection.wizard</field>
+        <field name="binding_model_id" ref="model_secure_api"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_export_postman_collection_wizard"/>
+    </record>
+</odoo>

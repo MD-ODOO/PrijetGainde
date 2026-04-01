@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Hériter de la vue list de asset.transfer.entry pour ajouter le champ localisation -->
+    <record id="view_asset_transfer_tree_inherit" model="ir.ui.view">
+        <field name="name">asset.transfer.tree.inherit</field>
+        <field name="model">asset.transfer.entry</field>
+        <field name="inherit_id" ref="asset_management.view_asset_transfer_tree"/>
+        <field name="arch" type="xml">
+            <field name="transfer_employee_id" position="after">
+                <field name="localisation"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Hériter de la vue form de asset.management pour ajouter le champ localisation dans les lignes de transfert -->
+    <record id="view_asset_form_inherit_localisation" model="ir.ui.view">
+        <field name="name">asset.management.form.inherit.localisation</field>
+        <field name="model">asset.management</field>
+        <field name="inherit_id" ref="asset_management.view_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='transfer_ids']/list/field[@name='transfer_employee_id']" position="after">
+                <field name="localisation"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

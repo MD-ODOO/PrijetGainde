@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="hr_employee_form_inherit" model="ir.ui.view">
+      <field name="name">hr.employee.form.inherit</field>
+      <field name="model">hr.employee</field>
+      <field name="inherit_id" ref="hr.view_employee_form"/>
+      <field name="arch" type="xml">
+      
+      <xpath expr="//field[@name='work_email']" position="before">
+                <field name="ipres_number"/>
+                <field name="num_css"/>
+                <field name="grade"/>
+            </xpath>
+        <!-- Ajouter ipres_number et num_css après le 5ème champ du 1er groupe -->
+       
+
+        <!-- Ajouter un groupe Période d'essai et autres groupes avant active_group -->
+        <xpath expr="//group[@name='active_group']" position="before">
+          <group string="Période d'essai">
+            <field name="debut"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,44 @@
+<odoo>
+  <template id="treasury_kpi_template">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <h2>KPI Trésorerie</h2>
+        <p>
+          Période : <span t-esc="date_from"/> → <span t-esc="date_to"/>
+        </p>
+        <table class="table table-sm o_main_table">
+          <tbody>
+            <tr>
+              <th>Taux de règlement fournisseurs</th>
+              <td class="text-end"><span t-esc="'%.2f' % supplier_payment_rate"/> %</td>
+            </tr>
+            <tr>
+              <th>Taux de recouvrement client</th>
+              <td class="text-end"><span t-esc="'%.2f' % customer_collection_rate"/> %</td>
+            </tr>
+            <tr>
+              <th>Montant global à décaisser</th>
+              <td class="text-end"><span t-esc="total_to_disburse"/></td>
+            </tr>
+            <tr>
+              <th>Salaires</th>
+              <td class="text-end"><span t-esc="totals_by_type.get('salary')"/></td>
+            </tr>
+            <tr>
+              <th>Primes</th>
+              <td class="text-end"><span t-esc="totals_by_type.get('bonus')"/></td>
+            </tr>
+            <tr>
+              <th>Fournisseurs</th>
+              <td class="text-end"><span t-esc="totals_by_type.get('supplier')"/></td>
+            </tr>
+            <tr>
+              <th>Impôts et taxes</th>
+              <td class="text-end"><span t-esc="totals_by_type.get('tax')"/></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </t>
+  </template>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================= -->
+        <!-- Formulaire VPI -->
+        <!-- ============================= -->
+       
+        <!-- ============================= -->
+        <!-- Liste Catégorie -->
+        <!-- ============================= 
+        <record id="list_category_view" model="ir.ui.view">
+            <field name="name">category.list</field>
+            <field name="model">cerco.category</field>
+            <field name="arch" type="xml">
+                <list string="Catégorie" editable="bottom">
+                    <field name="name"/>
+                    <field name="grade_id"/>
+                    <field name="echelon"/>
+                    <field name="indice"/>
+                    <field name="value_year"/>
+                </list>
+            </field>
+        </record>
+        -->
+       
+
+
+
+
+
+    </data>
+</odoo>

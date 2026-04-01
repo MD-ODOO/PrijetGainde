@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo noupdate="0">
+
+    <!-- List View -->
+    <record id="helpdesk_ticket_type_tree_view" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.tree</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="arch" type="xml">
+            <list string="Types de réclamations">
+                <field name="sequence" widget="handle"/>
+                <field name="reclamations"/>
+                <field name="type_reclamation"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="helpdesk_ticket_type_form_view" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.form</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="arch" type="xml">
+            <form string="Type de réclamation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reclamations"/>
+                            <field name="type_reclamation"/>
+                        </group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="helpdesk_ticket_type_search_view" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.type.search</field>
+        <field name="model">helpdesk.ticket.type</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher Types de réclamations">
+                <field name="reclamations"/>
+                <field name="type_reclamation"/>
+                <filter string="Actif" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactif" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="helpdesk_ticket_type_action" model="ir.actions.act_window">
+        <field name="name">Types de réclamations</field>
+        <field name="res_model">helpdesk.ticket.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau type de réclamation
+            </p>
+            <p>
+                Définissez les différents types de réclamations pour vos tickets helpdesk.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem
+        id="helpdesk_ticket_type_menu"
+        name="Types de réclamations"
+        parent="helpdesk.helpdesk_menu_config"
+        action="helpdesk_ticket_type_action"
+        sequence="18"
+        groups="helpdesk.group_helpdesk_manager"/>
+
+</odoo>
+

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Formulaire Congés Héritage -->
+        <record id="view_hr_holidays_inherit" model="ir.ui.view">
+            <field name="name">Holidays</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+            <field name="arch" type="xml">
+
+                <button name="refuse" position="replace">
+                    <button string="Refuser"
+                            type="action"
+                            name="%(hr_holiday_refusal_motivation)d"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','in',['validate','refuse','draft'])]}"
+                            groups="base.group_hr_user"/>
+                    <button string="Remettre en brouillon"
+                            type="object"
+                            name="holidays_resete"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','!=','validate')]}"
+                            groups="base.group_hr_manager"/>
+                </button>
+
+                <field name="department_id" position="after">
+                    <field name="supporting_document" widget="many2many_binary" attrs="{'invisible': [('is_absence', '=', False)]}"/>
+                    <field name="is_absence" string="Demande d'absence" invisible="1"/>
+                </field>
+
+                <xpath expr="//sheet/group[1]" position="after">
+                    <div attrs="{'invisible':[('state','!=','refuse')]}">
+                        <separator string="Motif du refus"/>
+                        <field name="refusal_motivation" readonly="1"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Filtre Congés Héritage -->
+        <record id="view_holiday_filter_inherit" model="ir.ui.view">
+            <field name="name">Leave Request filter</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.view_hr_holidays_filter"/>
+            <field name="arch" type="xml">
+                <filter name="validated" position="after">
+                    <filter domain="[('is_absence','=',True)]" string="Demande d'absence" name="is_absence"/>
+                </filter>
+            </field>
+        </record>
+
+        <!-- Action : Mes demandes d'absence -->
+        <record id="open_ask_absence" model="ir.actions.act_window">
+            <field name="name">Demande d'absence</field>
+            <field name="res_model">hr.holidays</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="view_id" eval="False"/>
+            <field name="context">
+                {'default_type': 'remove','default_is_absence':True,'needaction_menu_ref':['hr_holidays.menu_open_company_allocation']}
+            </field>
+            <field name="domain">[('type','=','remove'),('user_id', '=', uid),('is_absence','=',True)]</field>
+            <field name="search_view_id" ref="view_holiday_filter_inherit"/>
+        </record>
+
+        <!-- Action : Absences à approuver -->
+        <record id="open_absences_approve" model="ir.actions.act_window">
+            <field name="name">Absences à valider</field>
+            <field name="res_model">hr.holidays</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="context">{'default_type':'remove'}</field>
+            <field name="domain">['|', ('type','=','remove'), ('state','!=','draft'), ('is_absence','=',True)]</field>
+            <field name="search_view_id" ref="hr_holidays.view_hr_holidays_filter" />
+        </record>
+
+        <!-- Menu : Demande d'absence -->
+        <menuitem
+            id="hr_holidays.menu_hr_holidays_absence"
+            name="Demande d'absence"
+            parent="hr_holidays.menu_open_ask_holidays"
+            action="open_ask_absence"
+            groups="base.group_user"
+            sequence="2"/>
+
+        <!-- Menu : Absences à approuver -->
+        <menuitem id="team_absence_approve"
+            name="Absences à approuver"
+            parent="hr_holidays.menu_open_ask_holidays"
+            groups="base.group_hr_user"
+            action="open_absences_approve"
+            sequence="4" />
+
+        <!-- Formulaire Statut Congés -->
+        <record id="view_hr_holidays_status_form" model="ir.ui.view">
+            <field name="name">hr.holidays.status.form</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="is_legal_leave"/>
+                    <field name="number_legal_days_per_year" attrs="{'invisible': [('is_legal_leave', '!=', False)],'required':[('is_legal_leave','=',False)]}"/>
+                    <field name="is_not_deductible"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

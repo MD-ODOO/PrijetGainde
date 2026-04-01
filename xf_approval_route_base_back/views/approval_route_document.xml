@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="approval_route_document_stage_list" model="ir.ui.view">
+            <field name="name">approval_route_document_stage_list</field>
+            <field name="model">approval.route.document.stage</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="sequence" invisible="True"/>
+                    <field name="name"/>
+                    <field name="user_ids" widget="many2many_avatar_user"/>
+                    <field name="state"/>
+                    <field name="decisions_summary"/>
+                </list>
+            </field>
+        </record>
+        <record id="approval_route_document_stage_form" model="ir.ui.view">
+            <field name="name">approval_route_document_stage_form</field>
+            <field name="model">approval.route.document.stage</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="sequence" invisible="True"/>
+                            <field name="name"/>
+                            <field name="user_ids" widget="many2many_avatar_user"/>
+                            <field name="approval_type"/>
+                            <field name="state"/>
+                            <field name="decisions_summary"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

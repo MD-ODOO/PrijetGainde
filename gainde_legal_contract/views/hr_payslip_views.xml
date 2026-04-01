@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_inherit_sign" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit.sign</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <!-- On déclare le champ technique pour que Odoo puisse évaluer la condition 'invisible' -->
+                <field name="sign_status" invisible="1"/>
+
+                <button name="action_sign_document"
+                        string="Signer Bulletin"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'done' or sign_status == 'signed'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,242 @@
+<odoo>
+  <record id="action_treasury_payment" model="ir.actions.act_window">
+    <field name="name">Décaissements</field>
+    <field name="res_model">treasury.payment</field>
+    <field name="view_mode">list,form,graph,pivot</field>
+    <field name="context">{'search_default_to_pay': 1}</field>
+  </record>
+
+  <!-- Tableau de bord opérationnel (OWL client action) -->
+  <record id="action_treasury_payment_ops_dashboard" model="ir.actions.client">
+    <field name="name">Tableau de bord — Décaissements</field>
+    <field name="tag">treasury_payment_dashboard</field>
+  </record>
+
+  <!-- Analyse graphique / pivot (ancienne vue dashboard) -->
+  <record id="action_treasury_payment_dashboard" model="ir.actions.act_window">
+    <field name="name">Analyse des décaissements</field>
+    <field name="res_model">treasury.payment</field>
+    <field name="view_mode">graph,pivot</field>
+    <field name="context">{"group_by": ["state", "payment_type"]}</field>
+    <field name="groups_id" eval="[(4, ref('treasury_management.group_treasury_df'))]"/>
+  </record>
+
+  <record id="view_treasury_payment_tree" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <list decoration-danger="is_overdue"
+            decoration-warning="priority in ('2','3') and state not in ('paid','cancelled') and not is_overdue"
+            decoration-success="state == 'paid'"
+            decoration-info="state == 'planned' and not is_overdue and priority not in ('2','3')"
+            decoration-muted="state in ('draft', 'cancelled')"
+            string="Décaissements"
+            multi_edit="1">
+        <field name="name" string="Référence"/>
+        <field name="beneficiary_display" string="Bénéficiaire"/>
+        <field name="category_id" optional="show"/>
+        <field name="planned_payment_date" string="Date prévue"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="payment_type" optional="show"/>
+        <field name="payment_channel" optional="show"/>
+        <field name="responsible_user_id" optional="hide"/>
+        <field name="priority" widget="priority"/>
+        <field name="is_overdue" invisible="1"/>
+        <field name="state" widget="badge"
+               decoration-success="state == 'paid'"
+               decoration-warning="state == 'planned' and not is_overdue"
+               decoration-danger="is_overdue or state == 'cancelled'"
+               decoration-muted="state == 'draft'"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_payment_search" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <search string="Recherche décaissements">
+        <field name="name" string="Référence"/>
+        <field name="partner_id"/>
+        <field name="journal_id"/>
+        <field name="category_id"/>
+        <field name="responsible_user_id"/>
+        <separator/>
+        <filter name="to_pay" string="À payer"
+                domain="[('state','in',('draft','planned'))]"
+                help="Décaissements à payer (brouillon ou planifiés)."/>
+        <filter name="draft" string="Non planifié"
+                domain="[('state','=','draft')]"
+                help="Décaissements non planifiés."/>
+        <filter name="planned" string="Planifié"
+                domain="[('state','=','planned')]"/>
+        <filter name="paid" string="Payé"
+                domain="[('state','=','paid')]"/>
+        <filter name="overdue" string="En retard"
+                domain="['&amp;', ('state','!=','paid'), ('planned_payment_date','&lt;', context_today())]"/>
+        <separator/>
+        <filter name="channel_cash" string="Espèces"
+                domain="[('payment_channel','=','cash')]"/>
+        <filter name="channel_transfer" string="Virement"
+                domain="[('payment_channel','=','transfer')]"/>
+        <filter name="channel_cheque" string="Chèque"
+                domain="[('payment_channel','=','cheque')]"/>
+        <separator/>
+        <filter name="date_this_month" string="Ce mois"
+                domain="[('planned_payment_date','&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                          ('planned_payment_date','&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>
+        <group expand="0" string="Regrouper par">
+          <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
+          <filter name="group_payment_type" string="Type de paiement" context="{'group_by': 'payment_type'}"/>
+          <filter name="group_category" string="Catégorie" context="{'group_by': 'category_id'}"/>
+          <filter name="group_channel" string="Mode de paiement" context="{'group_by': 'payment_channel'}"/>
+          <filter name="group_journal" string="Journal" context="{'group_by': 'journal_id'}"/>
+          <filter name="group_responsible" string="Responsable" context="{'group_by': 'responsible_user_id'}"/>
+          <filter name="group_partner" string="Partenaire" context="{'group_by': 'partner_id'}"/>
+          <filter name="group_month" string="Mois prévu" context="{'group_by': 'planned_payment_date:month'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="view_treasury_payment_form" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_open_plan_wizard" type="object" string="Programmer le règlement"
+                  class="btn-primary"
+                  groups="treasury_management.group_treasury_df,treasury_management.group_treasury_cashier"
+                  invisible="state != 'draft'"/>
+          <button name="action_pay" type="object" string="Valider le paiement"
+                  class="btn-primary"
+                  groups="treasury_management.group_treasury_df,treasury_management.group_treasury_cashier"
+                  invisible="state != 'planned'"/>
+          <button name="action_print_payment_voucher" type="object" string="Imprimer bon de caisse"
+                  class="btn-secondary"
+                  invisible="state != 'paid'"/>
+          <button name="action_cancel" type="object" string="Annuler"
+                  class="btn-secondary"
+                  groups="treasury_management.group_treasury_df"
+                  invisible="state == 'cancelled'"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,planned,paid,cancelled"/>
+        </header>
+        <sheet>
+          <!-- Smart buttons -->
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_payment" type="object"
+                    class="oe_stat_button" icon="fa-credit-card"
+                    invisible="not payment_id">
+              <div class="o_stat_info">
+                <span class="o_stat_text">Paiement comptable</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Banners d'alerte -->
+          <div class="alert alert-danger d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="not is_overdue">
+            <i class="fa fa-exclamation-triangle fa-lg"/>
+            <div>
+              <strong>Paiement en retard !</strong>
+              La date de règlement prévue est dépassée. Ce décaissement doit être traité immédiatement.
+            </div>
+          </div>
+          <div class="alert alert-danger d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="priority != '3' or state in ('paid','cancelled') or is_overdue">
+            <i class="fa fa-star fa-lg"/>
+            <div>
+              <strong>Paiement très urgent (★★★)</strong>
+              Ce décaissement est classé priorité maximale — à régler en priorité absolue.
+            </div>
+          </div>
+          <div class="alert alert-warning d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="priority != '2' or state in ('paid','cancelled') or is_overdue">
+            <i class="fa fa-star fa-lg"/>
+            <div>
+              <strong>Paiement urgent (★★)</strong>
+              Ce décaissement nécessite un traitement rapide.
+            </div>
+          </div>
+
+          <div class="oe_title">
+            <h1>
+              <field name="name" readonly="1"/>
+            </h1>
+          </div>
+
+          <group>
+            <group string="Informations générales">
+              <field name="payment_type" readonly="state == 'paid'"/>
+              <field name="employee_id" groups="base.group_hr_user"
+                     invisible="payment_type != 'salary'"
+                     readonly="state == 'paid'"/>
+              <field name="beneficiary_display" readonly="1" invisible="payment_type != 'salary'"/>
+              <field name="partner_id" invisible="payment_type == 'salary'"
+                     readonly="state == 'paid'"/>
+              <field name="category_id" readonly="state == 'paid'"/>
+              <field name="invoice_id" readonly="state == 'paid'"/>
+            </group>
+            <group string="Priorité &amp; Planification">
+              <field name="priority" widget="priority" readonly="state == 'paid'"/>
+              <field name="urgency_reason" readonly="state == 'paid'"
+                     invisible="priority not in ('2', '3')"
+                     placeholder="Motif justifiant l'urgence…"/>
+              <field name="planned_payment_date" readonly="state == 'paid'"/>
+              <field name="payment_date" readonly="state == 'paid'"/>
+              <field name="responsible_user_id" readonly="state == 'paid'"/>
+            </group>
+          </group>
+
+          <group>
+            <group string="Mode de règlement">
+              <field name="payment_channel" readonly="state == 'paid'"/>
+              <field name="journal_id" readonly="state == 'paid'"/>
+              <field name="instructions" readonly="state == 'paid'"
+                     placeholder="Instructions spéciales pour le règlement…"/>
+            </group>
+            <group string="Montants">
+              <field name="currency_id" readonly="state == 'paid'"/>
+              <field name="amount_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="state == 'paid'"/>
+              <field name="amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Montant (devise société)"/>
+              <field name="payment_delay_days" readonly="1"
+                     invisible="not payment_delay_days"
+                     string="Écart vs échéance facture (jours)"/>
+            </group>
+          </group>
+
+          <field name="is_overdue" invisible="1"/>
+          <field name="cash_required" invisible="1"/>
+          <field name="payment_id" invisible="1"/>
+          <chatter/>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_treasury_payment_graph" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <graph string="Décaissements" type="bar">
+        <field name="amount" type="measure"/>
+        <field name="state" type="row"/>
+        <field name="payment_type" type="col"/>
+      </graph>
+    </field>
+  </record>
+
+  <record id="view_treasury_payment_pivot" model="ir.ui.view">
+    <field name="model">treasury.payment</field>
+    <field name="arch" type="xml">
+      <pivot string="Décaissements">
+        <field name="amount" type="measure"/>
+        <field name="payment_delay_days" type="measure"/>
+        <field name="state" type="row"/>
+        <field name="payment_type" type="col"/>
+      </pivot>
+    </field>
+  </record>
+</odoo>

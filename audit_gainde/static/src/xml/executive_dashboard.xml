@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+        <t t-name="audit_gainde.RiskDashboard">
+
+            <div class="exec-dashboard o_risk_dashboard">
+
+                <!-- KPI Row -->
+                <div class="kpi-row row">
+
+                    <div class="kpi-card blue col-3" t-on-click="openAllRisks">
+                        <h3>Total risques</h3>
+                        <span t-esc="data.kpis.total"/>
+                    </div>
+
+                    <div class="kpi-card red col-3" t-on-click="openCriticalRisks">
+                        <h3>Critiques</h3>
+                        <span t-esc="data.kpis.critical"/>
+                    </div>
+
+                    <div class="kpi-card green col-3" t-on-click="openUsedRisks">
+                        <h3>Utilisés</h3>
+                        <span t-esc="data.kpis.used"/>
+                    </div>
+
+                    <div class="kpi-card purple col-3" t-on-click="openNoControlRisks">
+                        <h3>Sans contrôle</h3>
+                        <span t-esc="data.kpis.no_control"/>
+                    </div>
+
+                </div>
+
+                <!-- Graph Row -->
+                <div class="chart_grid row mt-4">
+
+                    <div class="chart_card col-6">
+                        <canvas id="topRisks"/>
+                    </div>
+
+                    <div class="chart_card col-6">
+                        <canvas id="riskLevels"/>
+                    </div>
+
+                </div>
+
+                <!-- Domain Graph Row -->
+                <div class="chart_grid row mt-4">
+
+                    <div class="chart_card col-12">
+                        <canvas id="riskDomains"/>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </t>
+
+</templates>

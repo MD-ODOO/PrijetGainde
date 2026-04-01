@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Formulaire du wizard -->
+        <record id="hr_holidays_attribution_view" model="ir.ui.view">
+            <field name="name">Attribution congés</field>
+            <field name="model">nrt.hr_holidays.attribution</field>
+            <field name="arch" type="xml">
+                <form string="Attribution congés">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_stop"/>
+                        </group>
+                        <group>
+                            <field name="number_of_days"/>
+                            <field name="leave_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="attribute" string="Attribuer" type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Annuler" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action pour ouvrir le wizard -->
+        <record model="ir.actions.act_window" id="open_nrt_holidays_attribution">
+            <field name="name">Attribution des congés</field>
+            <field name="res_model">nrt.hr_holidays.attribution</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_holidays_attribution_view"/>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem name="Attribution congés"
+                  parent="hr_holidays.menu_open_ask_holidays"
+                  id="menu_open_view_nrt_holidays_attribution"
+                  action="open_nrt_holidays_attribution"
+                  groups="base.group_hr_manager"
+                  sequence="10"/>
+    </data>
+</odoo>

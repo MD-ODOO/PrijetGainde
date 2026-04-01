@@ -1,0 +1,67 @@
+<odoo>
+<template id="my_payslips_template" name="My Payslips">
+    <t t-call="portal.portal_layout">
+        <div class="container mt-4">
+            <h2>My Payslips</h2>
+                      <div class="col d-flex justify-content-between">
+                    <!-- Left Button -->
+                    <a href="/my/home" class="btn btn-secondary">
+                        <i class="fa fa-arrow-left me-1"></i>
+                        Back
+                    </a>
+                    <!-- Right Button -->
+                    <a href="/my" class="btn btn-primary">
+                        <i class="fa fa-arrow-right me-1"></i>
+                        Back
+                    </a>
+                </div>
+            <t t-if="payslips">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Slip No</th>
+                        <th>Date From</th>
+                        <th>Date To</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="payslips" t-as="payslip">
+                        <tr>
+                            <td><t t-esc="payslip.number"/></td>
+                            <td><t t-esc="payslip.date_from"/></td>
+                            <td><t t-esc="payslip.date_to"/></td>
+                            <td>
+                               <t t-esc="payslip.line_ids.filtered(lambda l: l.code == 'NET')[0].total if payslip.line_ids.filtered(lambda l: l.code == 'NET') else 0"/>
+                            </td>
+                            <td>
+                                <span t-attf-class="badge #{'bg-success' if payslip.state == 'paid' else 'bg-secondary'}">
+                                     <t t-esc="payslip.state"/>
+                               </span>
+                            </td>
+                            <td>
+                                <a t-att-href="'/my/payslip/%s/pdf' % payslip.id"
+                                       class="btn btn-primary btn-sm"
+                                       target="_blank">
+                                        <i class="fa fa-download me-1"></i>Download PDF
+                                    </a>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            </t>
+            <t t-else="">
+                <div class="alert alert-warning mt-4" role="alert">
+                    There are no Payslip Found.
+                </div>
+            </t>
+        </div>
+        <div t-if="pager" class="o_portal_pager d-flex justify-content-center my-3">
+                <t t-call="portal.pager"/>
+            </div>
+    </t>
+</template>
+</odoo>

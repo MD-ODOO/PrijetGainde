@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="gainde_header_footer">
+            <t t-name="web.external_layout_standard">
+            <t t-foreach="docs" t-as="o">
+                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" 
+                                style="max-height: 300px; max-width: 400px;margin-top:10px;" alt="Logo"/>
+                        </div>
+
+                        
+                        <div  class="col-6 text-right">
+                        <table style="border: 1px solid black; border-collapse: collapse; width: 100%; text-align: left; position: relative; top: 20px;">
+                            <tr>
+                                <td style="padding: 10px; padding-bottom: 30px; border: 1px solid black;">
+                                    <strong><t t-esc="o.partner_id.name"/></strong><br/>
+                                    <strong>E-mail:</strong> <t t-esc="o.partner_id.email"/><br/>
+                                    <strong>Téléphone:</strong> <t t-esc="o.partner_id.mobile"/><br/>
+                                    <strong>Adresses:</strong> <t t-esc="o.partner_id.street"/>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                            <p style="font-size: 12px;margin-top: 20px;white-space: nowrap;"> N° de commande à rappeler obligatoirement sur toutes les factures</p>
+                               
+                        </div>
+
+
+
+                    </div>
+                    <!-- <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="col-6" name="company_address">
+                            <ul class="list-unstyled">
+                                <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/></li>
+                                <li t-else=""><t t-esc="company.company_details"/></li>
+                                <li t-if="forced_vat">
+                                    <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                                    <span t-esc="forced_vat"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <div class="pt-5">
+                        <!-- This div ensures that the address is not cropped by the header. -->
+                        <t t-call="web.address_layout"/>
+                    </div>
+                    <t t-out="0"/>
+                </div>
+
+                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                    <div class="text-center" style="border-top: 1px solid black;">
+                       <!-- <ul class="list-inline mb4">
+                            <div t-field="company.report_footer"/>
+                        </ul>-->
+
+                        <div t-if="report_type == 'pdf'" class="text-muted">
+
+                            <div class="row" style="display: flex; justify-content: space-between; align-items: center; text-align: left; font-size: 14px;margin-left:20px;">
+                
+                <!-- Première colonne -->
+                <div class="col-4" style="padding-right: 15px;">
+                    <strong>Groupement d'Intérêt Économique</strong><br/>
+                    <label>Capital social :</label>
+                    <span>300 000 000 FCFA</span><br/>
+                    <label>RC N° :</label>
+                    <span>SN DKR 2002B1149</span><br/>
+                    <label>NINEA :</label>
+                    <span>0021516952G6</span>
+                </div>
+
+                <!-- Séparateur -->
+                <div class="col-auto" style="border-left: 1px solid black; height: 60px; margin: 0 20px;"></div>
+
+                <!-- Deuxième colonne -->
+                <div class="col-4" style="padding-right: 15px;">
+                    <strong>Groupement d'Intérêt Économique</strong><br/>
+                    <label>Capital social :</label>
+                    <span>300 000 000 FCFA</span><br/>
+                    <label>RC N° :</label>
+                    <span>SN DKR 2002B1149</span><br/>
+                    <label>NINEA :</label>
+                    <span>0021516952G6</span>
+                </div>
+
+                <!-- Séparateur -->
+                <div class="col-auto" style="border-left: 1px solid black; height: 60px;margin: 0 20px;"></div>
+
+                <!-- Troisième colonne -->
+                <div class="col-4">
+                    <label>Tél :</label>
+                    <span>(221) 33 859 39 99</span><br/>
+                    <label>Fax :</label>
+                    <span>(221) 33 824 17 24</span><br/>
+                    <label>W :</label>
+                    <span><a href="http://www.gainde2000.sn">www.gainde2000.sn</a></span>
+                </div>
+                
+            </div> 
+                               
+                                
+                            
+                         
+                        </div>
+
+                        <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                            <span t-field="o.name"/>
+                        </div>
+                    </div>
+                </div>
+            </t>  
+            
+            </t>  
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="approval_role_rcg_expense" model="approval.role">
+            <field name="name">RCG</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="approval_role_daf_expense" model="approval.role">
+            <field name="name">DAF</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="approval_route_expense_default_gainde" model="approval.route">
+            <field name="name">Expense Default Route (RCG → DAF)</field>
+            <field name="model_id" ref="hr_expense.model_hr_expense_sheet"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="approval_route_expense_stage_rcg" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="approval_route_expense_default_gainde"/>
+            <field name="name">RCG</field>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_rcg_expense"/>
+        </record>
+
+        <record id="approval_route_expense_stage_daf" model="approval.route.stage">
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="approval_route_expense_default_gainde"/>
+            <field name="name">DAF</field>
+            <field name="approval_role_id" ref="purchase_gainde.approval_role_daf_expense"/>
+        </record>
+    </data>
+</odoo>

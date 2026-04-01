@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             Ordre des menus principaux :
+             1. Tableau de bord   (sequence=5)
+             2. Actifs            (sequence=10)  ← inclut Sessions d'inventaire
+             3. Rapports          (sequence=20)
+             4. Configuration     (sequence=80)
+        ══════════════════════════════════════════════════════════════════ -->
+
+        <!-- 1. Tableau de bord — première position -->
+        <menuitem id="menu_asset_dashboard"
+                  name="Tableau de bord"
+                  parent="asset_management.menu_asset_root"
+                  action="action_asset_dashboard"
+                  groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"
+                  sequence="5"/>
+
+        <!-- 2. Menu parent Actifs -->
+        <menuitem id="menu_actifs_parent"
+                  name="Actifs"
+                  parent="asset_management.menu_asset_root"
+                  sequence="10"/>
+
+        <!-- 2a. Liste des actifs -->
+        <menuitem id="asset_management.menu_asset"
+                  name="Actifs"
+                  parent="menu_actifs_parent"
+                  action="asset_management.action_assets"
+                  groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"
+                  sequence="10"/>
+
+        <!-- 2b. Transferts -->
+        <menuitem id="asset_management.menu_asset_transfer"
+                  name="Transferts"
+                  parent="menu_actifs_parent"
+                  action="asset_management.action_assets_transfer_entry"
+                  groups="asset_management.transfer_user_group,asset_management.transfer_admin_group,base.group_system"
+                  sequence="20"/>
+
+        <!-- 2c. Sessions d inventaire - parent defini dans asset_inventory_session_views.xml -->
+
+        <!-- 3. Rapports -->
+        <menuitem id="asset_management.menu_asset_reporting"
+                  name="Rapports"
+                  parent="asset_management.menu_asset_root"
+                  sequence="20"/>
+
+        <!-- 4. Configuration -->
+        <menuitem id="asset_management.asset_configuration"
+                  name="Configuration"
+                  parent="asset_management.menu_asset_root"
+                  groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"
+                  sequence="80"/>
+
+        <!-- Localisations sous Configuration -->
+        <menuitem id="menu_asset_localisation"
+                  name="Localisations"
+                  parent="asset_management.asset_configuration"
+                  action="action_asset_localisation"
+                  groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"
+                  sequence="30"/>
+
+        <!-- Masquer le menu Fournisseurs -->
+        <menuitem id="asset_management.menu_asset_vendor_root" active="False"/>
+
+    </data>
+</odoo>

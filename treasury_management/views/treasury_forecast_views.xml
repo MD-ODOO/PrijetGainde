@@ -1,0 +1,147 @@
+<odoo>
+  <record id="action_treasury_forecast" model="ir.actions.act_window">
+    <field name="name">Prévisions</field>
+    <field name="res_model">treasury.forecast</field>
+    <field name="view_mode">list,form,graph,pivot</field>
+    <field name="groups_id" eval="[(4, ref('treasury_management.group_treasury_df'))]"/>
+  </record>
+
+  <record id="view_treasury_forecast_search" model="ir.ui.view">
+    <field name="model">treasury.forecast</field>
+    <field name="arch" type="xml">
+      <search string="Recherche prévisions">
+        <field name="source_ref" string="Référence source"/>
+        <separator/>
+        <filter name="flow_in" string="Encaissements"
+                domain="[('flow_direction','=','in')]"/>
+        <filter name="flow_out" string="Décaissements"
+                domain="[('flow_direction','=','out')]"/>
+        <separator/>
+        <filter name="source_manual" string="Manuel"
+                domain="[('source_type','=','manual')]"/>
+        <filter name="source_invoice" string="Factures"
+                domain="[('source_type','=','invoice')]"/>
+        <filter name="source_payroll" string="Salaires"
+                domain="[('source_type','=','payroll')]"/>
+        <filter name="source_payment" string="Décaissements"
+                domain="[('source_type','=','payment')]"/>
+        <filter name="source_receipt" string="Encaissements"
+                domain="[('source_type','=','receipt')]"/>
+        <separator/>
+        <filter name="period_month" string="Mensuel"
+                domain="[('period_type','=','month')]"/>
+        <filter name="period_quarter" string="Trimestriel"
+                domain="[('period_type','=','quarter')]"/>
+        <group expand="0" string="Regrouper par">
+          <filter name="group_flow" string="Flux" context="{'group_by': 'flow_direction'}"/>
+          <filter name="group_source" string="Source" context="{'group_by': 'source_type'}"/>
+          <filter name="group_period" string="Période" context="{'group_by': 'period_type'}"/>
+          <filter name="group_month" string="Mois" context="{'group_by': 'date:month'}"/>
+          <filter name="group_quarter" string="Trimestre" context="{'group_by': 'date:quarter'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="view_treasury_forecast_tree" model="ir.ui.view">
+    <field name="model">treasury.forecast</field>
+    <field name="arch" type="xml">
+      <list decoration-success="flow_direction == 'in'"
+            decoration-danger="flow_direction == 'out'"
+            string="Prévisions de trésorerie">
+        <field name="period_type" optional="show"/>
+        <field name="date" string="Début période"/>
+        <field name="date_end" string="Fin période" optional="show"/>
+        <field name="flow_direction" widget="badge"
+               decoration-success="flow_direction == 'in'"
+               decoration-danger="flow_direction == 'out'"/>
+        <field name="source_type"/>
+        <field name="source_ref" optional="show"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="amount_currency" widget="monetary"
+               options="{'currency_field': 'currency_id'}"
+               string="Montant (devise)"/>
+        <field name="amount" widget="monetary"
+               options="{'currency_field': 'currency_id'}"
+               string="Montant (société)" optional="show"/>
+        <field name="signed_amount" widget="monetary"
+               options="{'currency_field': 'currency_id'}"
+               string="Montant net"/>
+        <field name="priority" widget="priority" optional="show"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_forecast_form" model="ir.ui.view">
+    <field name="model">treasury.forecast</field>
+    <field name="arch" type="xml">
+      <form string="Prévision de trésorerie">
+        <sheet>
+          <group>
+            <group string="Période">
+              <field name="period_type"/>
+              <field name="date" string="Date de début"/>
+              <field name="date_end" readonly="1"/>
+            </group>
+            <group string="Source">
+              <field name="source_type"/>
+              <field name="flow_direction" widget="radio"/>
+              <field name="source_ref"/>
+              <field name="priority" widget="priority"/>
+            </group>
+          </group>
+          <group string="Montants">
+            <group>
+              <field name="currency_id"/>
+              <field name="amount_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     string="Montant (devise)"/>
+            </group>
+            <group>
+              <field name="amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Montant (société)"/>
+              <field name="signed_amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Montant net"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_treasury_forecast_graph" model="ir.ui.view">
+    <field name="model">treasury.forecast</field>
+    <field name="arch" type="xml">
+      <graph string="Prévisions" type="bar">
+        <field name="amount" type="measure"/>
+        <field name="date" type="row" interval="month"/>
+        <field name="flow_direction" type="col"/>
+      </graph>
+    </field>
+  </record>
+
+  <record id="view_treasury_forecast_pivot" model="ir.ui.view">
+    <field name="model">treasury.forecast</field>
+    <field name="arch" type="xml">
+      <pivot string="Prévisions">
+        <field name="amount" type="measure"/>
+        <field name="signed_amount" type="measure" string="Net"/>
+        <field name="flow_direction" type="row"/>
+        <field name="date" type="col" interval="month"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- Action de masse: supprimer les prévisions sélectionnées depuis le bouton Actions -->
+  <record id="action_treasury_forecast_mass_delete" model="ir.actions.server">
+    <field name="name">Supprimer</field>
+    <field name="model_id" ref="treasury_management.model_treasury_forecast"/>
+    <field name="binding_model_id" ref="treasury_management.model_treasury_forecast"/>
+    <field name="binding_type">action</field>
+    <field name="state">code</field>
+    <field name="code">records.unlink()</field>
+    <field name="groups_id" eval="[(4, ref('treasury_management.group_treasury_df'))]"/>
+  </record>
+</odoo>

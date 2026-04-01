@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_user_login_history_internal_user,user_login_history group_internal_user,model_user_login_history,base.group_user,1,0,0,0
+access_user_session_detail_internal_user,user_session_detail group_internal_user,model_user_session_detail,base.group_user,1,0,0,1

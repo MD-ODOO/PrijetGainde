@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- VUE LIST -->
+        <record id="view_audit_gainde_risk_list" model="ir.ui.view">
+            <field name="name">audit_gainde.risk.list</field>
+            <field name="model">audit_gainde.risk</field>
+            <field name="arch" type="xml">
+                <list string="Risques d'audit">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="domain" widget="badge"/>
+                    <field name="level" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_risk_form" model="ir.ui.view">
+            <field name="name">audit_gainde.risk.form</field>
+            <field name="model">audit_gainde.risk</field>
+            <field name="arch" type="xml">
+                <form string="Risque d'audit">
+                    <sheet>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="domain"/>
+                                <field name="process"/>
+                            </group>
+                            <group>
+                                <field name="level"/>
+                                <field name="probability"/>
+                                <field name="impact"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="name" nolabel="1" height="100"/>
+                            </page>
+                            <page string="Contrôles existants">
+                                <field name="control_ids">
+                                    <list>
+                                        <field name="description"/>
+                                        <field name="control_type"/>
+                                        <field name="frequency"/>
+                                        <field name="efficacy"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Constats">
+                                <field name="finding_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="name"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Missions">
+                                <field name="mission_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="name"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="action_audit_gainde_risk" model="ir.actions.act_window">
+            <field name="name">Risques d'audit</field>
+            <field name="res_model">audit_gainde.risk</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_risks"
+                  name="Risques"
+                  parent="menu_audit_gainde_missions"
+                  action="action_audit_gainde_risk"
+                  sequence="20"/>
+
+        <record id="action_risk_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard Risques</field>
+        <field name="tag">risk_dashboard</field>
+    </record>
+    <menuitem
+        id="menu_risk_dashboard"
+        name="Dashboard"
+        parent="menu_audit_gainde_root"
+        action="action_risk_dashboard"
+        sequence="10"
+    />
+    </data>
+</odoo>

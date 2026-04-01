@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="treasury_management.TreasuryKpiDashboard">
+    <div class="o_treasury_kpi_dashboard o_form_view o_xxl">
+
+        <!-- Filters -->
+        <div class="o_row o_align_items_center o_justify_content_between o_mb_3 o_px_2 o_py_2 o_card">
+            <div>
+                <h3 class="o_mb_0">Tableau de bord Trésorerie</h3>
+                <small class="text-muted" t-esc="state.data?.company?.name"/>
+            </div>
+            <div class="o_row o_gap_2 o_align_items_center">
+                <div>
+                    <label class="text-muted">Période</label>
+                    <select class="o_input" style="min-width:150px"
+                            t-att-value="state.period"
+                            t-on-change="onPeriodChange">
+                        <option value="current">Année en cours</option>
+                        <option value="last">Année dernière</option>
+                        <option value="custom">Personnalisée</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-muted">Année</label>
+                    <input type="number" class="o_input" style="width:110px"
+                           t-att-value="state.year"
+                           t-att-readonly="state.period != 'custom' ? true : undefined"
+                           t-on-change="onYearInput"/>
+                </div>
+                <div>
+                    <label class="text-muted">Vue</label>
+                    <select class="o_input" style="min-width:170px"
+                            t-att-value="state.view"
+                            t-on-change="onViewChange">
+                        <option value="all">Tous les flux</option>
+                        <option value="receipts">Encaissements</option>
+                        <option value="payments">Décaissements</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <t t-if="state.loading">
+            <div class="o_text_center o_py_4">
+                <i class="fa fa-spinner fa-spin me-2"/> Chargement…
+            </div>
+        </t>
+
+        <!-- Content -->
+        <t t-if="!state.loading">
+
+            <!-- Summary tiles -->
+            <div class="o_row o_gap_3 o_my_3 o_flex_wrap">
+                <t t-foreach="summaryCards" t-as="c" t-key="c.key">
+                    <div class="o_card o_px_3 o_py_3" style="flex:1; min-width:260px; box-shadow:0 4px 10px rgba(0,0,0,0.05); border:1px solid #eef1f5;">
+                        <div class="text-muted o_mb_1" t-esc="c.label"/>
+                        <div style="font-size:28px; font-weight:700; color:#1f2d3d" t-esc="formatCurrency(c.value)"/>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Status strip -->
+            <div class="o_card o_px_3 o_py_3 o_mb_3" style="box-shadow:0 6px 16px rgba(15,23,42,0.08); border:1px solid #e6e9f0; background:linear-gradient(135deg,#ffffff 0%,#f7f9fc 100%);">
+                <div class="o_row o_align_items_center o_justify_content_between o_mb_2">
+                    <h4 class="o_mb_0">Suivi des décaissements</h4>
+                    <span class="badge bg-light text-muted" style="font-weight:600;">Vue : <t t-esc="state.view == 'payments' and 'Décaissements' or state.view == 'receipts' and 'Encaissements' or 'Tous'"/></span>
+                </div>
+                <div class="o_row o_gap_3">
+                    <div class="o_col-4 o_card o_px_3 o_py_3" style="background:#e8f6ef;border:1px solid #d2ecde; box-shadow:none;">
+                        <div class="text-success" style="font-size:28px; font-weight:700" t-esc="paymentTracking.paid"/>
+                        <div class="text-success">Payés</div>
+                    </div>
+                    <div class="o_col-4 o_card o_px_3 o_py_3" style="background:#fff6e5;border:1px solid #ffe3b8; box-shadow:none;">
+                        <div style="color:#d48b00;font-size:28px;font-weight:700" t-esc="paymentTracking.pending"/>
+                        <div style="color:#d48b00">En attente</div>
+                    </div>
+                    <div class="o_col-4 o_card o_px_3 o_py_3" style="background:#fde8e8;border:1px solid #f4c7c7; box-shadow:none;">
+                        <div class="text-danger" style="font-size:28px; font-weight:700" t-esc="paymentTracking.overdue"/>
+                        <div class="text-danger">En retard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="o_card o_px_3 o_py_3">
+                <h4>Flux cumulés</h4>
+                <div style="height:260px">
+                    <canvas id="treasury-kpi-chart"/>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="o_card o_px_3 o_py_3 o_mt_3">
+                <h4>Détails mensuels</h4>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Mois</th>
+                            <th class="text-end">Encaissements</th>
+                            <th class="text-end">Décaissements</th>
+                            <th class="text-end">Δ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="tableRows" t-as="r" t-key="r.month">
+                            <tr>
+                                <td t-esc="r.month"/>
+                                <td class="text-end" t-esc="formatCurrency(r.revenue)"/>
+                                <td class="text-end" t-esc="formatCurrency(r.expenses)"/>
+                                <td class="text-end"
+                                    t-att-class="r.delta &lt; 0 ? 'text-danger' : 'text-success'"
+                                    t-esc="formatCurrency(r.delta)"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Latest -->
+            <div class="o_card o_px_3 o_py_3 o_mt_3" style="border:1px solid #eef1f5; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+                <h4>Derniers mouvements</h4>
+                <p class="text-muted o_mb_0">Aucun mouvement récent.</p>
+            </div>
+
+        </t>
+    </div>
+</t>
+
+</templates>

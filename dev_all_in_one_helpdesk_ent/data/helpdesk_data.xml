@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+  -->
+<odoo noupdate="1">
+	<record id="stage_close" model="helpdesk.stage">
+        <field name="name">Closed</field>
+        <field name="sequence">6</field>
+        <field name="fold" eval="True"/>
+    </record>
+</odoo>

@@ -1,0 +1,1583 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* xf_approval_route_purchase
+# 	* xf_approval_route_base
+# 	* bf_portal_purchase_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e-20251021\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-30 00:03+0000\n"
+"PO-Revision-Date: 2025-12-30 00:03+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid ""
+"\n"
+"            Dear colleagues,\n"
+"            You have been requested to approve the %s \"%s\"\n"
+"            "
+msgstr ""
+"\n"
+"               Chers collègues, Il vous est demandé d'approuver le %s « %s ». "
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route__locked_fields
+#, fuzzy
+msgid ""
+"\n"
+"        Here you need to specify document fields that need to be locked for editing \n"
+"        after being sent for approval or \n"
+"        after receiving approval from at least one participant\n"
+"        "
+msgstr ""
+"\n"
+"        Vous devez ici spécifier les champs du document qui doivent être verrouillés pour modification après avoir été envoyés pour approbation ou "
+"après avoir reçu l'approbation d'au moins un participant. "
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "%s %s by %s"
+msgstr "%s %s par %s"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route.py:0
+msgid "%s (Copy)"
+msgstr "%s (Copie)"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "%s was fully approved"
+msgstr "%s a été entièrement approuvé"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "* %s %s %s %s"
+msgstr "* %s %s %s %s"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "* Document is associated with selected %s"
+msgstr "* Le document est associé à la sélection %s"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "* Document is not associated with selected %s"
+msgstr "* Le document n'est pas associé à la sélection %s"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "* Document meets custom conditions in Python code"
+msgstr "* Le document répond aux conditions personnalisées dans le code Python."
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid ", as approval has been received from one or more approvers."
+msgstr ", car l'approbation a été reçue d'un ou plusieurs approbateurs."
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid ", as it is currently under approval."
+msgstr ", car il est actuellement en cours d'approbation."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+#, fuzzy
+msgid ""
+"<code colspan=\"2\" invisible=\"lock_fields != True\">\n"
+"                                    Here you need to specify document fields that need to be locked for editing\n"
+"                                    after being sent for approval or\n"
+"                                    after receiving approval from at least one participant.\n"
+"                                </code>"
+msgstr ""
+"<code colspan=\"2\" invisible=\"lock_fields != True\">\n"
+"                                    Vous devez ici spécifier les champs du document qui doivent être verrouillés pour modification\n"
+"après avoir été envoyés pour approbation ou\n"
+"après avoir reçu l'approbation d'au moins un participant.\n"
+"                               </code>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "<em class=\"font-weight-normal text-muted\">Requested by #</em>"
+msgstr "<em class=\"font-weight-normal text-muted\">Demandé par #</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "<em>New</em>"
+msgstr "<em>Nouveau</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "<em>Purchase requests draft</em>"
+msgstr "<em>Projet de demande d'achat</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i class=\"fa fa-download\"/> Télécharger"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-file-text-o\"/> Request approval"
+msgstr "<i class=\"fa fa-file-text-o\"/> Demander l'approbation"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-fw fa-floppy-o\"/> Save"
+msgstr "<i class=\"fa fa-fw fa-floppy-o\"/> Enregistrer"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-fw fa-times\"/> Discard"
+msgstr "<i class=\"fa fa-fw fa-times\"/> Rejeter"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+#, fuzzy
+msgid "<i class=\"fa fa-plus fa-1g float-sm-none float-md-start\" title=\"Edit\"/>"
+msgstr "<i class=\"fa fa-plus fa-1g float-sm-none float-md-start\" title=\"Edit\"/>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<i class=\"fa fa-print\"/> View Details"
+msgstr "<i class=\"fa fa-print\"/> Voir les détails"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#, fuzzy
+msgid "<i class=\"fa fa-trash fa-1x\" role=\"img\" aria-label=\"Open\"/>"
+msgstr "<i class=\"fa fa-trash fa-1x\" role=\"img\" aria-label=\"Open\"/>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-trash\"/> Delete"
+msgstr "<i class=\"fa fa-trash\"/> Supprimer"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<small class=\"text-end\">Stage:</small>"
+msgstr "<small class=\"text-end\">Étape :</small>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid ""
+"<small class=\"text-end\">Stage:</small>\n"
+"                                            <span class=\"badge rounded-pill text-bg-info\" title=\"Current status of the requirement\">Draft</span>"
+msgstr ""
+"<small class=\"text-end\">Étape :</small>\n"
+" <span class=\"badge rounded-pill text-bg-info\" title=\"Current status of the requirement\">                                           Ébauche</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+#, fuzzy
+msgid "<small>#</small>"
+msgstr "<small>#</small>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid "<span class=\"h3\">New</span>"
+msgstr "<span class=\"h3\">Nouveau</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<span>Your purchase request has been creada con exito. Thank you for your collaboration.</span>"
+msgstr "<span>Votre demande d'achat a été créée avec succès. Merci pour votre collaboration.</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<span>Your purchase request has been sent for approval. Thank you for your collaboration.</span>"
+msgstr "<span>Votre demande d'achat a été envoyée pour approbation. Merci de votre collaboration.</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid "<strong class=\"col-lg-2\">Requested by:</strong>"
+msgstr "<strong class=\"col-lg-2\">Demandé par :</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<strong class=\"col-lg-3\">Create on:</strong>"
+msgstr "<strong class=\"col-lg-3\">Créer le :</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<strong class=\"col-lg-3\">Requested by:</strong>"
+msgstr "<strong class=\"col-lg-3\">Demandé par :</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests_line_head
+msgid "<strong>Descrip.</strong>"
+msgstr "<strong>Description.</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests_line_head
+msgid "<strong>Product *</strong>"
+msgstr "<strong>Produit *</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests_line_head
+msgid "<strong>Product description *</strong>"
+msgstr "<strong>Description du produit *</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests_line_head
+msgid "<strong>Quantity *</strong>"
+msgstr "<strong>Quantité *</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests_line_head
+#, fuzzy
+msgid "<strong>Uom *</strong>"
+msgstr "<strong>Uom *</strong>"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__active
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: xf_approval_route_base
+#: model:ir.actions.act_window,name:xf_approval_route_base.approval_role_form_act_window
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Add Approval Role"
+msgstr "Ajouter un rôle d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.actions.act_window,name:xf_approval_route_base.approval_route_form_act_window
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Add Approval Route"
+msgstr "Ajouter un circuit d'approbation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Add New Stage"
+msgstr "Ajouter une nouvelle étape"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Add additional approver only for orders from particular company\n"
+"                                                employee:\n"
+"                                                <br/>\n"
+"                                                <code>result = user.company_id.name == 'YourCompany'</code>"
+msgstr ""
+"Ajouter un approbateur supplémentaire uniquement pour les commandes provenant d'une entreprise particulière\n"
+"                                                employé :\n"
+"                                               <br/> \n"
+" <code>                                               result = user.company_id.name == 'YourCompany'</code>"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Add additional approver only for orders from particular department\n"
+"                                                member:\n"
+"                                                <br/>\n"
+"                                                <code>result = user.department_id.name == 'IT Department'</code>\n"
+"                                                <br/>\n"
+"                                                (Applicable only if HR module used)"
+msgstr ""
+"Ajouter un approbateur supplémentaire uniquement pour les commandes provenant d'un service particulier\n"
+"membre : <br/><code>result = user.department_id.name == 'Service informatique'</code> <br/>(Applicable uniquement si le module RH est utilisé)"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Add additional approver only for particular period (using Order Date):\n"
+"                                                <br/>\n"
+"                                                <code>result = '2021-08-09' &lt;= str(self.date_order) &lt;=\n"
+"                                                    '2021-08-15'\n"
+"                                                </code>"
+msgstr ""
+"Ajouter un approbateur supplémentaire uniquement pour une période donnée (en utilisant la date de commande) : <br/> "
+"<code>                                               result = '2021-08-09' &lt;= str(self.date_order) &lt;=\n"
+"                                                    '2021-08-15'\n"
+"                                               </code>"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Add additional approver only if approval workflow initiated by\n"
+"                                                particular employee:\n"
+"                                                <br/>\n"
+"                                                <code>result = 'Elena Winters' in env.user.name</code>"
+msgstr ""
+"Ajouter un approbateur supplémentaire uniquement si le workflow d'approbation a été lancé par\n"
+"                                                un employé particulier :\n"
+"                                               <br/> \n"
+" <code>                                               result = 'Elena Winters' in env.user.name</code>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Add product"
+msgstr "Ajouter un produit"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "Additional Configuration for Approval Stage"
+msgstr "Configuration supplémentaire pour la phase d'approbation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Additional approver only for particular vendor/customer:\n"
+"                                                <br/>\n"
+"                                                <code>result = self.partner_id.name == 'Gemini Furniture'</code>"
+msgstr ""
+"Approbateur supplémentaire uniquement pour un fournisseur/client particulier : <br/><code>result = self.partner_id.name == 'Gemini Furniture'</code>"
+
+#. module: xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__all_used_analytic_accounts
+#, fuzzy
+msgid "All Used Analytic Accounts"
+msgstr "Tous les comptes analytiques utilisés"
+
+#. module: xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__all_used_products
+#, fuzzy
+msgid "All Used Products"
+msgstr "Tous les produits d'occasion"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__approval_type__all
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__approval_type__all
+#, fuzzy
+msgid "All approvers"
+msgstr "Tous les approbateurs"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_amount
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Amount"
+msgstr "Montant"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage__condition_amount
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount
+#, fuzzy
+msgid "Amount (included) for which approval is required"
+msgstr "Montant (inclus) pour lequel l'approbation est requise"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_amount_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount_field_id
+msgid "Amount Field"
+msgstr "Champ de quantité"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_amount_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount_operator
+#, fuzzy
+msgid "Amount Operator"
+msgstr "Opérateur de quantité"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_analytic_account_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_analytic_account__condition_analytic_account_field_id
+#, fuzzy
+msgid "Analytic Account Field"
+msgstr "Champ de compte analytique"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_analytic_account_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_analytic_account__condition_analytic_account_operator
+#, fuzzy
+msgid "Analytic Account Operator"
+msgstr "Opérateur de compte analytique"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_analytic_account_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_analytic_account__condition_analytic_account_ids
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Analytic Accounts"
+msgstr "Comptes analytiques"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__model_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__model_id
+#, fuzzy
+msgid "Applicable for"
+msgstr "Applicable pour"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "Apply if:"
+msgstr "Postulez si :"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_role
+#, fuzzy
+msgid "Approval Role"
+msgstr "Rôle d'approbation"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model,name:xf_approval_route_base.model_approval_route
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__approval_route_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__approval_route_id
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__approval_route_id
+#, fuzzy
+msgid "Approval Route"
+msgstr "Voie d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage
+#, fuzzy
+msgid "Approval Route Stage"
+msgstr "Étape du processus d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_amount
+#, fuzzy
+msgid "Approval Route Stage Condition Amount"
+msgstr "Étape du processus d'approbation Condition Montant"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_analytic_account
+#, fuzzy
+msgid "Approval Route Stage Condition Analytic Account"
+msgstr "Étape du processus d'approbation Condition Compte analytique"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_code
+#, fuzzy
+msgid "Approval Route Stage Condition Code"
+msgstr "Code de condition de l'étape du processus d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_company
+#, fuzzy
+msgid "Approval Route Stage Condition Company"
+msgstr "Étape du processus d'approbation Condition Entreprise"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_country
+#, fuzzy
+msgid "Approval Route Stage Condition Country"
+msgstr "Étape du processus d'approbation Condition Pays"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_partner
+#, fuzzy
+msgid "Approval Route Stage Condition Partner"
+msgstr "Étape du processus d'approbation Condition Partenaire"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_product
+#, fuzzy
+msgid "Approval Route Stage Condition Product"
+msgstr "Étape du processus d'approbation Condition Produit"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_stage_condition_relation
+#, fuzzy
+msgid "Approval Route Stage Condition Relation"
+msgstr "Étape du processus d'approbation Condition Relation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Approval Route(s):"
+msgstr "Voie(s) d'approbation :"
+
+#. module: xf_approval_route_base
+#: model:ir.actions.act_window,name:xf_approval_route_base.approval_route_act_window
+#: model:ir.module.category,name:xf_approval_route_base.module_category_approval_route
+#: model:ir.ui.menu,name:xf_approval_route_base.approval_route_technical_menu
+#: model:ir.ui.menu,name:xf_approval_route_base.approval_route_technical_root_menu
+#, fuzzy
+msgid "Approval Routes"
+msgstr "Voies d'approbation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+msgid "Approval Settings"
+msgstr "Paramètres de validation"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__stage_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__approval_route_stage_ids
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__approval_route_stage_ids
+#, fuzzy
+msgid "Approval Stages"
+msgstr "Étapes d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__approval_type
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__approval_type
+#, fuzzy
+msgid "Approval Type"
+msgstr "Type d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__state__approved
+msgid "Approved"
+msgstr "Approuvé"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Approver"
+msgstr "Approbateur"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__user_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__computed_user_ids
+msgid "Approvers"
+msgstr "Approbateurs"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__custom_user_ids
+#, fuzzy
+msgid "Approvers (Custom)"
+msgstr "Approbateurs (personnalisés)"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__approval_role_id
+#, fuzzy
+msgid "Approvers (Predefined)"
+msgstr "Approbateurs (prédéfinis)"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, fuzzy
+msgid "Are you sure you want to approve the request?"
+msgstr "Êtes-vous sûr de vouloir approuver la demande ?"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, fuzzy
+msgid "Are you sure you want to delete the request?"
+msgstr "Êtes-vous sûr de vouloir supprimer la demande ?"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__approval_type__one
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__approval_type__one
+#, fuzzy
+msgid "At least one approver"
+msgstr "Au moins un approbateur"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__can_edit
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__can_edit
+msgid "Can Edit"
+msgstr "Peut éditer"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Close"
+msgstr "Fermer"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Communication history"
+msgstr "Historique de communication"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model,name:xf_approval_route_purchase.model_res_company
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_company_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_company__condition_company_ids
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Companies"
+msgstr "Sociétés"
+
+#. modules: bf_portal_purchase_request, xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__company_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__company_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__company_id
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Company"
+msgstr "Société"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_company_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_company__condition_company_field_id
+msgid "Company Field"
+msgstr "Champ réservé à l'entreprise"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_company_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_company__condition_company_operator
+#, fuzzy
+msgid "Company Operator"
+msgstr "Opérateur de la société"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_summary
+#, fuzzy
+msgid "Condition Summary"
+msgstr "Résumé de l'état"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Conditions"
+msgstr "Conditions"
+
+#. module: xf_approval_route_purchase
+#: model:ir.model,name:xf_approval_route_purchase.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Contact"
+msgstr "Contact"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_analytic_account_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_company_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_country_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_partner_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_product_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_analytic_account__condition_analytic_account_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_company__condition_company_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_country__condition_country_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_partner__condition_partner_operator__in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_product__condition_product_operator__in
+#, fuzzy
+msgid "Contain (in)"
+msgstr "Contenir (dans)"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_res_config_settings__approval_route_count
+#, fuzzy
+msgid "Count Approval Routes"
+msgstr "Compter les itinéraires approuvés"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_res_config_settings__approval_role_count
+#, fuzzy
+msgid "Count Predefined Roles"
+msgstr "Compter les rôles prédéfinis"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_country_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_country__condition_country_ids
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Countries"
+msgstr "Pays"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_country_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_country__condition_country_field_id
+msgid "Country Field"
+msgstr "Champ Pays"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_country_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_country__condition_country_operator
+#, fuzzy
+msgid "Country Operator"
+msgstr "Opérateur national"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__create_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__create_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__create_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__create_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__create_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__create_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Creation date"
+msgstr "Date de création"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_amount_currency_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount_currency_id
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Currency"
+msgstr "Devise"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__current_approval_stage_id
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__current_approval_stage_id
+#, fuzzy
+msgid "Current Approval Stage"
+msgstr "Stade actuel de l'approbation"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Current status of the requirement"
+msgstr "État actuel de l'exigence"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_code
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_code__condition_code
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid "Custom Condition Code"
+msgstr "Code de condition personnalisé"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "Custom conditions are disabled"
+msgstr "Les conditions personnalisées sont désactivées."
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,help:bf_portal_purchase_request.field_purchase_request__access_url
+msgid "Customer Portal URL"
+msgstr "URL du Portail client"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__decisions
+#, fuzzy
+msgid "Decisions (Serialized)"
+msgstr "Décisions (série)"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__decisions_summary
+#, fuzzy
+msgid "Decisions (Summary)"
+msgstr "Décisions (résumé)"
+
+#. modules: bf_portal_purchase_request, xf_approval_route_base
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, fuzzy
+msgid "Delete request."
+msgstr "Supprimer la demande."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Description"
+msgstr "Description"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Description portal"
+msgstr "Portail de description"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__display_name
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__display_name
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__display_name
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__display_name
+msgid "Display Name"
+msgstr "Afficher le nom"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_analytic_account_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_company_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_country_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_partner_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_product_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_analytic_account__condition_analytic_account_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_company__condition_company_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_country__condition_country_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_partner__condition_partner_operator__not_in
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_product__condition_product_operator__not_in
+#, fuzzy
+msgid "Do not contain (not in)"
+msgstr "Ne contient pas (pas dans)"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_document
+#, fuzzy
+msgid "Document Approval"
+msgstr "Approbation des documents"
+
+#. module: xf_approval_route_base
+#: model:ir.model,name:xf_approval_route_base.model_approval_route_document_stage
+#, fuzzy
+msgid "Document Approval Stage"
+msgstr "Étape d'approbation du document"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Edit"
+msgstr "Modifier"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Edit Stage"
+msgstr "Modifier le stage"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Enter Python code here. Help about Python expression is available in the help tab of this document."
+msgstr "Entrer du code Python ici. Une aide sur l'expression Python est disponible dans l'onglet d'aide de ce document."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Examples:"
+msgstr "Exemples :"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_amount_operator__>=
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_amount__condition_amount_operator__>=
+#, fuzzy
+msgid "Greater or Equal (>=)"
+msgstr "Supérieur ou égal (>=)"
+
+#. module: xf_approval_route_base
+#: model:ir.module.category,description:xf_approval_route_base.module_category_approval_route
+#, fuzzy
+msgid "Helps you manage your approval routes"
+msgstr "Vous aide à gérer vos circuits d'approbation"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__id
+msgid "ID"
+msgstr "ID"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage__use_custom_conditions
+#, fuzzy
+msgid "If enabled, you will be able to set custom conditions to add stage to approval route dynamically"
+msgstr "Si cette option est activée, vous pourrez définir des conditions personnalisées pour ajouter dynamiquement une étape au parcours d'approbation."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"If you want to include additional approver only for vendors/customers\n"
+"                                                from\n"
+"                                                United States:\n"
+"                                                <br/>\n"
+"                                                <code>result = self.partner_id.country_id.code == 'US'</code>\n"
+"                                                <br/>\n"
+"                                                (\"code\" is the ISO country code in two chars)"
+msgstr ""
+"Si vous souhaitez inclure un approbateur supplémentaire uniquement pour les fournisseurs/clients\n"
+"                                                des\n"
+"                                                États-Unis :\n"
+"                                               <br/> \n"
+" <code>                                               result = self.partner_id.country_id.code ==</code>'US'\n"
+"                                               <br/> \n"
+"                                                (« code » correspond au code ISO du pays à deux caractères)"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__is_approval_received
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__is_approval_received
+msgid "Is Approval Received"
+msgstr "L'approbation a-t-elle été reçue"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__is_current_approver
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__is_current_approver
+msgid "Is Current Approver"
+msgstr "Est-ce l'approbateur actuel"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__is_fully_approved
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__is_fully_approved
+#, fuzzy
+msgid "Is Fully Approved"
+msgstr "Est entièrement approuvé"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__is_under_approval
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__is_under_approval
+#, fuzzy
+msgid "Is Under Approval"
+msgstr "En cours d'approbation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"Keywords: Use the \"<code>self</code>\" to get document object properties,\n"
+"                                        and the \"<code>user</code>\" keyword for current user`s \"res.users\" object.\n"
+"                                        Also using the \"<code>env</code>\" keyword to refer to the current environment\n"
+"                                        properties."
+msgstr ""
+"Mots-clés : Utilisez «<code>self</code> » pour obtenir les propriétés de l'objet document,\n"
+"et le mot-clé «<code>user</code> » pour l'objet « res.users » de l'utilisateur actuel.\n"
+"Utilisez également le mot-clé «<code>env</code> » pour faire référence aux propriétés de l'environnement actuel."
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__write_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__write_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__write_uid
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__write_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__write_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__write_date
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage__condition_amount_operator__<=
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_stage_condition_amount__condition_amount_operator__<=
+#, fuzzy
+msgid "Less or Equal (<=)"
+msgstr "Inférieur ou égal (<=)"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_purchase_requests
+msgid "List and create your purchase request"
+msgstr "Répertoriez et créez votre demande d'achat"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__lock_fields
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+#, fuzzy
+msgid "Lock Fields"
+msgstr "Champs verrouillés"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__locked_fields
+#, fuzzy
+msgid "Locked Fields"
+msgstr "Champs verrouillés"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Manage Approval Roles"
+msgstr "Gérer les rôles d'approbation"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Manage Approval Routes"
+msgstr "Gérer les circuits d'approbation"
+
+#. module: xf_approval_route_base
+#: model:res.groups,name:xf_approval_route_base.group_approval_route_manager
+msgid "Manager"
+msgstr "Gérant"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__model
+msgid "Model Name"
+msgstr "Nom du modéle"
+
+#. modules: bf_portal_purchase_request, xf_approval_route_base
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+msgid "Newest"
+msgstr "Plus récent"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document__next_approval_stage_id
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__next_approval_stage_id
+#, fuzzy
+msgid "Next Approval Stage"
+msgstr "Prochaine étape d'approbation"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__res_company__use_approval_route__no
+#: model:ir.model.fields.selection,name:xf_approval_route_purchase.selection__res_company__use_approval_route_purchase__no
+msgid "No"
+msgstr "Non"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "No additional conditions are set"
+msgstr "Aucune condition supplémentaire n'est fixée."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.actions.act_window,help:xf_approval_route_base.approval_role_act_window
+#, fuzzy
+msgid "No role found. Let's create one!"
+msgstr "Aucun rôle trouvé. Créons-en un !"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.actions.act_window,help:xf_approval_route_base.approval_route_act_window
+#, fuzzy
+msgid "No route found. Let's create one!"
+msgstr "Aucun itinéraire trouvé. Créons-en un !"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+msgid "None"
+msgstr "Rien"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Operator"
+msgstr "Opérateur"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__res_company__use_approval_route__optional
+#: model:ir.model.fields.selection,name:xf_approval_route_purchase.selection__res_company__use_approval_route_purchase__optional
+msgid "Optional"
+msgstr "Optionnel"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_partner_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_partner__condition_partner_field_id
+#, fuzzy
+msgid "Partner Field"
+msgstr "Champ partenaire"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_partner_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_partner__condition_partner_operator
+#, fuzzy
+msgid "Partner Operator"
+msgstr "Opérateur partenaire"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_partner_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_partner__condition_partner_ids
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__state__pending
+msgid "Pending"
+msgstr "En attente"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+#, fuzzy
+msgid "Please confirm removing the stage"
+msgstr "Veuillez confirmer la suppression de l'étape."
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_stage.py:0
+#, fuzzy
+msgid "Please set at least one approver!"
+msgstr "Veuillez désigner au moins un approbateur !"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route.py:0
+#, fuzzy
+msgid "Please specify at least one field to lock!"
+msgstr "Veuillez spécifier au moins un champ à verrouiller !"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_url
+msgid "Portal Access URL"
+msgstr "URL d’accès au portail"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request_line__portal_product_description
+msgid "Portal product description"
+msgstr "Description du produit sur le portail"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__name
+#, fuzzy
+msgid "Position/Role"
+msgstr "Poste/Fonction"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+#, fuzzy
+msgid "Predefined Approval Role(s):"
+msgstr "Rôle(s) d'approbation prédéfini(s) :"
+
+#. module: xf_approval_route_base
+#: model:ir.actions.act_window,name:xf_approval_route_base.approval_role_act_window
+#: model:ir.ui.menu,name:xf_approval_route_base.approval_role_technical_menu
+#, fuzzy
+msgid "Predefined Approval Roles"
+msgstr "Rôles d'approbation prédéfinis"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Product"
+msgstr "Produit"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_product_field_id
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_product__condition_product_field_id
+msgid "Product Field"
+msgstr "Champ Produit"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_product_operator
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_product__condition_product_operator
+#, fuzzy
+msgid "Product Operator"
+msgstr "Opérateur produit"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__condition_product_ids
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage_condition_product__condition_product_ids
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+msgid "Products"
+msgstr "Produits"
+
+#. module: xf_approval_route_purchase
+#: model:ir.model,name:xf_approval_route_purchase.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de commande fournisseur"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model,name:bf_portal_purchase_request.model_purchase_request
+msgid "Purchase Request"
+msgstr "Demande d'achat"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model,name:bf_portal_purchase_request.model_purchase_request_line
+msgid "Purchase Request Line"
+msgstr "Ligne de demande d'achat"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_purchase_requests
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Purchase Requests"
+msgstr "Demandes d'achat"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "Purchase requests"
+msgstr "Demandes d'achat"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route__model_id
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage__model_id
+#, fuzzy
+msgid "Record model which the approval route applicable for"
+msgstr "Modèle de référence auquel s'applique la procédure d'homologation"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__state__rejected
+msgid "Rejected"
+msgstr "Rejeté"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__res_id
+#, fuzzy
+msgid "Related Document ID"
+msgstr "Document connexe ID"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__res_model
+#, fuzzy
+msgid "Related Document Model Name"
+msgstr "Document associé Nom du modèle"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Request Reference"
+msgstr "Référence de la demande"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, fuzzy
+msgid "Request approve."
+msgstr "Demande d'approbation."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Request reference"
+msgstr "Référence de la demande"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0 model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Requested by"
+msgstr "Demandé par"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__res_company__use_approval_route__required
+#: model:ir.model.fields.selection,name:xf_approval_route_purchase.selection__res_company__use_approval_route_purchase__required
+msgid "Required"
+msgstr "Requis"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route__user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid "Returned value have to be set in the variable 'result'."
+msgstr "La valeur renvoyée doit être définie dans la variable « result »."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+msgid "Roles"
+msgstr "Rôles"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Route Title"
+msgstr "Titre de l'itinéraire"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.res_config_settings_view_form_xf_approval_route_base
+msgid "Routes"
+msgstr "Itinéraires"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Search"
+msgstr "Rechercher"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Search in all"
+msgstr "Rechercher dans tout"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Search in creation date"
+msgstr "Rechercher par date de création"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+msgid "Search in description"
+msgstr "Rechercher dans la description"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Search in name"
+msgstr "Rechercher par nom"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Search in requested by"
+msgstr "Recherche demandée par"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__sequence
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: xf_approval_route_base
+#: model:ir.actions.act_window,name:xf_approval_route_base.action_approval_route_base_configuration
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Settings"
+msgstr "Réglages"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+msgid "Some required fields are empty."
+msgstr "Certains champs obligatoires sont vides."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Source Document"
+msgstr "Document source"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__name
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__name
+msgid "Stage"
+msgstr "Étape"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid "Stage Title"
+msgstr "Titre de la scène"
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_form
+msgid "Stages"
+msgstr "Étapes"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "State"
+msgstr "État"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_document_stage__state
+msgid "Status"
+msgstr "Statut"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "The document locking option is enabled in the approval workflow settings."
+msgstr "L'option de verrouillage des documents est activée dans les paramètres du workflow d'approbation."
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "This %s is not under approval!"
+msgstr "Ceci %s n'est pas soumis à approbation !"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+msgid "This %s must be approved by %s"
+msgstr "Ceci %s doit être approuvé par %s"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "This document cannot be modified %s"
+msgstr "Ce document ne peut pas être modifié %s"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields.selection,name:xf_approval_route_base.selection__approval_route_document_stage__state__to_approve
+msgid "To Approve"
+msgstr "A approuver"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_document__is_under_approval
+#: model:ir.model.fields,help:xf_approval_route_purchase.field_purchase_order__is_under_approval
+#, fuzzy
+msgid "True if document is waiting approval"
+msgstr "Vrai si le document est en attente d'approbation"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_document__is_fully_approved
+#: model:ir.model.fields,help:xf_approval_route_purchase.field_purchase_order__is_fully_approved
+#, fuzzy
+msgid "True if document received approval from all approvers"
+msgstr "Vrai si le document a été approuvé par tous les approbateurs"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_document__is_approval_received
+#: model:ir.model.fields,help:xf_approval_route_purchase.field_purchase_order__is_approval_received
+msgid "True if document received approval from at least one approver"
+msgstr "Vrai si le document a été approuvé par au moins un approbateur"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Type operation"
+msgstr "Opération de type"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Uom"
+msgstr "UDM"
+
+#. modules: xf_approval_route_base, xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_res_company__use_approval_route
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_res_config_settings__use_approval_route
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_purchase_order__use_approval_route
+#, fuzzy
+msgid "Use Approval Route"
+msgstr "Utiliser la voie d'approbation"
+
+#. module: xf_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_res_company__use_approval_route_purchase
+#: model:ir.model.fields,field_description:xf_approval_route_purchase.field_res_config_settings__use_approval_route_purchase
+#, fuzzy
+msgid "Use Approval Route for Purchases"
+msgstr "Utiliser la voie d'approbation pour les achats"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_route_stage__use_custom_conditions
+#, fuzzy
+msgid "Use Custom Conditions"
+msgstr "Utiliser des conditions personnalisées"
+
+#. module: xf_approval_route_purchase
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_purchase.res_config_settings_view_form_purchase_approval_route
+#, fuzzy
+msgid "Use Dynamic Approval Route for Purchase Orders. Values set here are company-specific."
+msgstr "Utiliser le circuit d'approbation dynamique pour les bons de commande. Les valeurs définies ici sont spécifiques à l'entreprise."
+
+#. module: xf_approval_route_base
+#: model:res.groups,name:xf_approval_route_base.group_approval_route_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,field_description:xf_approval_route_base.field_approval_role__user_ids
+msgid "User(s)"
+msgstr "Utilisateur(s)"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage__condition_amount_currency_id
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage_condition_amount__condition_amount_currency_id
+#, fuzzy
+msgid "Utility field to express threshold currency"
+msgstr "Champ utilitaire pour exprimer la devise seuil"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "View Details"
+msgstr "Voir les détails"
+
+#. module: xf_approval_route_base
+#. odoo-python
+#: code:addons/xf_approval_route_base/models/approval_route_document.py:0
+#, fuzzy
+msgid "Wrong condition code defined for %s. Error: %s"
+msgstr "Code d'état incorrect défini pour %s. Erreur : %s"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: xf_approval_route_base
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage__condition_code
+#: model:ir.model.fields,help:xf_approval_route_base.field_approval_route_stage_condition_code__condition_code
+#, fuzzy
+msgid "You can enter python expression to define custom condition"
+msgstr "Vous pouvez saisir une expression Python pour définir une condition personnalisée."
+
+#. module: xf_approval_route_base
+#: model_terms:ir.ui.view,arch_db:xf_approval_route_base.approval_route_stage_form
+#, fuzzy
+msgid ""
+"You can enter python expression to define custom condition to\n"
+"                                        include/exclude approver to/from document approval workflow."
+msgstr ""
+"Vous pouvez saisir une expression Python pour définir une condition personnalisée afin d'inclure/exclure un approbateur dans/du workflow "
+"d'approbation des documents."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "You do not have any purchase requests."
+msgstr "Vous n'avez aucune demande d'achat."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Your purchase request has been created from the portal."
+msgstr "Votre demande d'achat a été créée à partir du portail."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Your purchase request has been edited from the portal."
+msgstr "Votre demande d'achat a été modifiée depuis le portail."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, fuzzy
+msgid "Your purchase request has been sent from the portal for approval."
+msgstr "Votre demande d'achat a été envoyée depuis le portail pour approbation."

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res_config_settings_view_form_secure_api</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="100"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+        <xpath expr="//form" position="inside">
+        <app data-string="API Management" id="secure_api" string="API Management" name="secure_api" groups="base.group_user">
+            <div class="app_settings_block" data-string="Secure API" string="Secure API" data-key="secure_api" groups="base.group_user">
+                <div id="secure_api_xml_rpc">
+                    <h2>XML-RPC</h2>
+                    <div class="row mt16 o_settings_container" id="secure_api_row_1">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="is_disable_xml_rpc"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="is_disable_xml_rpc"/>
+                                <div class="text-muted">
+                                    Disable built-in XML-RPC functionality.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                        </div>                                       
+                    </div>
+                </div>
+                <div id="secure_api_expose_api">
+                    <h2>Expose API</h2>
+                    <div class="row mt16 o_settings_container" id="secure_api_row_2">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="is_expose_api_on_view"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="is_expose_api_on_view"/>
+                                <div class="text-muted">
+                                    Enable the Expose API Button on List and Kanban views
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="expose_api_route_prefix"/><br/>
+                                <div class="text-muted">
+                                    The route prefix of the new api exposed from Expose API Button
+                                </div>
+                                <field name="expose_api_route_prefix" placeholder="/api/v1" required="1"/>
+                            </div>
+                        </div>                                       
+                    </div>
+                </div>
+                <div id="secure_api_security">
+                    <h2>Security</h2>
+                    <div class="row mt16 o_settings_container" id="secure_api_row_3">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Default Authentication</span>
+                                <div class="text-muted">
+                                    Set the default authentication for new APIs.<br/>
+                                    -User: The user must be authenticated and the current request will perform using the rights of the user.<br/>
+                                    -Public: The user may or may not be authenticated. If she isn\'t, the current request will perform using the configured security user.
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16 row">
+                                        <label for="default_auth" string="Authentication" class="col-3 col-lg-3 o_light_label"/>
+                                        <field name="default_auth" class="oe_inline" required="1"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_cors"/><br/>
+                                <field name="default_cors" placeholder="*" required="1"/>
+                            </div>                                    
+                        </div>                                       
+                    </div>
+                    <div class="row mt16 o_settings_container" id="secure_api_row_4">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="default_is_secure_record_id"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_is_secure_record_id"/>
+                                <div class="text-muted">
+                                    Secure the record integer IDs from API users. The encoded record ID will look like a random short string (eg. AbdxXdJ5, gpkngme9, 3edpNmlZ, ...) which is not easy to guess. The encoder/decoder is powered by the open-source Python package "hashids"
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="hashids_salt"/><br/>
+                                <div class="text-muted">
+                                    Default salt used for generating obfuscated IDs
+                                </div>
+                                <field name="hashids_salt" placeholder="Random string" required="1"/>
+                                <br/>
+                                <label for="hashids_min_length"/><br/>
+                                <div class="text-muted">
+                                    Default minimum length for obfuscated IDs
+                                </div>
+                                <field name="hashids_min_length" placeholder="5" required="1"/>
+                            </div>
+                        </div>                                       
+                    </div>
+                </div>
+                <div id="secure_api_configuration">
+                    <h2>Common Configuration</h2>
+                    <div class="row mt16 o_settings_container" id="secure_api_row_5">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_listing_limit"/><br/>
+                                <field name="default_listing_limit" placeholder="10" required="1"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="default_is_allow_multi"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="default_is_allow_multi"/>
+                                <div class="text-muted">
+                                    Allow the action affects on multiple records with one API request (create, read, update, delete, rpc)
+                                </div>
+                            </div>
+                        </div>                                       
+                    </div>                    
+                </div>
+            </div>
+        </app>
+        </xpath>
+        </field>
+    </record>
+
+    <record id="action_secure_api_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'secure_api', 'bin_size': False}</field>
+    </record>
+
+    <menuitem id="menu_secure_api_global_settings"
+        name="Settings"
+        parent="secure_api.menu_secure_api_configuration"
+        sequence="0"
+        action="action_secure_api_config_settings"
+        groups="base.group_system"/>
+</odoo>

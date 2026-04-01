@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- VUE LIST -->
+        <record id="view_audit_gainde_finding_list" model="ir.ui.view">
+            <field name="name">audit_gainde.finding.list</field>
+            <field name="model">audit_gainde.finding</field>
+            <field name="arch" type="xml">
+                <list string="Constats d'audit">
+                    <field name="reference"/>
+                    <field name="name" width="400"/>
+                    <field name="mission_id"/>
+                    <field name="risk_id"/>
+                    <field name="severity" widget="badge"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_finding_form" model="ir.ui.view">
+            <field name="name">audit_gainde.finding.form</field>
+            <field name="model">audit_gainde.finding</field>
+            <field name="arch" type="xml">
+                <form string="Constat d'audit">
+                    <header>
+                    
+                        <button name="action_draft_finding" string="Remettre en brouillon"
+                                type="object" class="btn-primary"
+                                invisible="state != 'closed'"/>                               
+                        
+                                
+                        <button name="action_close_finding" string="Clôturer"
+                                type="object" class="btn-success"
+                                groups="audit_gainde.group_senior"
+                                invisible="state != 'draft'"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="reference"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="severity" />
+                            </group>
+                            <group>
+                                <field name="mission_id"/>
+                                <field name="risk_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="name" nolabel="1"/>
+                            </page>
+                            <page string="Recommandations">
+                                <field name="recommendation_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="description"/>
+                                        <field name="state"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+<record id="view_audit_gainde_finding_search" model="ir.ui.view">
+    <field name="name">audit_gainde.finding.search</field>
+    <field name="model">audit_gainde.finding</field>
+    <field name="arch" type="xml">
+        <search string="Recherche Constats">
+            <field name="reference"/>
+            <field name="mission_id"/>
+            <field name="severity"/>
+            <field name="state"/>
+
+            <!-- Filtres par gravité -->
+            <filter name="severity_minor" string="Mineur" domain="[('severity','=','minor')]"/>
+            <filter name="severity_major" string="Majeur" domain="[('severity','=','major')]"/>
+            <filter name="severity_critical" string="Critique" domain="[('severity','=','critical')]"/>
+
+
+            <group expand="0" string="Regrouper par">
+                <filter name="group_by_severity"
+                        string="Gravité"
+                        context="{'group_by':'severity'}"/>
+
+                <filter name="group_by_mission"
+                        string="Mission"
+                        context="{'group_by':'mission_id'}"/>
+
+                <filter name="group_by_state"
+                        string="État"
+                        context="{'group_by':'state'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+
+        <!-- ACTION -->
+        <record id="action_audit_gainde_finding" model="ir.actions.act_window">
+            <field name="name">Constats d'audit</field>
+            <field name="res_model">audit_gainde.finding</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_audit_gainde_finding_search"/>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_findings"
+                  name="Constats"
+                  parent="menu_audit_gainde_missions"
+                  action="action_audit_gainde_finding"
+                  sequence="30"/>
+    </data>
+</odoo>

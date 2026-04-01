@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="dev_helpdesk_portal_solution" name="Helpdesk Portal" inherit_id="helpdesk.tickets_followup">
+        <xpath expr="//div[@name='description']" position="after">
+            <t t-if="ticket.stage_id.is_solve">
+                <h3 id="solution">Solution</h3>
+                <span t-field="ticket.solution_description"/>
+                <h3 id="solution">Solution Attachment</h3>
+                <table class="table table-sm" width="100%">
+                    <thead>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Customer</th>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="ticket.solution_document_ids" t-as="l">
+                            <tr>
+                                <td>
+                                    <img width="30%" height="30%" class="float-left" t-if="l.document"
+                                         t-att-src="image_data_uri(l.document)" alt="Contact"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-field="l.description"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+            
+             <div class="col-10 text-right">
+                <t t-if="ticket.signature_name">
+			        <h5>Signature</h5>
+			       <h3 style="margin-right:-100px;"> <img t-att-src="image_data_uri(ticket.signature)" style="max-height: 6rem; max-width: 100%;"/></h3>
+			        <p t-field="ticket.signature_name"/>
+		        </t>
+	        </div>
+        </xpath>
+        
+        
+        
+        
+        
+<!--        dev_all_in_one_helpdesk-->
+        
+        <xpath expr="//div[@id='ticket-nav']" position="after">
+            <div class="btn-group flex-grow-1 mr-1 mb-1 download print">
+                <a class="btn btn-secondary btn-block o_download_btn" t-att-href="ticket.get_portal_url(report_type='pdf', download=True)" style="margin-right:5px;" title="Download"><i class="fa fa-download"/> Downloadss</a>
+               <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" style="margin-left:5px;" t-att-href="ticket.get_portal_url(report_type='pdf')" id="print_ticket_ticket_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
+            </div>
+                    
+                    
+		<div role="dialog" class="modal fade" id="modalaccept">
+		            <div class="modal-dialog">
+						<form id="accept" method="POST" t-att-data-order-id="ticket.id" t-att-data-token="ticket.access_token" class="js_accept_json modal-content js_website_submit_form">
+		                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+		                    <header class="modal-header">
+		                        <h4 class="modal-title">Confirm Authentication</h4>
+		                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="margin-left:50%">&amp;times;</button>
+		                    </header>
+		                    
+		                    <main class="modal-body">
+		                        <t t-call="portal.signature_form">
+		                                    <t t-set="call_url" t-value="ticket.get_portal_url(suffix='/accept')"/>
+		                                    <t t-set="default_name" t-value="ticket.user_id.name or ''"/>
+		                        </t>
+		                        
+		                    </main>
+		                </form>
+		            </div>
+            </div>
+            
+            <a  role="button" class="btn btn-primary mb-1 pt-1" data-bs-toggle="modal" t-if="not ticket.signature" data-bs-target="#modalaccept" href="#">
+                    		<i class="fa fa-check"/> Sign &amp; Accept
+			</a>	                    
+                                    
+        </xpath>
+        
+    </template>
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_action_reminder" model="mail.template">
+        <field name="name">Relance Action Corrective</field>
+        <field name="model_id" ref="model_audit_gainde_corrective_action"/>
+        <field name="email_from">{{ object.mission_id.responsible_id.email_formatted or 'noreply@gainde.com' }}</field>
+        <field name="email_to">{{ object.responsible_id.id }}</field>
+        <field name="subject">Relance Action Corrective ref: {{ object.reference }} - Échéance {{ format_date(object.date_target) }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="font-size: 13px;">
+                    Bonjour <t t-out="object.responsible_id.name or ''"/>,<br/><br/>
+
+                    RELANCE : Action <strong t-out="object.reference"/> échéance dans <strong> 10 jours</strong><br/>
+
+
+                    <a t-att-href="'/web#id=' + str(object.id) + '&amp;model=' + object._name"
+                       style="padding: 8px 16px; color: #FFFFFF; background-color: #875A7B; border-radius: 3px; text-decoration: none;">
+                       OUVRIR L'ACTION
+                    </a>
+
+                    <br/><br/>Cordialement,<br/>Système Audit Gainde
+                </p>
+            </div>
+        </field>
+        <field name="lang">{{ object.responsible_id.lang or 'fr_FR' }}</field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+
+
+    <record id="email_template_mission_create" model="mail.template">
+    <field name="name">Nouvelle Mission Audit</field>
+    <field name="model_id" ref="model_audit_gainde_mission"/>
+    <field name="email_from">{{ user.email_formatted or 'audit@gainde.com' }}</field>
+    <field name="email_to">{{ object.responsible_id.email_formatted or '' }}</field>
+    <field name="email_cc">{{ object.team_ids.filtered('email').mapped('email_formatted') }}</field>
+    <field name="subject">Nouvelle Mission: {{ object.name }} ({{ object.reference }})</field>
+    <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+            <p style="font-size: 13px;">
+                Bonjour,<br/><br/>
+                Nouvelle mission affectée<br/>
+                <strong><t t-out="object.name or ''"/></strong>
+                (<t t-out="object.reference or ''"/><br/><br/>
+                <strong>Domaine:</strong> <t t-out="object.domain.name or ''"/><br/>
+                <strong>Date début:</strong> <t t-out="format_date(object.period_start) or ''"/><br/><br/>
+                <a t-att-href="'/web#id=' + str(object.id) + '&amp;model=' + object._name"
+                   style="padding: 8px 16px; color: #FFFFFF; background-color: #875A7B; border-radius: 3px; text-decoration: none;">
+                   OUVRIR MISSION
+                </a>
+                <br/><br/>Cordialement,<br/>Système Audit Gainde
+            </p>
+        </div>
+    </field>
+    <field name="lang">{{ object.responsible_id.lang or 'fr_FR' }}</field>
+    <field name="auto_delete" eval="True"/>
+</record>
+
+
+</odoo>

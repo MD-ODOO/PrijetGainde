@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List + form views for Orbus API configuration -->
+        <record id="view_orbus_api_config_list" model="ir.ui.view">
+            <field name="name">orbus.api.config.list</field>
+            <field name="model">orbus.api.config</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="base_url"/>
+                    <field name="username"/>
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_orbus_api_config_form" model="ir.ui.view">
+            <field name="name">orbus.api.config.form</field>
+            <field name="model">orbus.api.config</field>
+            <field name="arch" type="xml">
+                <form string="Configuration API Orbus">
+                    <header>
+                        <button name="action_fetch_factures_next_periode" type="object"
+                                string="Importer prochain batch factures"
+                                class="btn-primary"/>
+                        <button name="action_fetch_factures_selected_periode" type="object"
+                            string="Importer batch période"
+                            class="btn-secondary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="batch_periode"/>
+                        </group>
+                        <group string="Connexion">
+                            <field name="base_url"/>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                        </group>
+                        <group string="Token actuel" colspan="2">
+                            <field name="access_token"/>
+                            <field name="token_expiration" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_orbus_api_config" model="ir.actions.act_window">
+            <field name="name">Configuration API Orbus</field>
+            <field name="res_model">orbus.api.config</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p>
+                    Gérez ici l'URL, les identifiants et le token de connexion à l'API Orbus
+                    pour chaque société.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu: sous menu Comptabilité / Écritures -->
+        <menuitem id="menu_orbus_api_config_root"
+                  name="Orbus API"
+              parent="account.menu_finance_entries"
+                  sequence="90"/>
+
+        <menuitem id="menu_orbus_api_config"
+                  name="Configuration API Orbus"
+                  parent="menu_orbus_api_config_root"
+                  action="action_orbus_api_config"
+                  sequence="1"/>
+    </data>
+</odoo>

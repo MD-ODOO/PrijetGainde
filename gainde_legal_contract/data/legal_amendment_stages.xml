@@ -1,0 +1,24 @@
+<odoo>
+    <data noupdate="1">
+    <record id="amendment_stage_draft" model="legal.contract.amendment.stage">
+        <field name="name">Brouillon</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="amendment_stage_sent" model="legal.contract.amendment.stage">
+        <field name="name">Envoyé</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="amendment_stage_signed" model="legal.contract.amendment.stage">
+        <field name="name">Signé</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="amendment_stage_revised" model="legal.contract.amendment.stage">
+        <field name="name">Revisé</field>
+        <field name="sequence">4</field>
+    </record>
+
+    </data>
+</odoo>

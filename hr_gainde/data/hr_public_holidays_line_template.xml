@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="jour_an" model="hr.public_holidays.line_template">
+            <field name="name">Jour de l’an</field>
+            <field name="date">01-01</field>
+            <field name="variable" eval="False"/>
+        </record>
+        <record id="maouloud" model="hr.public_holidays.line_template">
+            <field name="name">Maouloud</field>
+            <field name="date">01-15</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="jour_independance" model="hr.public_holidays.line_template">
+            <field name="name">Jour de l’indépendance</field>
+            <field name="date">04-04</field>
+            <field name="variable" eval="False"/>
+        </record>
+        <record id="paques" model="hr.public_holidays.line_template">
+            <field name="name">Pâques</field>
+            <field name="date">04-21</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="fete_travail" model="hr.public_holidays.line_template">
+            <field name="name">Fête du travail</field>
+            <field name="date">05-01</field>
+            <field name="variable" eval="False"/>
+        </record>
+        <record id="ascension" model="hr.public_holidays.line_template">
+            <field name="name">Ascension</field>
+            <field name="date">05-29</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="pentecote" model="hr.public_holidays.line_template">
+            <field name="name">Pentecôte</field>
+            <field name="date">06-08</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="korite" model="hr.public_holidays.line_template">
+            <field name="name">Korité</field>
+            <field name="date">07-28</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="assomption" model="hr.public_holidays.line_template">
+            <field name="name">Assomption</field>
+            <field name="date">08-15</field>
+            <field name="variable" eval="False"/>
+        </record>
+        <record id="toussaint" model="hr.public_holidays.line_template">
+            <field name="name">Toussaint</field>
+            <field name="date">11-01</field>
+            <field name="variable" eval="False"/>
+        </record>
+        <record id="tamkharit" model="hr.public_holidays.line_template">
+            <field name="name">Tamkharit</field>
+            <field name="date">11-04</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="magal_touba" model="hr.public_holidays.line_template">
+            <field name="name">Magal de Touba</field>
+            <field name="date">12-15</field>
+            <field name="variable" eval="True"/>
+        </record>
+        <record id="noel" model="hr.public_holidays.line_template">
+            <field name="name">Noël</field>
+            <field name="date">12-25</field>
+            <field name="variable" eval="False"/>
+        </record>
+    </data>
+</odoo>

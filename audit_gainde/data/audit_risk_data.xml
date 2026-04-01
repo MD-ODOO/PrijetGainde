@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <!-- PLAN0001 CONFORMITE : 30 RISQUES -->
+    <record id="risk_1_1" model="audit_gainde.risk">
+        <field name="code">R001</field>
+        <field name="name">Erreurs declarations ORBUS Odoo</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Declaration douaniere</field>
+        <field name="level">high</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+
+    <record id="risk_1_2" model="audit_gainde.risk">
+        <field name="code">R002</field>
+        <field name="name">Synchronisation ORBUS defectueuse</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Interface API</field>
+        <field name="level">critical</field>
+        <field name="probability">low</field>
+        <field name="impact">critical</field>
+    </record>
+
+    <record id="risk_1_3" model="audit_gainde.risk">
+        <field name="code">R003</field>
+        <field name="name">Delais declarations excessifs</field>
+        <field name="domain">Conformite</field>
+        <field name="process">SLA douanier</field>
+        <field name="level">medium</field>
+        <field name="probability">high</field>
+        <field name="impact">low</field>
+    </record>
+
+    <record id="risk_1_4" model="audit_gainde.risk">
+        <field name="code">R004</field>
+        <field name="name">Donnees manquantes declarations</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Saisie ORBUS</field>
+        <field name="level">medium</field>
+        <field name="probability">high</field>
+        <field name="impact">medium</field>
+    </record>
+
+    <record id="risk_1_5" model="audit_gainde.risk">
+        <field name="code">R005</field>
+        <field name="name">Rejets DGID DAM NCTS</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Validation douaniere</field>
+        <field name="level">high</field>
+        <field name="probability">high</field>
+        <field name="impact">medium</field>
+    </record>
+
+    <record id="risk_1_6" model="audit_gainde.risk">
+        <field name="code">R006</field>
+        <field name="name">Erreurs assiette douaniere BL</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Calcul droits</field>
+        <field name="level">medium</field>
+        <field name="probability">high</field>
+        <field name="impact">medium</field>
+    </record>
+
+    <record id="risk_1_7" model="audit_gainde.risk">
+        <field name="code">R007</field>
+        <field name="name">Classification tarifaire erronee</field>
+        <field name="domain">Conformite</field>
+        <field name="process">SH douaniere</field>
+        <field name="level">critical</field>
+        <field name="probability">low</field>
+        <field name="impact">high</field>
+    </record>
+
+    <record id="risk_1_8" model="audit_gainde.risk">
+        <field name="code">R008</field>
+        <field name="name">NCTS export non transmis</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Export NCTS</field>
+        <field name="level">high</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+
+    <record id="risk_1_9" model="audit_gainde.risk">
+        <field name="code">R009</field>
+        <field name="name">Stocks suspensif incoherents</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Entrepot suspensif</field>
+        <field name="level">medium</field>
+        <field name="probability">high</field>
+        <field name="impact">medium</field>
+    </record>
+
+    <record id="risk_1_10" model="audit_gainde.risk">
+        <field name="code">R010</field>
+        <field name="name">Redressement TVA 18 percent</field>
+        <field name="domain">Conformite</field>
+        <field name="process">TVA recuperable</field>
+        <field name="level">critical</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+
+    <!-- R011-R030 : Continuer meme format pour PLAN0001 -->
+    <record id="risk_1_11" model="audit_gainde.risk">
+        <field name="code">R011</field>
+        <field name="name">Procedures douanieres non respectees</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Procedures internes</field>
+        <field name="level">medium</field>
+        <field name="probability">medium</field>
+        <field name="impact">medium</field>
+    </record>
+
+    <record id="risk_1_12" model="audit_gainde.risk">
+        <field name="code">R012</field>
+        <field name="name">Non-conformite rapport DGID</field>
+        <field name="domain">Conformite</field>
+        <field name="process">Reporting</field>
+        <field name="level">high</field>
+        <field name="probability">low</field>
+        <field name="impact">high</field>
+    </record>
+
+    <!-- PLAN0002 FINANCIER : 15 RISQUES -->
+    <record id="risk_2_1" model="audit_gainde.risk">
+        <field name="code">R013</field>
+        <field name="name">Taxe especes non collectee POS</field>
+        <field name="domain">Financier</field>
+        <field name="process">Taxe 1 cash</field>
+        <field name="level">critical</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+    
+    <!-- PLAN0002 FINANCIER : 15 RISQUES -->
+    <record id="risk_2_2" model="audit_gainde.risk">
+        <field name="code">R014</field>
+        <field name="name">Taxe especes non collectee POS</field>
+        <field name="domain">Financier</field>
+        <field name="process">Taxe 1 cash</field>
+        <field name="level">critical</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+    
+    <!-- PLAN0002 FINANCIER : 15 RISQUES -->
+    <record id="risk_2_3" model="audit_gainde.risk">
+        <field name="code">R015</field>
+        <field name="name">Taxe especes non collectee POS</field>
+        <field name="domain">Financier</field>
+        <field name="process">Taxe 1 cash</field>
+        <field name="level">critical</field>
+        <field name="probability">medium</field>
+        <field name="impact">high</field>
+    </record>
+    
+    </data>
+
+</odoo>

@@ -1,0 +1,148 @@
+<odoo>
+  <menuitem id="menu_treasury_root"
+            name="Trésorerie"
+            web_icon="treasury_management,static/description/icon.png"
+            sequence="10"
+            groups="base.group_user"/>
+
+  <menuitem id="menu_treasury_operations"
+            name="Opérations"
+            parent="menu_treasury_root"
+            sequence="10"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager,treasury_management.group_treasury_cashier"/>
+  <menuitem id="menu_treasury_payroll_batch"
+            name="Décaissements paie"
+            parent="menu_treasury_operations"
+            action="action_treasury_payroll_batch"
+            sequence="8"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_payment"
+            name="Décaissements"
+            parent="menu_treasury_operations"
+            action="action_treasury_payment"
+            sequence="1"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_receipt"
+            name="Encaissements"
+            parent="menu_treasury_operations"
+            action="treasury_management.action_treasury_receipt_sync"
+            sequence="2"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_vendor_bills"
+            name="Échéancier fournisseur"
+            parent="menu_treasury_operations"
+            action="action_treasury_vendor_bills"
+            sequence="5"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_bank_statements"
+            name="Relevés bancaires"
+            parent="menu_treasury_operations"
+            action="action_treasury_bank_statements"
+            sequence="95"
+            active="False"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_cash"
+            name="Caisse dépenses"
+            parent="menu_treasury_operations"
+            action="action_treasury_cash"
+            sequence="4"
+            groups="treasury_management.group_treasury_cashier,treasury_management.group_treasury_df"/>
+
+  <menuitem id="menu_treasury_forecast_root"
+            name="Prévisions"
+            parent="menu_treasury_root"
+            sequence="20"
+            groups="treasury_management.group_treasury_df"/>
+  <menuitem id="menu_treasury_forecast"
+            name="Liste des prévisions"
+            parent="menu_treasury_forecast_root"
+            action="action_treasury_forecast"
+            sequence="10"
+            groups="treasury_management.group_treasury_df"/>
+  <menuitem id="menu_treasury_forecast_generate"
+            name="Générer prévisions"
+            parent="menu_treasury_forecast_root"
+            action="action_treasury_forecast_generate"
+            sequence="20"
+            groups="treasury_management.group_treasury_df"/>
+
+  <menuitem id="menu_treasury_reporting"
+            name="Reporting &amp; KPI"
+            parent="menu_treasury_root"
+            sequence="30"
+            groups="treasury_management.group_treasury_df"/>
+  <menuitem id="menu_treasury_ops_dashboard"
+            name="Tableau de bord"
+            parent="menu_treasury_root"
+            action="action_treasury_payment_ops_dashboard"
+            sequence="6"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+  <menuitem id="menu_treasury_dashboard"
+            name="Analyse des décaissements"
+            parent="menu_treasury_reporting"
+            action="action_treasury_payment_dashboard"
+            sequence="10"
+            groups="treasury_management.group_treasury_df"/>
+  <menuitem id="menu_treasury_receipt_dashboard"
+            name="Tableau de bord encaissements"
+            parent="menu_treasury_reporting"
+            action="action_treasury_receipt_dashboard"
+            sequence="20"
+            groups="treasury_management.group_treasury_df"/>
+  <!-- KPI dashboard/menu removed -->
+  <menuitem id="menu_treasury_kpi"
+            name="KPI Trésorerie"
+            parent="menu_treasury_reporting"
+            action="action_treasury_kpi"
+            sequence="40"
+            groups="treasury_management.group_treasury_df"/>
+
+  <menuitem id="menu_treasury_setu_transactions"
+            name="Transactions"
+            parent="menu_treasury_root"
+            sequence="15"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_invoice_paid_out"
+            name="Factures encaissées"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_invoice_paid_out"
+            sequence="10"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_payment_inbound"
+            name="Paiements entrants"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_payment_inbound"
+            sequence="20"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_invoice_unpaid_out"
+            name="Factures non encaissées"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_invoice_unpaid_out"
+            sequence="30"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_bill_paid_in"
+            name="Factures réglées"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_bill_paid_in"
+            sequence="40"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_payment_outbound"
+            name="Paiements sortants"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_payment_outbound"
+            sequence="50"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+  <menuitem id="menu_treasury_setu_transactions_bill_unpaid_in"
+            name="Factures non réglées"
+            parent="menu_treasury_setu_transactions"
+            action="action_treasury_bill_unpaid_in"
+            sequence="60"
+            groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager"/>
+
+</odoo>

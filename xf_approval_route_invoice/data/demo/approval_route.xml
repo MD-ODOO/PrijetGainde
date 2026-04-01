@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_approval_route_1" model="approval.route">
+            <field name="name">Demo Route for Invoices</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="invoice_approval_route_1_prod_mgr" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">Product Manager</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_product_manager"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_product_field_id"
+                   ref="xf_approval_route_invoice.field_account_move__all_used_products"/>
+            <field name="condition_product_operator">in</field>
+            <field name="condition_product_ids"
+                   eval="[(6,0,[ref('product.product_product_7'), ref('product.product_product_8')])]"/>
+        </record>
+
+        <record id="invoice_approval_route_1_stage_marketing_mgr" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">Marketing Manager</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_marketing_manager"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_analytic_account_field_id"
+                   ref="xf_approval_route_invoice.field_account_move__all_used_analytic_accounts"/>
+            <field name="condition_analytic_account_operator">in</field>
+            <field name="condition_analytic_account_ids" eval="[(6,0,[ref('analytic.analytic_commercial_marketing')])]"/>
+        </record>
+
+        <record id="invoice_approval_route_1_stage_rd_mgr" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">R&amp;D Manager</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_rnd_manager"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_analytic_account_field_id"
+                   ref="xf_approval_route_invoice.field_account_move__all_used_analytic_accounts"/>
+            <field name="condition_analytic_account_operator">in</field>
+            <field name="condition_analytic_account_ids" eval="[(6,0,[ref('analytic.analytic_rd_department')])]"/>
+        </record>
+
+        <record id="invoice_approval_route_1_sales_director" model="approval.route.stage">
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">Sales Director</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_sales_director"/>
+            <field name="use_custom_conditions" eval="False"/>
+        </record>
+
+        <record id="invoice_approval_route_1_accountant" model="approval.route.stage">
+            <field name="sequence">3</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">Accountant</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_accountant"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_amount_field_id" ref="account.field_account_move__amount_total"/>
+            <field name="condition_amount_operator">&gt;=</field>
+            <field name="condition_amount">1000</field>
+            <field name="condition_amount_currency_id" ref="base.USD"/>
+        </record>
+
+        <record id="invoice_approval_route_1_fin_dir" model="approval.route.stage">
+            <field name="sequence">4</field>
+            <field name="approval_route_id" ref="invoice_approval_route_1"/>
+            <field name="name">Financial Director</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_fin_dir"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_amount_field_id" ref="account.field_account_move__amount_total"/>
+            <field name="condition_amount_operator">&gt;=</field>
+            <field name="condition_amount">100000</field>
+            <field name="condition_amount_currency_id" ref="base.USD"/>
+        </record>
+    </data>
+</odoo>

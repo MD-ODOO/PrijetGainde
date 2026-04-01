@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_tier_account" model="ir.ui.view">
+        <field name="name">res.partner.form.tier.account</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="tier_account" placeholder="e.g., TIER-001"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_tier_account" model="ir.ui.view">
+        <field name="name">res.partner.tree.tier.account</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="tier_account" optional="hide" widget="badge" decoration-info="tier_account"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_search_tier_account" model="ir.ui.view">
+        <field name="name">res.partner.search.tier.account</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='name']" position="before">
+                <field name="tier_account" string="Compte Tiers"/>
+            </xpath>
+            <xpath expr="//search/field[@name='name']" position="attributes">
+                <attribute name="filter_domain">['|', '|', '|', '|', '|', ('tier_account', 'ilike', self), ('complete_name', 'ilike', self), ('ref', 'ilike', self), ('email', 'ilike', self), ('vat', 'ilike', self), ('company_registry', 'ilike', self)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

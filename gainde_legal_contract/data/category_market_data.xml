@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="type_market" model="legal.contract.type">
+            <field name="name">Accord de Marché / Contrat Cadre</field>
+            <field name="category">market</field>
+            <field name="code">MARKET-G2K</field>
+            <field name="description">Modèle Standard de Contrat de Marché Société (B2B)</field>
+            <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                    Considerant GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    Depuis une vingtaine d’années, il s’est aussi orienté dans les activités de certification électronique pour la sécurisation de ses plateformes de services dans un premier temps, ensuite pour s’ouvrir au marché national, international et devenir l’un des premiers prestataires de service de certification du Sénégal.
+                    <br/><br/>
+                    Considérant que {{partner_name}} est .....;
+                    <br/><br/>
+                    Considérant que les parties souhaitent formaliser les bases d’une collaboration structurée autour d’objectifs communs, notamment en matière de ;
+                     </p>
+                     <p class="mt-3"><strong>Entre les parties, il a été convenu et arrêté ce qui suit :</strong></p>
+
+
+        ]]></field>
+        </record>
+
+        <record id="art_market_1" model="legal.article.template">
+            <field name="name">Article 1 : DEFINITIONS</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Aux fins de l’exécution du présent contrat, les termes ci-après auront le sens qui leur
+                est donné dans les définitions ci-dessous :
+            </p>
+            <p><strong> Equipements/Produits </strong>:...................</p>
+            <p><strong>Missions / travaux </strong>: Fourniture...................</p>
+            <p><strong>Recette technique </strong>:Procédure de vérification et de validation technique de la
+            conformité de l’exécution de la livraison. Celle-ci est effectuée par le prestataire, en
+            présence de GAINDE 2000, à l’issue de laquelle un procès-verbal contradictoire, signé
+            par les parties, est dressé.</p>
+            <p><strong>Tiers </strong>: Toute personne (physique ou morale) autre que les parties.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_market_2" model="legal.article.template">
+            <field name="name">Article 2 : OBJET</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Par le présent contrat, le client confie au prestataire qui accepte, à titre onéreux, la
+            fourniture ..............., conformément aux spécifications détaillées dans le ............
+            et son offre technique.
+            </p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_market_3" model="legal.article.template">
+            <field name="name">Article 3 : OBLIGATIONS DES PARTIES</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>GAINDE 2000 s’engage à :</p>
+            <ul style="list-style-type: '-' ;">
+                <li>
+                    <p>S’acquitter des dispositions financières spécifiées à l’article 4 ;
+                    </p>
+                </li>
+                <li>
+                    <p>Organiser et planifier, par l’entremise de son point focal, le planning de
+                    réception avec le prestataire, en rapports avec ses services ;
+                    </p>
+                </li>
+                <li>
+                    <p>Donner suite et valider obligatoirement les dates et heures d’intervention que
+                        le prestataire communiquera 48h avant ;
+                    </p>
+                </li>
+                <li>
+                    <p>Superviser la réalisation des livraisons ;
+                    </p>
+                </li>
+                <li>
+                    <p>Provoquer la recette technique des ...............  et émettre ses réserves, si nécessaire ;
+                    </p>
+                </li>
+                <li>
+                    <p>Signaler les non-conformités et les malfaçons constatées et instruire leur prise
+                        en charge par le prestataire dans un délai maximal de 48h.
+                    </p>
+                </li>
+            </ul>
+            <p>Le prestataire est assujetti aux obligations particulières ci-après :</p>
+            <ul style="list-style-type: '-' ;">
+                <li>
+                    <p>Fournir des strictement conformes aux spécifications détaillées dans son offre technique ;
+                    </p>
+                </li>
+                <li>
+                    <p>Livrer intégralement ................
+                    </p>
+                </li>
+                <li>
+                    <p>Se conformer à toutes les obligations issues du ............ et de son offre technique ;
+                    </p>
+                </li>
+                <li>
+                    <p>Exécuter toute autre prestation inscrite dans le ........... et dans son offre technique.
+                    </p>
+                </li>
+            </ul>
+            ]]></field>
+        </record>
+        <record id="art_market_4" model="legal.article.template">
+            <field name="name">Article 4 : RESULTATS - LIVRABLESS</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Les livrables et/résultats attendus sont :</p>
+            <ul style="list-style-type: '-' ;">
+                <li>
+                    <p>Des vidéos corporate et solutions très haute qualité ;
+                    </p>
+                </li>
+                <li>
+                    <p>Des messages forts et mémorables ;
+                    </p>
+                </li>
+                <li>
+                    <p>Des supports stratégiques et digitaux ;
+                    </p>
+                </li>
+                <li>
+                    <p>Une cohérence visuelle et éditoriale sur l’ensemble des canaux.
+                    </p>
+                </li>
+            </ul>
+            <p>Le prestataire doit fournir les livrables avec toutes les spécifications listées dans le
+              cahier des charges et dans son offre technique, annexes du présent contrat.</p>
+
+            ]]></field>
+        </record>
+        <record id="art_market_5" model="legal.article.template">
+            <field name="name">Article 5 : DISPOSITIONS FINANCIERES</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Le présent contrat est exécuté pour un montant de  francs CFA toutes
+            taxes comprises ( F CFA TTC). Ledit montant est fixe et non révisable, sous
+            peine de résiliation du contrat.</p>
+
+            <p>Le règlement se fera par chèque ou virement bancaire, au nom du prestataire, selon
+            les modalités suivantes :</p> <br/>
+            <p>.............</p>
+            ]]></field>
+        </record>
+        <record id="art_market_6" model="legal.article.template">
+            <field name="name">Article 6 : LIVRAISON-GARANTIE-SAV</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>La livraison se fera dans un délai maximal de trente (30) jours à compter de la
+            signature du contrat.</p>
+            <p>Une réception définitive sera prononcée au plus tard à l’expiration du délai de
+            garantie si tous les défauts signalés à la recette provisoire sont corrigés et les
+            performances conformes aux clauses techniques.</p>
+            <p>Si GAINDE 2000 estime ne pas pouvoir prononcer la recette définitive, le
+            fournisseur sera mis en demeure de présenter à nouveau les .............en
+            réception définitive dans un délai déterminé.</p>
+            <p>Les frais supplémentaires de contrôle seront alors à sa charge.</p>
+            <p>Le prestataire garantit les ......... fourni(e)s pour une durée de douze (12)
+            mois après la réception provisoire. Cette garantie permettra de maintenir les
+            ........ en condition opérationnelle.</p>
+            <p>Durant cette période de garantie, le prestataire prend en charge, à ses frais,
+            toutes les malfaçons et les ............... non conformes et/ou défectueux.</p>
+            <p>Pour le SAV, une équipe dédiée sera mise à la disposition de GAINDE 2000 pour
+            une meilleure prise en charge des incidents.</p>
+
+
+            ]]></field>
+        </record>
+        <record id="art_market_7" model="legal.article.template">
+            <field name="name">Article 7 : PENALITES</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+        <p>En cas de retard imputable au prestataire dans l’exécution de ses obligations
+        contractuelles, notamment en ce qui concerne le respect des délais convenus,
+        celui-ci sera redevable, sans mise en demeure préalable, de pénalités de retard
+        calculées à raison de zéro virgule cinq pour cent (0,5%) du montant hors taxes
+        de la partie des prestations non exécutées par jour de retard.</p>
+        <p>Ces pénalités seront plafonnées à cinq pour cent (5%) du montant desdites
+        prestations.</p>
+        <p>Le paiement des pénalités de retard ne libérera pas le prestataire de l’exécution
+        de ses obligations contractuelles. Les pénalités de retard, lorsqu’elles sont
+        applicables, seront déduites de plein droit des sommes dues au prestataire, par
+        imputation sur les factures présentées pour paiement, sans qu’il soit besoin de
+        notification préalable ou de formalité particulière.</p>
+        <p>Leur application ne fait pas obstacle au droit pour le client:</p>
+        <ul style="list-style-type: '-' ;">
+                <li>
+                    <p>de résilier le contrat de plein droit, sans préjudice de tous dommages et intérêts ;
+                    </p>
+                </li>
+                <li>
+                    <p>de réclamer des dommages-intérêts complémentaires, si le retard cause
+                        un préjudice supérieur au montant desdites pénalités ;
+                    </p>
+                </li>
+                <li>
+                    <p>de faire exécuter la prestation par un tiers, aux frais et risques du
+                    prestataire défaillant, sans préjudice des pénalités de retard et des autres
+                    recours prévus au contrat.
+                    </p>
+                </li>
+            </ul>
+
+            ]]></field>
+        </record>
+        <record id="art_market_8" model="legal.article.template">
+            <field name="name">Article 8 : DUREE ET ENTREE EN VIGUEUR</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+
+            <p>Le présent contrat est conclu pour une durée de ... (......) ........ Il entre en
+            vigueur à compter de sa date de signature.</p>
+            <p>Toutefois, le présent contrat continue de produire ses effets jusqu’à l’expiration de la
+                période de garantie des ........ fourni(e)s.</p>
+
+            ]]></field>
+        </record>
+        <record id="art_market_9" model="legal.article.template">
+            <field name="name">Article 9 : DOCUMENTS CONTRACTUELS</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Sont considérées comme pièces contractuelles pour y faire référence en cas de besoin
+                et admises comme telles tant par le prestataire que par GAINDE 2000:</p>
+                <ul style="list-style-type: '-' ;">
+                <li>
+                    <p>Le présent contrat ;
+                    </p>
+                </li>
+                <li>
+                    <p>La consultation restreinte ;
+                    </p>
+                </li>
+                <li>
+                    <p>La proposition technique du prestataire ;
+                    </p>
+                </li>
+                <li>
+                    <p>L’offre commerciale du prestataire.
+                    </p>
+                </li>
+            </ul>
+
+            ]]></field>
+        </record>
+        <record id="art_market_10" model="legal.article.template">
+            <field name="name">Article 10 : CONFIDENTIALITE</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Toutes les informations auxquelles le prestataire et son personnel auront eu
+                connaissance dans le cadre de l’exécution de leur mission sont confidentielles.</p>
+            <p>Le prestataire s’engage en outre au respect de la confidentialité des informations
+                qu’il recevra dans l’exercice de sa mission, à conserver dans de bonnes dispositions
+                de sécurité et de confidentialité, les documents et informations dont il aura pris
+                connaissance dans l’exécution de sa présente mission.</p>
+            <p>Le prestataire reconnaît avoir pris connaissance des dispositions des lois sénégalaises
+                N°2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel,
+                N°2008-08 du 25 janvier 2008 sur les transactions électroniques et N°2008-11 du 25
+                janvier 2008 sur la cybercriminalité.</p>
+            <p>Par conséquent, il s’engage à garder ces informations confidentielles à l’égard des
+            tiers et à prendre toutes les mesures nécessaires pour faire respecter la présente
+            clause à son personnel aussi bien en cours d’exécution de la mission qu’après son
+            terme.</p>
+            <p>Le prestataire s’engage à se conformer aux procédures de qualité et de sécurité de
+                l’information applicables à GAINDE 2000, mises à sa disposition.</p>
+
+            ]]></field>
+        </record>
+        <record id="art_market_11" model="legal.article.template">
+            <field name="name">Article 11 : RESILIATION</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Le présent contrat pourra être résilié de plein droit, en cas de manquement par l’une
+                des parties à ses obligations.</p>
+            <p>La partie la plus diligente peut envisager la résiliation du contrat après une lettre de
+                mise en demeure, restée sans effet, enjoignant à l’autre partie d’apporter un remède
+                à son ou ses manquements à l’issue d’un délai de sept (07) jours.</p>
+
+            <p>La partie qui prend l’initiative de la résiliation doit la notifier à son contractant par
+                lettre recommandée avec accusé de réception.</p>
+            <p>La résiliation anticipée du présent contrat ne préjudicierait pas à l’exécution des
+                actions en cours ni à leur règlement, ni à l’obtention en justice de tous dommages et
+                intérêts auxquels pourrait prétendre la partie subissant un quelconque préjudice du
+                fait de l’inexécution, ou de la mauvaise exécution, par l’autre partie, de ses
+                obligations.</p>
+
+            ]]></field>
+        </record>
+        <record id="art_market_12" model="legal.article.template">
+            <field name="name">Article 12 : AVENANT (S)</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Le présent contrat pourra être modifié, d’accord parties, sous la forme d’un ou des
+                avenants qui y seront annexés et intégrés.</p>
+            ]]></field>
+        </record>
+        <record id="art_market_13" model="legal.article.template">
+            <field name="name">Article 13 : DROIT APPLICABLE</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Le présent contrat relève exclusivement du droit sénégalais.</p>
+            <p>Tout différend né, entre les parties, à propos de l’existence, de la validité, de
+                l’interprétation, de l’exécution, ou du terme de la présente convention, sera soumis
+                aux juridictions compétentes par la partie la plus diligente, à défaut d’accord
+                amiable.</p>
+
+
+            ]]></field>
+        </record>
+        <record id="art_market_14" model="legal.article.template">
+            <field name="name">Article 14 : CLAUSES DIVERSES</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Pour tout ce qui n’est pas prévu dans le présent contrat, les parties s’en réfèrent aux
+                dispositions du Nouveau Code des Obligations Civiles et Commerciales.</p>
+            ]]></field>
+        </record>
+        <record id="art_market_15" model="legal.article.template">
+            <field name="name">Article 15 : CONDITIONS FINANCIÈRES</field>
+            <field name="contract_type_id" ref="type_market"/>
+            <field name="content"><![CDATA[
+            <p>Les frais et taxes portant sur les formalités d’enregistrement du présent contrat sont
+                à la charge du prestataire.</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_contract_business">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+
+                    <!-- HEADER COMMUN GAINDE -->
+                    <t t-call="gainde_legal_contract.custom_gainde_header"/>
+                    <div class="page"
+                         style="font-family: 'Helvetica', Arial, sans-serif; text-align: justify; font-size: 12pt;">
+
+                        <div class="page gainde_contract">
+                            <!-- BLOC IDENTIFICATION (Présent ici car Marché) -->
+                            <t t-call="gainde_legal_contract.identification_table_block"/>
+                            <t t-call="gainde_legal_contract.identification_activity_block"/>
+                            <t t-call="gainde_legal_contract.identification_comment_block"/>
+
+                            <h3 class="text-center" style="text-transform: uppercase;">CONTRAT DE PRESTATION DE SERVICES
+                            </h3>
+
+                            <!-- 1. AFFICHAGE DE L'EN-TETE EDITE -->
+                            <div class="mb-4">
+                                <t t-out="doc.header_content"/>
+                            </div>
+                            <!-- Utilisation de la fonction de traitement Python pour le rendu dynamique -->
+                            <t t-foreach="doc.get_processed_articles()" t-as="art">
+
+                                <!-- Titre avec soulignement dynamique (Border s'arrête à la fin du texte) -->
+                                <h6 class="mt-4 mb-2" style="font-weight: bold;">
+                                    <span class="text-dark border-bottom border-dark pb-1" t-esc="art['name']"/>
+                                </h6>
+
+                                <!-- Contenu de l'article avec variables remplacées (t-out pour le HTML) -->
+                                <div class="ps-3 small text-justify" style="line-height: 1.5;">
+                                    <t t-out="art['content']"/>
+                                </div>
+
+                            </t>
+
+
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article Premier : OBJET</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>Par le présent contrat, GAINDE 2000 confie au prestataire qui accepte, une mission de :-->
+                            <!--                                <span t-field="doc.mission_description"/>-->
+                            <!--                                .-->
+                            <!--                            </p>-->
+                            <!--                            <p>Les modalités d’exécution de la mission du prestataire sont ci-après définies.</p>-->
+
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">  Article 2 : OBLIGATIONS DU PRESTATAIRE</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>2.1. Déroulement de la mission : Le prestataire déroule sa mission conformément à la-->
+                            <!--                                feuille-->
+                            <!--                                de-->
+                            <!--                                route fournie.-->
+                            <!--                            </p>-->
+                            <!--                            <p>2.2. Exécution</p>-->
+                            <!--                            <p>Dans le cadre de sa mission, le prestataire s’engage :</p>-->
+                            <!--                            <p>- à mettre en œuvre les moyens et l’organisation nécessaires afin de respecter-->
+                            <!--                                les délais convenus au présent contrat ;-->
+                            <!--                            </p>-->
+                            <!--                            <p>- à travailler en étroite collaboration avec l’équipe désignée par GAINDE 2000-->
+                            <!--                                selon le planning d’intervention en présentiel pour le nombre de jours-->
+                            <!--                                nécessaire ou à distance selon les besoins.-->
+                            <!--                            </p>-->
+                            <!--                            <p>2.3. Résultats attendus</p>-->
+                            <!--                            <p>Les livrables et/ou résultats attendus sont :</p>-->
+
+                            <!--                            <p>2.4. Diligence</p>-->
+                            <!--                            <p>Le prestataire s’engage à exécuter sa mission dans les règles de l’art et à y apporter-->
+                            <!--                                tout le professionnalisme attendu par GAINDE 2000.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Il s’engage à exécuter sa mission et à restituer les livrables dans les délais impartis-->
+                            <!--                                et-->
+                            <!--                                les conditions convenues avec GAINDE 2000.-->
+                            <!--                            </p>-->
+                            <!--                            <p>2.5 Intutule personel</p>-->
+                            <!--                            <p>Le présent contrat étant conclu en considération de la personne, le prestataire-->
+                            <!--                                s’interdit de le céder à une tierce personne.-->
+                            <!--                            </p>-->
+
+
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1"> Article 3 : OBLIGATIONS DE GAINDE 2000</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>En contrepartie, GAINDE 2000 paiera au prestataire une rémunération mensuelle brute de-->
+                            <!--                                <strong>-->
+                            <!--                                    <span t-field="doc.salary_gross"-->
+                            <!--                                          t-options='{"widget": "monetary", "display_currency": doc.company_id.currency_id}'/>-->
+                            <!--                                </strong>-->
+                            <!--                                francs CFA TTC (-->
+                            <!--                                <span t-field="doc.salary_in_words"/>-->
+                            <!--                                par chèque ou virement.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Conformément à la législation fiscale, une retenue à la source de 5% sera faite.</p>-->
+
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1"> Article 4 : ENTRÉE EN VIGUEUR - DURÉE</span></h6>-->
+                            <!--                            <p>Le contrat est conclu pour une durée de<span t-field="doc.duration_text"/>. Il entre en-->
+                            <!--                                vigueur-->
+                            <!--                                le<span t-field="doc.date_start"/>> et expire le<span t-field="doc.date_end"/>.-->
+                            <!--                            </p>-->
+
+                            <!--                            &lt;!&ndash; Intégration des articles juridiques standards (5 à 11) &ndash;&gt;-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">  Article 5 : DOCUMENTS CONTRACTUELS</span></h6>-->
+                            <!--                            <p>Sont considérés comme documents contractuels : le présent contrat, l’Acte d’engagement de-->
+                            <!--                                sécurité, les livrables attendus, tout autre document.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1"> Article 6 : PROPRIÉTÉ</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>Le prestataire garantit la qualité, l’exactitude et la pertinence des livrables-->
+                            <!--                                identifiés au 2.3.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Tous les livrables produits par le prestataire, dans le cadre de l’exécution du contrat,-->
+                            <!--                                sont la propriété de GAINDE 2000.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Toute utilisation ultérieure des livrables susvisés, des documents et/ou autres-->
+                            <!--                                informations portant sur l’exécution du présent contrat, par le prestataire, pour son-->
+                            <!--                                propre compte ou celui de tiers, emporte obligatoirement l’autorisation expresse de-->
+                            <!--                                GAINDE 2000.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article 7 : CONFIDENTIALITÉ</span></h6>-->
+                            <!--                            <p>Toutes les informations auxquelles le prestataire aura eu connaissance dans le cadre-->
+                            <!--                                de l’exécution de sa mission sont confidentielles.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Le prestataire s’engage en outre au respect de la confidentialité des informations-->
+                            <!--                                qu’il recevra dans l’exercice de sa mission, à conserver dans de bonnes dispositions-->
+                            <!--                                de sécurité et de confidentialité, les documents et informations dont il aura pris-->
+                            <!--                                connaissance dans l’exécution de sa présente mission.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Le prestataire reconnaît avoir pris connaissance des dispositions des lois sénégalaises-->
+                            <!--                                N°2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel,-->
+                            <!--                                N°2008-08 du 25 janvier 2008 sur les transactions électroniques et N°2008-11 du 25-->
+                            <!--                                janvier 2008 sur la cybercriminalité.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Par conséquent, il s’engage à garder ces informations confidentielles à l’égard des-->
+                            <!--                                tiers et à prendre toutes les mesures nécessaires pour respecter la présente clause,-->
+                            <!--                                aussi bien en cours d’exécution de la mission qu’après son terme.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Le prestataire s’engage à se conformer aux procédures qualité et de sécurité de-->
+                            <!--                                l’information applicables à GAINDE 2000, mises à sa disposition.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article 8 : RESPONSABILITÉ</span></h6>-->
+                            <!--                            <p>Chaque partie est responsable, dans les conditions du droit commun, de l’exécution-->
+                            <!--                                des obligations mises à sa charge par le présent contrat.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Le prestataire est seul responsable de la bonne exécution des prestations qui lui sont-->
+                            <!--                                confiées. Il garantit GAINDE 2000 contre tout dommage, préjudice, réclamation ou-->
+                            <!--                                action émanant de tiers résultant d’une faute, d’une négligence ou d’un manquement-->
+                            <!--                                imputable à lui-même ou à son personnel dans l’exécution du présent contrat.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article 9 : FORCE MAJEURE</span></h6>-->
+                            <!--                            <p>En cas de survenance d’un événement de force majeure tel que défini par la loi et la-->
+                            <!--                                jurisprudence, les parties tenteront de poursuivre l’exécution du contrat dans la-->
+                            <!--                                mesure du possible.-->
+                            <!--                            </p>-->
+                            <!--                            <p>Aucune des parties ne pourra être tenue responsable des dommages directs ou-->
+                            <!--                                indirects subis par l’une ou l’autre, et consécutifs à la survenance de l’événement de-->
+                            <!--                                force majeure.-->
+                            <!--                            </p>-->
+                            <!--                            <p>La force majeure suspend de droit l’exécution du contrat. Les parties décideront d’un-->
+                            <!--                                commun accord de la suspension temporaire ou de la résiliation du contrat.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1"> Article 10 : RÉSILIATION</span></h6>-->
+                            <!--                            <p>Le présent contrat pourra être résilié de plein droit, par anticipation, en cas de-->
+                            <!--                                manquement par l’une des parties aux obligations qui en découlent.-->
+                            <!--                            </p>-->
+                            <!--                            <p>À l’initiative de la partie diligente, la résiliation intervient à l’expiration du délai-->
+                            <!--                                imparti par la lettre de mise en demeure, restée sans effet, enjoignant à l’autre-->
+                            <!--                                partie d’apporter un remède à son ou ses manquements.-->
+                            <!--                            </p>-->
+                            <!--                            <p>La partie qui prend l’initiative de la résiliation doit la notifier à son contractant par-->
+                            <!--                                lettre recommandée avec accusé de réception.-->
+                            <!--                            </p>-->
+                            <!--                            <p>La résiliation anticipée du présent contrat ne préjudiciera pas à l’exécution des-->
+                            <!--                                activités en cours, ni à l’obtention en justice de tous dommages et intérêts auxquels-->
+                            <!--                                pourrait prétendre la partie subissant un quelconque préjudice du fait de-->
+                            <!--                                l’inexécution, ou de la mauvaise exécution, par l’autre partie, de ses obligations.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article 11 : AVENANT (S)</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>Le présent contrat pourra être modifié, d’accord parties, sous la forme d’un ou des-->
+                            <!--                                avenants qui y seront annexés et intégrés.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1"> Article 12 : DROIT APPLICABLE</span>-->
+                            <!--                            </h6>-->
+                            <!--                            <p>Le présent contrat relève exclusivement du droit sénégalais.</p>-->
+                            <!--                            <p>-->
+                            <!--                                Tout différend né, entre les parties, à propos de son existence, de sa validité, de son-->
+                            <!--                                interprétation, de son exécution, ou de son terme, sera soumis aux juridictions-->
+                            <!--                                locales compétentes par la partie la plus diligente, à défaut d’accord amiable.-->
+                            <!--                            </p>-->
+                            <!--                            <h6 class="mb-2 mt-4" style="font-weight: bold; font-size: 1rem;">-->
+
+                            <!--                                <span  class="text-dark border-bottom border-dark  pb-1">Article 13 : CLAUSES DIVERSES</span></h6>-->
+                            <!--                            <p>Pour toute disposition non prévue dans le présent contrat, les parties se réfèreront à-->
+                            <!--                                la législation en vigueur.-->
+                            <!--                            </p>-->
+
+                            <!-- SIGNATURES -->
+                            <t t-call="gainde_legal_contract.signatures_block"/>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER COMMUN -->
+                    <t t-call="gainde_legal_contract.custom_gainde_footer"/>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

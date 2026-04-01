@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_test_form_view" model="ir.ui.view">
+            <field name="name">secure_api_test_form_view</field>
+            <field name="model">secure.api.test</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Route" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="API Route"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="secure_api_id" options="{'no_create_edit': True, 'no_create': True}"/>
+                                <field name="api_action"/>
+                                <field name="live_test_method"/>
+                                <field name="live_test_model"/>
+                                <field name="live_test_id"/>
+                                <field name="live_test_ids"/>
+                                <field name="live_test_data"/>
+                            </group>
+                            <group>
+                                <field name="live_test_domain"/>
+                                <field name="live_test_offset"/>
+                                <field name="live_test_limit"/>
+                                <field name="live_test_order"/>
+                                <field name="status"/>
+                                <field name="status_text"/>
+                                <field name="live_test_computed_list_data"/>
+                            </group>
+                        </group>
+                        <group string="cURL Command">
+                            <field name="curl_command" widget="CopyClipboardChar" readonly="1"/>
+                        </group>
+                        <group string="Response">
+                            <field name="response" nolabel="1" colspan="2" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

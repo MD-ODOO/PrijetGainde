@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mass_ticket_tags_view" model="ir.ui.view">
+        <field name="name">mass.ticket.tags.view</field>
+        <field name="model">mass.ticket.tags</field>
+        <field name="arch" type="xml">
+            <form string="Mass Ticket Tags">
+                <group>
+                    <group>
+                        <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="update_tags" string="Update Tags" type="object" class="btn-primary"/>
+                    or
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+     <record id="action_mass_ticket_tags" model="ir.actions.act_window">
+        <field name="name">Mass Update Tags</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mass.ticket.tags</field>
+    	<field name="view_id" ref="mass_ticket_tags_view"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+    </record>
+</odoo>

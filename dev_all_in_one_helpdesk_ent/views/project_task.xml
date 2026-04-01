@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <record id="view_project_task_helpdesk_ticket_form" model="ir.ui.view">
+        <field name="name">view.project.task.helpdesk.ticket.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+           <xpath expr="//div[@class='oe_button_box']" position="inside">
+               <button type="object"
+                      invisible="ticket_count == 0"
+                    name="action_view_ticket" class="oe_stat_button" icon="fa-ticket" 
+                    group="dev_all_in_one_helpdesk_ent.group_helpdesk_user">
+                    <field name="ticket_count" widget="statinfo" string="Ticket"/>
+               </button>
+           </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_Elena_Winters" model="res.partner">
+        <field name="name">Elena Winters</field>
+        <field name="function">Regional Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Elena.Winters@example.com</field>
+    </record>
+
+    <record id="user_Elena_Winters" model="res.users">
+        <field name="partner_id" ref="partner_Elena_Winters"/>
+        <field name="login">Elena.Winters@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Elena Winters
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Elena-Winters.jpg"/>
+    </record>
+
+    <record id="partner_Gerald_Schaefer" model="res.partner">
+        <field name="name">Gerald Schaefer</field>
+        <field name="function">Sales Director</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Gerald.Schaefer@example.com</field>
+    </record>
+
+    <record id="user_Gerald_Schaefer" model="res.users">
+        <field name="partner_id" ref="partner_Gerald_Schaefer"/>
+        <field name="login">Gerald.Schaefer@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Gerald Schaefer
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Gerald-Schaefer.jpg"/>
+    </record>
+
+    <record id="partner_Kristina_Ayala" model="res.partner">
+        <field name="name">Kristina Ayala</field>
+        <field name="function">Accountant</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Kristina.Ayala@example.com</field>
+    </record>
+
+    <record id="user_Kristina_Ayala" model="res.users">
+        <field name="partner_id" ref="partner_Kristina_Ayala"/>
+        <field name="login">Kristina.Ayala@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Kristina Ayala
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Kristina-Ayala.jpg"/>
+    </record>
+
+    <record id="partner_Tim_Fox" model="res.partner">
+        <field name="name">Tim Fox</field>
+        <field name="function">Product Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Tim.Fox@example.com</field>
+    </record>
+
+    <record id="user_Tim_Fox" model="res.users">
+        <field name="partner_id" ref="partner_Tim_Fox"/>
+        <field name="login">Tim.Fox@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Tim Fox
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Tim-Fox.jpg"/>
+    </record>
+
+    <record id="partner_Damion_Efland" model="res.partner">
+        <field name="name">Damion Efland</field>
+        <field name="function">Marketing Department Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Damion.Efland@example.com</field>
+    </record>
+
+    <record id="user_Damion_Efland" model="res.users">
+        <field name="partner_id" ref="partner_Damion_Efland"/>
+        <field name="login">Damion.Efland@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Damion Efland
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Damion-Efland.jpg"/>
+    </record>
+
+    <record id="partner_Gary_Goetzmann" model="res.partner">
+        <field name="name">Gary Goetzmann</field>
+        <field name="function">IT Department Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Gary.Goetzmann@example.com</field>
+    </record>
+
+    <record id="user_Gary_Goetzmann" model="res.users">
+        <field name="partner_id" ref="partner_Gary_Goetzmann"/>
+        <field name="login">Gary.Goetzmann@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Gary Goetzmann
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Gary-Goetzmann.jpg"/>
+    </record>
+
+    <record id="partner_Larhonda_Goodale" model="res.partner">
+        <field name="name">Larhonda Goodale</field>
+        <field name="function">Financial Analyst</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Larhonda.Goodale@example.com</field>
+    </record>
+
+    <record id="user_Larhonda_Goodale" model="res.users">
+        <field name="partner_id" ref="partner_Larhonda_Goodale"/>
+        <field name="login">Larhonda.Goodale@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Larhonda Goodale
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Larhonda-Goodale.jpg"/>
+    </record>
+
+    <record id="partner_Lory_Weinhold" model="res.partner">
+        <field name="name">Lory Weinhold</field>
+        <field name="function">HR Officer</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Lory.Weinhold@example.com</field>
+    </record>
+
+    <record id="user_Lory_Weinhold" model="res.users">
+        <field name="partner_id" ref="partner_Lory_Weinhold"/>
+        <field name="login">Lory.Weinhold@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Lory Weinhold
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Lory-Weinhold.jpg"/>
+    </record>
+
+    <record id="partner_Mira_Tennett" model="res.partner">
+        <field name="name">Mira Tennett</field>
+        <field name="function">HR Department Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Mira.Tennett@example.com</field>
+    </record>
+
+    <record id="user_Mira_Tennett" model="res.users">
+        <field name="partner_id" ref="partner_Mira_Tennett"/>
+        <field name="login">Mira.Tennett@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Mira Tennett
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Mira-Tennett.jpg"/>
+    </record>
+
+    <record id="partner_Noble_Wojno" model="res.partner">
+        <field name="name">Noble Wojno</field>
+        <field name="function">R&amp;D Department Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Noble.Wojno@example.com</field>
+    </record>
+
+    <record id="user_Noble_Wojno" model="res.users">
+        <field name="partner_id" ref="partner_Noble_Wojno"/>
+        <field name="login">Noble.Wojno@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Noble Wojno
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Noble-Wojno.jpg"/>
+    </record>
+
+    <record id="partner_Rolf_Baus" model="res.partner">
+        <field name="name">Rolf Baus</field>
+        <field name="function">Financial Director</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Rolf.Baus@example.com</field>
+    </record>
+
+    <record id="user_Rolf_Baus" model="res.users">
+        <field name="partner_id" ref="partner_Rolf_Baus"/>
+        <field name="login">Rolf.Baus@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Rolf Baus
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Rolf-Baus.jpg"/>
+    </record>
+
+    <record id="partner_Sheree_Elfstrom" model="res.partner">
+        <field name="name">Sheree Elfstrom</field>
+        <field name="function">Supply Manager</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Sheree.Elfstrom@example.com</field>
+    </record>
+
+    <record id="user_Sheree_Elfstrom" model="res.users">
+        <field name="partner_id" ref="partner_Sheree_Elfstrom"/>
+        <field name="login">Sheree.Elfstrom@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Sheree Elfstrom
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Sheree-Elfstrom.jpg"/>
+    </record>
+
+    <record id="partner_Shila_Shavers" model="res.partner">
+        <field name="name">Shila Shavers</field>
+        <field name="function">CEO</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="email">Shila.Shavers@example.com</field>
+    </record>
+
+    <record id="user_Shila_Shavers" model="res.users">
+        <field name="partner_id" ref="partner_Shila_Shavers"/>
+        <field name="login">Shila.Shavers@example.com</field>
+        <field name="password">1</field>
+        <field name="signature" type="html">
+            <span>
+                Best Regards<br/>Shila Shavers
+            </span>
+        </field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]"/>
+        <field name="image_1920" type="base64" file="xf_demo_data/static/img/Shila-Shavers.jpg"/>
+    </record>
+</odoo>

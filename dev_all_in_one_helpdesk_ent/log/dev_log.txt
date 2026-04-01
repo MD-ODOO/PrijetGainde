@@ -1,0 +1,48 @@
+24 October 2024 : 
+---------------------------
+v 18.0.1.0
+
+    * Module Created
+    * dev_task_helpdesk_ent
+    * dev_helpdesk_ticket_number_ent
+    * dev_helpdesk_solution_ent
+    * dev_helpdesk_report_ent
+    * dev_helpdesk_sub_ticket_ent
+    * dev_helpdesk_portal_export_ent
+    * dev_template_export_base
+    * dev_helpdesk_notification_ent
+    * dev_helpdesk_mass_update_tags_ent
+    * dev_helpdesk_mass_update_ent
+    * dev_helpdesk_mass_assign_ticket_ent
+    * dev_helpdesk_due_reminder_ent
+    * dev_helpdesk_document_ent
+    * dev_expense_helpdesk_ent
+    * dev_helpdesk_survey_ent
+    * dev_helpdesk_ticket_tracking_ent
+    * dev_helpdesk_whatsapp_ent
+    * dev_maintenance_helpdesk_ent
+    * dev_helpdesk_multi_user_ent    
+    * dev_template_export_base
+    * dev_crm_helpdesk_ent
+    * dev_helpdesk_portal_signature_ent
+    * dev_knowledge
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,236 @@
+<odoo>
+  <template id="treasury_payment_template">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <h2>Décaissements</h2>
+        <table class="table table-sm o_main_table">
+          <thead>
+            <tr>
+              <th>Référence</th>
+              <th>Type</th>
+              <th>Partenaire</th>
+              <th>Facture</th>
+              <th>Date</th>
+              <th>Devise</th>
+              <th>Montant devise</th>
+              <th>Montant société</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="docs" t-as="rec">
+              <tr>
+                <td><span t-esc="rec.name"/></td>
+                <td><span t-esc="rec.payment_type"/></td>
+                <td><span t-esc="rec.partner_id.display_name"/></td>
+                <td><span t-esc="rec.invoice_id.name or rec.invoice_id.ref"/></td>
+                <td><span t-esc="rec.payment_date"/></td>
+                <td><span t-esc="rec.currency_id.name"/></td>
+                <td class="text-end"><span t-esc="rec.amount_currency"/></td>
+                <td class="text-end"><span t-esc="rec.amount"/></td>
+                <td><span t-esc="rec.state"/></td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+      </div>
+    </t>
+  </template>
+
+  <template id="treasury_forecast_template">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <h2>Prévisions</h2>
+        <table class="table table-sm o_main_table">
+          <thead>
+            <tr>
+              <th>Période</th>
+              <th>Début</th>
+              <th>Fin</th>
+              <th>Source</th>
+              <th>Référence</th>
+              <th>Devise</th>
+              <th>Montant devise</th>
+              <th>Montant société</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="docs" t-as="rec">
+              <tr>
+                <td><span t-esc="rec.period_type"/></td>
+                <td><span t-esc="rec.date"/></td>
+                <td><span t-esc="rec.date_end"/></td>
+                <td><span t-esc="rec.source_type"/></td>
+                <td><span t-esc="rec.source_ref"/></td>
+                <td><span t-esc="rec.currency_id.name"/></td>
+                <td class="text-end"><span t-esc="rec.amount_currency"/></td>
+                <td class="text-end"><span t-esc="rec.amount"/></td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+      </div>
+    </t>
+  </template>
+
+  <template id="treasury_payment_voucher_template">
+    <t t-call="web.external_layout">
+      <main class="o_report_layout" style="font-size:18px; font-weight:700; line-height:1.55; padding:12mm;">
+        <t t-foreach="docs" t-as="rec">
+          <div class="page" style="page-break-inside:avoid;">
+            <!-- Titre centré encadré -->
+            <div style="text-align:center; margin:0 0 16px 0;">
+              <span style="display:inline-block; border:1px solid #444; border-radius:6px; padding:8px 14px; font-size:20px; font-weight:700;">Bon de paiement</span>
+            </div>
+
+            <!-- Montant mis en avant + en lettres -->
+            <div style="background:#f7f7f7; border:1px solid #ddd; padding:8px 10px; margin:0 0 14px 0;">
+              <div style="text-align:left; font-size:18px; font-weight:700; margin-bottom:6px;">
+                <t t-if="rec.amount_currency == int(rec.amount_currency)">
+                  <span t-esc="'{:,}'.format(int(rec.amount_currency)).replace(',', ' ')"/> FCFA
+                </t>
+                <t t-else="">
+                  <span t-esc="'{:,}'.format(rec.amount_currency).replace(',', ' ')"/> FCFA
+                </t>
+              </div>
+              <div style="font-size:12px; color:#333; font-weight:700;">
+                <span>Montant en lettres :</span>
+                <span style="margin-left:4px;" t-esc="rec.currency_id.amount_to_text(rec.amount_currency)"/>
+              </div>
+            </div>
+
+            <!-- Bloc infos principales en lignes simples -->
+            <div style="border:1px solid #ddd; padding:12px 14px; margin:6px 0 16px 0; background:#fbfbfb;">
+              <div style="margin-bottom:6px; font-weight:600;">Référence : <span style="font-weight:400;" t-esc="rec.name"/></div>
+              <div style="margin-bottom:6px; font-weight:600;">
+                Bénéficiaire :
+                <span style="font-weight:400;">
+                  <span t-if="rec.payment_type == 'salary'" t-esc="rec.beneficiary_display"/>
+                  <span t-elif="rec.partner_id" t-esc="rec.partner_id.display_name"/>
+                </span>
+              </div>
+              <div style="margin-bottom:6px; font-weight:600;">Date prévue : <span style="font-weight:400;" t-esc="rec.planned_payment_date"/></div>
+              <div style="margin-bottom:10px; font-weight:600;">Date de paiement : <span style="font-weight:400;" t-esc="rec.payment_date"/></div>
+              <div style="font-weight:600; color:#444;">Instructions</div>
+              <div><span t-esc="rec.instructions"/></div>
+            </div>
+
+            <!-- Ligne bénéficiaire / préparé par -->
+            <div style="display:flex; gap:18px; margin-top:22px; align-items:center;">
+              <div style="flex:1; font-weight:600;">Nom et signature du bénéficiaire</div>
+              <div style="flex:1; text-align:right;">
+                <span style="font-weight:600;">Préparé par :</span>
+                <span style="font-weight:400;" t-esc="rec.create_uid.name"/>
+              </div>
+            </div>
+
+            <!-- Zone de signature bénéficiaire -->
+            <div style="margin-top:18px; width:70%; height:60px;"></div>
+
+            <!-- Visa Responsable trésorerie -->
+            <div style="margin-top:28px; text-align:center;">
+              <div style="font-weight:600; margin-bottom:32px;">Visa Responsable trésorerie</div>
+              <div style="width:50%; margin:0 auto; height:58px;"></div>
+            </div>
+          </div>
+          <div t-if="not docs[-1] == rec" class="page-break" style="page-break-after:always;"></div>
+        </t>
+      </main>
+    </t>
+  </template>
+
+  <template id="payroll_disbursement_report_template">
+    <t t-call="web.external_layout">
+      <div class="page">
+        <h2 style="margin-bottom:12px;">Rapport décaissement paie</h2>
+        <p>
+          Société : <span t-esc="docs and docs[0].company_id.name"/><br/>
+          Période : <span t-esc="docs and docs[0].period_start"/> ➜ <span t-esc="docs and docs[0].period_end"/>
+        </p>
+
+        <h4 style="margin-top:12px;">Récapitulatif</h4>
+        <table class="table table-sm o_main_table">
+          <tbody>
+            <tr><th>Total net</th><td class="text-end" t-esc="docs and docs[0].total_net"/></tr>
+            <tr><th>Total IPRESS</th><td class="text-end" t-esc="docs and docs[0].total_ipress"/></tr>
+            <tr><th>Total CFCE</th><td class="text-end" t-esc="docs and docs[0].total_cfce"/></tr>
+            <tr><th>Allocations familiales</th><td class="text-end" t-esc="docs and docs[0].total_family_allowance"/></tr>
+            <tr><th>Impôt sur le revenu</th><td class="text-end" t-esc="docs and docs[0].total_income_tax"/></tr>
+          </tbody>
+        </table>
+
+        <h4 style="margin-top:18px;">Lots générés</h4>
+        <table class="table table-sm o_main_table">
+          <thead>
+            <tr>
+              <th>Lot</th>
+              <th>Type</th>
+              <th>Début</th>
+              <th>Fin</th>
+              <th>Montant</th>
+              <th>Journal</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-if="docs and docs[0].batch_ids">
+              <t t-foreach="docs[0].batch_ids" t-as="batch">
+                <tr>
+                  <td t-esc="batch.name"/>
+                  <td t-esc="batch.batch_type"/>
+                  <td t-esc="batch.period_start"/>
+                  <td t-esc="batch.period_end"/>
+                  <td class="text-end" t-esc="batch.amount_total"/>
+                  <td t-esc="batch.journal_id.display_name"/>
+                  <td t-esc="batch.state"/>
+                </tr>
+              </t>
+            </t>
+            <t t-else="">
+              <tr>
+                <td colspan="7" style="text-align:center; font-style:italic; color:#666;">
+                  Aucune donnée pour la période sélectionnée.
+                </td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+
+        <h4 style="margin-top:18px;">Décaissements liés</h4>
+        <table class="table table-sm o_main_table">
+          <thead>
+            <tr>
+              <th>Référence</th>
+              <th>Type</th>
+              <th>Bénéficiaire</th>
+              <th>Date</th>
+              <th>Montant</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-if="docs and docs[0].batch_ids and docs[0].batch_ids.mapped('payroll_payment_id')">
+              <t t-foreach="docs[0].batch_ids.mapped('payroll_payment_id')" t-as="pay">
+                <tr>
+                  <td t-esc="pay.name"/>
+                  <td t-esc="pay.payment_type"/>
+                  <td t-esc="pay.beneficiary_display or pay.partner_id.display_name"/>
+                  <td t-esc="pay.payment_date"/>
+                  <td class="text-end" t-esc="pay.amount_currency"/>
+                  <td t-esc="pay.state"/>
+                </tr>
+              </t>
+            </t>
+            <t t-else="">
+              <tr>
+                <td colspan="6" style="text-align:center; font-style:italic; color:#666;">
+                  Aucun décaissement lié.
+                </td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+      </div>
+    </t>
+  </template>
+</odoo>

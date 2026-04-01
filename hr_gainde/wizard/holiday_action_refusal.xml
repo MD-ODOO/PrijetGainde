@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard de refus de congé -->
+        <record id="view_nrt_hr_holiday_refusal_motivation_form" model="ir.ui.view">
+            <field name="name">nrt.holidays.refusal.motivation.form</field>
+            <field name="model">nrt.holidays.refusal.motivation</field>
+            <field name="arch" type="xml">
+                <form string="Motif du refus">
+                    <group>
+                        <field name="holiday_request" invisible="1"/>
+                        <field name="motivation"/>
+                    </group>
+                    <footer>
+                        <button name="refuse" string="Refuser" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Annuler" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_nrt_hr_holiday_refusal_motivation" model="ir.actions.act_window">
+            <field name="name">Motif du refus</field>
+            <field name="res_model">nrt.holidays.refusal.motivation</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_nrt_hr_holiday_refusal_motivation_form"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="hr.model_hr_holidays"/>
+        </record>
+
+    </data>
+</odoo>

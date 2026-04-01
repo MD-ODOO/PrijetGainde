@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_mission_search" model="ir.ui.view">
+            <field name="name">audit_gainde.mission.search</field>
+            <field name="model">audit_gainde.mission</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="reference"/>
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+
+                    <!-- Filtre Mes missions -->
+                    <filter
+                        name="my_missions"
+                        string="Mes missions"
+                        domain="[('responsible_id','=',uid)]"
+                    />
+
+                </search>
+            </field>
+        </record>
+        <!-- VUE LIST (Odoo 18) -->
+        <record id="view_audit_gainde_mission_list" model="ir.ui.view">
+            <field name="name">audit_gainde.mission.list</field>
+            <field name="model">audit_gainde.mission</field>
+            <field name="arch" type="xml">
+                <list string="Missions d'audit">
+                    <field name="reference"/>
+                    <field name="name"/>
+                    <field name="plan_id"/>
+                    <field name="domain" widget="badge"/>
+                    <field name="responsible_id"/>
+                    <field name="state" widget="badge"/>
+                    <field name="risk_count"/>
+                    <field name="finding_count"/>
+                    <field name="recommendation_done_rate" widget="percentage"/>
+                    <field name="completion_rate" widget="progressbar" options="{'max_value': 100}"/>
+                    <field name="responsible_domaine_audit_id"/>
+                    
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE KANBAN -->
+        <record id="view_audit_gainde_mission_kanban" model="ir.ui.view">
+            <field name="name">audit_gainde.mission.kanban</field>
+            <field name="model">audit_gainde.mission</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="reference"/>
+                    <field name="name"/>
+                    <field name="domain"/>
+                    <field name="responsible_id"/>
+                    <field name="state"/>
+                    <field name="risk_count"/>
+                    <field name="finding_count"/>
+                    <field name="responsible_domaine_audit_id"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_title">
+                                        <field name="reference"/> - <field name="name"/>
+                                    </div>
+                                    <div>
+                                        <field name="domain" widget="badge"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <div class="col-6">
+                                            <i class="fa fa-exclamation-triangle text-warning" title="Alerte"/>
+                                            <field name="risk_count"/>
+                                        </div>
+                                        <div class="col-6">
+                                            <field name="responsible_id" widget="badge"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_mission_form" model="ir.ui.view">
+            <field name="name">audit_gainde.mission.form</field>
+            <field name="model">audit_gainde.mission</field>
+            <field name="arch" type="xml">
+                <form string="Mission d'audit">
+                    <header>
+                        <button name="action_start_mission" string="Démarrer"
+                                type="object" class="btn-primary"
+                                invisible="state != 'planned'"/>
+                                
+                        <button name="action_review_mission" string="Revue"
+                                type="object" class="btn-primary"
+                                invisible="state not in ['in_progress', 'closed']"/>
+                                
+                        <button name="action_start_mission" string="Remettre en cours"
+                                type="object" class="btn-primary"
+                                invisible="state != 'review'"/>
+                                
+                        <button name="action_close_mission" 
+                                string="Clôturer"
+                                type="object" 
+                                class="btn-success"
+                                groups="audit_gainde.group_manager"
+                                invisible="state not in ['in_progress', 'review']"/>
+                                
+                        <button name="action_send_mission_email"
+                        string="Envoyer Notification"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-envelope"/>
+                        
+                        <field name="state" widget="statusbar"/>
+
+
+                    </header>
+                    <sheet>
+                            <group class="oe_title">
+                                <field name="reference"/>
+                            </group>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="plan_id"/>
+                                <field name="domain"/>
+                                <field name="direction"/>
+                                <field name="responsible_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="team_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="responsible_domaine_audit_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="period_start"/>
+                                <field name="period_end"/>
+                                <field name="completion_rate" widget="progressbar"/>
+                                <field name="recommendation_done_rate" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Objectif">
+                                <field name="objective"/>
+                            </page>
+                            <page string="Risques">
+                                <field name="risk_ids">
+                                    <list>
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="level"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Contrôles existants">
+                                <field name="control_ids">
+                                    <list>
+                                        <field name="description"/>
+                                        <field name="control_type"/>
+                                        <field name="frequency"/>
+                                        <field name="efficacy"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Constats">
+                                <field name="finding_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="name"/>
+                                        <field name="severity"/>
+                                        <field name="state" widget="badge"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Recommandations">
+                                <field name="recommendation_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="description"/>
+                                        <field name="responsible_id"/>
+                                        <field name="date_target"/>
+                                        <field name="date_start"/>
+                                        <field name="days_delayed"/>
+                                        <field name="state" widget="badge"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <!-- ACTIONS CORRECTIVES -->
+                            <page string="Actions Correctives">
+                                <field name="corrective_action_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="responsible_id"/>
+                                        <field name="days_remaining"/>
+                                        <field name="state" widget="badge"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+
+        <record id="action_audit_gainde_mission" model="ir.actions.act_window">
+            <field name="name">Missions d'audit</field>
+            <field name="res_model">audit_gainde.mission</field>
+            <field name="view_mode">list,kanban,form</field>
+            <field name="context">{'search_default_my_missions': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première mission d'audit !
+                </p>
+            </field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_missions"
+                  name="Missions"
+                  parent="menu_audit_gainde_root"/>
+
+        <menuitem id="menu_audit_gainde_missions_1"
+                  name="Missions"
+                  parent="menu_audit_gainde_missions"
+                  action="action_audit_gainde_mission"
+                  sequence="10"/>
+
+        <record id="view_audit_gainde_mission_form_smart_buttons" model="ir.ui.view">
+            <field name="name">audit_gainde.mission.form.smart.buttons</field>
+            <field name="model">audit_gainde.mission</field>
+            <field name="inherit_id" ref="audit_gainde.view_audit_gainde_mission_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="inside">
+
+                    <div name="button_box" class="oe_button_box">
+
+                        <!-- Risques -->
+                        <button name="action_risk_list"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exclamation-triangle">
+                            <field name="risk_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- Constats -->
+                        <button name="action_finding_list"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-file-text-o">
+                            <field name="finding_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- Recommandations -->
+                        <button name="action_recommendation_list"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-lightbulb-o">
+                            <field name="recommendation_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- Actions correctives -->
+                        <button name="action_corrective_action_list"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-wrench">
+                            <field name="corrective_action_count" widget="statinfo"/>
+                        </button>
+
+
+
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

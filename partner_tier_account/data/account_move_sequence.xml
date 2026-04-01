@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_account_move_entry_sequence" model="ir.sequence">
+            <field name="name">Account Move Entry Sequence</field>
+            <field name="code">account.move.entry.sequence</field>
+            <field name="prefix"></field>
+            <field name="suffix"> - %(year)s</field>
+            <field name="padding">6</field>
+            <field name="implementation">standard</field>
+        </record>
+    </data>
+</odoo>

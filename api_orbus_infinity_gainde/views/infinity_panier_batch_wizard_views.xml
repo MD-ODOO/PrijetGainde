@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue formulaire du wizard d'import -->
+        <record id="view_orbus_infinity_panier_batch_wizard_form" model="ir.ui.view">
+            <field name="name">orbus.infinity.panier.batch.wizard.form</field>
+            <field name="model">orbus.infinity.panier.batch.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Importer un lot Orbus Infinity" create="false" edit="false">
+                    <group>
+                        <field name="company_id"/>
+                    </group>
+                    <group string="Filtres list-panier" col="4">
+                        <field name="connaissement"/>
+                        <field name="numero_dossier"/>
+                        <field name="reference_panier"/>
+                        <field name="numero_paiement"/>
+                        <field name="transitaire"/>
+                        <field name="collectionneur"/>
+                        <field name="date_generate_reference"/>
+                        <field name="last_fetched_date"/>
+                        <field name="start_date_paiement"/>
+                        <field name="end_date_paiement"/>
+                        <field name="payer"/>
+                    </group>
+                    <footer>
+                        <button string="Importer" type="object"
+                                name="action_fetch_batch" class="btn-primary"/>
+                        <button string="Annuler" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action du wizard -->
+        <record id="action_orbus_infinity_panier_batch_wizard" model="ir.actions.act_window">
+            <field name="name">Importer un lot Orbus Infinity</field>
+            <field name="res_model">orbus.infinity.panier.batch.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Menu sous Orbus API -->
+        <menuitem id="menu_orbus_infinity_panier_batch_wizard"
+                  name="Importer un lot Orbus Infinity"
+                  parent="api_orbus_gainde.menu_orbus_api_config_root"
+                  action="action_orbus_infinity_panier_batch_wizard"
+                  sequence="11"/>
+    </data>
+</odoo>

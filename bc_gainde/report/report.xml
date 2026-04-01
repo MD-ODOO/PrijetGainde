@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+   
+    <record id="action_commande_ci_burkina" model="ir.actions.report">
+       <field name="name">BC GAINDE 2000</field>
+       <field name="model">purchase.order</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">bc_gainde.gainde_report</field>
+       <field name="report_file">bc_gainde.gainde_report</field>
+       <field name="print_report_name">'BC Gainde - %s' % (object.name)</field>
+       <!-- Pas de binding_model_id pour ne pas afficher automatiquement dans le menu Imprimer -->
+    </record>
+
+    <!-- Action de rapport pour les factures (account.move) -->
+    <!-- <record id="action_invoice_ci_gainde" model="ir.actions.report">
+       <field name="name">Facture GAINDE 2000</field>
+       <field name="model">account.move</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">bc_gainde.gainde_invoice_report</field>
+       <field name="report_file">bc_gainde.gainde_invoice_report</field>
+       <field name="print_report_name">'Facture Gainde - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="account.model_account_move"/>
+       <field name="binding_type">report</field>
+    </record> -->
+    </data>
+</odoo>
+       

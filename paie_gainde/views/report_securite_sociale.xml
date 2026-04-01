@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ACTION REPORT -->
+    <record id="action_report_css" model="ir.actions.report">
+        <field name="name">Sécurité Sociale</field>
+        <field name="model">cerco.payslip.lines.securite.sociale</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cesag_payroll.report_css</field>
+        <field name="report_file">cesag_payroll.report_css</field>
+    </record>
+
+    <!-- TEMPLATE -->
+    <template id="report_css">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+
+                        <h3 style="text-align:center;">Sécurité Sociale</h3>
+
+                        <p style="text-align:center;">
+                            Période du <span t-esc="get_date_from()"/>
+                            au <span t-esc="get_date_to()"/>
+                        </p>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Brut</th>
+                                    <th>Base</th>
+                                    <th>Alloc. familiales</th>
+                                    <th>Accident travail</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Hommes</td>
+                                    <td t-esc="total_brut_male"/>
+                                    <td t-esc="total_base_male"/>
+                                    <td t-esc="total_prestfam_male"/>
+                                    <td t-esc="total_acw_male"/>
+                                    <td t-esc="total_prestfam_male + total_acw_male"/>
+                                </tr>
+                                <tr>
+                                    <td>Femmes</td>
+                                    <td t-esc="total_brut_female"/>
+                                    <td t-esc="total_base_female"/>
+                                    <td t-esc="total_prestfam_female"/>
+                                    <td t-esc="total_acw_female"/>
+                                    <td t-esc="total_prestfam_female + total_acw_female"/>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td t-esc="sum_total_brut()"/>
+                                    <td t-esc="sum_total_base()"/>
+                                    <td t-esc="sum_total_prestfam()"/>
+                                    <td t-esc="sum_total_acw()"/>
+                                    <td t-esc="sum_total_cotisation()"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

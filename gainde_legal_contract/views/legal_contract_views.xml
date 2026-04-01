@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="legal_contract_action" model="ir.actions.act_window">
+        <field name="name">Contrats Juridiques</field>
+        <field name="res_model">legal.contract</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+    <!-- Debut de generation des contats par type  -->
+    <record id="legal_contract_generate_wizard_action" model="ir.actions.act_window">
+        <field name="name">Générer Contrat</field>
+        <field name="res_model">legal.contract.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="legal_contract_generate_wizard_form" model="ir.ui.view">
+        <field name="name">legal.contract.generate.wizard.form</field>
+        <field name="model">legal.contract.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="contract_id" invisible="1"/>
+                    <field name="template_id" required="1"/>
+                </group>
+                <footer>
+                    <button name="action_generate_pdf" type="object" string="Générer PDF" class="btn-primary"/>
+                    <button special="cancel" string="Annuler"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- fin de generation des contats par type  -->
+
+
+    <record id="legal_contract_kanban_view" model="ir.ui.view">
+        <field name="name">legal.contract.kanban</field>
+        <field name="model">legal.contract</field>
+        <field name="arch" type="xml">
+            <!-- Ajout de sample="1" pour le look Enterprise et quick_create pour l'ergonomie -->
+            <kanban default_group_by="stage_id" class="o_kanban_mobile" sample="1" quick_create="true"
+                    records_draggable="1">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="stage_id"/>
+                <field name="activity_ids"/>
+
+                <templates>
+                    <t t-name="card">
+                        <!-- h-100 et d-flex assurent que les cartes ont toutes la même hauteur dans une ligne -->
+                        <div class="oe_kanban_global_click d-flex flex-column h-100">
+                            <div class="o_kanban_record_top mb-2">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title fs-5 fw-bold text-truncate">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </div>
+
+                            <div class="o_kanban_record_body flex-grow-1">
+                                <div class="d-flex align-items-center text-muted mb-2">
+                                    <i class="fa fa-user me-2 text-primary"/>
+                                    <span class="text-truncate">
+                                        <field name="partner_id"/>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="o_kanban_record_bottom mt-auto pt-2 border-top">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="oe_kanban_bottom_left">
+                                        <!-- On affiche le nom de l'étape en badge discret -->
+                                        <field name="stage_id" widget="badge" decoration-muted="1"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right d-flex align-items-center">
+                                        <field name="activity_ids" widget="kanban_activity"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+
+
+    <record id="legal_contract_form_view" model="ir.ui.view">
+        <field name="name">legal.contract.form</field>
+        <field name="model">legal.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contrat Juridique">
+                <header>
+                    <!-- CHAMPS TECHNIQUES (obligatoires pour les boutons) -->
+                    <field name="sign_status" invisible="1"/>
+                    <field name="alert_sent" invisible="1"/>
+                    <field name="stage_id_name" invisible="1"/> <!-- Assurez-vous que ce champ existe en Python -->
+
+                    <button name="action_sign_document"
+                            type="object"
+                            string="Signer Contrat"
+                            class="btn-primary"
+                            icon="fa-pencil"
+                            groups="gainde_legal_contract.group_ged_sign_juridique"
+                            invisible="sign_status in ['signed', 'expired']"/>
+                    <button name="%(legal_contract_generate_wizard_action)d"
+                            type="action"
+                            string="Générer Contrat PDF"
+                            class="oe_highlight"
+                            context="{'default_contract_id': id}"
+                            invisible="not id or not type_id"/>
+
+                    <button name="action_set_stage_negotiation" type="object" string="Négociation"
+                            class="btn-primary" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="stage_id_name in ['Négociation', 'Signé', 'Exécution', 'Clôturé']"/>
+
+                    <button name="action_set_stage_signed" type="object" string="Signer"
+                            class="btn-primary" groups="gainde_legal_contract.group_ged_juridique"
+                            invisible="stage_id_name not in ['Validation', 'Négociation']"/>
+
+                    <button name="action_set_stage_execution" type="object" string="Lancer Exécution"
+                            groups="gainde_legal_contract.group_ged_juridique"
+                            class="btn-secondary" invisible="stage_id_name != 'Signé'"/>
+
+                    <button name="action_set_stage_closed" type="object" string="Clôturer" class="btn-secondary"
+                            groups="gainde_legal_contract.group_ged_juridique" invisible="stage_id_name == 'Clôturé'"/>
+
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Alerte" bg_color="bg-danger" invisible="not alert_sent"/>
+
+                    <div class="oe_title mb-1">
+                        <span class="text-muted text-uppercase fw-semibold" style="font-size: 0.75rem;">Référence
+                            Contrat
+                        </span>
+                        <h4>
+                            <field name="name" class="text-truncate" style="color: #00438b;" readonly="1"/>
+                        </h4>
+                    </div>
+
+                    <group>
+                        <group string="Informations Générales">
+                            <field name="type_id" options="{'no_create': True}"/>
+                            <field name="contract_category" invisible="1"/>
+                            <field name="partner_id"
+                                   widget="many2many_tags"
+                                   options="{'color_field': 'color'}"/>
+<!--                            <field name="partner_role" readonly="1" force_save="1" decoration-info="1"/>-->
+                            <field name="department_id" options="{'no_create': True}"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Dates et Suivi échéances">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="renewal_date"/>
+                            <field name="notice_type"/>
+                            <field name="notice_duration" invisible="not notice_type"/>
+                            <field name="notice_end_date" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Pièces Jointes" name="documents" icon="fa-file-text">
+                            <field name="document_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Infos Général">
+                            <group>
+                                <group>
+                                    <field name="title"/>
+                                    <field name="object"/>
+                                    <field name="writer"/>
+                                    <field name="signature_date"/>
+                                </group>
+                                <group>
+                                    <field name="version"/>
+                                    <field name="reference"/>
+                                    <field name="diffusion"/>
+                                    <field name="duration_text"/>
+
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="activity"/>
+                                    <field name="comments"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="En-tête &amp; Parties" name="header_edit">
+                            <div class="alert alert-info" role="alert">
+                                Ce texte est généré automatiquement. Vous pouvez le modifier manuellement avant de
+                                générer le PDF.
+                            </div>
+                            <field name="header_content" widget="html" options="{'style-inline': true}"/>
+                        </page>
+                        <page string="Détails Consultant" invisible="contract_category != 'consultant'">
+                            <group>
+                                <group>
+                                    <field name="job_id"/>
+                                    <field name="salary_gross"/>
+                                </group>
+                                <group>
+                                    <field name="salary_in_words"/>
+                                    <field name="trial_period"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Détails Marché" invisible="contract_category not in ['business', 'market']">
+                            <group>
+                                <group>
+                                    <field name="representative_name" placeholder="Nom du signataire adverse"/>
+                                    <field name="market_value" widget="monetary"/>
+                                </group>
+                                <group>
+                                    <field name="guarantee_amount" widget="monetary"/>
+                                    <field name="payment_terms"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ONGLET 3: CONFIDENTIALITÉ (NDA) -->
+                        <page string="Clauses NDA" invisible="contract_category != 'nda'">
+                            <group>
+                                <field name="secrecy_years"/>
+                                <field name="penalty_amount"/>
+                            </group>
+                        </page>
+
+                        <page string="Avenants" name="amendments" icon="fa-list">
+                            <field name="amendment_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Contentieux" name="litigation" icon="fa-gavel">
+                            <field name="litigation_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="provision_amount"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_legal_contract_list" model="ir.ui.view">
+        <field name="name">legal.contract.list</field>
+        <field name="model">legal.contract</field>
+        <field name="arch" type="xml">
+            <list string="Contrats">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="type_id"/>
+                <!-- Badges de couleurs selon l'étape -->
+                <field name="stage_id"
+                       widget="badge"
+                       decoration-info="stage_id_name == 'Négociation'"
+                       decoration-success="stage_id_name == 'Signature' or stage_id_name == 'Exécution' or stage_id_name == 'Validation'"
+                       decoration-muted="stage_id_name == 'Cloturé'"
+                       decoration-warning="stage_id_name == 'Création'"/>
+                <field name="date_end" widget="remaining_days"/>
+                <field name="department_id"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

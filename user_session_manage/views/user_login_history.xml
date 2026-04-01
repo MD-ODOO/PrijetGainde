@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--User Login History List View -->
+        <record id="view_user_login_history_list" model="ir.ui.view">
+            <field name="name">user.login.history.list</field>
+            <field name="model">user.login.history</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="user_id"/>
+                    <field name="login_datetime"/>
+                </list>
+            </field>
+        </record>
+
+        <!--User Login History Action -->
+        <record id="action_user_login_history" model="ir.actions.act_window">
+            <field name="name">User Login Histories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">user.login.history</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

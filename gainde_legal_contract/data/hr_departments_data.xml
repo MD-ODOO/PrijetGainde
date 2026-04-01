@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- NIVEAU 1 : Les Racines -->
+        <record id="dep_ag" model="hr.department">
+            <field name="name">AG</field>
+        </record>
+
+        <record id="dep_support" model="hr.department">
+            <field name="name">Support Technique</field>
+        </record>
+
+        <!-- NIVEAU 2 : Sous AG -->
+        <record id="dep_cg" model="hr.department">
+            <field name="name">CG</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_dac" model="hr.department">
+            <field name="name">DAC</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_dag" model="hr.department">
+            <field name="name">DAG</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_dedi" model="hr.department">
+            <field name="name">DEDI</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_degm" model="hr.department">
+            <field name="name">DEGM</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_deps" model="hr.department">
+            <field name="name">DEPS</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <record id="dep_deto" model="hr.department">
+            <field name="name">DETO</field>
+            <field name="parent_id" ref="dep_ag"/>
+        </record>
+
+        <!-- NIVEAU 3 : Sous DEGM -->
+        <record id="dep_dch" model="hr.department">
+            <field name="name">DCH</field>
+            <field name="parent_id" ref="dep_degm"/>
+        </record>
+
+        <record id="dep_dcj" model="hr.department">
+            <field name="name">DCJ</field>
+            <field name="parent_id" ref="dep_degm"/>
+        </record>
+
+        <record id="dep_df" model="hr.department">
+            <field name="name">DF</field>
+            <field name="parent_id" ref="dep_degm"/>
+        </record>
+
+        <record id="dep_dp" model="hr.department">
+            <field name="name">DP</field>
+            <field name="parent_id" ref="dep_degm"/>
+        </record>
+
+        <!-- NIVEAU 3 : Sous DETO -->
+        <record id="dep_fisd" model="hr.department">
+            <field name="name">FISD</field>
+            <field name="parent_id" ref="dep_deto"/>
+        </record>
+
+        <record id="dep_guce" model="hr.department">
+            <field name="name">GUCE</field>
+            <field name="parent_id" ref="dep_deto"/>
+        </record>
+    </data>
+</odoo>

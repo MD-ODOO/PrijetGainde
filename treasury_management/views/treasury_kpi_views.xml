@@ -1,0 +1,97 @@
+<odoo>
+  <record id="view_treasury_kpi_list" model="ir.ui.view">
+    <field name="name">treasury.kpi.list</field>
+    <field name="model">treasury.kpi</field>
+    <field name="arch" type="xml">
+      <list string="KPI Trésorerie">
+        <field name="date_from"/>
+        <field name="date_to"/>
+        <field name="company_id"/>
+        <field name="payroll_batch_id"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="total_receipt_forecast" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="supplier_payment_rate" widget="progressbar" options="{'max_value': 100}"/>
+        <field name="customer_collection_rate" widget="progressbar" options="{'max_value': 100}"/>
+        <field name="total_to_disburse" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_kpi_form" model="ir.ui.view">
+    <field name="name">treasury.kpi.form</field>
+    <field name="model">treasury.kpi</field>
+    <field name="arch" type="xml">
+      <form string="KPI Trésorerie">
+        <header>
+          <button string="Imprimer KPI" type="object" name="action_print_kpi" class="btn-primary"/>
+        </header>
+        <sheet>
+          <field name="currency_id" invisible="1"/>
+
+          <group>
+            <group string="Période">
+              <field name="company_id"/>
+              <field name="date_from"/>
+              <field name="date_to"/>
+            </group>
+            <group string="Lot paie (optionnel)">
+              <field name="payroll_batch_id"/>
+              <field name="batch_type" readonly="1" invisible="not payroll_batch_id"/>
+              <field name="batch_state" readonly="1" invisible="not payroll_batch_id"/>
+              <field name="batch_period_start" readonly="1" invisible="not payroll_batch_id"/>
+              <field name="batch_period_end" readonly="1" invisible="not payroll_batch_id"/>
+              <field name="batch_amount_total" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="1" invisible="not payroll_batch_id"/>
+            </group>
+          </group>
+
+          <group>
+            <group string="Taux de performance">
+              <field name="supplier_payment_rate"
+                     widget="progressbar"
+                     options="{'max_value': 100}"
+                     readonly="1"/>
+              <field name="customer_collection_rate"
+                     widget="progressbar"
+                     options="{'max_value': 100}"
+                     readonly="1"/>
+            </group>
+            <group string="Encaissements prévus">
+              <field name="total_receipt_forecast" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+              <field name="total_receipt_customer" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+              <field name="total_receipt_other" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+            </group>
+          </group>
+
+          <group string="Montants décaissés par nature">
+            <group>
+              <field name="total_to_disburse" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Total à décaisser"/>
+              <field name="total_supplier" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Fournisseurs"/>
+              <field name="total_salary" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Salaires"/>
+              <field name="total_bonus" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Primes"/>
+            </group>
+            <group>
+              <field name="total_tax" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Impôts &amp; taxes"/>
+              <field name="total_expense" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Notes de frais"/>
+              <field name="total_other" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Autres"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_treasury_kpi" model="ir.actions.act_window">
+    <field name="name">KPI Trésorerie</field>
+    <field name="res_model">treasury.kpi</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="view_id" ref="treasury_management.view_treasury_kpi_kanban"/>
+    <field name="groups_id" eval="[(4, ref('treasury_management.group_treasury_df'))]"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Créez un enregistrement pour calculer et imprimer les indicateurs KPI sur une période donnée.
+      </p>
+    </field>
+  </record>
+</odoo>

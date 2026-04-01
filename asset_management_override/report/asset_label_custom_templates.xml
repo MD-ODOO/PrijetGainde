@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="report_assettemplatelabel2x7">
+    <t t-call="web.basic_layout">
+        <style>
+            /* Style 2x7 inspiré de label_custom, adapté à 97mm x 37.1mm */
+            .o_label_2x7_custom {
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            .o_label_2x7_custom .label-table {
+                width: 100%;
+                height: 100%;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+                background: #fff;
+            }
+            .o_label_2x7_custom .logo-cell {
+                width: 22mm;
+                background: #f5f5f5;
+                vertical-align: middle;
+                padding: 0;
+            }
+            .o_label_2x7_custom .logo-wrapper {
+                padding: 2mm;
+                text-align: center;
+            }
+            .o_label_2x7_custom .logo-img {
+                width: 18mm;
+                height: auto;
+            }
+            .o_label_2x7_custom .content-cell {
+                vertical-align: middle;
+                padding: 0.5mm 0.5mm 0.4mm 0.5mm; /* réduire gauche/droite et bas */
+                background: #fff;
+            }
+            .o_label_2x7_custom .content-wrap {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* centrage vertical */
+            }
+            .o_label_2x7_custom .asset-title {
+                text-align: center;
+                font-size: 10px;
+                font-weight: 900;
+                margin-bottom: 0.5mm;
+                text-transform: uppercase;
+                line-height: 1.1;
+            }
+            .o_label_2x7_custom .barcode-wrapper {
+                text-align: center;
+                padding: 0.2mm 0;
+            }
+            .o_label_2x7_custom .barcode-meta {
+                width: 72mm; /* même largeur que le widget code-barres */
+                margin: 0 auto;
+                margin-top: 0.2mm;
+                line-height: 1.1;
+            }
+            .o_label_2x7_custom .asset-code {
+                font-size: 9px;
+                font-weight: 900;
+                letter-spacing: 0.5px;
+                text-align: center;
+            }
+            .o_label_2x7_custom .asset-date {
+                text-align: right;
+                font-size: 8px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
+        </style>
+        <div class="page">
+            <t t-set="columns" t-value="2"/>
+            <t t-set="rows" t-value="7"/>
+            <t t-set="price_included" t-value="True"/>
+            <t t-call="asset_management_override.report_assetlabel"/>
+        </div>
+    </t>
+</template>
+   <template id="report_simple_label2x7">
+            <t t-set="barcode_size" t-value="'width:72mm;height:10mm'"/>
+            <t t-set="table_style" t-value="'width:97mm;height:37.1mm;' + table_style"/>
+            <t t-set="barcode_value" t-value="barcode or (asset and (asset.barcode or asset.name))"/>
+            <t t-set="service_date" t-value="asset and (asset.invoice_date or (asset.create_date and asset.create_date.date()))"/>
+            <td t-att-style="make_invisible and 'visibility:hidden;'" >
+                <div class="o_label_2x7_custom" t-att-style="table_style">
+                    <table class="label-table">
+                        <tr>
+                            <td class="logo-cell">
+                                <div class="logo-wrapper">
+                                    <img t-if="logo_data" t-att-src="image_data_uri(logo_data)" class="logo-img"/>
+                                    <img t-if="not logo_data and env.company.logo" t-att-src="image_data_uri(env.company.logo)" class="logo-img"/>
+                                </div>
+                            </td>
+                            <td class="content-cell">
+                                <div class="content-wrap">
+                                    <div class="asset-title">
+                                        <t t-out="asset and (asset.name or '')"/>
+                                    </div>
+                                    <div class="barcode-wrapper">
+                                        <div t-out="barcode_value" t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': barcode_size}"/>
+                                    </div>
+                                    <div class="barcode-meta">
+                                        <div class="asset-code">
+                                            <t t-out="barcode_value or ''"/>
+                                        </div>
+                                        <div class="asset-date">
+                                            <t t-esc="service_date and service_date.strftime('%d-%m-%Y')"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </template>
+
+
+        <template id="label_custom">
+            <t t-call="web.basic_layout">
+                <style>
+                    @page {
+                        size: A4;
+                        margin: 0;
+                    }
+                    body {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .label-page {
+                        width: 100mm;
+                        height: 50mm;
+                        margin: 10mm auto;
+                        padding: 0;
+                        box-sizing: border-box;
+                        border: 1px solid #ccc;
+                    }
+                    .label-table {
+                        width: 100%;
+                        height: 100%;
+                        border-collapse: collapse;
+                        font-family: Arial, sans-serif;
+                        background: #fff;
+                    }
+                    .logo-cell {
+                        width: 24mm;
+                        background: #f5f5f5;
+                        vertical-align: top;
+                        padding: 0;
+                        position: relative;
+                    }
+                    .logo-wrapper {
+                        padding: 2mm;
+                        text-align: center;
+                    }
+                    .logo-img {
+                        width: 20mm;
+                        height: auto;
+                    }
+                    .property-text {
+                        position: absolute;
+                        bottom: 3mm;
+                        left: 2mm;
+                        font-size: 7px;
+                        font-weight: 700;
+                        writing-mode: vertical-rl;
+                        transform: rotate(180deg);
+                        letter-spacing: 0.5px;
+                    }
+                    .content-cell {
+                        vertical-align: top;
+                        padding: 2mm 3mm;
+                        background: #fff;
+                    }
+                    .asset-title {
+                        text-align: center;
+                        font-size: 16px;
+                        font-weight: 900;
+                        margin-bottom: 2mm;
+                        text-transform: uppercase;
+                    }
+                    .barcode-wrapper {
+                        text-align: center;
+                        padding: 2mm 0;
+                    }
+                    .bottom-row {
+                        width: 100%;
+                        margin-top: 2mm;
+                    }
+                    .asset-code {
+                        font-size: 14px;
+                        font-weight: 900;
+                        letter-spacing: 1px;
+                    }
+                    .asset-date {
+                        text-align: right;
+                        font-size: 11px;
+                        font-weight: 700;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="asset">
+                    <t t-set="barcode_value" t-value="asset.barcode or asset.name"/>
+                    <t t-set="service_date" t-value="asset.invoice_date or (asset.create_date and asset.create_date.date())"/>
+                    <div class="label-page">
+                        <table class="label-table">
+                            <tr>
+                                <td class="logo-cell">
+                                    <div class="logo-wrapper">
+                                        <img t-if="logo_data" t-att-src="image_data_uri(logo_data)" class="logo-img"/>
+                                        <img t-if="not logo_data and env.company.logo" t-att-src="image_data_uri(env.company.logo)" class="logo-img"/>
+                                    </div>
+
+                                </td>
+                                <td class="content-cell">
+                                    <div class="asset-title">
+                                        <t t-out="asset.name or ''"/>
+                                    </div>
+                                    <div class="barcode-wrapper">
+                                        <div t-out="barcode_value" t-options="{'widget': 'barcode', 'symbology': 'auto', 'img_style': 'width:65mm;height:15mm;'}"/>
+                                    </div>
+                                    <table class="bottom-row">
+                                        <tr>
+                                            <td class="asset-code">
+                                                <t t-out="barcode_value"/>
+                                            </td>
+                                            <td class="asset-date">
+                                                <t t-esc="service_date and service_date.strftime('%d-%m-%Y')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+  <template id="report_assetlabel">
+            <t t-call="web.html_container">
+                <t t-if="columns and rows">
+                    <t t-set="padding_page" t-value="'padding: 14mm 3mm'"/>
+                    <t t-set="report_to_call" t-value="'2x7'"/>
+                    <t t-foreach="range(page_numbers or 0)" t-as="page">
+                        <div class="o_label_sheet" t-att-style="padding_page">
+                            <table class="my-0 table table-sm table-borderless" style="table-layout: fixed; width: 100%;">
+                                <t t-foreach="range(rows)" t-as="row">
+                                    <tr>
+                                        <t t-foreach="range(columns)" t-as="column">
+                                            <t t-if="not current_quantity and quantity and not (current_data and current_data[1])">
+                                                <t t-set="current_data" t-value="quantity.popitem()"/>
+                                                <t t-set="asset" t-value="current_data[0]"/>
+                                                <t t-set="barcode_and_qty" t-value="current_data[1].pop()"/>
+                                                <t t-set="barcode" t-value="barcode_and_qty[0]"/>
+                                                <t t-set="current_quantity" t-value="barcode_and_qty[1]"/>
+                                            </t>
+                                            <t t-if="current_quantity">
+                                                <t t-set="make_invisible" t-value="False"/>
+                                                <t t-set="current_quantity" t-value="current_quantity - 1"/>
+                                            </t>
+                                            <t t-elif="current_data and current_data[1]">
+                                                <t t-set="barcode_and_qty" t-value="current_data[1].pop()"/>
+                                                <t t-set="barcode" t-value="barcode_and_qty[0]"/>
+                                                <t t-set="current_quantity" t-value="barcode_and_qty[1] - 1"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="make_invisible" t-value="True"/>
+                                            </t>
+                                            <t t-set="table_style" t-value="'border: 1px solid black;'"/>
+                                            <t t-call="asset_management_override.report_simple_label2x7"/>
+                                            
+                                          
+                                           
+                                           
+                                        </t>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
+

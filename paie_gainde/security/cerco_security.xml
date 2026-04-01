@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Groupe Responsable Paie -->
+        <!-- <record id="group_cerco_payroll_manager" model="res.groups">
+            <field name="name">Responsable Paie</field>
+            <field name="category_id" ref="base.module_category_hr"/>
+            <field name="is_only_seen_by_admin" eval="False"/>
+        </record> -->
+
+        <!-- Accès au modèle line_cerco_convention -->
+        <!-- <record id="access_line_cerco_convention_manager" model="ir.model.access">
+            <field name="name">Accès ligne convention Responsable Paie</field>
+            <field name="model_id" ref="model_line_cerco_convention"/>
+            <field name="group_id" ref="group_cerco_payroll_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record> -->
+    </data>
+</odoo>

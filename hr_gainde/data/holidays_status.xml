@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- CRON : Notification reprise de service 
+        <record id="nrt_automatic_notif_reprise" model="ir.cron">
+            <field name="name">Notification reprise de service</field>
+            <field name="model">hr.holidays</field>
+            <field name="function">_trigger_notification</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="priority">5</field>
+            <field name="active">True</field>
+        </record> -->
+
+        <!-- CRON : Congé légal mensuel 
+        <record id="cerco_holidays_automatic" model="ir.cron">
+            <field name="name">Congé légal mensuel</field>
+            <field name="model">res.company</field>
+            <field name="function">_trigger_legal_holidays_tasks</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="priority">5</field>
+            <field name="active">True</field>
+        </record>-->
+
+        <!-- Types de congés 
+        <record id="holiday_status_mariage" model="hr.holidays.status">
+            <field name="name">Mariage</field>
+            <field name="limit" eval="True"/>
+            <field name="code">mariage</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_mariage_relat" model="hr.holidays.status">
+            <field name="name">Mariage d'un enfant, frère ou sœur</field>
+            <field name="limit" eval="True"/>
+            <field name="code">mariage_relat</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_dec_conj_desc" model="hr.holidays.status">
+            <field name="name">Décès d'un conjoint ou descendant</field>
+            <field name="limit" eval="True"/>
+            <field name="code">dec_conj_desc</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_dec_conj_asc" model="hr.holidays.status">
+            <field name="name">Décès d'un ascendant, frère ou sœur</field>
+            <field name="limit" eval="True"/>
+            <field name="code">dec_conj_asc</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_dec_beaup" model="hr.holidays.status">
+            <field name="name">Décès d'un beau-père ou belle-mère</field>
+            <field name="limit" eval="True"/>
+            <field name="code">dec_beaup</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_dec_naiss" model="hr.holidays.status">
+            <field name="name">Naissance d'un enfant</field>
+            <field name="limit" eval="True"/>
+            <field name="code">naissance</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_bapt" model="hr.holidays.status">
+            <field name="name">Baptême d'un enfant</field>
+            <field name="limit" eval="True"/>
+            <field name="code">bapteme</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_communion" model="hr.holidays.status">
+            <field name="name">Première communion</field>
+            <field name="limit" eval="True"/>
+            <field name="code">communion</field>
+            <field name="color_name">lightcoral</field>
+        </record>
+
+        <record id="holiday_status_hospi_conj" model="hr.holidays.status">
+            <field name="name">Hospitalisation d'un conjoint ou d'un enfant</field>
+            <field name="limit" eval="True"/>
+            <field name="code">hospitalisation</field>
+            <field name="color_name">lightcoral</field>
+        </record> -->
+
+        <!-- Types de contrat -->
+        <record id="hr_contract_type_1" model="hr.contract.type">
+            <field name="name">CDD</field>
+        </record>
+        <record id="hr_contract_type_2" model="hr.contract.type">
+            <field name="name">CDI</field>
+        </record>
+        <record id="hr_contract_type_3" model="hr.contract.type">
+            <field name="name">Stage</field>
+        </record>
+        <record id="hr_contract_type_4" model="hr.contract.type">
+            <field name="name">Prestation</field>
+        </record>
+
+    </data>
+</odoo>

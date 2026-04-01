@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ── Vue formulaire Session d'inventaire ──────────────────── -->
+        <record id="view_asset_inventory_session_form" model="ir.ui.view">
+            <field name="name">asset.inventory.form</field>
+            <field name="model">asset.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Session d'inventaire">
+                    <header>
+                        <button name="action_start" type="object" string="Démarrer"
+                                class="oe_highlight"
+                                invisible="state != 'draft'"/>
+                        <button name="action_done" type="object" string="Terminer l'inventaire"
+                                class="oe_highlight"
+                                invisible="state != 'in_progress'"/>
+                        <button name="action_reset_draft" type="object" string="Remettre en brouillon"
+                                invisible="state == 'draft'"/>
+                        <button name="action_print_report" type="object" string="Rapport PDF"
+                                class="btn-secondary"
+                                icon="fa-print"
+                                invisible="state == 'draft'"/>
+                        <button name="action_open_mobile_scan" type="object" string="App Mobile"
+                                class="btn-secondary"
+                                icon="fa-mobile"
+                                invisible="state != 'in_progress'"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,in_progress,done"/>
+                    </header>
+
+                    <sheet>
+                        <!-- Compteurs -->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="btn_scanned_count" class="oe_stat_button" icon="fa-check-circle" type="button">
+                                <div class="o_stat_info">
+                                    <field name="scanned_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Scannés</span>
+                                </div>
+                            </button>
+                            <button name="btn_missing_count" class="oe_stat_button" icon="fa-exclamation-triangle" type="button">
+                                <div class="o_stat_info">
+                                    <field name="missing_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Manquants</span>
+                                </div>
+                            </button>
+                            <button name="btn_unexpected_count" class="oe_stat_button" icon="fa-question-circle" type="button"
+                                    invisible="unexpected_count == 0">
+                                <div class="o_stat_info">
+                                    <field name="unexpected_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Inattendus</span>
+                                </div>
+                            </button>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="operator_id"/>
+                            </group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+
+                        <!-- Zone de scan — visible uniquement en cours -->
+                        <div invisible="state != 'in_progress'">
+                            <!-- Handler global barcode (douchette clavier / scanner mobile) -->
+                            <widget name="asset_inventory_barcode_handler"/>
+                            <group>
+                                <field name="barcode_scan"
+                                       placeholder="Saisie manuelle ou douchette clavier..."/>
+                            </group>
+                        </div>
+
+                        <!-- Liste des actifs scannés -->
+                        <field name="line_ids" widget="one2many_list" nolabel="1">
+                            <list string="Actifs scannés" editable="bottom" create="0" delete="1">
+                                <field name="scan_date" string="Scanné le" readonly="1"/>
+                                <field name="barcode" string="Code-barres" readonly="1"/>
+                                <field name="asset_name" string="Nom de l'actif" readonly="1"/>
+                                <field name="localisation_id" string="Localisation" readonly="1"/>
+                                <field name="assigne_a" string="Assigné à" readonly="1"/>
+                                <field name="invoice_date" string="Date acquisition" readonly="1"/>
+                                <field name="state" string="État" widget="badge"
+                                       decoration-success="state == 'found'"
+                                       decoration-warning="state == 'unexpected'"
+                                       readonly="1"/>
+                            </list>
+                        </field>
+
+                        <group>
+                            <field name="notes" placeholder="Observations, remarques..."/>
+                        </group>
+                    </sheet>
+
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ── Vue liste Sessions d'inventaire ──────────────────────── -->
+        <record id="view_asset_inventory_session_list" model="ir.ui.view">
+            <field name="name">asset.inventory.list</field>
+            <field name="model">asset.inventory</field>
+            <field name="arch" type="xml">
+                <list string="Sessions d'inventaire" decoration-muted="state == 'done'">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="operator_id"/>
+                    <field name="scanned_count" string="Scannés"/>
+                    <field name="missing_count" string="Manquants"/>
+                    <field name="state" widget="badge"
+                           decoration-info="state == 'draft'"
+                           decoration-warning="state == 'in_progress'"
+                           decoration-success="state == 'done'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ── Action Sessions d'inventaire ─────────────────────────── -->
+        <record id="action_asset_inventory_session" model="ir.actions.act_window">
+            <field name="name">Sessions d'inventaire</field>
+            <field name="res_model">asset.inventory</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créer une nouvelle session d'inventaire
+                </p>
+                <p>
+                    Démarrez une session, scannez les codes-barres de vos actifs et
+                    générez un rapport comparatif.
+                </p>
+            </field>
+        </record>
+
+        <!-- ── Menu Sessions d'inventaire sous Actifs ──────────────── -->
+        <menuitem id="menu_asset_inventory_session"
+                  name="Sessions d'inventaire"
+                  parent="asset_management_override.menu_actifs_parent"
+                  action="action_asset_inventory_session"
+                  groups="asset_management.assets_user_group,asset_management.assets_admin_group,base.group_system"
+                  sequence="30"/>
+
+    </data>
+</odoo>

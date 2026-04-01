@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit purchase order form to adjust states and confirm buttons -->
+    <record id="view_purchase_order_form_inherit_gainde" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.gainde</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_purchase_requests"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list">
+                    <field name="purchase_request_count" widget="statinfo" string="Demandes d'achat"/>
+                </button>
+            </xpath>
+            <!-- Département après le fournisseur (non modifiable hors brouillon) -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="department_id" modifiers="{&quot;readonly&quot;: [[&quot;state&quot;, &quot;!=&quot;, &quot;draft&quot;]]}"/>
+            </xpath>
+
+            <!-- Bouton pour créer / ouvrir le TDR lié -->
+            <xpath expr="//header" position="inside">
+                <button name="action_open_tdr" type="object" string="TDR"
+                        class="btn-secondary" groups="purchase.group_purchase_manager"/>
+            </xpath>
+
+            <!-- Bouton Rejeter et Retourner visibles quand la commande est en attente d'approbation et que l'utilisateur est approbateur courant -->
+            <xpath expr="//header/button[@name='button_cancel']" position="before">
+                <button name="button_retourner"
+                        type="object"
+                        string="Retourner"
+                        class="btn-warning"
+                        invisible="state != 'to approve' or is_current_user_da == False"
+                        confirm="Êtes-vous sûr de vouloir retourner cette commande en brouillon ?"/>
+                <button name="button_reject"
+                        type="object"
+                        string="Rejeter"
+                        class="btn-danger"
+                        invisible="state != 'to approve' or is_current_approver == False"
+                        confirm="Êtes-vous sûr de vouloir rejeter cette commande ?"/>
+            </xpath>
+
+            <!-- Rendre le bouton Annuler visible uniquement quand la commande est en attente d'approbation et que l'utilisateur est approbateur courant -->
+            <xpath expr="//header/button[@name='button_cancel']" position="attributes">
+                <attribute name="invisible">state != 'to approve' or is_current_approver == False</attribute>
+            </xpath>
+
+            <!-- Bouton de confirmation réservé aux managers achats -->
+            <xpath expr="//header/button[@id='bid_confirm']" position="attributes">
+                <attribute name="groups">purchase.group_purchase_manager</attribute>
+            </xpath>
+
+            <!-- Afficher tous les états dans la barre de statut -->
+            <!-- <xpath expr="//header/field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft,sent,purchase,done</attribute>
+            </xpath> -->
+                   
+            <!-- Rendre analytic_distribution en lecture seule sur les lignes de commande -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='analytic_distribution']" position="attributes">
+                <attribute name="readonly">not can_edit_analytic_distribution_da</attribute>
+            </xpath>
+
+            <!-- Champs hors budget / urgent / TDR / mode de paiement dans l'onglet Other Information -->
+            <xpath expr="//page[@name='purchase_delivery_invoice']/group/group[@name='other_info']" position="inside">
+                <field name="is_out_of_budget_limit" groups="purchase.group_purchase_manager"/>
+                <field name="is_urgent_purchase" groups="purchase.group_purchase_manager"/>
+                <field name="tdr_linked_id" groups="purchase.group_purchase_manager"/>
+                <field name="payment_method_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Filtre par défaut : Mes approbations -->
+    <record id="view_purchase_order_filter_gainde" model="ir.ui.view">
+        <field name="name">purchase.order.search.gainde</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <filter name="my_approvals"
+                        string="Mes approbations"
+                        domain="[('current_approval_stage_id.user_ids', 'in', uid)]"
+                        context="{'search_default_my_approvals': 1}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action serveur : appliquer le filtre "Mes approbations" seulement si nécessaire -->
+    <record id="action_purchase_rfq_my_approvals" model="ir.actions.server">
+        <field name="name">Demandes de prix</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="state">code</field>
+        <field name="code">action = env['purchase.order'].action_open_rfq_with_my_approvals()</field>
+    </record>
+
+    <!-- Remplacer l'action du menu RFQ par l'action serveur -->
+    <record id="purchase.menu_purchase_rfq" model="ir.ui.menu">
+        <field name="action" ref="purchase_gainde.action_purchase_rfq_my_approvals"/>
+    </record>
+
+</odoo>

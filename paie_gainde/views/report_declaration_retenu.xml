@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+    <data>
+
+        <!-- Déclaration du rapport Déclaration des retenues -->
+        <record id="action_report_declaration_retenu" model="ir.actions.report">
+        <field name="name">Déclaration des retenues</field>
+        <field name="model">hr.contribution.register</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paie_gainde.report_declaration_retenu</field>
+        <field name="report_file">paie_gainde.report_declaration_retenu</field>
+        <field name="print_report_name">'Declaration_Retenues'</field>
+    </record>
+        
+
+        <!-- Template du rapport -->
+        <template id="report_declaration_retenu">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <table style="height: 66px" width="1025">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 335px"><span t-field="res_company.partner_id.street"/></td>
+                                        <td style="width: 335px"></td>
+                                        <td style="width: 335px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 335px">BP: <span t-field="res_company.partner_id.zip"/></td>
+                                        <td style="width: 335px">TEL: <span t-field="res_company.partner_id.phone"/></td>
+                                        <td style="width: 335px">DATE: <span t-esc="current_date"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 335px">FAX:</td>
+                                        <td style="width: 335px">Email: <span t-field="res_company.partner_id.email"/></td>
+                                        <td style="width: 335px"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h1 style="text-align: center;"><strong>Etat de déclaration mensuelle des impots</strong></h1>
+                            <p style="text-align: center;">Paie la période de <span t-esc="get_periode()"/></p>
+
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <tr style="font-weight:bold">
+                                        <td align="center"></td>
+                                        <td align="center">Brut Imposable</td>
+                                        <td align="center">IR</td>
+                                        <td align="center">TRIMF</td>
+                                        <td align="center">CFCE</td>
+                                        <td align="center">Total</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="get_payslip_lines(o)" t-as="r">
+                                        <!-- Les lignes détaillées peuvent être ajoutées ici -->
+                                    </tr>
+
+                                    <!-- Totaux Hommes -->
+                                    <tr>
+                                        <td>Hommes</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_brut_male()).replace(',', ' ')"/> (<span t-esc="get_male_count_brut()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_ir_male()).replace(',', ' ')"/> (<span t-esc="get_male_count_ir()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_trimf_male()).replace(',', ' ')"/> (<span t-esc="get_male_count_trimf()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_cfce_male()).replace(',', ' ')"/> (<span t-esc="get_male_count_cfce()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_of_total_male()).replace(',', ' ')"/></td>
+                                    </tr>
+
+                                    <!-- Totaux Femmes -->
+                                    <tr>
+                                        <td>Femmes</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_brut_female()).replace(',', ' ')"/> (<span t-esc="get_female_count_brut()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_ir_female()).replace(',', ' ')"/> (<span t-esc="get_female_count_ir()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_trimf_female()).replace(',', ' ')"/> (<span t-esc="get_female_count_trimf()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_cfce_female()).replace(',', ' ')"/> (<span t-esc="get_female_count_cfce()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(get_total_of_total_female()).replace(',', ' ')"/></td>
+                                    </tr>
+
+                                    <!-- Totaux Globaux -->
+                                    <tr>
+                                        <td>Total</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(sum_total_brut()).replace(',', ' ')"/> (<span t-esc="get_total_eff_brut()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(sum_total_ir()).replace(',', ' ')"/> (<span t-esc="get_total_eff_ir()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(sum_total_trimf()).replace(',', ' ')"/> (<span t-esc="get_total_eff_trimf()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(sum_total_cfce()).replace(',', ' ')"/> (<span t-esc="get_total_eff_cfce()"/>)</td>
+                                        <td align="right"><span t-esc="'{0:,.0f}'.format(sum_total_total()).replace(',', ' ')"/></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

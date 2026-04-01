@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Héritage Tree Hr Job -->
+        <record id="hr_job_inherit_tree" model="ir.ui.view">
+            <field name="name">hr.job.list.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="code"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Héritage Form Hr Job -->
+        <record id="hr_job_inherit_form" model="ir.ui.view">
+            <field name="name">hr.job.form.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="code" placeholder="Code poste"/>
+                    <field name="code_category" placeholder="Code catégorie"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Vue List personnalisée Hr Job -->
+        <record id="view_hr_job_list_custom" model="ir.ui.view">
+            <field name="name">hr.job.list.custom</field>
+            <field name="model">hr.job</field>
+            <field name="arch" type="xml">
+                <list string="Postes" editable="top">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="code_category"/>
+                    <field name="code"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action Postes -->
+        <record id="act_cerco_jobs" model="ir.actions.act_window">
+            <field name="name">Postes</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_hr_job_list_custom"/>
+        </record>
+
+        <!-- Vue List Cerco Function -->
+        <record id="view_cerco_function_list" model="ir.ui.view">
+            <field name="name">cerco.function.list</field>
+            <field name="model">cerco.function</field>
+            <field name="arch" type="xml">
+                <list string="Fonctions" editable="top">
+                    <field name="name"/>
+                    <field name="job_id"/>
+                    <field name="code"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action Fonctions -->
+        <record id="action_cerco_function" model="ir.actions.act_window">
+            <field name="name">Fonctions</field>
+            <field name="res_model">cerco.function</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="view_cerco_function_list"/>
+        </record>
+
+        <!-- Menus -->
+        <menuitem name="Postes"
+                  parent="hr.menu_hr_root"
+                  id="menu_cerco_jobs"
+                  action="act_cerco_jobs"
+                  sequence="20"/>
+
+        <menuitem name="Fonctions"
+                  parent="hr.menu_hr_root"
+                  id="menu_cerco_function_employee"
+                  action="action_cerco_function"
+                  sequence="25"/>
+
+    </data>
+</odoo>

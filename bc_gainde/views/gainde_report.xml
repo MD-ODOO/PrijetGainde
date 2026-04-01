@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Bon de commande -->
+        <template id="gainde_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                <t t-call="bc_gainde.gainde_external_view12">
+                        <t t-if="o.state not in ('purchase', 'done')">
+                        <p style="position: absolute;
+                                top: 300px;
+                                left: 100px;
+                                transform: rotate(331deg);
+                                -webkit-transform: rotate(331deg);
+                                -moz-transform: rotate(331deg);
+                                -o-transform: rotate(331deg);
+                                font-size: 12em;
+                                color: rgba(255, 5, 5, 0.17);
+                                font-family: 'Denk One', sans-serif;
+                                text-transform: uppercase;
+                                pointer-events: none;
+                                z-index: 1;">
+                            BROUILLON
+                        </p>
+                    </t>
+                        <div style="margin-left: 130px; display: flex; align-items: center;">
+                            <span style="font-weight: bold; font-size: 32px;">
+                                Bon de Commande N°
+                            </span>
+                            <span style="font-weight: bold; font-size:32px; margin-left: 20px;" t-esc="o.name"/>
+                        </div>
+                        <div style="margin-left: 140px; margin-right: 100px; margin-top: 10px;">
+                            
+                            <!-- <div style="margin-left: 570px; display: flex; align-items: center; font-size:22px; margin-top: 5px;">
+                                <span style="font-weight: bold; margin-right: 10px;">Réception le :</span>
+                                <span t-esc="o.date_planned and o.date_planned.strftime('%d-%m-%Y') or ''"/>
+                            </div> -->
+                            <!-- Date de Commande -->
+                            <div style="margin-left: 570px; display: flex; align-items: center; font-size:22px;">
+                                <span style="font-weight: bold; margin-right: 10px;">Date Commande :</span>
+                                <span t-esc="o.date_order and o.date_order.strftime('%d-%m-%Y') or ''"/>
+  <!-- Vérifie que ce champ est correct -->
+                            </div>
+
+                            <!-- Date de Confirmation -->
+                            
+
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div class="col-3 d-flex">
+                                <p style="font-weight: bold; font-size:22px; display: inline;">Service Demandeur:</p>
+                            </div>
+                            <div class="col-3 d-flex">
+                             <span style="font-size:22px; display: inline;" t-esc="(o.department_id and o.department_id.name) or 'Direction non renseigné'"/>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row d-flex justify-content-between align-items-stretch">
+                            
+                            <!-- Premier tableau (Informations générales) -->
+                            <div class="col-6" style="margin-right: 15px;">
+                                
+                                <table class="table table-bordered" style="width: 90%; height: 250px; box-sizing: border-box;border: 2px solid black;">
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px; width: 30%;">Devise</td>
+                                        <td style="font-size: 20px; width: 70%; display: flex; align-items: center;">
+                                            <t t-esc="o.currency_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Mode de règlement</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <!-- <t t-set="values" t-value="dict([
+                                                ('cheque', 'Chèque'),
+                                                ('cash', 'Espèce'),
+                                                ('bank_transfer', 'Virement bancaire'),
+                                                ('online_card', 'Carte bancaire (en ligne)'),
+                                                ('direct_debit', 'Prélèvement automatique'),
+                                                ('mobile_money', 'Mobile money (Orange Money / Wave)'),
+                                                ('letter_of_credit', 'Lettre de crédit')
+                                            ])"/> -->
+                                            <t t-if="o.payment_method_id">
+                                                <t t-esc="values.get(o.payment_method_id.name)"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Condition de règlement</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <t t-esc="o.payment_term_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Référence Fournisseur</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <t t-esc="o.partner_ref"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Deuxième tableau (Informations complémentaires) -->
+                            <div class="col-6" >
+                                <table class="table table-bordered" style="width: 100%; height: 250px; box-sizing: border-box;border-width: 2px;border:2px solid black;">
+                                    <tr>
+                                        <th style="font-weight: bold; font-size:22px; height: 40px; display: flex; align-items: center;">
+                                            INFORMATIONS COMPLÉMENTAIRES
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 20px; white-space: normal; height: calc(250px - 40px); padding: 0; overflow: hidden;">
+                                            <t t-foreach="o.order_line" t-as="line">
+                                                <t>
+                                                    <p>
+                                                        <t t-esc="line.name or line.name"/>
+                                                        <br/>
+                                                    </p>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <table style="margin-top: 50px;border: 1px solid black;" class="table">
+                        <thead>
+                           <tr style="font-size:20px">
+                                <th>Article</th>
+                                <th>Prix Unitaire</th>
+                                <th>Quantité</th>
+                                <th>% Rem</th>
+                                <th>Montant HT</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size:20px">
+                            <t t-foreach="o.order_line" t-as="line">
+                                <tr style="margin-bottom: 550px;text-align: center;">
+                                    <td style="text-align: left;border: 1px solid black;">
+                                        <t t-esc="line.product_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <t t-esc="'{0:,.0f}'.format(line.price_unit).replace(',', ' ').replace('.', ',')"/>
+                                    </td>
+                                    
+                                    <td style="border: 1px solid black;" t-esc="line.product_qty"/>
+                                    <td style="border: 1px solid black;" t-esc="line.discount or ''"/>
+                                
+                                    <td style="border-bottom: none;border: 1px solid black;">
+                                        <t t-esc="'{0:,.0f}'.format(line.price_subtotal).replace(',', ' ').replace('.', ',')"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+
+                <!-- Totaux -->
+                        <table class="table table-borderless" style="width: 30%; float: right; text-align: right;border-width: 2px;border: 1px solid black;">
+                            <tr style="font-size:20px;border: 1px solid black;">
+                                <td><strong>Total HT</strong></td>
+                                <td style="text-align: right;"><t t-esc="'{0:,.0f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                            <tr style="font-size:20px;border: 1px solid black;">
+                                <td>TVA</td>
+                                <td style="text-align: right;"><t t-esc="'{0:,.0f}'.format(o.amount_tax).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                            <tr style="font-size:20px;margin-bottom:300px;border: 1px solid black;">
+                                <td><strong>(FCFA) Total TTC</strong></td>
+                                <td><t t-esc="'{0:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/></td>
+
+                            </tr>
+                        </table>
+                       
+
+                       
+
+                   
+
+                        
+                            <table class="table table-sm">
+                                <!-- Ton tableau ici -->
+                            </table>
+                        
+                            <div style=" padding-top: 200px; font-size:20px;">
+                                <hr style="border: 1px solid black; margin: 0; width: 100%;"/>
+                                <p style="font-size:20px; margin-top: 5px;">Arrêté la présente à la somme de <t t-esc="o.currency_id.name"/> : 
+                                    <strong style="font-size:20px;"><t t-esc="o.amount_text"/></strong>
+                                </p>
+                                <p style="font-size:20px; margin-top: 5px;"><strong>VISA Responsable financier</strong></p>
+                            </div>
+
+                        
+
+            
+            
+            <div class="page">
+                            <div style="margin-top:30px" class="row">
+                                <div style="margin-top:30px" class="col-12 text-right">
+                                    <div style="text-align: right;margin-top:30px">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                        </div>
+                    
+                    </t> 
+                </t>
+            </t>
+        </template>
+
+        <!-- Facture (account.move) -->
+        <template id="gainde_invoice_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="bc_gainde.gainde_external_view12">
+                        <t t-if="o.state == 'draft'">
+                            <p style="position: absolute;
+                                    top: 300px;
+                                    left: 100px;
+                                    transform: rotate(331deg);
+                                    -webkit-transform: rotate(331deg);
+                                    -moz-transform: rotate(331deg);
+                                    -o-transform: rotate(331deg);
+                                    font-size: 12em;
+                                    color: rgba(255, 5, 5, 0.17);
+                                    font-family: 'Denk One', sans-serif;
+                                    text-transform: uppercase;
+                                    pointer-events: none;
+                                    z-index: 1;">
+                                BROUILLON
+                            </p>
+                        </t>
+
+                        <div style="margin-left: 130px; display: flex; align-items: center;">
+                            <span style="font-weight: bold; font-size: 32px;">
+                                Facture N°
+                            </span>
+                            <span style="font-weight: bold; font-size:32px; margin-left: 20px;" t-esc="o.name"/>
+                        </div>
+
+                        <div style="margin-left: 140px; margin-right: 100px; margin-top: 10px;">
+                            <!-- Dates de facture -->
+                            <div style="margin-left: 570px; display: flex; align-items: center; font-size:22px; margin-top: 5px;">
+                                <span style="font-weight: bold; margin-right: 10px;">Échéance le :</span>
+                                <span t-esc="o.invoice_date_due and o.invoice_date_due.strftime('%d-%m-%Y') or ''"/>
+                            </div>
+                            <div style="margin-left: 570px; display: flex; align-items: center; font-size:22px;">
+                                <span style="font-weight: bold; margin-right: 10px;">Date Facture :</span>
+                                <span t-esc="o.invoice_date and o.invoice_date.strftime('%d-%m-%Y') or ''"/>
+                            </div>
+                        </div>
+
+                        <!-- Service Demandeur (pris depuis le BC lié si disponible)
+                        <div class="row align-items-center">
+                            <div class="col-3 d-flex">
+                                <p style="font-weight: bold; font-size:22px; display: inline;">Service Demandeur:</p>
+                            </div>
+                            <div class="col-3 d-flex">
+                                <t t-set="dep" t-value="o.invoice_line_ids.mapped('purchase_line_id.order_id.department_id')[:1]"/>
+                                <span style="font-size:22px; display: inline;" t-esc="dep and dep[0].name or ''"/>
+                            </div>
+                        </div> -->
+
+                        <div class="row d-flex justify-content-between align-items-stretch">
+                            <!-- Premier tableau (Informations générales) -->
+                            <div class="col-6" style="margin-right: 15px;">
+                                <table class="table table-bordered" style="width: 90%; height: 250px; box-sizing: border-box;border: 2px solid black;">
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px; width: 30%;">Devise</td>
+                                        <td style="font-size: 20px; width: 70%; display: flex; align-items: center;">
+                                            <t t-esc="o.currency_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Mode de règlement</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <t t-esc="o.invoice_payment_term_id and o.invoice_payment_term_id.name or ''"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Condition de règlement</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <t t-esc="o.narration or ''"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; font-size: 22px;">Référence</td>
+                                        <td style="font-size: 20px; display: flex; align-items: center;">
+                                            <t t-esc="o.payment_reference or o.ref or ''"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Deuxième tableau (Informations complémentaires) -->
+                            <div class="col-6" >
+                                <table class="table table-bordered" style="width: 100%; height: 250px; box-sizing: border-box;border-width: 2px;border:2px solid black;">
+                                    <tr>
+                                        <th style="font-weight: bold; font-size:22px; height: 40px; display: flex; align-items: center;">
+                                            INFORMATIONS COMPLÉMENTAIRES
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 20px; white-space: normal; height: calc(250px - 40px); padding: 0; overflow: hidden;">
+                                        <!-- <p> <t t-esc="o.description or ''"/></p> -->
+
+                                            <t t-foreach="o.invoice_line_ids.filtered(lambda l: not l.display_type)" t-as="line">
+                                                <p><t t-esc="line.name"/><br/></p>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Détail des lignes de facture -->
+                        <table style="margin-top: 50px;border: 1px solid black;" class="table">
+                            <thead>
+                                <tr style="font-size:20px">
+                                    <th>Article</th>
+                                    <th>Prix Unitaire</th>
+                                    <th>Quantité</th>
+                                    <th>% Rem</th>
+                                    <th>Montant HT</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:20px">
+                                <t t-foreach="o.invoice_line_ids.filtered(lambda l: not l.display_type)" t-as="line">
+                                    <tr style="margin-bottom: 550px;text-align: center;">
+                                        <td style="text-align: left;border: 1px solid black;">
+                                            <t t-esc="line.product_id.name or line.name"/>
+                                        </td>
+                                        <td style="border: 1px solid black;">
+                                            <t t-esc="'{0:,.0f}'.format(line.price_unit).replace(',', ' ').replace('.', ',')"/>
+                                        </td>
+                                        <td style="border: 1px solid black;" t-esc="line.quantity"/>
+                                        <td style="border: 1px solid black;" t-esc="line.discount or ''"/>
+                                        <td style="border-bottom: none;border: 1px solid black;">
+                                            <t t-esc="'{0:,.0f}'.format(line.price_subtotal).replace(',', ' ').replace('.', ',')"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Totaux -->
+                        <table class="table table-borderless" style="width: 30%; float: right; text-align: right;border-width: 2px;border: 1px solid black;">
+                            <tr style="font-size:20px;border: 1px solid black;">
+                                <td><strong>Total HT</strong></td>
+                                <td style="text-align: right;"><t t-esc="'{0:,.0f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                            <tr style="font-size:20px;border: 1px solid black;">
+                                <td>TVA</td>
+                                <td style="text-align: right;"><t t-esc="'{0:,.0f}'.format(o.amount_tax).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                            <tr style="font-size:20px;margin-bottom:300px;border: 1px solid black;">
+                                <td><strong>(FCFA) Total TTC</strong></td>
+                                <td><t t-esc="'{0:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                        </table>
+
+                        <div style=" padding-top: 250px; font-size:20px;">
+                            <hr style="border: 1px solid black; margin: 0; width: 100%;"/>
+                            <p style="font-size:20px; margin-top: 5px;">Arrêté la présente à la somme de <t t-esc="o.currency_id.name"/> :
+                                <strong style="font-size:20px;"><t t-esc="getattr(o, 'amount_text', '')"/></strong>
+                            </p>
+                            <p style="font-size:20px; margin-top: 5px;"><strong>VISA Responsable financier</strong></p>
+                        </div>
+
+                        <div class="page">
+                            <div style="margin-top:30px" class="row">
+                                <div style="margin-top:30px" class="col-12 text-right">
+                                    <div style="text-align: right;margin-top:30px">
+                                    </div>
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

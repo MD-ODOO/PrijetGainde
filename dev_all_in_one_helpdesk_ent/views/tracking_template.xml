@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="ticket_tracking_page">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Ticket - Tracking</t>
+            <div id="wrap">
+                <div class="container oe_website_sale py-2">
+                    <div class="row">
+                        <div class="col-12 col-xl">
+                            <div class="oe_cart">
+                                <div class="thanks_msg">
+                                    <center><h3>Ticket Tracking</h3></center>
+                                </div>
+                                <div class="oe_structure clearfix mt-3" id="oe_structure_website_sale_confirmation_1"/>
+                                <div class="row col-12">
+	                            </div>
+                                <div class="oe_structure mt-3" id="oe_structure_website_sale_tracking_2"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3 ">
+	                    <div class="card-body">
+		                    <div class="col-lg-6 offset-lg-3 mt-2 tracking-input-container">
+								<div 
+									class="text-center form-group element-container form-field o_website_form_required_custom">
+									<input type="text" name="ticket_number" class="form-control tracking-ticket-number-input"
+										placeholder="Enter Ticket Number" />
+								</div>
+							</div>
+							<div class="text-center form-group">
+								<button class="btn btn-primary confirm_track_ticket">
+									Track
+									<i class="fa fa-ticket"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 dev-tracking-container d-none">
+                       	<center>
+	                       	<div class="col-6">
+		                         <h3 class="text-left mt-5">
+		                             <strong>Tracking Information:</strong>
+		                         </h3>
+		                         <table class="table">
+		                             <tbody>
+		                                 <tr>
+		                                 	<td>
+		                                 		<strong>Ticket Number</strong>
+		                                 	</td>
+		                                     <td>
+		                                     	<span class="ticket-number-status" id="ticket_number_status"></span>
+		                                     </td>
+		                                 </tr>
+		                                 
+		                                 <tr>
+		                                 	<td>
+		                                 		<strong>Ticket Name</strong>
+		                                 	</td>
+		                                     <td>
+		                                     	<span class="ticket-name-status" id="ticket_name_status"></span>
+		                                     </td>
+		                                 </tr>
+		                                 
+		                                 <tr>
+		                                 	<td>
+		                                 		<strong>Customer</strong>
+		                                 	</td>
+		                                     <td>
+		                                     	<span class="customer-delivery-order-status" id="customer_delivery_order_status"></span>
+		                                     </td>
+		                                 </tr>
+		                                 
+		                                 <tr>
+		                                 	<td>
+		                                 		<strong>Address</strong>
+		                                 	</td>
+		                                     <td>
+		                                        <p class="address-street" id="address_street" style="margin-top:0px;margin-bottom:0px"/>
+		                                        <p class="address-street-two" id="address_street2" style="margin-top:0px;margin-bottom:0px"/>
+		                                        <p class="address-street-city" id="address_street_city" style="margin-top:0px;margin-bottom:0px"/>
+		                                     </td>
+		                                 </tr>
+		                                 
+		                                 <tr>
+		                                 	<td>
+		                                 		<strong>Status</strong>
+		                                 	</td>
+		                                     <td>
+		                                     	<span class="delivery-order-status" id="delivery_order_status"></span>
+		                                     </td>
+		                                 </tr>
+		                             </tbody>
+		                         </table>
+		                     </div>
+		                 </center>
+                    </div>
+                    <div class="col-12 dev-none-tracking-container d-none">
+                       	<center>
+	                       	<div class="col-6">
+		                         <h3 class="text-left mt-5">
+		                             <strong>Tracking Information: Ticket Not Found</strong><br/><br/>
+		                         </h3>
+		                     </div>
+		                 </center>
+                    </div>
+                </div>
+                <div class="oe_structure" id="oe_structure_website_sale_tracking_3"/>
+            </div>
+        </t>
+    </template>
+</odoo>

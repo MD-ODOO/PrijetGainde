@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Wizard pour approbation des demandes médicales -->
+        <record id="request_medical_wizard_view" model="ir.ui.view">
+            <field name="name">request.medical.wizard.form</field>
+            <field name="model">request.medical.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Approbation">
+                    <group>
+                        <field name="comment" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="approve" string="Confirmer" type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Annuler" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Wizard pour refus des demandes médicales -->
+        <record id="request_medical_refusal_view" model="ir.ui.view">
+            <field name="name">request.medical.refusal.form</field>
+            <field name="model">request.medical.refusal</field>
+            <field name="arch" type="xml">
+                <form string="Rejeter">
+                    <group>
+                        <field name="comment" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="cancel_request" string="Rejeter" type="object" class="oe_highlight"/>
+                        <button special="cancel" string="Annuler" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

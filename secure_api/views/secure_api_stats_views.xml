@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_stats_form_view" model="ir.ui.view">
+            <field name="name">Usage Statistics</field>
+            <field name="model">secure.api.stats</field>
+            <field name="arch" type="xml">
+                <form string="Usage Statistics" create="0" edit="0" delete="0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>                    
+                        </div>
+                        <group name="stats">
+                            <group>
+                                <field name="secure_api_id"/>
+                                <field name="secure_api_route"/>
+                                <field name="secure_api_api_action"/>
+                                <field name="secure_api_model_ids" widget="many2many_tags"/>
+                                <field name="secure_api_auth"/>
+                                <field name="secure_api_category_id"/>
+                                <field name="secure_api_is_stats"/>
+                                <field name="secure_api_state" widget="badge" decoration-success="secure_api_state == 'published'" decoration-warning="secure_api_state == 'deactivated'" decoration-muted="secure_api_state == 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="hit_success"/>
+                                <field name="hit_fail"/>
+                                <field name="rate_success" widget="percentage"/>
+                                <field name="rate_fail" widget="percentage"/>
+                                <field name="total_hit"/>
+                                <field name="avg_elapsed_time"/>
+                            </group>
+                        </group>
+                        <group string="Request Log">
+                            <!-- <label for="line_ids" string="Request Log"/> -->
+                            <field name="line_ids" colspan="2" nolabel="1" options="{'no_create_edit': True, 'no_create': True}">
+                                <list string="Logs" limit="15" default_order="write_date desc">
+                                    <field name="endpoint"/>
+                                    <field name="method"/>
+                                    <field name="data"/>
+                                    <field name="line_type" widget="badge" decoration-success="line_type == 'success'" decoration-danger="line_type == 'error'"/>
+                                    <field name="elapsed_time"/>
+                                    <field name="write_date"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="secure_api_stats_line_form_view" model="ir.ui.view">
+            <field name="name">Request Log</field>
+            <field name="model">secure.api.stats.line</field>
+            <field name="arch" type="xml">
+                <form string="Request Log" create="0" edit="0" delete="0">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                            <label for="write_date" string="Date" class="oe_edit_only"/><h3><field name="write_date"/></h3>
+                        </div>
+                        <group name="lines">
+                            <group>
+                                <field name="secure_api_id"/>
+                                <field name="secure_api_api_action"/>
+                                <field name="secure_api_model_ids" widget="many2many_tags"/>
+                                <field name="secure_api_auth"/>
+                                <field name="secure_api_category_id"/>
+                                <field name="secure_api_state" widget="badge" decoration-success="secure_api_state == 'published'" decoration-warning="secure_api_state == 'deactivated'" decoration-muted="secure_api_state == 'draft'"/>
+                            </group>
+                            <group>
+                                <field name="stats_id"/>
+                                <field name="endpoint"/>
+                                <field name="method"/>
+                                <field name="data"/>
+                                <field name="elapsed_time"/>
+                                <field name="line_type" widget="badge" decoration-success="line_type == 'success'" decoration-danger="line_type == 'error'"/>
+                            </group>
+                        </group>
+                        <group name="request_and_error">
+                            <group>
+                                <label for="request" colspan="2"/>
+                                <field name="request" colspan="2" nolabel="1"/>
+                            </group>
+                            <group>
+                                <label for="error" colspan="2" invisible="line_type != 'error'"/>
+                                <field name="error" colspan="2" nolabel="1" invisible="line_type != 'error'"/>
+                                <label for="result" colspan="2" invisible="line_type != 'success'"/>
+                                <field name="result" colspan="2" nolabel="1" invisible="line_type != 'success'"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="secure_api_stats_tree_view" model="ir.ui.view">
+            <field name="name">Usage Statistics</field>
+            <field name="model">secure.api.stats</field>
+            <field name="arch" type="xml">
+                <list string="Usage Statistics">
+                    <field name="secure_api_id"/>
+                    <field name="secure_api_route"/>
+                    <field name="secure_api_api_action"/>
+                    <field name="secure_api_model_ids" widget="many2many_tags"/>
+                    <field name="secure_api_auth"/>
+                    <field name="secure_api_category_id"/>
+                    <field name="secure_api_is_stats"/>
+                    <field name="secure_api_state" widget="badge" decoration-success="secure_api_state == 'published'" decoration-warning="secure_api_state == 'deactivated'" decoration-muted="secure_api_state == 'draft'"/>
+                    <!-- <field name="secure_api_state" widget="label_selection" options="{'classes': {'draft': 'default', 'published': 'success', 'deactivated': 'danger'}}"/> -->
+                    <field name="hit_success" sum="Total"/>
+                    <field name="hit_fail" sum="Total"/>                    
+                    <field name="rate_success" widget="percentage"/>
+                    <field name="rate_fail" widget="percentage"/>
+                    <field name="total_hit" sum="Total"/>
+                    <field name="avg_elapsed_time" avg="Average"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="secure_api_stats_line_tree_view" model="ir.ui.view">
+            <field name="name">Request Log</field>
+            <field name="model">secure.api.stats.line</field>
+            <field name="arch" type="xml">
+                <list string="Request Log" default_order="write_date desc">
+                    <field name="secure_api_id"/>
+                    <field name="secure_api_api_action"/>
+                    <field name="secure_api_model_ids" widget="many2many_tags"/>
+                    <field name="secure_api_auth"/>
+                    <field name="secure_api_category_id"/>                    
+                    <field name="endpoint"/>
+                    <field name="method"/>
+                    <field name="data"/>
+                    <field name="elapsed_time"/>
+                    <field name="write_date"/>
+                    <field name="line_type" widget="badge" decoration-success="line_type == 'success'" decoration-danger="line_type == 'error'"/>
+                    <!-- <field name="secure_api_state" widget="badge" decoration-success="secure_api_state == 'published'" decoration-warning="secure_api_state == 'deactivated'" decoration-muted="secure_api_state == 'draft'"/> -->
+                </list>
+            </field>
+        </record>
+        
+        <record id="secure_api_stats_tree_filter" model="ir.ui.view">
+            <field name="name">secure_api_stats_tree_filter</field>
+            <field name="model">secure.api.stats</field>
+            <field name="arch" type="xml">
+                <search string="Statistics">
+                    <field name="secure_api_id" string="API Name or Route" filter_domain="['|',('secure_api_id.name','ilike',self),('secure_api_route','ilike',self)]"/>
+                    <group>
+                        <filter string="Type" name="grp_secure_api_api_action" domain="[]" context="{'group_by': 'secure_api_api_action'}"/>
+                        <filter string="Authentication" name="grp_secure_api_auth" domain="[]" context="{'group_by': 'secure_api_auth'}"/>
+                        <filter string="Category" name="grp_secure_api_category_id" domain="[]" context="{'group_by': 'secure_api_category_id'}"/>
+                        <filter string="API State" name="grp_secure_api_state" domain="[]" context="{'group_by': 'secure_api_state'}"/>                        
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_secure_api_stats" model="ir.actions.act_window">
+            <field name="name">Usage Statistics</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api.stats</field>
+            <field name="search_view_id" ref="secure_api_stats_tree_filter"/>
+            <field name="context">{'edit': 0, 'create': 0, 'delete': 0}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('secure_api_stats_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('secure_api_stats_form_view')})]"/>
+        </record>
+
+        <record id="secure_api_stats_line_tree_filter" model="ir.ui.view">
+            <field name="name">secure_api_stats_line_tree_filter</field>
+            <field name="model">secure.api.stats.line</field>
+            <field name="arch" type="xml">
+                <search string="Request Log">
+                    <field name="secure_api_id" string="API Name or Route" filter_domain="['|',('secure_api_id.name','ilike',self),('secure_api_id.route','ilike',self)]"/>
+                    <field name="endpoint" string="Endpoint"/>
+                    <separator/>
+                    <filter string="Success" name="filter_success" domain="[('line_type', '=', 'success')]"/>
+                    <filter string="Error" name="filter_error" domain="[('line_type', '=', 'error')]"/>
+                    <group>
+                        <filter string="API" name="grp_secure_api_id" domain="[]" context="{'group_by': 'secure_api_id'}"/>
+                        <filter string="Type" name="grp_secure_api_api_action" domain="[]" context="{'group_by': 'secure_api_api_action'}"/>
+                        <filter string="Authentication" name="grp_secure_api_auth" domain="[]" context="{'group_by': 'secure_api_auth'}"/>
+                        <filter string="Category" name="grp_secure_api_category_id" domain="[]" context="{'group_by': 'secure_api_category_id'}"/>
+                        <filter string="Endpoint" name="grp_endpoint" domain="[]" context="{'group_by': 'endpoint'}"/>
+                        <filter string="Method" name="grp_method" domain="[]" context="{'group_by': 'method'}"/>
+                        <filter string="Response Status" name="grp_line_type" domain="[]" context="{'group_by': 'line_type'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_secure_api_stats_line" model="ir.actions.act_window">
+            <field name="name">Request Log (Old requests are removed automatically)</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api.stats.line</field>
+            <field name="search_view_id" ref="secure_api_stats_line_tree_filter"/>
+            <field name="context">{'edit': 0, 'create': 0, 'delete': 0}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('secure_api_stats_line_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('secure_api_stats_line_form_view')})]"/>
+        </record>
+
+        <menuitem id="menu_secure_api_secure_api_stats_group"
+            name="Analytics"
+            sequence="30"
+            parent="secure_api.menu_secure_api"/>
+
+        <menuitem id="menu_secure_api_secure_api_stats_group_stats"
+            name="Usage Statistics"
+            action="action_secure_api_stats"
+            sequence="10"
+            parent="menu_secure_api_secure_api_stats_group"/>
+        <menuitem id="menu_secure_api_secure_api_stats_group_stats_line"
+            name="Request Log"
+            action="action_secure_api_stats_line"
+            sequence="20"
+            parent="menu_secure_api_secure_api_stats_group"/>
+    </data>
+</odoo>

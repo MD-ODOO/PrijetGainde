@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <record id="view_maintenance_request_helpdesk_ticket_form" model="ir.ui.view">
+        <field name="name">view.maintenance.request.helpdesk.ticket.form</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//header" position="inside">
+               <field name="ticket_count" string="Ticket" invisible="1"/>
+               <button type="object"
+                       invisible="ticket_count == 0"
+                    name="action_view_ticket" class="oe_highlight" string='View Ticket' 
+                    group="dev_task_helpdesk.group_helpdesk_user" />
+           </xpath>
+        </field>
+    </record>
+</odoo>

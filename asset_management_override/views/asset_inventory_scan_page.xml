@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="asset_inventory_scan_page" name="Asset Inventory Scan PWA">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+                <meta name="mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+                <meta name="apple-mobile-web-app-title" content="Asset Scan"/>
+                <meta name="theme-color" content="#875A7B"/>
+                <link rel="manifest" href="/asset-inventory/scan/manifest.json"/>
+                <link rel="apple-touch-icon" href="/asset_management_override/static/src/pwa/icon-192.png"/>
+                <title>Inventaire — Scan</title>
+                <style>
+                    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                    body {
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                        background: #f4f6f8;
+                        color: #212529;
+                        min-height: 100vh;
+                        padding-bottom: env(safe-area-inset-bottom);
+                    }
+                    .app-header {
+                        background: #875A7B;
+                        color: #fff;
+                        padding: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        position: sticky;
+                        top: 0;
+                        z-index: 100;
+                        box-shadow: 0 2px 8px rgba(0,0,0,.2);
+                    }
+                    .app-header h1 { font-size: 18px; font-weight: 600; }
+                    .app-header .user { font-size: 12px; opacity: .8; }
+                    .app-content { padding: 16px; max-width: 600px; margin: 0 auto; }
+                    .card {
+                        background: #fff;
+                        border-radius: 12px;
+                        padding: 16px;
+                        margin-bottom: 16px;
+                        box-shadow: 0 1px 4px rgba(0,0,0,.08);
+                    }
+                    .card-title {
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #6c757d;
+                        text-transform: uppercase;
+                        letter-spacing: .5px;
+                        margin-bottom: 12px;
+                    }
+                    select {
+                        width: 100%;
+                        padding: 12px;
+                        border: 1px solid #dee2e6;
+                        border-radius: 8px;
+                        font-size: 15px;
+                        background: #fff;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236c757d'/%3E%3C/svg%3E");
+                        background-repeat: no-repeat;
+                        background-position: right 12px center;
+                    }
+                    .stats-row {
+                        display: flex;
+                        gap: 12px;
+                        margin-top: 12px;
+                    }
+                    .stat-box {
+                        flex: 1;
+                        text-align: center;
+                        padding: 12px 8px;
+                        border-radius: 8px;
+                        background: #f8f9fa;
+                    }
+                    .stat-box .val {
+                        font-size: 28px;
+                        font-weight: 700;
+                        line-height: 1;
+                    }
+                    .stat-box .lbl { font-size: 11px; color: #6c757d; margin-top: 4px; }
+                    .stat-box.found .val { color: #28a745; }
+                    .stat-box.missing .val { color: #dc3545; }
+                    .btn-scan {
+                        width: 100%;
+                        padding: 18px;
+                        background: #875A7B;
+                        color: #fff;
+                        border: none;
+                        border-radius: 12px;
+                        font-size: 18px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        transition: background .15s;
+                        -webkit-tap-highlight-color: transparent;
+                    }
+                    .btn-scan:active { background: #6d4764; }
+                    .btn-scan:disabled { background: #adb5bd; cursor: not-allowed; }
+                    .btn-scan svg { width: 28px; height: 28px; flex-shrink: 0; }
+                    .manual-input {
+                        display: flex;
+                        gap: 8px;
+                        margin-top: 12px;
+                    }
+                    .manual-input input {
+                        flex: 1;
+                        padding: 12px;
+                        border: 1px solid #dee2e6;
+                        border-radius: 8px;
+                        font-size: 15px;
+                    }
+                    .manual-input button {
+                        padding: 12px 20px;
+                        background: #6c757d;
+                        color: #fff;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 15px;
+                        cursor: pointer;
+                    }
+                    .log-list { list-style: none; }
+                    .log-item {
+                        padding: 10px 12px;
+                        border-radius: 8px;
+                        margin-bottom: 8px;
+                        font-size: 14px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        animation: fadeIn .3s ease;
+                    }
+                    @keyframes fadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+                    .log-item.found { background: #d4edda; color: #155724; }
+                    .log-item.duplicate { background: #fff3cd; color: #856404; }
+                    .log-item.not_found { background: #f8d7da; color: #721c24; }
+                    .log-item .ico { font-size: 18px; flex-shrink: 0; }
+                    .toast {
+                        position: fixed;
+                        bottom: calc(24px + env(safe-area-inset-bottom));
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: rgba(0,0,0,.85);
+                        color: #fff;
+                        padding: 12px 24px;
+                        border-radius: 24px;
+                        font-size: 14px;
+                        z-index: 9999;
+                        pointer-events: none;
+                        opacity: 0;
+                        transition: opacity .3s;
+                        white-space: nowrap;
+                    }
+                    .toast.show { opacity: 1; }
+                    .no-session {
+                        text-align: center;
+                        padding: 32px 16px;
+                        color: #6c757d;
+                    }
+                    .no-session svg { width: 64px; height: 64px; opacity: .3; margin-bottom: 12px; }
+                    #camera-overlay {
+                        position: fixed;
+                        inset: 0;
+                        background: #000;
+                        z-index: 9998;
+                        display: none;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 16px;
+                    }
+                    #camera-overlay.active { display: flex; }
+                    #camera-video {
+                        width: 100%;
+                        max-width: 480px;
+                        border-radius: 12px;
+                        display: block;
+                    }
+                    .camera-aim {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 240px;
+                        height: 160px;
+                        border: 3px solid rgba(255,255,255,.8);
+                        border-radius: 12px;
+                        pointer-events: none;
+                    }
+                    .camera-aim::before, .camera-aim::after {
+                        content: '';
+                        position: absolute;
+                        width: 24px; height: 24px;
+                        border-color: #875A7B;
+                        border-style: solid;
+                    }
+                    .camera-aim::before { top:-3px; left:-3px; border-width: 4px 0 0 4px; border-radius: 4px 0 0 0; }
+                    .camera-aim::after { bottom:-3px; right:-3px; border-width: 0 4px 4px 0; border-radius: 0 0 4px 0; }
+                    #camera-label { color: #fff; font-size: 15px; text-align: center; padding: 0 24px; }
+                    #camera-cancel {
+                        padding: 14px 40px;
+                        background: #e53935;
+                        color: #fff;
+                        border: none;
+                        border-radius: 12px;
+                        font-size: 16px;
+                        cursor: pointer;
+                    }
+                    #install-banner {
+                        position: fixed;
+                        bottom: 0;
+                        left: 0; right: 0;
+                        background: #875A7B;
+                        color: #fff;
+                        padding: 14px 16px;
+                        display: none;
+                        align-items: center;
+                        justify-content: space-between;
+                        gap: 12px;
+                        z-index: 200;
+                        padding-bottom: calc(14px + env(safe-area-inset-bottom));
+                    }
+                    #install-banner.show { display: flex; }
+                    #install-banner p { font-size: 14px; flex: 1; }
+                    #install-btn {
+                        background: #fff;
+                        color: #875A7B;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px 20px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        font-size: 14px;
+                        white-space: nowrap;
+                    }
+                    #install-dismiss {
+                        background: none;
+                        border: none;
+                        color: rgba(255,255,255,.7);
+                        font-size: 20px;
+                        cursor: pointer;
+                        padding: 4px 8px;
+                    }
+                </style>
+            </t>
+            <t t-set="body_classname">o_web_client</t>
+
+            <!-- Header -->
+            <div class="app-header">
+                <div>
+                    <h1>📦 Inventaire Actifs</h1>
+                </div>
+                <div class="user" t-esc="user_name"/>
+            </div>
+
+            <div class="app-content">
+
+                <!-- Sélection session -->
+                <div class="card" id="session-card">
+                    <div class="card-title">Session en cours</div>
+                    <div id="no-session-msg" style="display:none" class="no-session">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <p>Aucune session en cours.<br/>Démarrez une session depuis Odoo.</p>
+                    </div>
+                    <select id="session-select" style="display:none">
+                    </select>
+                    <div class="stats-row" id="stats-row" style="display:none">
+                        <div class="stat-box found">
+                            <div class="val" id="stat-scanned">0</div>
+                            <div class="lbl">Scannés</div>
+                        </div>
+                        <div class="stat-box missing">
+                            <div class="val" id="stat-missing">0</div>
+                            <div class="lbl">Manquants</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton scan + saisie manuelle -->
+                <div class="card" id="scan-card" style="display:none">
+                    <div class="card-title">Scanner</div>
+                    <button class="btn-scan" id="btn-camera">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                            <circle cx="12" cy="13" r="4"/>
+                        </svg>
+                        Scanner avec la caméra
+                    </button>
+                    <div class="manual-input">
+                        <input type="text" id="manual-barcode" placeholder="Saisie manuelle..." inputmode="text" autocomplete="off"/>
+                        <button id="btn-manual">OK</button>
+                    </div>
+                </div>
+
+                <!-- Log des scans -->
+                <div class="card" id="log-card" style="display:none">
+                    <div class="card-title">Scans récents</div>
+                    <ul class="log-list" id="scan-log"></ul>
+                </div>
+
+            </div>
+
+            <!-- Overlay caméra -->
+            <div id="camera-overlay">
+                <video id="camera-video" autoplay="autoplay" playsinline="true" muted="muted"></video>
+                <div class="camera-aim"></div>
+                <div id="camera-label">Pointez le code-barres dans le cadre</div>
+                <button id="camera-cancel">✕ Annuler</button>
+            </div>
+
+            <!-- Toast -->
+            <div class="toast" id="toast"></div>
+
+            <!-- Bannière installation PWA -->
+            <div id="install-banner">
+                <p>Installer l'app pour un accès rapide depuis votre téléphone</p>
+                <button id="install-btn">Installer</button>
+                <button id="install-dismiss">✕</button>
+            </div>
+
+            <!-- Données dynamiques passées via data-attributes (évite les problèmes XML dans le JS) -->
+            <div id="pwa-init-data" style="display:none"
+                 t-att-data-sessions="sessions_json"
+                 t-att-data-selected="selected_json"
+                 t-att-data-csrf="csrf_token"/>
+
+            <script><![CDATA[
+                // ── Données initiales ──────────────────────────────────────
+                var _d = document.getElementById("pwa-init-data").dataset;
+                const SESSIONS = JSON.parse(_d.sessions || "[]");
+                const SELECTED = JSON.parse(_d.selected || "null");
+                const CSRF = _d.csrf || "";
+
+                // ── État ───────────────────────────────────────────────────
+                let currentSessionId = SELECTED ? SELECTED.id : null;
+                let scanning = false;
+                let stream = null;
+                let scanResolved = false;
+                let deferredInstallPrompt = null;
+
+                // ── Éléments DOM ───────────────────────────────────────────
+                const sessionSelect = document.getElementById("session-select");
+                const noSessionMsg  = document.getElementById("no-session-msg");
+                const statsRow      = document.getElementById("stats-row");
+                const statScanned   = document.getElementById("stat-scanned");
+                const statMissing   = document.getElementById("stat-missing");
+                const scanCard      = document.getElementById("scan-card");
+                const logCard       = document.getElementById("log-card");
+                const scanLog       = document.getElementById("scan-log");
+                const btnCamera     = document.getElementById("btn-camera");
+                const manualInput   = document.getElementById("manual-barcode");
+                const btnManual     = document.getElementById("btn-manual");
+                const overlay       = document.getElementById("camera-overlay");
+                const video         = document.getElementById("camera-video");
+                const cancelBtn     = document.getElementById("camera-cancel");
+                const toast         = document.getElementById("toast");
+                const installBanner = document.getElementById("install-banner");
+                const installBtn    = document.getElementById("install-btn");
+                const installDismiss= document.getElementById("install-dismiss");
+
+                // ── PWA Service Worker ─────────────────────────────────────
+                if ("serviceWorker" in navigator) {
+                    navigator.serviceWorker.register("/asset-inventory/scan/sw.js", {
+                        scope: "/asset-inventory/"
+                    }).catch(() => {});
+                }
+
+                // ── Bannière installation ──────────────────────────────────
+                window.addEventListener("beforeinstallprompt", (e) => {
+                    e.preventDefault();
+                    deferredInstallPrompt = e;
+                    installBanner.classList.add("show");
+                });
+                installBtn.onclick = async () => {
+                    if (!deferredInstallPrompt) return;
+                    deferredInstallPrompt.prompt();
+                    await deferredInstallPrompt.userChoice;
+                    deferredInstallPrompt = null;
+                    installBanner.classList.remove("show");
+                };
+                installDismiss.onclick = () => installBanner.classList.remove("show");
+
+                // ── Init sessions ──────────────────────────────────────────
+                function initSessions() {
+                    if (!SESSIONS || SESSIONS.length === 0) {
+                        noSessionMsg.style.display = "block";
+                        return;
+                    }
+                    sessionSelect.style.display = "block";
+                    sessionSelect.innerHTML = SESSIONS.map(s =>
+                        `<option value="${s.id}" ${s.id === currentSessionId ? "selected" : ""}>
+                            ${s.name} — ${s.date}
+                        </option>`
+                    ).join("");
+                    sessionSelect.onchange = () => {
+                        currentSessionId = parseInt(sessionSelect.value);
+                        refreshStats();
+                    };
+                    statsRow.style.display = "flex";
+                    scanCard.style.display = "block";
+                    if (SELECTED) {
+                        statScanned.textContent = SELECTED.scanned;
+                        statMissing.textContent = SELECTED.missing;
+                    }
+                }
+
+                // ── JSON-RPC helper ────────────────────────────────────────
+                async function rpc(model, method, args) {
+                    const resp = await fetch("/web/dataset/call_kw", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "same-origin",
+                        body: JSON.stringify({
+                            jsonrpc: "2.0",
+                            method: "call",
+                            id: Date.now(),
+                            params: {
+                                model,
+                                method,
+                                args,
+                                kwargs: { context: {} },
+                            },
+                        }),
+                    });
+                    const data = await resp.json();
+                    if (data.error) throw new Error(data.error.data?.message || data.error.message);
+                    return data.result;
+                }
+
+                // ── Rafraîchir les stats ───────────────────────────────────
+                async function refreshStats() {
+                    if (!currentSessionId) return;
+                    try {
+                        const [rec] = await rpc("asset.inventory", "read", [
+                            [currentSessionId],
+                            ["scanned_count", "missing_count"],
+                        ]);
+                        statScanned.textContent = rec.scanned_count;
+                        statMissing.textContent = rec.missing_count;
+                    } catch (_) {}
+                }
+
+                // ── Traiter un barcode ─────────────────────────────────────
+                async function processBarcode(barcode) {
+                    if (!barcode || !currentSessionId) return;
+                    barcode = barcode.trim();
+                    if (!barcode) return;
+                    try {
+                        const result = await rpc("asset.inventory", "action_scan_barcode", [
+                            [currentSessionId], barcode
+                        ]);
+                        let type, ico, msg;
+                        if (result.status === "found") {
+                            type = "found"; ico = "✅"; msg = result.name;
+                            showToast(`✓ ${result.name} ajouté`, "green");
+                            await refreshStats();
+                        } else if (result.status === "duplicate") {
+                            type = "duplicate"; ico = "⚠️"; msg = `Déjà scanné : ${result.name}`;
+                            showToast(`Déjà dans l'inventaire`, "orange");
+                        } else {
+                            type = "not_found"; ico = "❌"; msg = `Inconnu : ${result.barcode || barcode}`;
+                            showToast(`Actif non trouvé`, "red");
+                        }
+                        addLog(type, ico, msg, barcode);
+                    } catch (e) {
+                        showToast("Erreur : " + e.message, "red");
+                    }
+                }
+
+                // ── Journal des scans ──────────────────────────────────────
+                function addLog(type, ico, msg, barcode) {
+                    logCard.style.display = "block";
+                    const li = document.createElement("li");
+                    li.className = `log-item ${type}`;
+                    li.innerHTML = `<span class="ico">${ico}</span><span>${msg}<br><small style="opacity:.7">${barcode}</small></span>`;
+                    scanLog.prepend(li);
+                    // Garder les 20 derniers
+                    while (scanLog.children.length > 20) scanLog.lastChild.remove();
+                }
+
+                // ── Toast ──────────────────────────────────────────────────
+                let toastTimer;
+                function showToast(msg, color = "black") {
+                    toast.textContent = msg;
+                    toast.style.background = color === "green" ? "rgba(40,167,69,.9)"
+                        : color === "orange" ? "rgba(255,193,7,.9)"
+                        : color === "red" ? "rgba(220,53,69,.9)"
+                        : "rgba(0,0,0,.85)";
+                    if (color === "orange") toast.style.color = "#000";
+                    else toast.style.color = "#fff";
+                    toast.classList.add("show");
+                    clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+                }
+
+                // ── Caméra ─────────────────────────────────────────────────
+                btnCamera.onclick = openCamera;
+                cancelBtn.onclick = closeCamera;
+
+                // Chargement de @zxing/library (même version qu'Odoo — global window.ZXing)
+                let _zxingReader = null;
+                async function loadZXing() {
+                    if (_zxingReader) return _zxingReader;
+                    await new Promise((resolve, reject) => {
+                        const s = document.createElement("script");
+                        s.src = "https://cdn.jsdelivr.net/npm/@zxing/library@0.19.2/umd/index.min.js";
+                        s.onload = resolve;
+                        s.onerror = () => reject(new Error("Échec chargement ZXing CDN"));
+                        document.head.appendChild(s);
+                    });
+                    const ZXing = window.ZXing;
+                    if (!ZXing || !ZXing.MultiFormatReader) {
+                        throw new Error("ZXing non disponible après chargement");
+                    }
+                    // Même approche qu'Odoo : MultiFormatReader avec hints
+                    const hints = new Map([
+                        [ZXing.DecodeHintType.POSSIBLE_FORMATS, [
+                            ZXing.BarcodeFormat.CODE_128,
+                            ZXing.BarcodeFormat.CODE_39,
+                            ZXing.BarcodeFormat.CODE_93,
+                            ZXing.BarcodeFormat.EAN_13,
+                            ZXing.BarcodeFormat.EAN_8,
+                            ZXing.BarcodeFormat.UPC_A,
+                            ZXing.BarcodeFormat.UPC_E,
+                            ZXing.BarcodeFormat.QR_CODE,
+                            ZXing.BarcodeFormat.DATA_MATRIX,
+                            ZXing.BarcodeFormat.ITF,
+                        ]],
+                        [ZXing.DecodeHintType.TRY_HARDER, true],
+                    ]);
+                    const reader = new ZXing.MultiFormatReader();
+                    reader.setHints(hints);
+                    _zxingReader = { ZXing, reader };
+                    return _zxingReader;
+                }
+                // Précharger silencieusement dès ouverture de la page
+                loadZXing().catch(() => {});
+
+                async function openCamera() {
+                    if (!currentSessionId) { showToast("Aucune session sélectionnée", "red"); return; }
+                    if (!navigator.mediaDevices) {
+                        showToast("Caméra non disponible (HTTPS requis)", "red");
+                        return;
+                    }
+                    try {
+                        stream = await navigator.mediaDevices.getUserMedia({
+                            video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
+                        });
+                    } catch (_) {
+                        showToast("Accès caméra refusé", "red");
+                        return;
+                    }
+                    video.srcObject = stream;
+                    stream.getTracks().forEach(t => { t.onended = () => { if (!scanResolved) closeCamera(); }; });
+                    overlay.classList.add("active");
+                    scanResolved = false;
+
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+                    if ("BarcodeDetector" in window) {
+                        // ── Natif Chrome/Edge Android ──────────────────────
+                        const detector = new window.BarcodeDetector({
+                            formats: ["code_128","code_39","code_93","ean_13","ean_8","upc_a","upc_e","qr_code"],
+                        });
+                        async function tick() {
+                            if (scanResolved) return;
+                            if (video.readyState >= 2 && video.videoWidth > 0) {
+                                canvas.width = video.videoWidth;
+                                canvas.height = video.videoHeight;
+                                ctx.drawImage(video, 0, 0);
+                                try {
+                                    const codes = await detector.detect(canvas);
+                                    if (codes.length > 0) {
+                                        closeCamera();
+                                        await processBarcode(codes[0].rawValue);
+                                        return;
+                                    }
+                                } catch (_) {}
+                            }
+                            setTimeout(tick, 150);
+                        }
+                        setTimeout(tick, 1000);
+                    } else {
+                        // ── Fallback ZXing — même approche qu'Odoo ─────────
+                        // API bas niveau : MultiFormatReader.decode(binaryBitmap)
+                        // Stateless : aucun état interne à nettoyer entre sessions
+                        try {
+                            const { ZXing, reader } = await loadZXing();
+                            async function tickZXing() {
+                                if (scanResolved) return;
+                                if (video.readyState >= 2 && video.videoWidth > 0) {
+                                    canvas.width = video.videoWidth;
+                                    canvas.height = video.videoHeight;
+                                    ctx.drawImage(video, 0, 0);
+                                    try {
+                                        const lum = new ZXing.HTMLCanvasElementLuminanceSource(canvas);
+                                        const bmp = new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(lum));
+                                        const result = reader.decode(bmp);
+                                        if (result) {
+                                            closeCamera();
+                                            await processBarcode(result.getText());
+                                            return;
+                                        }
+                                    } catch (err) {
+                                        // NotFoundException = normal (pas de code dans ce frame)
+                                        if (err && err.name !== "NotFoundException") {
+                                            console.warn("ZXing decode error:", err);
+                                        }
+                                    }
+                                }
+                                setTimeout(tickZXing, 150);
+                            }
+                            setTimeout(tickZXing, 1000);
+                        } catch (err) {
+                            closeCamera();
+                            showToast("Erreur scanner : " + (err && err.message ? err.message : String(err)), "red");
+                        }
+                    }
+                }
+
+                function closeCamera() {
+                    scanResolved = true;
+                    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+                    video.srcObject = null;
+                    overlay.classList.remove("active");
+                }
+
+                // ── Saisie manuelle ────────────────────────────────────────
+                btnManual.onclick = () => {
+                    const val = manualInput.value.trim();
+                    if (val) { manualInput.value = ""; processBarcode(val); }
+                };
+                manualInput.onkeydown = (e) => {
+                    if (e.key === "Enter") { btnManual.click(); e.preventDefault(); }
+                };
+
+                // ── Douchette USB/Bluetooth (saisie rapide) ───────────────
+                let barcodeBuffer = "";
+                let barcodeTimer;
+                document.addEventListener("keypress", (e) => {
+                    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+                    clearTimeout(barcodeTimer);
+                    barcodeBuffer += e.key;
+                    barcodeTimer = setTimeout(() => {
+                        if (barcodeBuffer.length >= 4) processBarcode(barcodeBuffer);
+                        barcodeBuffer = "";
+                    }, 80);
+                });
+
+                // ── Lancement ─────────────────────────────────────────────
+                initSessions();
+            ]]></script>
+        </t>
+    </template>
+</odoo>

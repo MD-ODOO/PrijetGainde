@@ -1,0 +1,202 @@
+<div class="container">
+    <!-- Title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="oe_slogan">
+                <h2 class="oe_slogan">Employee Loan Management</h2>
+                <h3 class="oe_slogan">Flexible and Effortless Employee Loans</h3>
+                <div>
+                    Experience hassle-free employee loan management with our Odoo module. <br/>
+                    Empower your workforce to request loans, streamline approvals, and calculate repayments effortlessly.<br/>
+                    Stay in control with configurable parameters and automated workflows, ensuring financial wellness for your employees.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Upon installing this module, the administrator gains the ability
+                to configure maximum loan amounts and maximum loan terms in months
+                for employee loans.
+            </p>
+            <p>
+                <img class="oe_screenshot" src="res_config_settings_form.png" alt="Loan Management Settings" width="100%"/>
+            </p>
+            <p>
+                Access to this module is categorized into three levels:
+            </p>
+            <ul>
+                <li><b>Employee</b>: Grants the ability to request loans.</li>
+                <li><b>Officer</b>: Allows validation and approval of loan requests.</li>
+                <li><b>Administrator</b>: Provides full control and configuration privileges.</li>
+            </ul>
+
+            <p>
+                To request a loan, an employee must input the principal amount,
+                the desired loan term in months, and the planned date of the first payment.
+                Before submitting request employee should compute monthly installments.
+            </p>
+            <p>
+                <img class="oe_screenshot" src="loan_request_form_1.png" alt="Loan Request by Employee" width="100%"/>
+            </p>
+            <p>
+                The system computes the monthly installments after clicking the "Compute Installments" button.
+            </p>
+            <p>
+                <img class="oe_screenshot" src="loan_request_form_2.png" alt="Loan Request Installments" width="100%"/>
+            </p>
+            <p>
+                Loan module officers have the authority to approve or reject loan requests.
+                Before approval, officers can update the initial request data.
+                If any changes are made, the initiating employee is required to accept the modifications.
+                By default, the "Interest-Free" mode is applied,
+                but officers can change it to "Flat Interest" and set the interest rate.
+                Any alterations affecting the monthly installment trigger a recalculation.
+            </p>
+            <p>
+                <img class="oe_screenshot" src="loan_request_form_3_interest.png" alt="Loan Interest Mode" width="100%"/>
+            </p>
+            <p>
+                Furthermore, loan module officers can initiate loan requests on behalf of other employees.
+                In such cases, the respective employee must accept the request after it has been approved.
+            </p>
+
+            <p>
+                There are three available workflows:
+            </p>
+            <ol>
+                <li>
+                    Employee initiates a loan request =>
+                    Module officer approves =>
+                    Loan proceeds to the Disbursing stage =>
+                    Officer marks installments as paid =>
+                    Disbursed.
+                </li>
+                <li>
+                    Employee initiates a loan request =>
+                    Module officer makes changes and approves =>
+                    Employee accepts changes =>
+                    Loan proceeds to the Disbursing stage =>
+                    Officer marks installments as paid =>
+                    Disbursed.
+                </li>
+                <li>
+                    Module officer initiates a loan request on behalf of another employee =>
+                    Module officer approves =>
+                    Employee accepts changes =>
+                    Loan proceeds to the Disbursing stage =>
+                    Officer marks installments as paid =>
+                    Disbursed.
+                </li>
+            </ol>
+            <p>
+                Each stage includes a "Reject" button,
+                enabling officers reject a request or employees to reject a request
+                if they disagree with the changes made by officers.
+            </p>
+            <h3>Dynamic Approval Workflows for Employee Loans</h3>
+            <p>
+                For more extensive approval workflows with unlimited stages and
+                various conditions, consider our
+                <a href="https://apps.odoo.com/apps/modules/18.0/xf_approval_route_loan/">
+                    Dynamic Approval Workflows for Employee Loans
+                </a>
+                module.
+            </p>
+            <p>
+                The Loan Management module provides essential functionality for
+                requesting and approving employee loans, allowing manual marking
+                of installments as paid or unpaid without affecting accounting entries.
+            </p>
+            <h3>XF Payroll Integration</h3>
+            <p>
+                Our Loan Management Module can be seamlessly integrated with the
+                <a href="https://apps.odoo.com/apps/modules/18.0/xf_payroll_loan/">
+                    Payroll Deductions Module
+                </a>,
+                ensuring that approved loans are automatically deducted from employees' salaries,
+                simplifying payroll processes and ensuring accurate loan repayment tracking.
+            </p>
+            <h3>Accounting Integration</h3>
+            <p>
+                If you require automated accounting entries for loans and
+                their installments, please refer to our
+                <a href="https://apps.odoo.com/apps/modules/18.0/xf_loan_account/">
+                    Employee Loan Management (Accounting)
+                </a>
+                and
+                <a href="https://apps.odoo.com/apps/modules/18.0/xf_payroll_loan_account/">
+                    Payroll Loan Deductions (Accounting)
+                </a>
+                modules.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h3>Associated Submodules</h3>
+            <table class="table text-center">
+                <tr>
+                    <td>
+                        <h4>Dynamic Approval Workflows<br/> for Employee Loans</h4>
+                        <a href="https://apps.odoo.com/apps/modules/18.0/xf_approval_route_loan/">
+                            <img src="submodules/dynamic_approval_workflows_loan.png"
+                                 alt="Dynamic Approval Workflows for Loans"
+                                 width="80%"/>
+                        </a>
+                    </td>
+                    <td>
+                        <h4>Accounting Integration<br/> for Employee Loan Management</h4>
+                        <a href="https://apps.odoo.com/apps/modules/18.0/xf_loan_account/">
+                            <img src="submodules/xf_loan_account.png"
+                                 alt="Accounting Integration for Employee Loans"
+                                 width="80%"/>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>Payroll Integration<br/> for Employee Loans</h4>
+                        <a href="https://apps.odoo.com/apps/modules/18.0/xf_payroll_loan/">
+                            <img src="submodules/xf_payroll_loan.png"
+                                 alt="Payroll Integration for Employee Loans"
+                                 width="80%"/>
+                        </a>
+                    </td>
+                    <td>
+                        <h4>Payroll &amp; Accounting<br/> Integration for Employee Loans</h4>
+                        <a href="https://apps.odoo.com/apps/modules/18.0/xf_payroll_loan_account/">
+                            <img src="submodules/xf_payroll_loan_account.png"
+                                 alt="Payroll and Accounting Integration for Employee Loans"
+                                 width="80%"/>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="row">
+        <div class="col-12 oe_spaced">
+            <div class="text-center">
+                <img src="https://erp.xfanis.dev/web/logo/xf_loan/18" alt="Logo" width="200">
+            </div>
+            <div class="oe_slogan text-center">
+                <div>Need a demo, discount or any other help?</div>
+                <div>
+                    Reach me on <b><span style="color: #24A1DE">T</span>ele<span style="color: #24A1DE">g</span>ram</b>:
+                    <a href="https://t.me/xfanis">https://t.me/xfanis</a>
+                </div>
+                <br/>
+                <div>Contact me for Support, Customization, Implementation:</div>
+                <div><b>Email</b>: <a href="mailto:xfanis.dev@gmail.com">xfanis.dev@gmail.com</a></div>
+                <br/>
+                <div>Stay in touch and updated:</div>
+                <div><b>Twitter</b>: <a href="https://twitter.com/XFanis_Dev">https://twitter.com/XFanis_Dev</a></div>
+            </div>
+        </div>
+    </div>
+</div>

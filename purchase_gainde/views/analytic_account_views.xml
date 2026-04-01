@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Budget Center List View -->
+    <record id="view_budget_center_list" model="ir.ui.view">
+        <field name="name">budget.center.list</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <list string="Budget Centers" create="1">
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Budget Center Form View -->
+    <record id="view_budget_center_form" model="ir.ui.view">
+        <field name="name">budget.center.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <form string="Budget Center">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" 
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" 
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Budget Center Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g., IT Department"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company" 
+                                   options="{'no_create': True}"/>
+                            <field name="is_budgetary_center" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="plan_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Budget Position List View -->
+    <record id="view_budget_position_list" model="ir.ui.view">
+        <field name="name">budget.position.list</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <list string="Budget Positions" create="1">
+                <field name="name"/>
+                <field name="code" optional="show"/>
+                <field name="bp_user_profile" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Budget Position Form View -->
+    <record id="view_budget_position_form" model="ir.ui.view">
+        <field name="name">budget.position.form</field>
+        <field name="model">account.analytic.account</field>
+        <field name="arch" type="xml">
+            <form string="Budget Position">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" 
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" 
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" string="Budget Position Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g., Office Supplies"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company" 
+                                   options="{'no_create': True}"/>
+                            <field name="is_budgetary_poste" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="bp_user_profile" string="RCB attitré" invisible="is_budgetary_poste == False" />
+                            <field name="plan_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inherit Analytic Account form to lock plan_id for budget centers/positions -->
+    <record id="view_account_analytic_account_form_inherit_gainde" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.inherit.gainde</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+        <field name="arch" type="xml">
+            <!-- Rendre plan_id obligatoire et en lecture seule -->
+            <xpath expr="//field[@name='plan_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <!-- Afficher uniquement le profil poste budgétaire dans le formulaire générique.
+                 Le profil centre budgétaire est géré automatiquement côté modèle
+                 (création RCB_&lt;nom&gt; dans _gainde_ensure_rcb_profile_for_center). -->
+            <xpath expr="//field[@name='plan_id']" position="after">
+                <group string="Budget">
+                    <!-- Profil centre budgétaire, visible seulement si le compte est marqué centre -->
+       <field name="bc_user_profile" readonly="1" string="Profil centre budgétaire" invisible="is_budgetary_center == False"/>
+
+                    <!-- Profil poste budgétaire, visible seulement si le compte est marqué poste -->
+                    <field name="bp_user_profile" string="Profil poste budgétaire" invisible="is_budgetary_poste == False"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit budget analytic form: "Open" → "Valider" and revise via wizard -->
+    <record id="view_budget_analytic_form_inherit_gainde" model="ir.ui.view">
+        <field name="name">budget.analytic.form.inherit.gainde</field>
+        <field name="model">budget.analytic</field>
+        <field name="inherit_id" ref="account_budget.view_budget_analytic_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter le département sur le formulaire de budget -->
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="department_id" string="Direction"/>
+            </xpath>
+
+            <!-- Remplacer le bouton Open par Valider (même logique de visibilité) -->
+            <xpath expr="//header/button[@name='action_budget_confirm']" position="replace">
+                <button string="Valider" name="action_budget_confirm" invisible="state != 'draft'" type="object" class="btn-primary"/>
+            </xpath>
+
+            <!-- Remplacer le bouton Revise pour passer par notre wizard -->
+            <xpath expr="//header/button[@name='create_revised_budget']" position="replace">
+                <button string="Reviser" name="purchase_gainde.action_budget_revise_confirm_wizard" invisible="state != 'confirmed'" type="action" class="btn-secondary"/>
+            </xpath>
+
+            <!-- Personnalisation des colonnes de montants dans la liste des lignes de budget -->
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='budget_amount']" position="replace">
+                <!-- Budget d'origine (pas de parent_id) : budget_amount = montant budgété -->
+                <field name="budget_amount" string="Budgeté" column_invisible="parent.parent_id"/>
+
+                <!-- Budget révisé (parent_id défini) : revised_budget = montant validé d'origine, budget_amount = montant révisé -->
+                <field name="revised_budget" string="Validé" column_invisible="not parent.parent_id"/>
+                <field name="budget_amount" string="Révisé" column_invisible="not parent.parent_id"/>
+            </xpath>
+
+            <!-- Ajout de la colonne Code analytique avant la colonne du centre budgétaire -->
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='account_id']" position="before">
+                <field name="analytic_code" optional="show"/>
+            </xpath>
+
+            <!-- Dates par ligne de budget (Date From / Date To) -->
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='account_id']" position="after">
+                <field name="date_from" optional="show"/>
+                <field name="date_to" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

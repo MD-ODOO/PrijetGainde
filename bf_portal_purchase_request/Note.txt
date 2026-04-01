@@ -1,0 +1,21 @@
+Pendientes:
+ - Realizar diversas validaciones (OK)
+ - Traducción (OK)
+ - Agregar el estado (OK)
+ - Eliminar linea (OK)
+ - Agregar widget de fecha (OK)
+ - Falta crear el formulario para crear los requerimientos (OK)
+ - Cargar los requerimientos de un mismo usuario (OK)
+ - Agregar boton para cambiar de estado (OK)
+ - Falta agregar el mesaje de confirmación al eliminar (OK)
+ - Falta la traducción en campo de estado del formulario de crear nuevo req. (OK)
+ - Creado en y Registrado por - poner en una misma linea (OK)
+ - Las lineas se debe de actualizar no eliminar y agregar (OK)
+ - Lineas requeridas (OK)
+ - En nuevos requerimientos creados el access_token no se actualiza, si no hasta que ingresas a otro registro
+ - No hay forma de traducir los mesajes de confirmación de los btn Eliminar y Solicitar aprobación (Hay que probar con otra BD)
+ - Instalar y probar el modulo en una bd base
+
+El modulo: website_event_track ayuda a crear un widget tipo many2many en el website puede servir para futuros desarrollos
+website_event_track/controllers/event_track.py (website_event_track_fetch_tags)
+website_event_track/static/src/js/website_event_track_proposal_form_tags.js

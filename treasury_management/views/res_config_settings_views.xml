@@ -1,0 +1,98 @@
+<odoo>
+  <record id="res_config_settings_view_form_inherit_treasury" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.treasury</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//form" position="inside">
+        <app string="Trésorerie" name="treasury_management">
+          <div id="treasury_settings">
+            <h2>Trésorerie</h2>
+            <div class="row mt16 o_settings_container">
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="treasury_alert_threshold"/>
+                  <div class="text-muted">Seuil d'alerte basé sur le solde prévisionnel.</div>
+                  <field name="treasury_alert_threshold"/>
+                </div>
+              </div>
+               <div class="col-12 col-lg-6 o_setting_box">
+                 <div class="o_setting_left_pane"/>
+                 <div class="o_setting_right_pane">
+                   <label for="treasury_cash_threshold"/>
+                   <div class="text-muted">Seuil à partir duquel le décaissement passe en caisse.</div>
+                   <field name="treasury_cash_threshold"/>
+                 </div>
+               </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="treasury_cash_journal_id"/>
+                  <div class="text-muted">Journal utilisé pour les paiements en espèces.</div>
+                  <field name="treasury_cash_journal_id"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="treasury_alert_days"/>
+                  <div class="text-muted">Horizon de calcul des alertes.</div>
+                  <field name="treasury_alert_days"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="treasury_approval_threshold"/>
+                  <div class="text-muted">Seuil au-delà duquel une validation manager est requise.</div>
+                  <field name="treasury_approval_threshold"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="payroll_code_net"/>
+                  <div class="text-muted">Codes Net à payer (séparés par des virgules).</div>
+                  <field name="payroll_code_net" placeholder="NET"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="payroll_code_ipress"/>
+                  <div class="text-muted">Codes cotisations IPRESS.</div>
+                  <field name="payroll_code_ipress" placeholder="IPRESS,IPRES"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="payroll_code_cfce"/>
+                  <div class="text-muted">Codes CFCE.</div>
+                  <field name="payroll_code_cfce" placeholder="CFCE"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="payroll_code_family_allowance"/>
+                  <div class="text-muted">Codes allocations familiales.</div>
+                  <field name="payroll_code_family_allowance" placeholder="AF,ALLOCFAM"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 o_setting_box">
+                <div class="o_setting_left_pane"/>
+                <div class="o_setting_right_pane">
+                  <label for="payroll_code_income_tax"/>
+                  <div class="text-muted">Codes impôt sur le revenu.</div>
+                  <field name="payroll_code_income_tax" placeholder="IR,IRPP,IRRF"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app>
+      </xpath>
+    </field>
+  </record>
+</odoo>

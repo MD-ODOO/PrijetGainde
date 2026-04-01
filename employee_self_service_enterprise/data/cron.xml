@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="cron_grouped_payslip_send" model="ir.cron">
+        <field name="name">Envoi groupé bulletins employés</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_send_grouped_payslips()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="active">True</field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Profile User Manager</title>
+    <meta name="description" content="Simplify user access management in Odoo without technical knowledge" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: linear-gradient(to bottom right, #f8fafc, #e0f2fe);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 8rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero .highlight {
+            color: #2563eb;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            flex-wrap: wrap;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            padding: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Description Section */
+        .description {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .description-content {
+            max-width: 768px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .description h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .description p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .highlight-box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-list {
+            list-style: none;
+            space: 0.5rem 0;
+        }
+
+        .highlight-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .check-icon {
+            color: #2563eb;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: #f9fafb;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.875rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-header {
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .feature-icon {
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .feature-description {
+            color: #6b7280;
+        }
+
+        /* How it Works Section */
+        .how-it-works {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .steps {
+            margin-top: 4rem;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .step:nth-child(even) .step-content {
+            order: 2;
+        }
+
+        .step:nth-child(even) .step-image {
+            order: 1;
+        }
+
+        @media (max-width: 768px) {
+            .step {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .step:nth-child(even) .step-content,
+            .step:nth-child(even) .step-image {
+                order: unset;
+            }
+        }
+
+        .step-badge {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-features {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .step-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            padding: 0.5rem 0;
+        }
+
+        .step-feature:not(:last-child) {
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 0.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .step-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .step-dot.green { background: #10b981; }
+        .step-dot.blue { background: #3b82f6; }
+        .step-dot.purple { background: #8b5cf6; }
+
+        .step-image {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #f3f4f6;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: #f9fafb;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .contact h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-image img {
+            max-width: 24rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Icons */
+        .icon {
+            width: 1rem;
+            height: 1rem;
+            display: inline-block;
+        }
+
+        .icon-lg {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .icon-check {
+            color: #10b981;
+        }
+
+        .icon-blue {
+            color: #2563eb;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 3rem 0 5rem;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <div class="badge">
+                        🚀 Specialized Odoo Module
+                    </div>
+                    <h1>
+                        Access Profile 
+                        <span class="highlight">User Manager</span>
+                    </h1>
+                    <p>
+                        Simplify user access management in Odoo without technical knowledge. 
+                        Control menus, buttons, fields and records with an intuitive interface.
+                    </p>
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <span class="icon icon-check">✓</span>
+                            Odoo enterprise 
+                        </div>
+                        <div class="hero-feature">
+                            <span class="icon icon-check">✓</span>
+                             Odoo Community 
+                        </div>
+                        <div class="hero-feature">
+                            <span class="icon icon-check">✓</span>
+                            Quick installation
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="card">
+                        <img src="1.png" 
+                             alt="Access Profile User Manager" />
+                    </div>
+                    <div class="hero-badge">
+                        🛡️
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="description">
+        <div class="container">
+            <div class="description-content">
+                <h2>A complete solution for user rights management</h2>
+                <p>
+                    Access User Manager is an Odoo application designed to streamline and simplify user access management. 
+                    It provides an intuitive interface allowing administrators to control various access rights without requiring 
+                    complex technical knowledge.
+                </p>
+                <div class="highlight-box">
+                    <h3>With this tool, you can:</h3>
+                    <ul class="highlight-list">
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <span>Hide specific menus, buttons and tabs</span>
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <span>Manage model access rights (create, edit, delete, view, actions, archive/unarchive, duplicate and export)</span>
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <span>Define field access rights (make fields invisible, required or read-only)</span>
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <span>Configure domain-based access rights, allowing conditional restrictions</span>
+                        </li>
+                        <li>
+                            <span class="check-icon">✓</span>
+                            <span>Make any user read-only, hide discussion thread or disable developer mode</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Key Features</h2>
+                <p>Discover how Access Profile User Manager transforms user rights management in Odoo</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #2563eb; font-size: 2rem;">👥</span>
+                        </div>
+                        <h3 class="feature-title">User Profile Management</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Easily create and manage different user profiles with color coding for optimal organization.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #10b981; font-size: 2rem;">📋</span>
+                        </div>
+                        <h3 class="feature-title">Menu Control</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Hide any menu or submenu according to user profiles to simplify the interface.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #8b5cf6; font-size: 2rem;">🎛️</span>
+                        </div>
+                        <h3 class="feature-title">Button and Tab Management</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Control the visibility of specific buttons and tabs for each user profile.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #f59e0b; font-size: 2rem;">🔍</span>
+                        </div>
+                        <h3 class="feature-title">Filters and Groupings</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Manage access to filters and grouping options by user profile.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #eab308; font-size: 2rem;">📄</span>
+                        </div>
+                        <h3 class="feature-title">Field Rights</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Define field access rights (invisible, required, read-only).
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <span style="color: #ef4444; font-size: 2rem;">🗄️</span>
+                        </div>
+                        <h3 class="feature-title">Domain-based Access</h3>
+                    </div>
+                    <div class="feature-content">
+                        <p class="feature-description">
+                            Configure conditional restrictions based on custom criteria.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How it works</h2>
+                <p>A simple process for effective rights management</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 1</div>
+                        <h3 class="step-title">Access Settings</h3>
+                        <p class="step-description">Start by going to settings to create and manage your user profiles</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="ima_profile_tree.png" alt="Access Settings" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 2</div>
+                        <h3 class="step-title">Create Your Profiles</h3>
+                        <p class="step-description">Define different access profiles with color codes for better organization</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="image_profile_form.png" alt="Create Your Profiles" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 3</div>
+                        <h3 class="step-title">Configure Rules</h3>
+                        <p class="step-description">Create precise access rules for each user profile</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="acces_manager.png" alt="Configure Rules" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 4</div>
+                        <h3 class="step-title">Manage Access Rights</h3>
+                        <p class="step-description">Define permissions for models, fields and features</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="any_menu.png" alt="Manage Access Rights" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 5</div>
+                        <h3 class="step-title">Control Buttons</h3>
+                        <p class="step-description">Hide or display specific buttons according to profiles</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="any_buton_tab.png" alt="Control Buttons" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 6</div>
+                        <h3 class="step-title">Manage Fields</h3>
+                        <p class="step-description">Control field access (visible, required, read-only)</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="any_fields.png" alt="Manage Fields" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 7</div>
+                        <h3 class="step-title">Filters and Groupings</h3>
+                        <p class="step-description">Configure access to filters and grouping options</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="any_filter_group.png" alt="Filters and Groupings" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 8</div>
+                        <h3 class="step-title">Hide Menus</h3>
+                        <p class="step-description">Control menu visibility according to user profiles</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="acces_manager.png" alt="Hide Menus" />
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <div class="step-badge">Step 9</div>
+                        <h3 class="step-title">Domain-based Access</h3>
+                        <p class="step-description">Configure restrictions based on custom domains</p>
+                        <div class="step-features">
+                            <div class="step-feature">
+                                <div class="step-dot green"></div>
+                                <div>Easy to configure</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot blue"></div>
+                                <div>Intuitive interface</div>
+                            </div>
+                            <div class="step-feature">
+                                <div class="step-dot purple"></div>
+                                <div>Immediate results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-image">
+                        <img src="acces_manager.png" alt="Domain-based Access" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div>
+                    <h2>Contact / Support</h2>
+                    <p>
+                        Need help with configuration or would you like this module to have more features? Contact us.
+                    </p>
+                    
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                ✉️
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <a href="mailto:medconsultantweb@gmail.com">medconsultantweb@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-image">
+                    <img src="module_image.png" 
+                         alt="Support Access Profile User Manager" />
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

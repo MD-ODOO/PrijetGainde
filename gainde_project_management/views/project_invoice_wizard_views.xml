@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_invoice_wizard_form" model="ir.ui.view">
+        <field name="name">project.invoice.wizard.form</field>
+        <field name="model">project.invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Facturer les Jalons du Projet">
+                <group>
+                    <field name="project_id" readonly="1"/>
+                    <field name="sale_order_id" readonly="1"/>
+                    <field name="billing_method" readonly="1"/>
+                    <field name="invoice_date"/>
+                    <field name="journal_id"/>
+                </group>
+
+                 <notebook>
+                    <page string="Jalons" invisible="billing_method != 'milestone'">
+                        <field name="milestone_ids" nolabel="True">
+                            <list editable="bottom">
+                                <field name="name"/>
+                                <field name="deadline"/>
+                                <field name="percentage" string="% du total"/>
+                                <field name="is_reached"/>
+                                <field name="invoiced"/>
+                            </list>
+                        </field>
+                    </page>
+
+                    <page string="Prix fixe" invisible="billing_method != 'fixed'">
+                        <group>
+                            <field name="fixed_amount"/>
+                            <field name="amount_total" readonly="1"/>
+                        </group>
+                    </page>
+                </notebook>
+
+                <group>
+                    <field name="amount_total" readonly="1"/>
+                </group>
+
+                <footer>
+                    <button name="action_create_invoice" type="object" string="Créer la facture" class="btn-primary"/>
+                    <button special="cancel" string="Annuler"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_project_invoice_wizard" model="ir.actions.act_window">
+        <field name="name">Facturer projet (jalons / fixe)</field>
+        <field name="res_model">project.invoice.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

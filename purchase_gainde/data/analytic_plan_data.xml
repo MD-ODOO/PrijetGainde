@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Plan analytique pour les centres budgétaires -->
+        <record id="analytic_plan_budget_centers" model="account.analytic.plan">
+            <field name="name">Centres budgétaires</field>
+        </record>
+
+        <!-- Plan analytique pour les postes budgétaires -->
+        <record id="analytic_plan_budget_positions" model="account.analytic.plan">
+            <field name="name">Postes budgétaires</field>
+        </record>
+
+    </data>
+</odoo>

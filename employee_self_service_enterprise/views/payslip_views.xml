@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================= -->
+        <!-- Bouton ENVOI SIMPLE (fiche)  -->
+        <!-- ============================= -->
+        <record id="view_hr_payslip_form_send_mail" model="ir.ui.view">
+            <field name="name">hr.payslip.form.send.mail</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_payslip_send"
+                            type="object"
+                            string="Envoyer par mail"
+                            class="btn-primary"
+                            invisible="state != 'done'"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ================================= -->
+        <!-- Action serveur : TEST ENVOI GROUPÉ -->
+        <!-- ================================= -->
+        <record id="action_test_grouped_payslip_send"
+                model="ir.actions.server">
+            <field name="name"> Emvoyés Par Mail</field>
+            <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_test_send_grouped_payslips()
+            </field>
+            <field name="binding_model_id"
+                   ref="hr_payroll.model_hr_payslip"/>
+            <field name="binding_type">action</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,474 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bf_portal_purchase_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-10 22:57+0000\n"
+"PO-Revision-Date: 2024-10-10 22:57+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "<em class=\"font-weight-normal text-muted\">Requested by #</em>"
+msgstr "<em class=\"font-weight-normal text-muted\">Solicitado por #</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "<em>New</em>"
+msgstr "<em>Nuevo</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "<em>Purchase requests draft</em>"
+msgstr "<em>Borrador de solicitudes de compra</em>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-file-text-o\"/> Request approval"
+msgstr "<i class=\"fa fa-file-text-o\"/> Solicitar aprobación"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-fw fa-floppy-o\"/> Save"
+msgstr "<i class=\"fa fa-fw fa-floppy-o\"/> Guardar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-fw fa-times\"/> Discard"
+msgstr "<i class=\"fa fa-fw fa-times\"/> Descartar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "<i class=\"fa fa-plus fa-1g float-sm-none float-md-start\" title=\"Edit\"/>"
+msgstr "<i class=\"fa fa-plus fa-1g float-sm-none float-md-start\" title=\"Editar\"/>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-trash fa-1x\" role=\"img\" aria-label=\"Open\"/>"
+msgstr "<i class=\"fa fa-trash fa-1x\" role=\"img\" aria-label=\"Abrir\"/>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<i class=\"fa fa-trash\"/> Delete"
+msgstr "<i class=\"fa fa-trash\"/> Eliminar solicitud"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<small class=\"text-end\">Stage:</small>"
+msgstr "<small class=\"text-end\">Estado:</small>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid ""
+"<small class=\"text-end\">Stage:</small>\n"
+"                                            <span class=\"badge rounded-pill text-bg-info\" title=\"Current status of the requirement\">Draft</span>"
+msgstr ""
+"<small class=\"text-end\">Estado:</small>\n"
+"                                            <span class=\"badge rounded-pill text-bg-info\" title=\"Estado actual del requisito.\">Borrador</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "<small>#</small>"
+msgstr ""
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid "<span class=\"h3\">New</span>"
+msgstr "<span class=\"h3\">Nuevo</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid ""
+"<span>Your purchase request has been creada con exito. Thank you for your "
+"collaboration.</span>"
+msgstr ""
+"<span>Su solicitud de compra ha sido creada con exito. Gracias por tu "
+"colaboración.</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid ""
+"<span>Your purchase request has been sent for approval. Thank you for your "
+"collaboration.</span>"
+msgstr ""
+"<span>Su solicitud de compra ha sido enviada para su aprobación. Gracias por"
+" tu colaboración.</span>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_new_purchase_request_page
+msgid "<strong class=\"col-lg-2\">Requested by:</strong>"
+msgstr "<strong class=\"col-lg-2\">Solicitado por:</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<strong class=\"col-lg-3\">Create on:</strong>"
+msgstr "<strong class=\"col-lg-3\">Creado:</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<strong class=\"col-lg-3\">Requested by:</strong>"
+msgstr "<strong class=\"col-lg-3\">Solicitado por:</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<strong>Description *</strong>"
+msgstr "<strong>Nombre del producto</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<strong>Product *</strong>"
+msgstr "<strong>Producto *</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<strong>Quantity *</strong>"
+msgstr "<strong>Cantidad</strong>"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_warning
+msgid "Access warning"
+msgstr "Advertencia de acceso"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, python-format
+msgid "Are you sure you want to approve the request?"
+msgstr "¿Enviar solicitud?"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, python-format
+msgid "Are you sure you want to delete the request?"
+msgstr "¿Está seguro de que desea eliminar la solicitud?"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Añadir linea"
+msgstr "Añadir línea"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Communication history"
+msgstr "Historial de comunicación"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Creation date"
+msgstr "Fecha de creación"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Current status of the requirement"
+msgstr "Estado actual del requisito."
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,help:bf_portal_purchase_request.field_purchase_request__access_url
+msgid "Customer Portal URL"
+msgstr "URL del portal del cliente"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#, python-format
+msgid "Delete"
+msgstr "Borrar"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, python-format
+msgid "Delete request."
+msgstr "Eliminar solicitud."
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+#, python-format
+msgid "Description"
+msgstr "Glosa"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#, python-format
+msgid "Product description"
+msgstr "Descripción del producto"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Edit"
+msgstr "Editar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_purchase_requests
+msgid "List and create your purchase request"
+msgstr "Lista y crea tu solicitud de compra"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Name"
+msgstr "Nombre"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Newest"
+msgstr "El más nuevo"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "None"
+msgstr "Nínguno"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#, python-format
+msgid "Open"
+msgstr "Abierto"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_url
+msgid "Portal Access URL"
+msgstr "URL de acceso al portal"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#, python-format
+msgid "Product"
+msgstr "Producto"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model,name:bf_portal_purchase_request.model_purchase_request
+msgid "Purchase Request"
+msgstr "Solicitud de compra"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_purchase_requests
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Purchase Requests"
+msgstr "Solicitudes de compra"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_home_menu_purchase_requests
+msgid "Purchase requests"
+msgstr "Solicitudes de compra"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/xml/purchase_request.xml:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#, python-format
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Request Reference"
+msgstr "Referencia de solicitud"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, python-format
+msgid "Request approve."
+msgstr "Solicitud de aprobación."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "Request reference"
+msgstr "Ref. solicitud"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+#, python-format
+msgid "Requested by"
+msgstr "Solicitado por"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Search in all"
+msgstr "Buscar en todos"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Search in creation date"
+msgstr "Buscar fecha de creación"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Search in description"
+msgstr "Buscar glosa"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Search in name"
+msgstr "Buscar ref. solicitud"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Search in requested by"
+msgstr "Buscar solicitado por"
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request__access_token
+msgid "Security Token"
+msgstr "Token de seguridad"
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Some required fields are empty."
+msgstr "Algunos campos obligatorios están vacíos."
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "Source Document"
+msgstr "Documento de origen / Referencia"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "State"
+msgstr "Estado"
+
+#. module: bf_portal_purchase_request
+#. odoo-javascript
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#: code:addons/bf_portal_purchase_request/static/src/js/portal.js:0
+#, python-format
+msgid "Yes"
+msgstr "Si"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_my_purchase_requests
+msgid "You do not have any purchase requests."
+msgstr "No tienes ninguna solicitud de compra."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Your purchase request has been created from the portal."
+msgstr "Su solicitud de compra ha sido creada desde el portal."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Your purchase request has been edited from the portal."
+msgstr "Su solicitud de compra ha sido editada desde el portal."
+
+#. module: bf_portal_purchase_request
+#. odoo-python
+#: code:addons/bf_portal_purchase_request/controllers/portal.py:0
+#, python-format
+msgid "Your purchase request has been sent from the portal for approval."
+msgstr "Su solicitud de compra ha sido enviada desde el portal para su aprobación."
+
+#. module: bf_portal_purchase_request
+#: model:ir.model.fields,field_description:bf_portal_purchase_request.field_purchase_request_line__portal_product_description
+msgid "Portal product description"
+msgstr "Descripción"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+msgid "<strong>Product description *</strong>"
+msgstr "<strong>Descripción</strong>"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Approver"
+msgstr "Aprobador"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Type operation"
+msgstr "Tipo solicitud"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_new_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_fields
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.portal_form_pr_readonly_fields
+msgid "Company"
+msgstr "Compañia"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i class=\"fa fa-download\"/> Descargar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "Download"
+msgstr "Descargar"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "View Details"
+msgstr "Ver detalles"
+
+#. module: bf_portal_purchase_request
+#: model_terms:ir.ui.view,arch_db:bf_portal_purchase_request.bf_portal_purchase_request_page
+msgid "<i class=\"fa fa-print\"/> View Details"
+msgstr "<i class=\"fa fa-print\"/> Ver detalles"

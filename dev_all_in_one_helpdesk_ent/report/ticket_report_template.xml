@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ticket_template_main">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <style>
+                    .aging_table{
+					    width:100%;
+				    }
+				    .aging_table td{
+					    padding:5px;
+				    }
+				    .aging_table tr{
+					    page-break-inside: avoid;
+				    }
+				</style>
+                    <h3>
+                    <center>
+                        <span t-esc="o.ticket_sequnce"/><br/>
+                    </center>
+                   </h3>
+                <br/><br/>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="ticket_table col-12" style="width:100%;">
+		                    <tr>
+		                        <td style="width:12%"><b>Customer</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:30%">
+		                            <span t-esc="o.partner_id and o.partner_id.name or ''"/>
+		                        
+		                        </td>
+		                        <td style="10%"> </td>
+		                        <td style="width:12%"><b>Email</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:20%">
+		                            <span t-esc="o.partner_id and o.partner_id.name or ''"/>
+		                        
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <td style="width:12%"><b>Phone</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:30%">
+		                            <span t-esc="o.partner_phone"/>
+		                        </td>
+		                        <td style="10%"> </td>
+		                        <td style="width:12%"></td>
+		                        <td style="width:3%"></td>
+		                        <td style="width:20%"> </td>
+		                    </tr>
+		                    <tr>
+		                        <td colspan="7"><p></p></td>
+		                    </tr>
+		                    <tr>
+		                        <td style="width:12%"><b>Team</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:30%">
+		                            <span t-esc="o.team_id and o.team_id.name or ''"/>
+		                        </td>
+		                        <td style="10%"> </td>
+		                        <td style="width:12%"><b>Team Head</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:20%"> 
+		                            <span t-esc="o.user_id and o.user_id.name or ''"/>
+		                        </td>
+		                    </tr>
+<!--		                    <tr>-->
+<!--		                        <td style="width:12%"><b>Assigned User</b></td>-->
+<!--		                        <td style="width:3%">:</td>-->
+<!--		                        <td style="width:30%">-->
+<!--		                            <span t-esc="o.assing_user_id and o.assing_user_id.name or ''"/>-->
+<!--		                        </td>-->
+<!--		                        <td style="10%"> </td>-->
+<!--		                        <td style="width:12%"><b>Subject</b></td>-->
+<!--		                        <td style="width:3%">:</td>-->
+<!--		                        <td style="width:20%"> -->
+<!--		                            <span t-esc="o.subject_id and o.subject_id.name or ''"/>-->
+<!--		                        </td>-->
+<!--		                    </tr>-->
+		                    <tr>
+		                        <td colspan="7"><p></p></td>
+		                    </tr>
+
+		                    <tr>
+		                        <td style="width:12%"><b>Priority</b></td>
+		                        <td style="width:3%">:</td>
+		                        <td style="width:30%">
+<!--		                            <span t-esc="o.priority" t-field-options='{"widget": "priority"}' />-->
+									<t t-set="priority_labels" t-value="{'0': 'Low', '1': 'Medium', '2': 'High', '3': 'Very High'}"/>
+									<span t-esc="priority_labels[o.priority]" />
+		                        </td>
+		                        <td style="10%"> </td>
+		                        <td style="width:12%" invisible="1"><b>Source</b></td>
+		                        <td style="width:3%" invisible="1">:</td>
+		                        <td style="width:20%" invisible="1"> 
+		                            <span t-esc="o.source_id and o.source_id.name or ''"/>
+		                        </td>
+		                    </tr>
+		                    
+		                    
+		                </table>
+                    </div>
+                </div>
+                <br/><br/>
+                <div class="row">
+                    <div class="col-12">
+                        <h5>Description</h5>
+                        <span t-field="o.description"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_ticket_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="dev_all_in_one_helpdesk_ent.ticket_template_main"/>
+            </t>
+        </t>
+    </template>
+</odoo>
+

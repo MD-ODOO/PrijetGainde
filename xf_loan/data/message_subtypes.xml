@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_loan_request_approving" model="mail.message.subtype">
+            <field name="name">Loan Request Approving</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was applied and waiting for approval</field>
+        </record>
+        <record id="mt_loan_request_approved" model="mail.message.subtype">
+            <field name="name">Loan Request Approved</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was approved</field>
+        </record>
+        <record id="mt_loan_request_rejected" model="mail.message.subtype">
+            <field name="name">Loan Request Rejected</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was rejected</field>
+        </record>
+        <record id="mt_loan_request_accepting" model="mail.message.subtype">
+            <field name="name">Loan Request Accepting</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was approved and waiting for accepting</field>
+        </record>
+        <record id="mt_loan_request_rejected_by_employee" model="mail.message.subtype">
+            <field name="name">Loan Request Rejected by Employee</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was rejected by employee</field>
+        </record>
+        <record id="mt_loan_request_accepted" model="mail.message.subtype">
+            <field name="name">Loan Request Accepted</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan Request was accepted</field>
+        </record>
+        <record id="mt_loan_request_disbursed" model="mail.message.subtype">
+            <field name="name">Loan Request Disbursed</field>
+            <field name="res_model">hr.employee.loan.request</field>
+            <field name="default" eval="True"/>
+            <field name="description">Loan was disbursed</field>
+        </record>
+
+        <record id="input_type_loan" model="hr.payslip.input.type">
+        <field name="name">Prêt Employé</field>
+        <field name="code">PRTEMP</field>
+        </record> 
+
+
+    </data>
+</odoo>

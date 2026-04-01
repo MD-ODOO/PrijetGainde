@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue formulaire du wizard -->
+        <record id="view_maintenance_request_wizard_form" model="ir.ui.view">
+            <field name="name">maintenance.request.wizard.form</field>
+            <field name="model">maintenance.request.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Créer une demande de maintenance">
+                    <sheet>
+                        <group>
+                            <field name="asset_id" readonly="1"/>
+                            <field name="maintenance_type"/>
+                            <field name="schedule_date"/>
+                        </group>
+                        <group>
+                            <field name="description" placeholder="Décrivez le problème ou la maintenance nécessaire..."/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Confirmer" name="action_confirm" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+

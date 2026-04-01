@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+
+    <menuitem id="amn_parent_menu" web_icon="access_users_manager,static/description/icon.png"
+              name="Access Manager Ninja" sequence="1"
+              groups="base.group_system,access_users_manager.group_access_manager_ninja"/>
+
+
+    <menuitem
+            id="menu_global_tracking_first_form"
+            parent="access_users_manager.amn_parent_menu"
+            action="access_users_manager.action_global_tracking_first_form"
+            groups="base.group_system"
+    />
+    <menuitem id="menu_user_access_management" action="action_user_access_management" parent="access_users_manager.amn_parent_menu"
+              sequence="15" groups="access_users_manager.group_access_manager_ninja"/>
+    <menuitem
+            id="menu_action_res_users_profile_tree"
+            parent="access_users_manager.amn_parent_menu"
+            action="access_users_manager.action_res_user_profiles_tree"
+            groups="access_users_manager.group_access_manager_ninja"
+    />
+</odoo>

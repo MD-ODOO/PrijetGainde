@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ===================================================== -->
+        <!-- ACTION RAPPORT (ODOO 18 COMPLIANT)    --> 
+         
+        <!-- ===================================================== -->
+        <record id="paperformat_ipres_portrait" model="report.paperformat">
+    <field name="name">IPRES A4 Portrait</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">10</field>
+    <field name="margin_bottom">10</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">5</field>
+    <field name="dpi">90</field>
+</record>
+
+        <record id="action_report_payslip" model="ir.actions.report">
+            <field name="name">Bulletin GAINDE 2000</field>
+            <field name="model">hr.payslip</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">paie_gainde.report_payroll_cesag</field>
+            <field name="report_file">paie_gainde.report_payroll_cesag</field>
+             <field name="print_report_name">'Bulletin de Paie - %s' % (object.employee_id.name)</field>
+             <field name="paperformat_id" ref="paie_gainde.paperformat_ipres_portrait"/>
+            <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+            <field name="binding_type">report</field>
+        </record>
+        
+        
+       
+   <record id="action_server_print_bulletin_gainde" model="ir.actions.server">
+    <field name="name">Imprimer Bulletin Gaindé</field>
+    <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+    <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+    <field name="binding_type">action</field>
+    <field name="state">code</field>
+    <field name="code">
+        action = env.ref('paie_gainde.action_report_payslip').report_action(records)
+    </field>
+</record>
+        <record id="hr_payslip_inherit_bultin" model="ir.ui.view">
+  <field name="name">hr.payslip.bultint</field>
+  <field name="model">hr.payslip</field>
+  <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+  <field name="arch" type="xml">
+    <header position="inside">
+      <button name="%(action_report_payslip)d"
+              type="action"
+              string="Bulletin Gaindé"
+              class="btn-primary"/>
+    </header>
+  </field>
+</record>
+        
+          
+
+        <!-- ===================================================== -->
+        <!-- FORMAT DE PAPIER -->
+        <!-- ===================================================== -->
+      
+        <!-- ===================================================== -->
+        <!-- TEMPLATE QWEB PRINCIPAL -->
+    
+
+
+<template id="report_payroll_cesag">
+
+<t t-call="web.html_container">
+<t t-foreach="docs" t-as="o">
+<t t-call="web.basic_layout">
+
+<t t-set="mois_fr" t-value="{
+  '01': 'JANVIER',
+  '02': 'FÉVRIER',
+  '03': 'MARS',
+  '04': 'AVRIL',
+  '05': 'MAI',
+  '06': 'JUIN',
+  '07': 'JUILLET',
+  '08': 'AOÛT',
+  '09': 'SEPTEMBRE',
+  '10': 'OCTOBRE',
+  '11': 'NOVEMBRE',
+  '12': 'DÉCEMBRE'
+}"/>
+
+
+<style>
+.page {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  color: #000;
+  padding: 8px;
+}
+.blue-dark {
+  color: #1f3a5f;     /* bleu foncé sobre */
+  font-weight: bold;
+}
+
+/* ===== TABLEAUX ARRONDIS ===== */
+table {
+  width: 100%;
+  margin-bottom: 6px;
+
+  border-collapse: separate;   /* OBLIGATOIRE */
+  border-spacing: 0;
+
+  border: 1px solid #000;
+  border-radius: 8px;          /* ARRONDI */
+  overflow: hidden;            /* wkhtmltopdf */
+  font-weight: bold;
+}
+
+/* Cellules */
+th, td {
+  padding: 4px;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+/* Supprimer double bordure */
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== TABLES SANS BORDURE ===== */
+.no-border {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.no-border td {
+  border: none !important;
+}
+
+/* ===== ALIGNEMENTS ===== */
+.center { text-align: center; }
+.right { text-align: right; }
+.bold { font-weight: bold; }
+
+/* ===== TITRE ===== */
+.title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #1f3a5f;   /* bleu foncé */
+}
+
+/* ===== NET ===== */
+.net {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ===== SIGNATURE ===== */
+.signature-box {
+  height: 40px;
+  border: 1px dashed #000;
+  border-radius: 6px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  font-size: 9px;
+  text-align: center;
+  margin-top: 6px;
+}
+.upper {
+  text-transform: uppercase;
+}
+.shadow-light {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* ombre douce */
+}
+/* ===== TABLE IDENTITÉ : OMBRE INTERNE ===== */
+.inner-shadow {
+  border: none;                 /* pas de bordure externe */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* cellules */
+.inner-shadow td {
+  padding: 6px 4px;
+  border: none;                 /* pas de bordures */
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.18); /* ombre interne */
+}
+
+/* titres */
+.inner-shadow .bg {
+  font-weight: bold;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.22);
+}
+.table-title {
+  color: #1f3a5f;
+  font-weight: bold;
+}
+</style>
+
+
+
+<div class="page">
+
+<!-- ENTREPRISE -->
+<table class="no-border">
+<tr>
+<td>
+<img t-if="o.company_id.logo"
+ t-att-src="'data:image/png;base64,' + o.company_id.logo.decode('utf-8')"
+ style="height:60px;"/><br/>
+<span class="primary"><t t-esc="o.company_id.name"/></span><br/>
+<t t-esc="o.company_id.street"/><br/>
+<t t-esc="o.company_id.zip"/><br/>
+<t t-esc="o.company_id.phone"/>
+
+</td>
+
+</tr>
+</table>
+
+<div class="title">
+  BULLETIN DE PAIE DU
+  <t t-esc="o.date_from.strftime('%d')"/>
+  AU
+  <t t-esc="o.date_to.strftime('%d')"/>
+  <t t-esc="mois_fr[o.date_to.strftime('%m')]"/>
+  <t t-esc="o.date_to.strftime('%Y')"/>
+</div>
+
+
+<!-- EMPLOYÉ -->
+<div class="employee-box">
+<table>
+  <tr class="center bold">
+    <td>
+      Employé : <span class="upper"><t t-esc="o.employee_id.name"/></span>
+    </td>
+    <td>
+      Matricule : <t t-esc="o.employee_id.registration_number or '-'"/>
+    </td>
+  </tr>
+</table>
+</div>
+
+<!-- IDENTITÉ -->
+<table class="inner-shadow">
+  <tr class="bg center">
+    <td>Date naissance</td>
+    <td>Date embauche</td>
+    <td>Fonction</td>
+    <td>Catégorie</td>
+    <td>Convention Collective</td>
+  </tr>
+  <tr class="center">
+    <td><t t-esc="o.employee_id.birthday or '-'"/></td>
+    <td><t t-esc="o.contract_id.date_start or '-'"/></td>
+    <td><t t-esc="o.contract_id.job_id.name or '-'"/></td>
+    <td><t t-esc="o.contract_id.categ_id.name or '-'"/></td>
+    <td><t t-esc="o.contract_id.categ_id.conv_id.name or '__'"/></td>
+  </tr>
+  <tr class="bg center">
+    <td>Situation Matrimoniale</td>
+    <td>Nb parts</td>
+    <td>N° SS</td>
+    <td>N° IPRES</td>
+    <td>N° Carte d'identité</td>
+  </tr>
+  <tr class="center">
+    <td>
+      <t t-esc="o.employee_id.marital and dict(o.employee_id._fields['marital'].selection).get(o.employee_id.marital) or '-'"/>
+    </td>
+    <td><t t-esc="o.nb_part_of_payslip"/></td>
+    <td><t t-esc="o.employee_id.ssnid or '-'"/></td>
+    <td><t t-esc="o.employee_id.ipres_number or '-'"/></td>
+    <td><t t-esc="o.employee_id.identification_id or '-'"/></td>
+  </tr>
+</table>
+
+
+<!-- ===== BRUT ===== -->
+<!-- ===== TABLE UNIQUE DES RÈGLES ===== -->
+<table>
+                <tr class="bg center">
+                  <td>Rubriques de paie</td>
+                  <td>Base</td>
+                  <td>Taux</td>
+                  <td>Charges Pat.</td>
+                  <td>Gains</td>
+                  <td>Retenues</td>
+                </tr>
+
+                <!-- ===== SALAIRE DE BASE + SURSALAIRE (TOUJOURS EN HAUT) ===== -->
+                <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code =='BASIC' and line.code not in ['BASIC3'] and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount" t-options='{"widget":"integer"}'/></td>                  
+                  <td class="center"><span t-esc="o.line_ids.filtered(lambda line: line.code == 'RJT').total" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>
+                  </td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                  <td></td>
+                </tr>
+                
+                 <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.code =='BASIC3' and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount" t-options='{"widget":"integer"}'/></td>                  
+                  <td class="center"><span t-esc="o.line_ids.filtered(lambda line: line.code == 'CASH2').total" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/>
+                  </td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                  <td></td>
+                </tr>
+
+                <!-- ===== AUTRES GAINS (PRIMES / INDEMNITES) ===== -->
+                <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code =='BRUT' and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount" t-options='{"widget":"integer"}' /></td>
+                  <td class="center"></td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}'/></td>
+                  <td></td>
+                </tr>
+
+                <!-- ===== SALAIRE BRUT IMPOSABLE ===== -->
+                <tr class="blue-dark">
+                  <td> SALAIRE BRUT IMPOSABLE </td>
+                  <td colspan="3"></td>
+                  <td class="right">
+                    <t t-esc="sum(o.line_ids.filtered(lambda l: l.code == 'GROSS').mapped('total'))" t-options='{"widget":"integer"}'/>
+                  </td>
+                  <td></td>
+                </tr>
+
+                <!-- ===== CHARGES SALARIALES ===== -->
+                 <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.code == 'CSAL1' and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="sum(o.line_ids.filtered(lambda l: l.code == 'GROSS').mapped('total'))" t-options='{"widget":"integer"}'/></td>
+                  <td class="center"><t t-esc="o.nb_part_of_payslip"/></td>
+                  <td></td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                </tr>
+                
+                <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.code == 'CSAL2' and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="sum(o.line_ids.filtered(lambda l: l.code == 'GROSS').mapped('total'))" t-options='{"widget":"integer"}'/></td>
+                  <td class="center"><t t-esc="o.trimf"/></td>
+                  <td></td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                </tr>
+                
+                
+                <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code =='CSAL' and line.code not in ['CSAL1','CSAL2'] and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount or ''" t-options='{"widget":"integer"}'/></td>
+                  <td class="center"><t t-esc="l.rate or ''"/></td>
+                  <td></td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}'/></td>
+                </tr>
+                
+                <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code =='CPAT' and line.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount" t-options='{"widget":"integer"}' /></td>
+                  <td class="center"><t t-esc="('%.1f' % (l.rate or 0.0)) if l.rate else ''"/></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                
+                 <tr class="blue-dark">
+                  <td>  SALAIRE NET APRES IMPOT </td>
+                  <td colspan="3"></td>
+                  <t t-set="gross_total" 
+                     t-value="o.line_ids.filtered(lambda line: line.code == 'GROSS').total" t-options='{"widget":"integer"}'/>
+                  
+                  <t t-set="csal_total" 
+                     t-value="sum(o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code == 'CSAL' and line.total != 0).mapped('total'))" t-options='{"widget":"integer"}'/>
+                  
+                  <t t-set="difference" 
+                     t-value="gross_total - csal_total"/>
+                  
+                  <td class="right">
+                      <span t-esc="difference" t-options='{"widget": "integer"}'/>
+                  </td>
+                  <td></td>
+                </tr>
+                
+                 <tr t-foreach="o.line_ids.filtered(lambda l: l.category_id.code == 'ALW' and l.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"></td>
+                  <td class="center"></td>
+                  <td></td>
+                  <td class="right"><t t-esc="l.total" t-options='{"widget":"integer"}' /></td>
+                  <td></td>
+                </tr>
+                
+                <tr t-foreach="o.line_ids.filtered(lambda l: l.category_id.code == 'DED' and l.total != 0)" t-as="l">
+                  <td><t t-esc="l.sequence"/> - <t t-esc="l.name"/></td>
+                  <td class="right"><t t-esc="l.amount" t-options='{"widget":"integer"}' /></td>
+                  <td class="center"></td>
+                  <td></td>
+                  <td></td>
+                  <td class="right"><t t-esc="abs(l.total)" t-options='{"widget":"integer"}' /></td>
+                </tr>
+
+                <!-- ===== TOTAL CHARGES SALARIALES ===== -->
+                
+                
+
+                <!-- ===== ALLOCATIONS (PRIME TRANSPORT EN GAINS) ===== -->
+               
+
+                <!-- ===== TOTAUX DES COLONNES ===== -->
+                <tr class="bg">
+                  <td>TOTAUX</td>
+                  <td colspan="2"></td>
+
+                  <!-- Charges Patronales -->
+                  <td class="right">
+                    <t t-esc="sum(o.line_ids.filtered(lambda l: l.category_id.code == 'CPAT').mapped('total'))" t-options='{"widget":"integer"}'/>
+                  </td>
+
+                  <!-- Gains -->
+                  <t t-set="gross_total" 
+                     t-value="o.line_ids.filtered(lambda line: line.code == 'GROSS').total"/>
+                  
+                  <t t-set="alw_total" 
+                     t-value="sum(o.line_ids.filtered(lambda line: line.appears_on_payslip and line.category_id.code == 'ALW' and line.total != 0).mapped('total'))" t-options='{"widget":"integer"}'/>
+                  
+                  <t t-set="somme_revenu" 
+                     t-value="gross_total + alw_total" t-options='{"widget":"integer"}'/>
+                  
+                  <td class="right">
+                      <span t-esc="somme_revenu" t-options='{"widget": "integer"}'/>
+                  </td>
+                  
+
+                  <!-- Retenues -->
+                  <td class="right">
+                    <t t-esc="abs(sum(o.line_ids.filtered(
+                      lambda l: l.category_id.code == 'DED' or l.category_id.code == 'CSAL'
+                    ).mapped('total')))" t-options='{"widget":"integer"}'/>
+                  </td>
+                </tr>
+
+                <!-- ===== SALAIRE NET APRES IMPOT ===== -->
+               
+
+              </table>
+
+<!-- NET -->
+<table class="blue-dark">
+<tr class="net-row">
+<td class="right">NET A PAYER</td>
+<td class="right">
+<t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='NET').mapped('total'))" t-options='{"widget":"integer"}' /> FCFA
+</td>
+</tr>
+</table>
+
+ <table>
+  <tr class="bg center">
+    <td>Cumuls</td>
+    <td>Mensuel</td>
+    <td>Annuel</td>
+  </tr>
+  
+  <tr>
+    <td>BRUT IMPOSABLE</td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='GROSS').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CGROSS').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>IMPOT SUR LE REVENU</td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CSAL1').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CCSAL1').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>TRIMF</td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CSAL2').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+    <td class="right">
+      <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CCSAL2').mapped('total'))" t-options='{"widget":"integer"}'/>
+    </td>
+  </tr>
+  
+  
+  
+  <!-- IPRES RC SALARIÉ -->
+  <tr>
+  <td>IPRES RG</td>
+  <td class="right">
+  <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CSAL6' or l.code=='CSAL8').mapped('total'))" t-options='{"widget":"integer"}' />
+  </td>
+  <td class="right">
+  <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CCSAL6').mapped('total'))" t-options='{"widget":"integer"}'/>
+  </td>
+  </tr>
+ 
+  <tr>
+  <td>IPRES RC</td>
+  <td class="right">
+  <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CSAL7' or l.code=='CSAL9').mapped('total'))" t-options='{"widget":"integer"}'/>
+  </td>
+  <td class="right">
+  <t t-esc="sum(o.line_ids.filtered(lambda l: l.code=='CCSAL7').mapped('total'))" t-options='{"widget":"integer"}'/>
+  </td>
+  </tr>
+  
+  
+  </table>
+  <br/> 
+<div class="row">
+<div class="col-2">
+  </div>
+  <div class="col-3">
+      <table class="signature">
+      <tr>
+      <td class="signature1">Signature Employeur</td>
+      </tr>
+      
+      </table>
+  </div>
+  <div class="col-4">
+  </div>
+  <div class="col-3">
+    <table class="signature">
+    <tr>
+    <td class="signature1">Signature Employé</td>
+    </tr>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+NB : Ce bulletin doit être conservé sans limitation de durée
+</div>
+
+</div>
+
+</t>
+</t>
+</t>
+
+</template>
+
+
+
+
+
+
+    </data>
+</odoo>

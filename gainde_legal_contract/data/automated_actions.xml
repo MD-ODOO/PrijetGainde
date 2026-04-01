@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. TEMPLATE EMAIL (Syntaxe Jinja2 conservée pour le subject) -->
+    <record id="email_template_contract_alert" model="mail.template">
+        <field name="name">Contrat : Alerte Expiration</field>
+        <field name="model_id" ref="gainde_legal_contract.model_legal_contract"/>
+        <field name="subject">Alerte : Votre contrat {{ object.name }} expire bientôt</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p>Bonjour,</p>
+                <p>Le contrat <strong><t t-out="object.name"/></strong> arrive à échéance le <t t-out="object.date_end"/>.</p>
+            </div>
+        </field>
+    </record>
+
+    <!-- 2. ACTION AUTOMATISÉE (Nouvelle structure Odoo 18) -->
+    <record id="alert_contract_expiration" model="base.automation">
+        <field name="name">Alerte Expiration Contrats</field>
+        <field name="model_id" ref="gainde_legal_contract.model_legal_contract"/>
+        <field name="trigger">on_time</field>
+        <!-- On cible date_end -->
+        <field name="trg_date_id" ref="gainde_legal_contract.field_legal_contract__date_end"/>
+        <field name="trg_date_range">-30</field>
+        <field name="trg_date_range_type">day</field>
+        <!-- Filtre : On évite les contrats clôturés (utilisez le champ technique stage_id_name créé précédemment) -->
+        <field name="filter_domain">[('stage_id_name', '!=', 'Clôturé')]</field>
+    </record>
+
+    <!-- 3. ACTION SERVEUR LIÉE (Lien spécifique v18) -->
+    <record id="action_server_send_alert" model="ir.actions.server">
+        <field name="name">Envoyer Alerte Email Contrat</field>
+        <field name="model_id" ref="gainde_legal_contract.model_legal_contract"/>
+        <field name="base_automation_id" ref="alert_contract_expiration"/> <!-- Lien direct vers l'automation -->
+        <field name="state">mail_post</field>
+        <field name="template_id" ref="email_template_contract_alert"/>
+    </record>
+</odoo>

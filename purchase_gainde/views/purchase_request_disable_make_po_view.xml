@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- 1) Remove binding: action no longer appears on purchase.request.line -->
+    <record id="purchase_request.action_purchase_request_line_make_purchase_order"
+            model="ir.actions.act_window">
+      <field name="binding_model_id" eval="False"/>
+      <!-- in some versions it's set; harmless if field doesn't exist? (if it errors, remove this line) -->
+      <!-- <field name="binding_type" eval="False"/> -->
+    </record>
+
+    <!-- 2) Remove the wizard execution button ("Create RFQ") -->
+    <!-- <record id="purchase_gainde_view_purchase_request_line_make_purchase_order_remove_btn"
+            model="ir.ui.view">
+      <field name="name">purchase.request.line.make.purchase.order.remove.create.rfq.button</field>
+      <field name="model">purchase.request.line.make.purchase.order</field>
+      <field name="inherit_id" ref="purchase_request.view_purchase_request_line_make_purchase_order"/>
+      <field name="arch" type="xml">
+        <xpath expr="//form/footer/button[@name='make_purchase_order']" position="replace"/>
+      </field>
+    </record> -->
+
+  </data>
+</odoo>

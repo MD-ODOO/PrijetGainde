@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Rules -->
+        <!-- Company Based Global Rules -->
+
+        <record model="ir.rule" id="loan_request_comp_rule">
+            <field name="name">Loan Request (multi-company)</field>
+            <field name="model_id" ref="model_hr_employee_loan_request"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="loan_installment_comp_rule">
+            <field name="name">Loan Installment (multi-company)</field>
+            <field name="model_id" ref="model_hr_employee_loan_installment"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <!-- Group Rules -->
+
+        <record id="loan_request_employee_read_rule" model="ir.rule">
+            <field name="name">Employee can see own loan requests</field>
+            <field name="model_id" ref="model_hr_employee_loan_request"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_employee'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="loan_installment_employee_read_rule" model="ir.rule">
+            <field name="name">Employee can see own loan installments</field>
+            <field name="model_id" ref="model_hr_employee_loan_installment"/>
+            <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_employee'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="loan_request_employee_edit_rule" model="ir.rule">
+            <field name="name">Employee can edit own loan requests</field>
+            <field name="model_id" ref="model_hr_employee_loan_request"/>
+            <field name="domain_force">
+                [
+                ('employee_id.user_id', '=', user.id),
+                ('state', 'in', ['draft', 'accepting']),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_employee'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="loan_installment_employee_edit_rule" model="ir.rule">
+            <field name="name">Employee can edit own loan installments</field>
+            <field name="model_id" ref="model_hr_employee_loan_installment"/>
+            <field name="domain_force">
+                [
+                ('employee_id.user_id', '=', user.id),
+                ('loan_request_id.state', 'in', ['draft', 'accepting']),
+                ]
+            </field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_employee'))]"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="loan_request_officer_rule" model="ir.rule">
+            <field name="name">Officer can see/edit all loan requests</field>
+            <field name="model_id" ref="model_hr_employee_loan_request"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_officer'))]"/>
+        </record>
+
+        <record id="loan_installment_officer_rule" model="ir.rule">
+            <field name="name">Officer can see/edit all loan installments</field>
+            <field name="model_id" ref="model_hr_employee_loan_installment"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('xf_loan.group_xf_loan_officer'))]"/>
+        </record>
+
+    </data>
+</odoo>

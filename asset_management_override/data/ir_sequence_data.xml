@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_asset_inventory" model="ir.sequence">
+            <field name="name">Session d'inventaire</field>
+            <field name="code">asset.inventory</field>
+            <field name="prefix">INV/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    Unhide/show the odoo default portal services based on group-->
+    <template id="remove_portal_project_task_block" inherit_id="portal.portal_my_home" priority="100">
+        <xpath expr="//div[@id='portal_service_category']" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+        <xpath expr="//div[@id='portal_client_category']" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+        <xpath expr="//div[@id='portal_vendor_category']" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+        <xpath expr="//div[@id='portal_common_category']" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+        <xpath expr="//div[@id='portal_alert_category']" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+    </template>
+    <template id="remove_portal_purchase_block" inherit_id="portal.portal_breadcrumbs" priority="100">
+        <xpath expr="//ol" position="attributes">
+            <attribute name="groups">pk_advance_employee_portal.unhide_odoo_portal_app</attribute>
+        </xpath>
+    </template>
+
+    <template id="pk_advance_portal_my_home" inherit_id="portal.portal_my_home"
+              name="Custom Portal Menus" priority="25" customize_show="True">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_emp_profile')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr/static/description/icon.png'"/>
+                    <t t-set="title">My Profile</t>
+                    <t t-set="url" t-value="'/my/profile'"/>
+                    <t t-set="text">My Profile</t>
+                    <t t-set="placeholder_count" t-value="'empl_profile'"/>
+                </t>
+            </t>
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_attendance_access')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr_attendance/static/description/icon.png'"/>
+                    <t t-set="title">Attendance</t>
+                    <t t-set="url" t-value="'/attendance/my'"/>
+                    <t t-set="text">Attendance</t>
+                    <t t-set="placeholder_count" t-value="'attendance_checkin_out'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_leaves')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr_holidays/static/description/icon.png'"/>
+                    <t t-set="title">Time Off</t>
+                    <t t-set="url" t-value="'/employee/leaves'"/>
+                    <t t-set="text">Time Off</t>
+                    <t t-set="placeholder_count" t-value="'book_checkout_count'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_expenses')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr_expense/static/description/icon.png'"/>
+                    <t t-set="title">Expenses</t>
+                    <t t-set="url" t-value="'/expense/my'"/>
+                    <t t-set="text">Expenses</t>
+                    <t t-set="placeholder_count" t-value="'expense_checkout_count'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_timesheets')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr_timesheet/static/description/icon.png'"/>
+                    <t t-set="title">Timesheets</t>
+                    <t t-set="url" t-value="'/my/timesheet'"/>
+                    <t t-set="text">Timesheets</t>
+                    <t t-set="placeholder_count" t-value="'timesheet_portal'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_tasks')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/project/static/description/icon.png'"/>
+                    <t t-set="title">Tasks</t>
+                    <t t-set="url" t-value="'/tasks/my'"/>
+                    <t t-set="text">Tasks</t>
+                    <t t-set="placeholder_count" t-value="'project_checkout_count'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_schedule')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/planning/static/description/icon.png'"/>
+                    <t t-set="title">Weekly Schedule</t>
+                    <t t-set="url" t-value="'/weekly/schedule'"/>
+                    <t t-set="text">Weekly Schedule</t>
+                    <t t-set="placeholder_count" t-value="'weekly_checkout_count'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_payroll')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/hr_payroll/static/description/icon.png'"/>
+                    <t t-set="title">Payroll</t>
+                    <t t-set="url" t-value="'/my/payslips'"/>
+                    <t t-set="text">Payroll</t>
+                    <t t-set="placeholder_count" t-value="'my_payroll'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_sales')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/sale/static/description/icon.png'"/>
+                    <t t-set="title">Sales</t>
+                    <t t-set="url" t-value="'/sale/my'"/>
+                    <t t-set="text">Sales</t>
+                    <t t-set="placeholder_count" t-value="'sale_order_checkout_count'"/>
+                </t>
+            </t>
+
+            <t t-if="request.env.user.has_group('pk_advance_employee_portal.ad_group_portal_crm')">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/crm/static/description/icon.png'"/>
+                    <t t-set="title">CRM</t>
+                    <t t-set="url" t-value="'/my/crm'"/>
+                    <t t-set="text">CRM</t>
+                    <t t-set="placeholder_count" t-value="'crm_customer_portal'"/>
+                </t>
+            </t>
+
+        </xpath>
+    </template>
+
+
+</odoo>

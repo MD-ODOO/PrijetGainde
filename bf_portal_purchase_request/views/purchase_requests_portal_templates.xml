@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_purchase_requests" name="Portal layout : purchase_requests menu entries" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'purchase_request'" t-attf-class="breadcrumb-item #{'active ' if not purchase_request else ''}">
+                <a t-if="purchase_request" t-attf-href="/my/purchase_requests?{{ keep_query() }}">Purchase requests</a>
+                <!-- Form create -->
+                <a t-elif="default_requested_by" t-attf-href="/my/purchase_requests?{{ keep_query() }}">Purchase requests</a>
+                <t t-else="">Purchase requests</t>
+            </li>
+            <li t-if="purchase_request" class="breadcrumb-item active">
+                <t t-out="purchase_request.name" t-if="purchase_request.name != '/'"/>
+                <t t-else=""><em>Purchase requests draft</em></t>
+            </li>
+            <li t-if="default_requested_by" class="breadcrumb-item active">
+                <em>New</em>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_purchase_requests" name="Show Purchase Requests" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/bf_portal_purchase_request/static/src/img/request.svg'"/>
+                <t t-set="title">Purchase Requests</t>
+                <t t-set="url" t-value="'/my/purchase_requests'"/>
+                <t t-set="text">List and create your purchase request</t>
+                <t t-set="placeholder_count" t-value="'purchase_requests_count'"/>
+            </t>
+        </div>
+    </template>
+
+    <template id="portal_my_purchase_requests" name="My Purchase Requests">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Purchase Requests</t>
+            </t>
+            <p class="d-inline-flex gap-1">
+                <a href="/my/purchase_requests/new" class="btn btn-primary" aria-label="Edit">
+                    <i class="fa fa-plus fa-1g float-sm-none float-md-start" title="Edit"></i>
+                </a>
+            </p>
+            <div t-if="not purchase_requests" class="alert alert-warning" role="alert">
+                You do not have any purchase requests.
+            </div>
+            <t t-if="purchase_requests" t-call="portal.portal_table">
+                <t t-foreach="grouped_purchase_requests" t-as="request">
+                    <thead>
+                        <tr t-attf-class="{{'thead-light' if not groupby == 'none' else ''}}">
+                            <th t-if="groupby == 'none'">Request reference</th>
+                            <th t-else="">
+                                <em class="font-weight-normal text-muted">Requested by #</em>
+                                <span t-field="request[0].requested_by.name"/>
+                            </th>
+                            <th class="text-end">Creation date</th>
+                            <th class="text-left ps-5 d-none d-md-table-cell">Requested by</th>
+                            <th class="text-end d-none d-md-table-cell">Description</th>
+                            <th class="text-end">State</th>
+                            <!-- Solo falta agregar la confirmación antes de eliminar
+                            <th class="text-end"></th>
+                            -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="request" t-as="request">                            
+                            <tr>
+                                <td class="text-start"><a t-attf-href="/my/purchase_requests/#{request.id}"><small>#</small><t t-out="request.id"/><span class="ms-2" t-att-title="request.name" t-field="request.name"/></a></td>
+                                <td class="text-end">
+                                    <span t-field="request.date_start"/>
+                                </td>
+                                <td id="request_user_body" t-if="groupby != 'user'" class="ps-5 lh-1 d-none d-md-table-cell">
+                                    <img t-if="request.requested_by" class="o_avatar o_portal_contact_img rounded" t-attf-src="#{image_data_uri(request.requested_by.sudo().avatar_128)}" alt="Contact"/>
+                                    <span t-field="request.requested_by"/>
+                                </td>
+                                <td class="text-end d-none d-md-table-cell">
+                                    <span t-field="request.description"/>
+                                </td>
+                                <td class="text-end align-middle lh-1">
+                                    <span t-attf-class="badge rounded-pill fw-normal #{'text-bg-info' if request.state=='draft' else 'text-bg-primary'}" t-field="request.state"/>
+                                </td>
+                                <!-- Solo falta agregar la confirmación antes de eliminar
+                                <td class="text-end">
+                                    <t t-if="request.state=='draft'">
+                                        <a t-att-href="'/my/purchase_requests/delete/%s/%s' % (request.id, request.access_token)" class="o_purchase_js_delete" title="Delete">
+                                            <i class="fa fa-trash fa-1x" role="img" aria-label="Open"></i>
+                                        </a>
+                                    </t>
+                                </td>
+                                -->
+                            </tr>
+                        </t>
+                    </tbody>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_purchase_requests_line_head" name="My Purchase Requests">
+        <thead>
+            <tr>
+                <td class="col-4 col-sm-4 col-md-4 col-lg-4">
+                    <strong>Product *</strong>
+                </td>
+                <td t-if="0">
+                    <strong>Descrip.</strong>
+                </td>
+                <td class="col-4 col-sm-4 col-md-4 col-lg-4">
+                    <strong>Product description *</strong>
+                </td>
+                <td class="col-2 col-sm-2 col-md-2 col-lg-2">
+                    <strong>Quantity *</strong>
+                </td>
+                <td class="col-2 col-sm-2 col-md-2 col-lg-2">
+                    <strong>Uom *</strong>
+                </td>
+            </tr>
+        </thead>
+    </template>
+
+    <template id="portal_form_pr_fields">
+        <div class="row border rounded mb8">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <div t-if="error_message" class="alert alert-danger" role="alert">
+                <div class="col-lg-12">
+                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                </div>
+            </div>
+            <div t-attf-class="mb-1 #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="name">Request Reference</label>
+                <h4 class="m-0" t-field="purchase_request.name"/>
+            </div>
+
+            <div t-attf-class="mb-2 #{error.get('company_id') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="company_id">Company</label>
+                <select name="company_id" t-attf-class="js_select2_company_id form-select form-control #{error.get('company_id') and 'is-invalid' or ''}" t-att-disabled="None if can_edit else '1'">
+                    <t t-foreach="companies or []" t-as="company">
+                        <option t-att-value="company.id" t-att-selected="company.id == int(company_id) if company_id else company.id == purchase_request.company_id.id">
+                            <t t-esc="company.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+            <div t-attf-class="mb-2 #{error.get('origin') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="origin">Source Document</label>
+                <input type="text" name="origin" t-attf-class="form-control #{error.get('origin') and 'is-invalid' or ''}" t-att-value="origin or purchase_request.origin" t-att-disabled="None if can_edit else '1'"/>
+            </div>
+
+            <div t-attf-class="mb-2 #{error.get('description') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="description">Description</label>
+                <input type="text" name="description" t-attf-class="form-control #{error.get('description') and 'is-invalid' or ''}" t-att-value="description or purchase_request.description" t-att-disabled="None if can_edit else '1'"/>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('date_start') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="date_start">Creation date</label>
+                <t t-set='date_start_formatted'><t t-options='{"widget": "date"}' t-esc="purchase_request.date_start"/></t>
+                <input type="text" data-widget="datetime-picker" data-widget-type="date" name="date_start" t-attf-class="form-control datetimepicker-input date_start #{error.get('date_start') and 'is-invalid' or ''}" t-att-value="date_start or date_start_formatted" t-att-disabled="None if can_edit else '1'"/>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('assigned_to') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="assigned_to">Approver</label>
+                <select name="assigned_to" t-attf-class="js_select2_assigned_to form-select form-control #{error.get('assigned_to') and 'is-invalid' or ''}" t-att-disabled="None if can_edit else '1'">
+                    <option value=""></option>
+                    <t t-foreach="assigned_users or []" t-as="user">
+                        <option t-att-value="user.id" t-att-selected="user.id == int(assigned_to) if assigned_to else user.id == purchase_request.assigned_to.id">
+                            <t t-esc="user.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('picking_type_id') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="picking_type_id">Type operation</label>
+                <select name="picking_type_id" t-attf-class="js_select2_picking_type_id form-select form-control form-select-sm #{error.get('picking_type_id') and 'is-invalid' or ''}" t-att-disabled="None if can_edit else '1'">
+                    <option value=""></option>
+                    <t t-foreach="picking_types or []" t-as="picking_type">
+                        <option t-att-value="picking_type.id" style="display:none;" t-att-data-company_id="picking_type.company_id.id" t-att-selected="picking_type.id == int(picking_type_id) if picking_type_id else picking_type.id == purchase_request.picking_type_id.id">
+                            <t t-esc="picking_type.display_name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <textarea name="line_ids" class="d-none"/>
+        </div>
+
+        <div class="row border rounded mb8" t-if="purchase_request.state == 'draft'">
+            <div class="mb-2 col-xl-10">
+                <label class="col-form-label fw-bold">Product</label>
+                <input type="text" class="form-control product_js_select2" placeholder="Search"/>
+            </div>
+            <div class="mb-2 col-xl-2">
+                <label class="col-form-label fw-bold">Quantity</label>
+                <input type="number" step="0.01" class="form-control form-control-sm text-end qty" value="1.00"/>
+            </div>
+            <div class="mb-2 col-xl-10">
+                <label class="col-form-label fw-bold">Description portal</label>
+                <textarea class="form-control form-control-sm portal_description" placeholder="Description portal" rows="1"></textarea>
+            </div>
+            <div class="mb-2 col-xl-2">
+                <label class="col-form-label fw-bold">Uom</label>
+                <input type="text" class="form-control uom_js_select2"/>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button name="o_add_line_button" type="button" class="btn btn-info mb-2">
+                    Add product
+                </button>
+            </div>
+        </div>
+
+        <!-- One2many field (List of Products) -->
+        <div id="js_product_container" class="row border rounded mb8">
+            <table class="table table-striped items">
+                <t t-call="bf_portal_purchase_request.portal_my_purchase_requests_line_head"/>
+                <tbody class="table-body">
+                    <t t-foreach="purchase_request.line_ids or []" t-as="line">
+                        <tr class="o_data_row" t-attf-data-id="#{line.id}">
+                            <td>
+                                <p class="o_input_product" t-att-data-product-id="line.product_id.id" t-esc="line.product_id.display_name"/>
+                            </td>
+                            <td t-if="0">
+                                <textarea class="form-control o_input_description" rows="3"></textarea>
+                            </td>
+                            <td>
+                                <textarea class="form-control o_input_portal_product_description" rows="3" t-att-disabled="None if can_edit else '1'"><t t-esc="line.portal_product_description"/></textarea>
+                            </td>
+                            <td>
+                                <input type="number" step="0.01" class="form-control o_input_quantity text-end" t-att-value="line.product_qty and '{:.2f}'.format(line.product_qty) or '0.00'" t-att-disabled="None if can_edit else '1'"/>
+                            </td>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <span class="o_input_uom" t-att-data-product-id="line.product_uom_id.id" t-esc="line.product_uom_id.display_name"/>
+                                    <a t-if="purchase_request.state == 'draft'" href="#" class="btn o_purchase_line_js_delete" title="Delete">
+                                        <i class="fa fa-trash fa-1x" role="img" aria-label="Open"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a t-if="purchase_request.state == 'draft'" role="button" class="btn btn-secondary btn o_purchase_js_approve" t-att-href="'/my/purchase_requests/approve/%s/%s' % (purchase_request.id, purchase_request.access_token or '')"><i class="fa fa-file-text-o"/> Request approval</a>
+            <a t-if="purchase_request.state == 'draft'" role="button" class="btn btn-secondary btn" href="/my/purchase_requests"><i class="fa fa-fw fa-times"/> Discard</a>
+            <!-- Por el momento ocultar
+            <a role="button" class="btn btn-primary btn" href="/my/purchase_requests/new"><i class="fa fa-plus"/> New</a>
+            -->
+            <button t-if="purchase_request.state == 'draft'" type="submit" class="btn btn-primary edit_confirm"><i class="fa fa-fw fa-floppy-o"/> Save</button>
+            <a t-if="purchase_request.state == 'draft'" role="button" class="btn btn-danger btn o_purchase_js_delete" t-att-href="'/my/purchase_requests/delete/%s/%s' % (purchase_request.id, purchase_request.access_token or '')"><i class="fa fa-trash"/> Delete</a>
+        </div>
+    </template>
+
+    <template id="portal_form_pr_readonly_fields">
+        <div class="row border rounded mb8">
+            <div class="mb-1 col-xl-6">
+                <label class="col-form-label fw-bold">Request Reference</label>
+                <h4 class="m-0" t-field="purchase_request.name"/>
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Company</label>
+                <div t-esc="purchase_request.company_id.name" />
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Source Document</label>
+                <div t-esc="purchase_request.origin" />
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Description</label>
+                <div t-esc="purchase_request.description" />
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Creation date</label>
+                <t t-set='date_start_formatted'><t t-options='{"widget": "date"}' t-esc="purchase_request.date_start"/></t>
+                <div data-widget="datetime-picker" data-widget-type="date" t-esc="date_start_formatted" />
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Approver</label>
+                <div t-esc="purchase_request.assigned_to.display_name" />
+            </div>
+            <div class="mb-2 col-xl-6">
+                <label class="col-form-label fw-bold">Type operation</label>
+                <div t-esc="purchase_request.picking_type_id.display_name" />
+            </div>
+        </div>
+
+        <!-- One2many field (List of Products) -->
+        <div class="row border rounded mb8">
+            <table class="table table-striped items">
+                <t t-call="bf_portal_purchase_request.portal_my_purchase_requests_line_head"/>
+                <tbody class="table-body">
+                    <t t-foreach="purchase_request.line_ids or []" t-as="line">
+                        <tr class="o_data_row">
+                            <td>
+                                <p t-esc="line.product_id.display_name"/>
+                            </td>
+                            <td>
+                                <p t-esc="line.portal_product_description"/>
+                            </td>
+                            <td>
+                                <p class="text-end" t-esc="line.product_qty and '{:.2f}'.format(line.product_qty) or '0.00'"/>
+                            </td>
+                            <td>
+                                <p class="text-end" t-esc="line.product_uom_id.display_name"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="bf_portal_purchase_request_page">
+        <!-- Ref: helpdesk/views/helpdesk_portal_templates.xml (tickets_followup)-->
+        <t t-call="portal.portal_layout">
+            <t t-set="title" t-value="purchase_request.name"/>
+            <div class="row o_purchase_request_portal_sidebar">
+                <!-- Sidebar -->
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-3 col-xl-4 d-print-none'"/>
+                    <t t-set="title">
+                        <h2 t-field="purchase_request.estimated_cost" data-id="total_estimated_cost"/>
+                    </t>
+                    <t t-set="entries">
+                        <div class="d-flex flex-column gap-4">
+                            <div class="d-flex flex-column gap-2" id="purchase_request_sidebar_button">
+                                <div class="o_download_pdf d-flex gap-1 flex-lg-column flex-xl-row">
+                                    <div class="flex-grow-1">
+                                        <a class="btn btn-secondary o_print_btn d-block" t-att-href="purchase_request.get_portal_url(report_type='pdf')" id="print_purchase_request_report" title="View Details" target="_blank"><i class="fa fa-print"/> View Details</a>
+                                    </div>
+                                </div>
+                                <div class="o_download_pdf d-flex gap-1 flex-lg-column flex-xl-row">
+                                    <div class="flex-grow-1">
+                                        <a class="btn btn-primary d-block o_download_btn" t-att-href="purchase_request.get_portal_url(report_type='pdf', download=True)" title="Download"><i class="fa fa-download"/> Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- Page content -->
+                <div id="purchase_request_content" class="o_portal_content col-12 col-lg-9 col-xl-8 mt-lg-0">
+                    <div t-if="request_approve" class="alert alert-success alert-dismissible d-print-none" role="status">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <span>Your purchase request has been sent for approval. Thank you for your collaboration.</span>
+                    </div>
+                    <div t-if="request_create" class="alert alert-success alert-dismissible d-print-none" role="status">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <span>Your purchase request has been creada con exito. Thank you for your collaboration.</span>
+                    </div>
+                    <div id="card">
+                        <div id="card_header" class="container" data-anchor="true">
+                            <div class="row gs-0">
+                                <div class="col-md">
+                                    <h5 class="row justify-content-between">
+                                        <div class="col-md-9 text-truncate">
+                                            <span t-field="purchase_request.name" class="h3"/>
+                                            <small class="text-muted"> (#<span t-field="purchase_request.id"/>)</small>
+                                        </div>
+                                        <div class="col col-auto">
+                                            <small class="text-end">Stage:</small>
+                                            <span t-field="purchase_request.state" t-attf-class="badge rounded-pill #{'text-bg-info' if purchase_request.state == 'draft' else 'text-bg-primary'}" title="Current status of the requirement"/>
+                                        </div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="card_body">
+                            <div class="row mb-4">
+                                <strong class="col-lg-3">Requested by:</strong>
+                                <span class="col-lg-3">
+                                    <span t-field="purchase_request.requested_by"/>
+                                </span>
+                                <strong class="col-lg-3">Create on:</strong>
+                                <span class="col-lg-3" t-field="purchase_request.create_date" t-options='{"widget": "datetime", "hide_seconds": True}'/>
+                            </div>
+                            <!-- Ref.: form portal/views/portal_templates.xml (portal_my_details) -->
+                            <form t-attf-action="/my/purchase_requests/#{purchase_request.id}" method="post" class="edit_form">
+                                <div class="row o_bf_portal_purchase_request">
+                                    <div class="col-lg-12">
+                                        <t t-if="purchase_request.state == 'draft'">
+                                            <t t-call="bf_portal_purchase_request.portal_form_pr_fields"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-call="bf_portal_purchase_request.portal_form_pr_readonly_fields"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <div id="purchase_request_chat" class="o_portal_messages_container" data-anchor="true">
+                        <h3>Communication history</h3>
+                        <t t-call="portal.message_thread"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Create form purchase -->
+    <template id="portal_form_new_pr_fields">
+        <div class="row border rounded mb8">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <div t-if="error_message" class="alert alert-danger" role="alert">
+                <div class="col-lg-12">
+                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                </div>
+            </div>
+            <div t-attf-class="mb-1 #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="name">Request Reference</label>
+                <h4 class="m-0">/</h4>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('company_id') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="company_id">Company</label>
+                <select name="company_id" t-attf-class="js_select2_company_id form-select form-control #{error.get('company_id') and 'is-invalid' or ''}">
+                    <t t-foreach="companies or []" t-as="company">
+                        <option t-att-value="company.id" t-att-selected="company.id == int(company_id) if company_id else company.id == default_requested_by.company_id.id">
+                            <t t-esc="company.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('origin') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="origin">Source Document</label>
+                <input type="text" name="origin" t-attf-class="form-control #{error.get('origin') and 'is-invalid' or ''}" autofocus="autofocus"/>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('description') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="description">Description</label>
+                <input type="text" name="description" t-attf-class="form-control #{error.get('description') and 'is-invalid' or ''}"/>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('date_start') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="date_start">Creation date</label>
+                <t t-set='date_start_formatted'><t t-options='{"widget": "date"}' t-esc="default_date_start"/></t>
+                <input type="text" data-widget="datetime-picker" data-widget-type="date" name="date_start" t-attf-class="form-control datetimepicker-input date_start #{error.get('date_start') and 'is-invalid' or ''}" t-att-value="date_start_formatted" />
+            </div>
+            <div t-attf-class="mb-2 #{error.get('assigned_to') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="assigned_to">Approver</label>
+                <select name="assigned_to" t-attf-class="js_select2_assigned_to form-select form-control #{error.get('assigned_to') and 'is-invalid' or ''}">
+                    <option value=""></option>
+                    <t t-foreach="assigned_users or []" t-as="user">
+                        <option t-att-value="user.id">
+                            <t t-esc="user.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <div t-attf-class="mb-2 #{error.get('picking_type_id') and 'o_has_error' or ''} col-xl-6">
+                <label class="col-form-label fw-bold" for="picking_type_id">Type operation</label>
+                <select name="picking_type_id" t-attf-class="js_select2_picking_type_id form-select form-control form-select-sm #{error.get('picking_type_id') and 'is-invalid' or ''}">
+                    <option value=""></option>
+                    <t t-foreach="picking_types or []" t-as="picking_type">
+                        <option t-att-value="picking_type.id" style="display:none;" t-att-data-company_id="picking_type.company_id.id">
+                            <t t-esc="picking_type.display_name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+            <textarea name="line_ids" class="d-none"/>
+        </div>
+
+        <div class="row border rounded mb8">
+            <div class="mb-2 col-xl-10">
+                <label class="col-form-label fw-bold">Product</label>
+                <input type="text" class="form-control product_js_select2" placeholder="Search"/>
+            </div>
+            <div class="mb-2 col-xl-2">
+                <label class="col-form-label fw-bold">Quantity</label>
+                <input type="number" step="0.01" class="form-control form-control-sm text-end qty" value="1.00"/>
+            </div>
+            <div class="mb-2 col-xl-10">
+                <label class="col-form-label fw-bold">Description portal</label>
+                <textarea class="form-control form-control-sm portal_description" placeholder="Description portal" rows="1"></textarea>
+            </div>
+            <div class="mb-2 col-xl-2">
+                <label class="col-form-label fw-bold">Uom</label>
+                <input type="text" class="form-control uom_js_select2"/>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button name="o_add_line_button" type="button" class="btn btn-info mb-2">
+                    Add product
+                </button>
+            </div>
+        </div>
+
+        <!-- One2many field (List of Products) -->
+        <div id="js_product_container" class="row border rounded mb8">
+            <table class="table table-striped items">
+                <t t-call="bf_portal_purchase_request.portal_my_purchase_requests_line_head"/>
+                <tbody class="table-body">
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a href="/my/purchase_requests" role="button" class="btn btn-secondary btn"><i class="fa fa-fw fa-times"/> Discard</a>
+            <button type="submit" class="btn btn-primary edit_confirm"><i class="fa fa-fw fa-floppy-o"/> Save</button>
+        </div>
+    </template>
+
+    <template id="portal_new_purchase_request_page">
+        <!-- Ref: helpdesk/views/helpdesk_portal_templates.xml (tickets_followup)-->
+        <t t-call="portal.portal_layout">
+            <t t-set="title" t-value="New"/>
+            <div class="row o_purchase_request_portal_sidebar">
+                <!-- No es necesario mostrar el sidebar
+                    <t t-call="portal.portal_record_sidebar">
+                        <t t-set="classes" t-value="'col-lg-3 col-xl-4 d-print-none'"/>
+                    </t>
+                -->
+                <div class="col-lg-3 col-xl-4 d-print-none"></div>
+
+                <!-- Page content -->
+                <div id="purchase_request_content" class="o_portal_content col-12 col-lg-9 col-xl-8 mt-lg-0">
+                    <div id="card">
+                        <div id="card_header" class="container" data-anchor="true">
+                            <div class="row gs-0">
+                                <div class="col-md">
+                                    <h5 class="row justify-content-between">
+                                        <div class="col-md-9 text-truncate">
+                                            <span class="h3">New</span>
+                                        </div>
+                                        <div class="col col-auto">
+                                            <small class="text-end">Stage:</small>
+                                            <span class="badge rounded-pill text-bg-info" title="Current status of the requirement">Draft</span>
+                                        </div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="card_body">
+                            <div class="row mb-4">
+                                <strong class="col-lg-2">Requested by:</strong>
+                                <span class="col-lg-10">
+                                    <span t-field="default_requested_by.partner_id"/>
+                                </span>
+                            </div>
+                            <form action="/my/purchase_requests/new" method="post" class="edit_form">
+                                <div class="row o_bf_portal_purchase_request">
+                                    <div class="col-lg-12">
+                                        <t t-call="bf_portal_purchase_request.portal_form_new_pr_fields"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- MASQUER LES MENUS -->
+        
+        <!-- Masquer le menu Depreciation -->
+        <menuitem id="asset_management.menu_asset_depreciation" active="False"/>
+        
+        <!-- Masquer le menu Maintenance / Repair -->
+        <menuitem id="asset_management.menu_asset_maintenance" active="False"/>
+        
+        <!-- Masquer le menu Stock Movement Report -->
+        <menuitem id="asset_management.menu_asset_stock_movement_report" active="False"/>
+        
+        <!-- Masquer les menus de graphiques dans Reporting -->
+        <menuitem id="asset_management.menu_assets_depreciation_graph" active="False"/>
+        <menuitem id="asset_management.menu_asset_maintenance_graph" active="False"/>
+        <menuitem id="asset_management.menu_asset_transfer_graph" active="False"/>
+        <menuitem id="asset_management.menu_asset_vendor_graph" active="False"/>
+        
+        
+        <!-- MASQUER LES PAGES DANS LE FORMULAIRE -->
+        
+        <record id="asset_management_form_hide_pages" model="ir.ui.view">
+            <field name="name">asset.management.form.hide.pages</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_form"/>
+            <field name="arch" type="xml">
+                <!-- Masquer la page Maintenance / Repair -->
+                <xpath expr="//field[@name='maintenance_ids']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <!-- Masquer la page Depreciation -->
+                <xpath expr="//field[@name='depreciation_ids']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <!-- Masquer le groupe Depreciation Settings -->
+                <xpath expr="//field[@name='depreciation_apply']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <!-- Masquer le groupe Vendor And Warranty -->
+                <xpath expr="//field[@name='expired_warranty_date']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <!-- Rendre les lignes de transfert non supprimables et non créables -->
+                <xpath expr="//field[@name='transfer_ids']/list" position="attributes">
+                    <attribute name="delete">0</attribute>
+                    <attribute name="create">0</attribute>
+                </xpath>
+                
+                <!-- Masquer return_date dans la liste des transferts -->
+                <xpath expr="//field[@name='transfer_ids']/list/field[@name='return_date']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                
+                <!-- Masquer status dans la liste des transferts -->
+                <xpath expr="//field[@name='transfer_ids']/list/field[@name='status']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

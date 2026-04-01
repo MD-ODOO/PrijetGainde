@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_invoice_approval_route" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.invoice.approval.route</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="///block[@id='invoicing_settings']">
+                <setting id="use_approval_route_customer_invoice"
+                         title="Use Dynamic Approval Route for Customer Invoices. Values set here are company-specific."
+                         help="Use Dynamic Approval Route for Customer Invoices. Values set here are company-specific.">
+                    <field name="use_approval_route_customer_invoice" class="o_light_label" widget="radio"/>
+                </setting>
+            </xpath>
+            <xpath expr="///block[@id='account_vendor_bills']">
+                <setting id="use_approval_route_vendor_bill"
+                         title="Use Dynamic Approval Route for Vendor Bills. Values set here are company-specific."
+                         help="Use Dynamic Approval Route for Vendor Bills. Values set here are company-specific.">
+                    <field name="use_approval_route_vendor_bill" class="o_light_label" widget="radio"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

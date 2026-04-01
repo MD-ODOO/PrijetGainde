@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="picking_approval_route_1" model="approval.route">
+            <field name="name">Demo Route for Transfers</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="picking_approval_route_1_supply" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="picking_approval_route_1"/>
+            <field name="name">Supply Manager</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_supply_manager"/>
+            <field name="use_custom_conditions" eval="False"/>
+        </record>
+
+        <record id="picking_approval_route_1_partner_manager" model="approval.route.stage">
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="picking_approval_route_1"/>
+            <field name="name">Partner Relationship Manager</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_regional_manager"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_partner_field_id" ref="stock.field_stock_picking__partner_id"/>
+            <field name="condition_partner_operator">in</field>
+            <field name="condition_partner_ids"
+                   eval="[(6,0,[ref('base.res_partner_12')])]"/>
+        </record>
+    </data>
+</odoo>

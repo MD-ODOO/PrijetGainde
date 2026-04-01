@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+  -->
+<odoo>
+    <!-- Action for Project Dashboard-->
+    <record id="action_open_dashboard_helpdesk" model="ir.actions.client">
+        <field name="name">Helpdesk Dashboard</field>
+        <field name="tag">open_helpdesk_dashboard</field>
+    </record>
+    <!-- Dashboard menu item -->
+    <menuitem id="helpdesk_menu_open_Dashboard"
+              name="Dashboard"
+              action="action_open_dashboard_helpdesk"
+              parent="helpdesk.menu_helpdesk_root"
+              sequence="0"/>
+</odoo>

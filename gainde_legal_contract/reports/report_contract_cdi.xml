@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_contrat_cdi_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="text-center mb-4">
+                            <h2>CONTRAT DE TRAVAIL À DURÉE INDÉTERMINÉE</h2>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <strong>L'employeur :</strong><br/>
+                                <span t-field="o.company_id.name"/><br/>
+                                <span t-field="o.company_id.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                                SIRET / VAT : <span t-field="o.company_id.vat"/>
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Le salarié :</strong><br/>
+                                <span t-field="o.partner_id.name"/><br/>
+                                <span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                            </div>
+                        </div>
+
+                        <h4 class="mt-4">Article 1 – Objet du contrat</h4>
+                        <p>Le présent contrat a pour objet l'embauche de <span t-field="o.partner_id.name"/>
+                        en qualité de <strong><t t-esc="o.job_position or 'Collaborateur'"/></strong>.</p>
+
+                        <h4 class="mt-4">Article 2 – Durée et période d'essai</h4>
+                        <p>Le contrat est conclu pour une durée indéterminée à compter du <span t-field="o.date_start"/>.</p>
+                        <p>Période d'essai : <t t-esc="o.notice_duration"/> mois.</p>
+
+                        <h4 class="mt-4">Article 3 – Rémunération</h4>
+                        <p>Salaire brut mensuel : <span t-field="o.amount or '10 000 000'"/> <span t-field="o.company_id.currency_id.symbol"/></p>
+
+                        <div class="mt-5">
+                            <p>Fait à <span t-field="o.company_id.city"/>, le <span t-field="o.create_date" t-options='{"format": "dd/MM/yyyy"}'/></p>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-6 text-center">
+                                <strong>L'employeur</strong><br/><br/><br/>
+                                <span>(Signature précédée de la mention "Lu et approuvé")</span>
+                            </div>
+                            <div class="col-6 text-center">
+                                <strong>Le salarié</strong><br/><br/><br/>
+                                <span>(Signature précédée de la mention "Lu et approuvé")</span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+<!--    <record id="action_report_contrat_cdi" model="ir.actions.report">-->
+<!--        <field name="name">Contrat CDI</field>-->
+<!--        <field name="model">legal.contract</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">gainde_legal_contract.report_contrat_cdi_document</field>-->
+<!--        <field name="report_file">gainde_legal_contract.report_contrat_cdi_document</field>-->
+<!--        <field name="binding_model_id" ref="model_legal_contract"/>-->
+<!--        <field name="binding_type">report</field>-->
+<!--    </record>-->
+</odoo>

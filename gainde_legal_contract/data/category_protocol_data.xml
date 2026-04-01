@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- TYPE : PROTOCOLE D’ACCORD -->
+        <record id="type_protocol" model="legal.contract.type">
+            <field name="name">Protocole d’Accord (MoU)</field>
+            <field name="code">MOU-G2K</field>
+            <field name="category">protocol</field>
+            <field name="description">Cadre de collaboration stratégique entre GAINDE 2000 et ses partenaires.</field>
+            <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                    Considerant que GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    Depuis une vingtaine d’années, il s’est aussi orienté dans les activités de certification électronique pour la sécurisation de ses plateformes de services dans un premier temps, ensuite pour s’ouvrir au marché national, international et devenir l’un des premiers prestataires de service de certification du Sénégal.
+                    <br/><br/>
+                    Considérant que {{partner_name}} est .....;
+                    <br/><br/>
+                    Considérant que les parties souhaitent formaliser les bases d’une collaboration structurée autour d’objectifs communs, notamment en matière de ;
+                     </p>
+                     <p class="mt-3"><strong>Entre les parties, il a été convenu et arrêté ce qui suit :</strong></p>
+
+
+        ]]></field>
+        </record>
+
+        <!-- Articles du Protocole -->
+        <record id="art_mou_1" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 1 : Objet</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">
+                Le présent protocole d’accord a pour objet de définir les modalités de
+                collaboration entre GAINDE 2000 et le partenaire.
+            </p>]]>
+            </field>
+        </record>
+
+        <record id="art_mou_2" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 2 : Objectif</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">L’objectif visé par les parties est de formaliser leurs intentions de collaborer et d’établir un
+                cadre de concertation en vue d’identifier et d’explorer des opportunités de projets de GAINDE 2000 en
+                relation avec les domaines d’expertise du partenaire </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_3" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 3 : Champ d’application</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+               <p class="ps-3 small">Les axes de collaboration prévus sont les suivants :</p>
+                        <ol type="-">
+                            <li>
+                                <p>----------------
+                                </p>
+                            </li>
+                            <li>
+                                <p>----------------
+                                </p>
+                            </li>
+                            <li>
+                                <p>----------------
+                                </p>
+                            </li>
+                        </ol>
+
+            ]]></field>
+        </record>
+
+        <record id="art_mou_3" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 3 : Objectif</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">L’objectif visé par les parties est de formaliser leurs intentions de collaborer et d’établir un
+                cadre de concertation en vue d’identifier et d’explorer des opportunités de projets de GAINDE 2000 en
+                relation avec les domaines d’expertise du partenaire </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_4" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 4 : OObligations des parties</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">En plus de l’obligation de confidentialité qui pèse sur les parties conformément à
+                 l’article 6 du présent protocole, celles-ci s’engagent à négocier de bonnefoi aux fins des présentes.
+                 </p>
+                <p class="ps-3 small">A cet égard, elles s’interdisent toutes manœuvres intentionnelles, dilatoires,
+                visant à vicier le climat des négociations et à les faire échouer.
+                </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_5" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 5 : Limitations</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+               <p class="ps-3 small">Le présent protocole ne saurait être interprété par les parties comme un contrat de
+                partenariat ou un accord de groupement.</p>
+                <p class="ps-3 small">Exceptées les obligations décrites aux articles 4, 6 et 11 chacune des
+                    parties reste indépendante tant de par sa nature juridique, que de ses règles d’organisation
+                    et de fonctionnement.
+                </p>
+
+            ]]></field>
+        </record>
+        <record id="art_mou_6" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 6 : Confidentialité</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les termes du présent protocole sont strictement confidentiels. Les deux
+                            parties s’engagent à ne divulguer aucune information ou données, sans le consentement écrit
+                            préalable de l’autre partie. A ce titre, elles entendent :
+                        </p>
+                        <ul style="list-style-type: '-' ;">
+                            <li>
+                                <p>se garder de divulguer à des tiers toutes les informations se rapportant au
+                                    présent protocole et jugées confidentielles. A moins d’y avoir été autorisée
+                                    préalablement par écrit par l’autre partie, interdiction est faite d’utiliser à ses
+                                    propres fins, de publier, de copier, de permettre l’utilisation par des tiers, à
+                                    leurs propres profits ou au détriment de l’autre partie toute information se
+                                    rapportant au présent protocole ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>diligenter toutes les mesures nécessaires aux fins de restreindre l’accès aux
+                                    informations confidentielles ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>communiquer la présente clause aux personnes qui ont accès aux informations
+                                    confidentielles et/ou leur faire signer des accords similaires ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>restituer immédiatement tous les renseignements, notes, données, imprimés et
+                                    supports en sa possession et estampillés ‘Informations Confidentielles’ dès que
+                                    l’autre en fait la demande par écrit.L’obligation de confidentialité des parties
+                                    survit deux (02) ans après le terme du protocole.
+                                </p>
+                            </li>
+                        </ul>
+
+            ]]></field>
+        </record>
+        <record id="art_mou_7" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 7 : Prise en charge</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Chacune des parties supporte les frais découlant des négociations.
+                 </p>
+                <p class="ps-3 small">Les parties ne peuvent réclamer aucune compensation financière, aucun paiement,
+                ni aucun remboursement de frais découlant de la tenue des négociations.
+                </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_8" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 8 : Propriété intellectuelle</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Chacune des parties conserve ses droits de propriété intellectuelle sur ses produits.
+              </p>
+            <p class="ps-3 small">Toutefois, les parties veilleront à préciser l’étendue des droits conférés de part et
+                d’autre dans le cadre d’un éventuel partenariat (utilisation, personnalisation, commercialisation).
+            </p>
+            <p class="ps-3 small">Chacune des parties fait de son affaire personnelle la validité des droits
+                de propriété, intellectuelle et industrielle, utilisés dans le cadre du présent contrat
+                ainsi que leur droit à les utiliser vis à vis de tiers.
+            </p>
+            <p class="ps-3 small">Chacune des parties reconnaît que le protocole ne lui concède aucun droit ni aucun
+                titre de propriété quel qu’il soit sur les services de l’autre et ne tentera aucune action qui mettrait
+                en péril les droits de l’autre.
+            </p>
+
+            ]]></field>
+        </record>
+        <record id="art_mou_9" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 9 : Avenant (s)</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent protocole pourra être modifié d’accord parties par avenant (s) qui y
+                    sera (ont) annexé (s) et intégré (s).
+                </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_10" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 10 : Durée</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent protocole d’accord entre en vigueur à compter de sa date de
+                            signature. Il est conclu pour une durée de douze (12) mois. Il pourra être renouvelé par
+                            accord écrit des parties avant son terme.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_11" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 11 : Divulgation</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les parties s’engagent à ne pas divulguer l’existence de ce protocole aux
+                            tiers et au grand public, excepté leurs employés qui sont appelés à en prendre connaissance
+                            compte tenu de leurs fonctions.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_12" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 12 : Non exclusivité</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent protocole n’a aucun caractère exclusif. Par conséquent, chaque
+                            partie conserve son droit de négocier et de contracter avec des tiers.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_13" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 13 : Résiliation</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent protocole pourra être résilié de plein droit par anticipation,
+                            par l’une ou l’autre des parties :
+                        </p>
+                        <p class="ps-3 small">Le présent protocole pourra être résilié de plein droit par anticipation,
+                            par l’une ou l’autre des parties :
+                        </p>
+                        <ul class="ps-5 small" style="list-style-type: '- '; line-height: 1.4;">
+                            <li class="mb-2">
+                                <p>En cas d’inexécution de l’une quelconque des obligations y figurant et/ou de
+                                    l’une quelconque des obligations inhérentes à l’activité exercée.
+                                </p>
+                            </li>
+                        </ul>
+                        <p class="ps-3 small">Dans ce cas, la partie créancière de l’obligation inexécutée par l’autre
+                            adressera à cette dernière une lettre recommandée avec avis de réception la mettant en
+                            demeure d’exécuter l’obligation lui incombant.
+                        </p>
+                        <p class="ps-3 small">Si, dans un délai de quinze (15) jours après réception de ladite mise en
+                            demeure, la partie contrevenante ne s’est toujours pas exécutée, le présent protocole sera
+                            résolu sans préjudice des dommages-intérêts qui pourraient être dus, tant du chef de la
+                            rupture que de l’inexécution de l’obligation considérée.
+                        </p>
+                        <ul class="ps-5 small" style="list-style-type: '- '; line-height: 1.4;">
+                            <li class="mb-2">
+                                <p>Pour cause de force majeure telle que définie par la jurisprudence.
+                                </p>
+                            </li>
+                        </ul>
+
+                        <p class="ps-3 small">Nonobstant cette résiliation anticipée, la partie diligente dispose du
+                            droit de réclamer la réparation d’un quelconque préjudice subi du fait des manquements de
+                            l’autre partie.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_14" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 15 : Responsabilité</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Chacune des parties reste responsable des obligations lui incombant en
+                            vertu du présent protocole, notamment celles prévues à l’article 6.
+                        </p>
+                <p class="ps-3 small">Les parties s’engagent au respect de la réglementation en vigueur pour ce
+                    qui concerne l’objet du protocole.
+                </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_15" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 15 : Cession</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent protocole est conclu intuitu personae c’est-à-dire en
+                            considération des capacités et de la nature intrinsèque des parties. Dès lors, il est
+                            incessible, non transmissible et inaliénable.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_16" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 16 : Renonciation</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le défaut d’exercice de tout ou partie des droits prévus aux termes du
+                            présent, ne pourra être assimilé en aucun cas à une renonciation préalable ou subséquente de
+                            son titulaire.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_17" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 17 : Divisibilité</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">La nullité ou le caractère illégal d’une des dispositions du présent
+                            protocole n’entrave pas la validité des autres dispositions qui seront interprétées au mieux
+                            pour satisfaire à l’intention et à la bonne foi des parties.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_18" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 18 : Force exécutoire</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+             <p class="ps-3 small">Le présent protocole et les obligations qui en découlent ont une force
+                            exécutoire pour les représentants, les employés ou toute personne habilitée à agir au nom ou
+                            pour le compte de chaque partie.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_19" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 19 : Droit applicable - Litiges</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Le présent protocole est soumis au droit sénégalais.</p>
+            <p class="ps-3 small">Tous les litiges portant sur l’interprétation ou l’exécution du présent
+                protocole seront soumis à la médiation du Tribunal de Commerce Hors Classe de Dakar.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_mou_20" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 20 : Élection de domicile</field>
+            <field name="contract_type_id" ref="type_protocol"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Les parties élisent domicile à leurs sièges sociaux respectifs indiqués supra,
+             où toutes les notifications se feront par voie postale.</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

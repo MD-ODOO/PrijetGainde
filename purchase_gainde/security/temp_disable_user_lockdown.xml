@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--
+        Désactivation temporaire des restrictions user_directory_lockdown.xml + res_users_rule.xml.
+
+        IMPORTANT:
+        - Commenter un fichier dans __manifest__.py n'annule pas les enregistrements déjà appliqués.
+        - Ce fichier force un "rollback" lors d'un upgrade du module.
+        -->
+
+        <!-- Rétablir l'accès au menu/utilisateurs (groupes standards Settings + ERP Manager). -->
+        <record id="base.action_res_users" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+        </record>
+        <record id="base.menu_action_res_users" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+        </record>
+        <record id="base.menu_users" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+        </record>
+
+    </data>
+</odoo>

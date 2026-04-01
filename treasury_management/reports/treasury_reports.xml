@@ -1,0 +1,75 @@
+<odoo>
+  <report
+    id="treasury_payment_report"
+    model="treasury.payment"
+    string="Décaissements (PDF)"
+    report_type="qweb-pdf"
+    name="treasury_management.treasury_payment_template"
+    file="treasury_management.treasury_payment_template"
+  />
+
+  <record id="treasury_payment_voucher_report" model="ir.actions.report">
+    <field name="name">Bon de paiement</field>
+    <field name="model">treasury.payment</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">treasury_management.treasury_payment_voucher_template</field>
+    <field name="report_file">treasury_management.treasury_payment_voucher_template</field>
+    <field name="binding_model_id" ref="model_treasury_payment"/>
+    <field name="binding_type">report</field>
+    <field name="print_report_name">'Bon de paiement - %s' % (object.name or '')</field>
+  </record>
+
+  <report
+    id="treasury_forecast_report"
+    model="treasury.forecast"
+    string="Prévisions (PDF)"
+    report_type="qweb-pdf"
+    name="treasury_management.treasury_forecast_template"
+    file="treasury_management.treasury_forecast_template"
+  />
+
+  <report
+    id="treasury_kpi_report"
+    model="treasury.kpi"
+    string="KPI Trésorerie (PDF)"
+    report_type="qweb-pdf"
+    name="treasury_management.treasury_kpi_template"
+    file="treasury_management.treasury_kpi_template"
+  />
+
+  <report
+    id="treasury_kpi_report_account_move"
+    model="account.move"
+    string="KPI Trésorerie"
+    report_type="qweb-pdf"
+    name="treasury_management.treasury_kpi_template"
+    file="treasury_management.treasury_kpi_template"
+  />
+
+  <report
+    id="payroll_disbursement_report"
+    model="treasury.payroll.disbursement.wizard"
+    string="Rapport décaissement paie"
+    report_type="qweb-pdf"
+    name="treasury_management.payroll_disbursement_report_template"
+    file="treasury_management.payroll_disbursement_report_template"
+  />
+
+  <report
+    id="treasury_payment_xlsx"
+    model="treasury.payment"
+    string="Décaissements (XLSX)"
+    report_type="xlsx"
+    name="treasury_management.treasury_payment_xlsx"
+    file="treasury_payments"
+  />
+
+  <report
+    id="treasury_forecast_xlsx"
+    model="treasury.forecast"
+    string="Prévisions (XLSX)"
+    report_type="xlsx"
+    name="treasury_management.treasury_forecast_xlsx"
+    file="treasury_forecasts"
+  />
+</odoo>

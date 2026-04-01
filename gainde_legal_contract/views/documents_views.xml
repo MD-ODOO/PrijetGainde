@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="documents_document_form_view_inherit" model="ir.ui.view">
+        <field name="name">documents.document.form.inherit</field>
+        <field name="model">documents.document</field>
+        <field name="inherit_id" ref="documents.document_view_form"/>
+        <field name="arch" type="xml">
+            <!-- On utilise position="inside" dans le header existant -->
+            <xpath expr="//header" position="inside">
+                <!-- Déclaration sécurisée du champ pour la condition invisible -->
+                <field name="sign_status" invisible="1"/>
+
+                <button name="action_sign_document"
+                        string="Signer PDF"
+                        type="object"
+                        class="btn-primary"
+                        invisible="mimetype != 'application/pdf' or sign_status == 'signed'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

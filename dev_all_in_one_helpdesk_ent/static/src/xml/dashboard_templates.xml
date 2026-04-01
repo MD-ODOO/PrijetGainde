@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template for the helpdesk dashboard -->
+<templates id="template" xml:space="preserve">
+    <t t-name="helpdeskdashboard">
+        <div style="max-height: -webkit-fill-available; overflow-y: scroll; background-color:#fff7fd">
+            <div class="mx-5">
+            <div id="AlertBox" class="mt-3 alert alert-warning" role="alert">
+                <h3>Please Select Stages in Configuration Settings</h3>
+            </div>
+              <div class="row gx-0 mt-3">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button id="downloadBtn" t-on-click="(e) => this.downloadReport(e)" class="btn btn-primary p-2">
+                            <i class="fa fa-file-pdf-o p-1" aria-hidden="true"></i> Print
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mx-5" id="dashboard" >
+                <t t-call="ETPHelpdeskfilters"/>
+                <t t-call="ETPHelpdeskcounters"/>
+                <t t-call="ETPHelpdeskcharts"/>
+                <t t-call="ETPHelpdeskTables"/>
+            </div>
+        </div>
+    </t>
+
+    <!-- Filter -->
+
+    <t t-name="ETPHelpdeskfilters">
+        <div class="card mt-4 filters">
+            <div class="row p-2 m-2 gx-0 gy-2" >  
+                <div class="col-lg-1 my-auto">
+                    <img t-att-src="'data:image/png;base64,' + user_img" class="css-shadow"/>
+                </div>
+                <div class="col-lg-4 pl-1 my-auto" style="padding-left: 20px;">
+                    <h2> <t t-esc="greetings"/>, <t t-esc="user_name"/>.</h2>
+                    <h5>Welcome to your Helpdesk Dashboard.</h5>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row gy-2">
+                        <div class="col-lg-3 m-0">
+                            <label for="team_selection" class="form-label fw-bolder">Team Filter</label>
+                            <select class="form-select" id="team_selection" t-on-change="(ev) => this._onchangeHelpdeskFilter(ev)">
+                                <option value="all">All Team</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 m-0">
+                            <label for="user_selectionss" class="form-label fw-bolder">User Filter</label>
+                            <select class="form-select" id="user_selections" t-on-change="(ev) => this._onchangeHelpdeskFilter(ev)">
+                                <option value="all">All User</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 m-0">
+                            <label for="partner_selection" class="form-label fw-bolder">Partner Filter</label>
+                            <select class="form-select" id="partner_selection" t-on-change="(ev) => this._onchangeHelpdeskFilter(ev)">
+                                <option value="all">All Partner</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 m-0">
+                            <label for="stages_selection" class="form-label fw-bolder">Stages Filter</label>
+                            <select class="form-select" id="stages_selection" t-on-change="(ev) => this._onchangeHelpdeskFilter(ev)">
+                                <option value="all">All Stages</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 m-0">
+                            <label for="duration_selection" class="form-label fw-bolder">Date Filter</label>
+                            <select class="form-select" id="duration_selection"
+                                    t-on-change="(ev) => this._onchangeHelpdeskFilter(ev)">
+                                
+                                <option value="0">Today</option>
+                                <option value="7">Last 7 Days</option>
+                                <option value="28">Last 28 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="365">Last 365 Days</option>
+                                <option value="all">Lifetime</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Counters -->
+
+    <t t-name="ETPHelpdeskcounters">
+        <div class="mt-5 mb-5">
+            <div class="row text-center gy-2">
+                <div class="col-lg-3"> 
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card box-header">
+                                <div class="card-body box-body" >
+                                    <span style="font-size:20px;">All Tickets </span>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="card box" id="all_ticket_data1" t-on-click="(e) => this.action_all_ticket(e)">
+                                <div class="card-body box-body">
+                                    <h1 id="all_ticket_data">
+                                        <t t-esc="all_ticket_data.length" />
+                                    </h1>
+                                    <h5>All</h5>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3"> 
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card box-header">
+                                <div class="card-body box-body" >
+                                    <span style="font-size:20px;"> Open Tickets </span>
+                                </div>
+                             </div>
+                        </div>
+                    </div>    
+                    <div class="row mt-2">    
+                        <div class="col-12">
+                            <div class="card box" id="in_progress_ticket_data1" t-on-click="(e) => this.action_all_ticket(e)">
+                                <div class="card-body box-body">
+                                    <h1 id="in_progress_ticket_data">
+                                        <t t-esc="in_progress_ticket_data.length" />
+                                    </h1>
+                                    <h5>Opened</h5>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card box-header">
+                                <div class="card-body box-body" >
+                                    <span style="font-size:20px;"> Done Tickets </span>
+                                </div>
+                             </div>
+                        </div>
+                    </div> 
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="card box" id="solve_ticket_data1" t-on-click="(e) => this.action_all_ticket(e)">
+                                <div class="card-body box-body">
+                                    <h1 id="solve_ticket_data">
+                                        <t t-esc="solve_ticket_data.length" />
+                                    </h1>
+                                    <h5>Done</h5>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card box-header">
+                                <div class="card-body box-body" >
+                                    <span style="font-size:20px;"> Close Tickets </span>
+                                </div>
+                             </div>
+                        </div>
+                    </div>     
+                    <div class="row mt-2">    
+                        <div class="col-12">
+                            <div class="card box" id="cancel_ticket_data1" t-on-click="(e) => this.action_all_ticket(e)">
+                                <div class="card-body box-body">
+                                    <h1 id="cancel_ticket_data">
+                                        <t t-esc="cancel_ticket_data.length" />
+                                    </h1>
+                                    <h5>Cancelled</h5>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </t>
+
+    <!-- Charts -->
+
+    <t t-name="ETPHelpdeskcharts">
+        <div class="mt-5">
+            <div class="row gy-2">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="card table-card" style="overflow-x:clip;">
+                        <div class="card-header">
+                            <div class="row">
+
+                                <div class="col-6 ">    
+                                     <label for="stages_chart_selection"
+                                            class="form-label fw-bolder">Chart Type</label>
+                                    <select id="stages_chart_selection" class="form-select form-control pull-left"
+                                            t-on-change="(ev) => this._onchangeStagesChart(ev)">
+                                        <option value="bar">Bar</option>
+                                        <option value="line">Line</option>
+                                        <option value="pie">Pie</option>
+                                        <option value="doughnut">Doughnut</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-title text-center p-3" style="font-weight:600; font-size:23px;">
+                          <div class="row">
+                          <div class="col-2"></div>
+                             <div class="col-8">Group By Stages</div>
+                                <div class="col-2">
+                                  <i class="fa fa-download" style="cursor: pointer;" aria-hidden="true" t-on-click="(e) => this._downloadChart(e)"></i>
+                                </div>
+                         </div>
+                            
+                        </div>
+                        <div class="card-body text-center">
+                            <canvas id="stages_chart_data" class="bar-chart"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6 ">
+                                     <label for="helpdesk_team_chart_selection"
+                                            class="form-label fw-bolder">Chart Type</label>
+                                    <select id="helpdesk_team_chart_selection" class="form-select form-control pull-left"
+                                            t-on-change="(ev) => this._onchangeTeamChart(ev)">
+                                       
+                                        <option value="pie">Pie</option>
+                                        <option value="bar">Bar</option>
+                                        <option value="line">Line</option>
+                                        <option value="doughnut">Doughnut</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-title text-center p-3" style="font-weight:600; font-size:23px;">
+                            <div class="row">
+                            <div class="col-2"></div>
+                             <div class="col-8">Group By Team</div>
+                                  <div class="col-2">
+                                     <i class="fa fa-download" style="cursor: pointer;" aria-hidden="true" t-on-click="(e) => this._downloadChart(e)"></i>
+                                  </div>
+                             </div>
+                            </div>
+                        <div class="card-body text-center">
+                            <canvas id="helpdesk_team_chart_data" class="bar-chart"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 gy-2">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="card table-card" style="overflow-x:clip;">
+                        <div class="card-header">
+                            <div class="row">
+                                
+                                <div class="col-6 ">    
+                                     <label for="helpdesk_priority_chart_selection"
+                                            class="form-label fw-bolder">Chart Type</label>
+                                    <select id="helpdesk_priority_chart_selection" class="form-select form-control pull-left"
+                                            t-on-change="(ev) => this._onchangePriorityChart(ev)">
+                                        
+                                        <option value="line">Line</option>
+                                        <option value="bar">Bar</option>
+                                        <option value="pie">Pie</option>
+                                        <option value="doughnut">Doughnut</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-title text-center p-3" style="font-weight:600; font-size:23px;">
+                          <div class="row">
+                          <div class="col-2"></div>
+                             <div class="col-8">Group By Priority</div>
+                                <div class="col-2">
+                                  <i class="fa fa-download" style="cursor: pointer;" aria-hidden="true" t-on-click="(e) => this._downloadChart(e)"></i>
+                                </div>
+                         </div>
+                            
+                        </div>
+                        <div class="card-body text-center">
+                            <canvas id="helpdesk_priority_chart_data" class="bar-chart"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-6 ">
+                                     <label for="helpdesk_source_chart_selection"
+                                            class="form-label fw-bolder">Chart Type</label>
+                                    <select id="helpdesk_source_chart_selection" class="form-select form-control pull-left"
+                                            t-on-change="(ev) => this._onchangeSourceChart(ev)">
+                                        <option value="doughnut">Doughnut</option>
+                                        <option value="pie">Pie</option>
+                                        <option value="bar">Bar</option>
+                                        <option value="line">Line</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-title text-center p-3" style="font-weight:600; font-size:23px;">
+                            <div class="row">
+                            <div class="col-2"></div>
+                             <div class="col-8">Group By Source</div>
+                                  <div class="col-2">
+                                     <i class="fa fa-download" style="cursor: pointer;" aria-hidden="true" t-on-click="(e) => this._downloadChart(e)"></i>
+                                  </div>
+                             </div>
+                            </div>
+                        <div class="card-body text-center">
+                            <canvas id="helpdesk_source_chart_data" class="bar-chart"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ETPHelpdeskTables">
+        <div class="row mt-4 gy-2 md-5">
+            <div class='col-lg-6 col-md-6 col-12'>
+                <div class="card table-card table-responsive ">
+                    <div class="card-header table-header">
+                        <span>
+                            All Ticket
+                            <sup><span style="margin-left: 5px; cursor: pointer;" title="Display all created tickets of customer.">?</span></sup>
+                        </span>
+                    </div>
+                    <table id="my_table_all_team_list" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Customer</th>
+                                <th>Team</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+                    <t t-if ="Math.ceil(this.state.totalrows/this.state.rowsPerPage) > 0">
+                        <div class="pagination-controls d-flex align-items-center justify-content-center text-primary m-2">
+                            <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" id='prev_button' t-on-click="(e) => this.prevPage(e)"> </i>
+                            <span style="font-weight:600; font-size:15px; margin:0px 5px 0px 5px">Page <t t-esc="this.state.currentPage"/> of <t t-esc="Math.ceil(this.state.totalrows/this.state.rowsPerPage)"/>
+                            </span>
+                            <i class="fa fa-chevron-circle-right fa-2x" id='next_button' aria-hidden="true" t-on-click="(e) => this.nextPage(e)"> </i>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <div class='col-lg-6 col-md-6 col-12'>
+                <div class="card table-card table-responsive ">
+                    <div class="card-header table-header">
+                        <span>
+                            Upcoming Closing Tickets
+                            <sup><span style="margin-left: 5px; cursor: pointer;" title="Display closing tickets based on expected date.">?</span></sup>
+                        </span>
+                    </div>
+                    <table id="my_table_closing_ticket_list" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Customer</th>
+                                <th>Contact</th>
+                                 <th></th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
+                    <t t-if ="Math.ceil(this.state.totalemprows/this.state.rowsPerPage) > 0">
+                        <div class="pagination-controls d-flex align-items-center justify-content-center text-primary m-2">
+                            <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" id='prevs_button' t-on-click="(e) => this.prevsPage(e)"> </i>
+                            <span style="font-weight:600; font-size:15px; margin:0px 5px 0px 5px">Page <t t-esc="this.state.currentempPage"/> of <t t-esc="Math.ceil(this.state.totalemprows/this.state.rowsPerPage)"/>
+                            </span>
+                            <i class="fa fa-chevron-circle-right fa-2x" id='nextt_button' aria-hidden="true" t-on-click="(e) => this.nexttPage(e)"> </i>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        
+        </div>
+        <div class="row">
+            <div class="col-12" style="margin:20px;"> </div>
+        </div>
+    </t>
+</templates>
+
+
+
+    
+

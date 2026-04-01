@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- VUE LISTE (TREE) -->
+        <record id="view_audit_gainde_plan_tree" model="ir.ui.view">
+            <field name="name">audit_gainde.plan.tree</field>
+            <field name="model">audit_gainde.plan</field>
+            <field name="arch" type="xml">
+                <list string="Plans d'audit Gainde"
+                      decoration-success="state=='closed'"
+                      decoration-info="state=='validated'"
+                      decoration-warning="state=='in_progress'">
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="plan_responsible_id"/>
+                    <field name="planned_missions_count"/>
+                    <field name="completed_missions_count"/>
+                    <field name="completion_rate" widget="progressbar"/>
+                    <field name="total_risk_count"/>
+                    <field name="total_recommendation_count"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE KANBAN -->
+        <record id="view_audit_gainde_plan_kanban" model="ir.ui.view">
+            <field name="name">audit_gainde.plan.kanban</field>
+            <field name="model">audit_gainde.plan</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="name"/>
+                    <field name="year"/>
+                    <field name="state"/>
+                    <field name="planned_missions_count"/>
+                    <field name="completion_rate"/>
+                    <field name="plan_responsible_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                        <field name="year" options="{'groupSeparators': false}"/>
+                                    </div>
+                                    <div>
+                                        <field name="planned_missions_count"/> prévues
+                                        <field name="completion_rate"/>%
+                                    </div>
+                                    <field name="plan_responsible_id" widget="badge"/>
+                                    <field name="year" options="{'groupSeparators': false}"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_plan_form" model="ir.ui.view">
+            <field name="name">audit_gainde.plan.form</field>
+            <field name="model">audit_gainde.plan</field>
+            <field name="arch" type="xml">
+                <form string="Plan d’audit annuel">
+                    <header>
+                        <button name="action_validate_plan" string="Valider"
+                                type="object" class="btn-primary"
+                                invisible="state != 'draft'"/>
+                        <button name="action_start_plan" string="Démarrer"
+                                type="object" class="btn-primary"
+                                invisible="state != 'validated'"/>
+                        <button name="action_close_plan" string="Clôturer"
+                                type="object" class="btn-success"
+                                invisible="state not in ['in_progress', 'validated']"/>
+                        <button name="action_draft" string="Brouillon"
+                                type="object"
+                                invisible="state == 'draft'"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                      <group>
+                                <field name="name" invisible="name == 'New'"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="year" />
+                                <field name="plan_responsible_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="planned_missions_count"/>
+                            </group>
+                            <group>
+                                <field name="completion_rate" widget="progressbar"/>
+                                <field name="total_risk_count"/>
+                                <field name="total_recommendation_count"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Objectifs stratégiques">
+                                <field name="strategic_objectives"/>
+                            </page>
+                            <page string="Missions">
+                                <field name="mission_ids">
+                                    <list>
+                                        <field name="name"/>
+                                        <field name="state"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTION -->
+        <record id="action_audit_gainde_plan" model="ir.actions.act_window">
+            <field name="name">Plan d’audit annuel</field>
+            <field name="res_model">audit_gainde.plan</field>
+            <field name="view_mode">list,kanban,form</field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_root" 
+                  name="Audit Gainde"
+                  web_icon="audit_gainde,static/description/icon.png"/>
+        <menuitem id="menu_audit_gainde_plans"
+                  name="Plans d'audit"
+                  parent="menu_audit_gainde_root"
+                  action="action_audit_gainde_plan"/>
+
+
+        <record id="view_audit_gainde_plan_form_smart_buttons" model="ir.ui.view">
+            <field name="name">audit_gainde.plan.form.smart.buttons</field>
+            <field name="model">audit_gainde.plan</field>
+            <field name="inherit_id" ref="audit_gainde.view_audit_gainde_plan_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//sheet" position="inside">
+
+                    <div class="oe_button_box" name="button_box">
+
+
+                        <!-- MISSIONS EN RETARD -->
+                        <button name="action_mission_late"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-clock-o">
+                            <field name="mission_late_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- MISSIONS EN PLANIFIEES -->
+                        <button name="action_mission_planned"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-clock">
+                            <field name="mission_planned_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- MISSIONS EN COURS -->
+                        <button name="action_mission_progress"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-spinner">
+                            <field name="mission_progress_count" widget="statinfo"/>
+                        </button>
+
+                        <!-- MISSIONS TERMINEES -->
+                        <button name="action_mission_done"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-circle">
+                            <field name="mission_done_count" widget="statinfo"/>
+                        </button>
+
+                    </div>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

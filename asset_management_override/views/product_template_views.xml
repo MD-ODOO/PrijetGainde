@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_form_view_assets" model="ir.ui.view">
+        <field name="name">product.template.form.assets</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_assets"
+                    type="object"
+                    class="oe_stat_button"
+                        icon="fa-archive">
+                    <field name="asset_count" widget="statinfo" string="Assets"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

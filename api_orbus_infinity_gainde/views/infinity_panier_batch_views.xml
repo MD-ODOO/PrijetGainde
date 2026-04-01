@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Vue liste des batches de paniers Orbus Infinity -->
+        <record id="view_orbus_infinity_panier_batch_list" model="ir.ui.view">
+            <field name="name">orbus.infinity.panier.batch.list</field>
+            <field name="model">orbus.infinity.panier.batch</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="status_code"/>
+                    <field name="status"/>
+                    <field name="request_date"/>
+                    <field name="company_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vue formulaire des batches de paniers Orbus Infinity -->
+        <record id="view_orbus_infinity_panier_batch_form" model="ir.ui.view">
+            <field name="name">orbus.infinity.panier.batch.form</field>
+            <field name="model">orbus.infinity.panier.batch</field>
+            <field name="arch" type="xml">
+                <form string="Lot de paniers Orbus Infinity">
+                    <header>
+                        <button name="action_create_invoices" type="object"
+                                string="Créer les factures Odoo"
+                                class="btn-primary"/>
+                        <button name="action_register_payments" type="object"
+                                string="Enregistrer les paiements Odoo"
+                                class="btn-secondary"/>
+                        <button name="action_export_xlsx" type="object"
+                            string="Exporter Excel"
+                            class="btn-secondary"/>
+                        <button name="action_delete_lines" type="object"
+                                string="Supprimer toutes les lignes"
+                                class="btn-secondary"
+                                confirm="Supprimer toutes les lignes de ce batch ?"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group string="Résumé">
+                            <field name="total_lines" readonly="1"/>
+                            <field name="total_montant_ttc" readonly="1"/>
+                            <field name="total_part_gainde_ttc" readonly="1"/>
+                            <field name="total_part_guce_ttc" readonly="1"/>
+                            <field name="total_montant_ht" readonly="1"/>
+                            <field name="total_montant_tva" readonly="1"/>
+                            <field name="total_paid_ttc" readonly="1"/>
+                        </group>
+                        <group string="Métadonnées">
+                            <field name="status_code"/>
+                            <field name="status"/>
+                            <field name="message"/>
+                            <field name="total_elements"/>
+                            <field name="total_pages"/>
+                            <field name="page_size"/>
+                            <field name="page_number"/>
+                            <field name="request_date"/>
+                            <field name="params_json" widget="text"/>
+                            <field name="raw_response" widget="text"/>
+                        </group>
+                        <group string="Synthèse API" colspan="2">
+                            <div style="max-height:200px; overflow:auto;">
+                                <field name="api_summary_html" widget="html" nolabel="1" readonly="1"/>
+                            </div>
+                        </group>
+                        <notebook>
+                            <page string="Paniers">
+                                <field name="line_ids">
+                                    <list editable="bottom">
+                                        <field name="reference_panier"/>
+                                        <field name="numero_dossier"/>
+                                        <field name="numero_paiement"/>
+                                        <field name="source"/>
+                                        <field name="destination"/>
+                                        <field name="zone"/>
+                                        <field name="montant_ht"/>
+                                        <field name="montant_ttc"/>
+                                        <field name="part_gainde_ttc"/>
+                                           <field name="source"/>
+                                           <field name="destination_pays"/>
+                                        <field name="montant_tva"/>
+                                        <field name="payer"/>
+                                        <field name="collectionneur"/>
+                                        <field name="transitaire"/>
+                                        <field name="connaissement"/>
+                                        <field name="factures_count"/>
+                                        <field name="state"/>
+                                        <field name="invoice_id"/>
+                                        <field name="error_message"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Factures (JSON)">
+                                <field name="line_ids">
+                                    <list editable="bottom">
+                                        <field name="reference_panier"/>
+                                        <field name="factures_json" widget="text"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action liste des batches -->
+        <record id="action_orbus_infinity_panier_batch" model="ir.actions.act_window">
+            <field name="name">Lots de paniers Orbus Infinity</field>
+            <field name="res_model">orbus.infinity.panier.batch</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Vue pivot : stats par requête (batch) -->
+        <record id="view_orbus_infinity_panier_batch_line_pivot" model="ir.ui.view">
+            <field name="name">orbus.infinity.panier.batch.line.pivot</field>
+            <field name="model">orbus.infinity.panier.batch.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Stats Orbus Infinity">
+                    <field name="batch_id" type="row"/>
+                    <field name="payment_journal_label" type="row"/>
+                    <field name="zone" type="col"/>
+                    <field name="payer" type="col"/>
+                    <field name="montant_ttc" type="measure"/>
+                    <field name="part_gainde_ttc" type="measure"/>
+                    <field name="part_guce_ttc" type="measure"/>
+                    <field name="montant_ht" type="measure"/>
+                    <field name="montant_tva" type="measure"/>
+                    <field name="factures_count" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_orbus_infinity_panier_batch_line_stats" model="ir.actions.act_window">
+            <field name="name">Stats Orbus Infinity (Pivot)</field>
+            <field name="res_model">orbus.infinity.panier.batch.line</field>
+            <field name="view_mode">pivot,list</field>
+        </record>
+
+        <!-- Menu sous Orbus API -->
+        <menuitem id="menu_orbus_infinity_panier_batch"
+                  name="Lots de paniers Orbus Infinity"
+                  parent="api_orbus_gainde.menu_orbus_api_config_root"
+                  action="action_orbus_infinity_panier_batch"
+                  sequence="12"/>
+
+        <menuitem id="menu_orbus_infinity_panier_batch_stats"
+                  name="Stats Orbus Infinity"
+                  parent="api_orbus_gainde.menu_orbus_api_config_root"
+                  action="action_orbus_infinity_panier_batch_line_stats"
+                  sequence="13"/>
+    </data>
+</odoo>

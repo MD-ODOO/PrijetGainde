@@ -1,0 +1,11 @@
+<odoo>
+  <record id="payment_term_treasury_30" model="account.payment.term">
+    <field name="name">30 jours</field>
+    <field name="line_ids" eval="[Command.clear(), Command.create({'value': 'percent', 'value_amount': 100.0, 'nb_days': 30})]"/>
+  </record>
+
+  <record id="payment_term_treasury_60" model="account.payment.term">
+    <field name="name">60 jours</field>
+    <field name="line_ids" eval="[Command.clear(), Command.create({'value': 'percent', 'value_amount': 100.0, 'nb_days': 60})]"/>
+  </record>
+</odoo>

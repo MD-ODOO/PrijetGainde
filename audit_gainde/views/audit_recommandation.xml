@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- VUE Search -->
+        <record id="view_audit_gainde_recommendation_search" model="ir.ui.view">
+            <field name="name">audit_gainde.recommendation.search</field>
+            <field name="model">audit_gainde.recommendation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="reference"/>
+                    <field name="state"/>
+                    <field name="responsible_id"/>
+
+                    <!-- Filtre Mes recommendations -->
+                    <filter
+                        name="my_recommendations"
+                        string="Mes recommendations"
+                        domain="[('responsible_id','=',uid)]"
+                    />
+
+                </search>
+            </field>
+        </record>
+
+        <!-- VUE List -->
+        <record id="view_audit_gainde_recommendation_list" model="ir.ui.view">
+            <field name="name">audit_gainde.recommendation.list</field>
+            <field name="model">audit_gainde.recommendation</field>
+            <field name="arch" type="xml">
+                <list string="Recommandations">
+                    <field name="reference"/>
+                    <field name="description" width="300"/>
+                    <field name="responsible_id"/>
+                    <field name="date_target"/>
+                    <field name="days_delayed" decoration-danger="days_delayed > 0"/>
+                    <field name="progress" widget="progressbar"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_recommendation_form" model="ir.ui.view">
+            <field name="name">audit_gainde.recommendation.form</field>
+            <field name="model">audit_gainde.recommendation</field>
+            <field name="arch" type="xml">
+                <form string="Recommandation d'audit">
+                    <header>
+                        <button name="action_start" string="Démarrer"
+                                type="object" class="btn-primary"
+                                invisible="state != 'open'"/>
+                                
+                        <button name="action_start" string="En cours"
+                                type="object" class="btn-primary"
+                                invisible="state != 'implemented'"/>
+                                
+                        <button name="action_implemented" string="Mise en œuvre"
+                                type="object"
+                                invisible="state not in  ['in_progress','closed']"/>
+                        
+                        <button name="action_close" string="Clôturer"
+                                type="object" class="btn-success"
+                                groups="audit_gainde.group_senior"
+                                invisible="state != 'implemented'"/>
+                                
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="reference"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="finding_id"/>
+                                <field name="responsible_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="date_target"/>
+                            </group>
+                            <group>
+                                <field name="days_delayed" decoration-danger="days_delayed > 0"/>
+                                <field name="progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" nolabel="1"/>
+                            </page>
+                            
+                            <!-- ACTIONS CORRECTIVES -->
+                            <page string="Suivi des actions correctives">
+                                <field name="corrective_action_ids">
+                                    <list>
+                                        <field name="reference"/>
+                                        <field name="responsible_id"/>
+                                        <field name="days_remaining"/>
+                                        <field name="state" widget="badge"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- ACTION -->
+        <record id="action_audit_gainde_recommendation" model="ir.actions.act_window">
+            <field name="name">Recommandations</field>
+            <field name="res_model">audit_gainde.recommendation</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{'search_default_my_recommendations': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première recommendations !
+                </p>
+            </field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_recommendations"
+                  name="Recommandations"
+                  parent="menu_audit_gainde_missions"
+                  action="action_audit_gainde_recommendation"
+                  sequence="40"/>
+    </data>
+</odoo>

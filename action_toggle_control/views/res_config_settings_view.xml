@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_res_config_settings_action_toggle" model="ir.ui.view">
+        <field name="name">res.config.settings.action.toggle</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <form position="inside">
+                <app string="Contrôle des actions" name="action_toggle_control" groups="base.group_system">
+                    <block title="Activation de l'action 48">
+                        <setting>
+                            <field name="enable_action_48"/>
+                            <div class="content-group">
+                                <div class="text-muted">
+                                    Active ou désactive l’accès à l’URL /action-48.
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </form>
+        </field>
+    </record>
+</odoo>

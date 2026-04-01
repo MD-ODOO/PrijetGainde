@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <record id="view_dev_helpdesk_project_task_form" model="ir.ui.view">
+        <field name="name">view.dev.helpdesk.project.task.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//header" position="inside">
+                <button string="Enregistrer" name="action_save_ticket" type="object" class="oe_highlight"
+                        help="Enregistrer les modifications du ticket"/>
+                <button string="Clôturer le ticket" name="action_close_ticket" type="object" class="oe_highlight" 
+                        invisible="is_closed"
+                        help="Clôturer le ticket et le déplacer vers le stage résolu"/>
+                        
+                <button string="Create Task" name="create_ticket_task"  type="object" class="oe_highlight" 
+                        groups="dev_all_in_one_helpdesk_ent.group_dev_helpdesk_task"/>
+                        
+                 <button string="Create Expense" name="create_expense" type="object" class="oe_highlight"
+                        groups="dev_all_in_one_helpdesk_ent.group_expense_helpdesk_ticket"/>        
+                        
+                        
+                 <button name="%(dev_all_in_one_helpdesk_ent.action_whatsapp_wizard)d" string="Send whatsapp" type="action" class="oe_highlight"
+                    context="{'default_partner_id':partner_id,'default_mobile':partner_phone}" 
+                    invisible="1"/>
+                    
+                    
+                  <button string="Create Maintenance" name="create_ticket_maintenance"  type="object" class="oe_highlight" 
+                        groups="dev_all_in_one_helpdesk_ent.group_dev_helpdesk_maintenance"/>   
+                        
+                  <button string="Create Leads" name="create_lead"  type="object" class="oe_highlight" groups="dev_all_in_one_helpdesk_ent.group_crm_helpdesk_ticket" />                        
+                    
+           </xpath>
+           
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button type="object"
+                        invisible="task_count == 0"
+                    name="action_view_task" class="oe_stat_button" icon="fa-tasks" 
+                    groups="dev_all_in_one_helpdesk_ent.group_dev_helpdesk_task">
+                    <field name="task_count" widget="statinfo" string="Task"/>
+                </button>
+                
+                <button type="object"
+                        invisible="expense_count == 0"
+                        name="action_view_expense"
+                        class="oe_stat_button"
+                        icon="fa-chain"
+                >
+                    <field name="expense_count" widget="statinfo" string="Expense"/>
+                </button>
+                
+                
+                 <button type="object"
+                        invisible="main_request_count == 0"
+                    name="action_view_maintenance" class="oe_stat_button" icon="fa-tasks" 
+                    groups="dev_all_in_one_helpdesk_ent.group_dev_helpdesk_maintenance">
+                    <field name="main_request_count" widget="statinfo" string="Maintenance Request"/>
+                </button>
+                
+                <button type="object" 
+                                    name="action_view_lead"
+                                    class="oe_stat_button"
+                                    icon="fa-chain"
+                                    invisible='lead_count == 0'
+                                     >
+<!--                                     attrs="{'invisible':[('lead_count','=',0)]}" -->
+                                     <field name="lead_count" widget="statinfo" string="Lead"/></button>
+            </xpath>
+            
+            <xpath expr="//group//group[2]//field[@name='email_cc']" position="after">
+                        <field name='date_deadline' invisible="1" />
+                 </xpath>
+                 <xpath expr="//group//group[2]//field[@name='partner_id']" position="after">
+                        <field name='source_id' invisible="1" />
+                 </xpath>
+            
+            
+<!--            dev_helpdesk_ticket_number_ent-->
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <h2><field name="ticket_sequnce" readonly="1" /></h2>
+           </xpath>
+            
+            
+            
+<!--            dev_helpdesk_solution_ent-->
+            <xpath expr="//notebook" position="inside">
+                    <page string="Solution" name="solution">
+                        <field name="solution_description" widget="html"/>
+                        <separator string="Solution Attachment"/>
+                        <field name="solution_document_ids">
+                            <list editable="bottom">
+                                <field name="description"/>
+                                <field name="document" widget="image" class="oe_avatar"/>
+                            </list>
+                        </field>
+                    </page>
+                    <page string="Survey" name="survey_tab">
+                    <group>
+                        <group>
+                            <field name="survey_template_id"/>
+                        </group>
+                    </group>
+                    <field name="ticket_survey_ids">
+                        <list editable="bottom">
+                            <field name="survey_id"/>
+                            <field name="survey_answer_id" column_invisible="1" />
+                            <field name="partner_id" column_invisible="1"/>
+                            <button name="start_survey"
+                                    type="object"
+                                    string="Start"
+                                    icon="fa-play-circle"
+                                    invisible="survey_answer_id != False"
+                                   />
+                            <button name="send_survey_to_customer"
+                                    type="object"
+                                    string="Send"
+                                    icon="fa-paper-plane"/>
+                            <button name="print_survey"
+                                    type="object"
+                                    string="Print Last Answer"
+                                    icon="fa-print"
+                                    invisible="not survey_answer_id "
+                                    />
+                        </list>
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="survey_id"/>
+                                </group>
+                                <group>
+                                    <field name="partner_id" invisible="1"/>
+                                </group>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page string='Signature'>
+		             		<group>
+		             			<group>
+		             				<field name='signature_name' readonly="1"/>
+		             				<field name='signature_date' readonly="1"/>
+		             			</group>
+							    <field name="signature" widget="signature" readonly="1"/>
+		             		</group>
+		             	</page>
+            </xpath> 
+            
+<!--            dev_helpdesk_sub_ticket_ent-->
+            <xpath expr="//field[@name='team_id']" position="before">
+		    <field name="allow_subticket" invisible="1"/>
+		    <field name="parent_id" options="{'no_create':True, 'no_open':True}"
+		           invisible="allow_subticket == False"/>
+            </xpath>
+            
+            <!-- Filtrer team_id par profile_type -->
+            <xpath expr="//field[@name='team_id']" position="attributes">
+                <!--<attribute name="domain">[('profile_type', 'in', ['helpdesk_level1', 'helpdesk_level2_functional', 'helpdesk_level2_technical'])]</attribute> -->
+                <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+            </xpath>
+            
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+		    <button type="object" name="action_view_sub_tickets" class="oe_stat_button" icon="fa-ticket"
+		            invisible="allow_subticket == False">
+		        <field name="sub_ticket_count" widget="statinfo" string="Sub Tickets"/>
+		    </button>
+            </xpath>
+            
+            
+<!--            dev_helpdesk_multi_user_ent-->
+             <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('id', 'in', allowed_user_ids)]</attribute>
+                <attribute name="options">{'no_create': True, 'no_create_edit': True}</attribute>
+             </xpath>
+             <xpath expr="//field[@name='user_id']" position="before">
+                <field name="allowed_user_ids" invisible="1"/>
+             </xpath>
+             <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="allow_multi_user" invisible="1"/>
+                    <field name="team_user_ids" invisible="1"/>
+                    <field name="multi_user_ids" string="Affecter plusieurs utilisateurs" 
+                           widget="many2many_tags" 
+                           domain="[('id','in',allowed_user_ids)]"
+                           options="{'no_create': True, 'no_create_edit':True}"
+                           invisible="allow_multi_user == False"
+                          />
+              </xpath>
+            
+            <!-- Ajouter le champ Type de réclamation au-dessus de tag_ids -->
+            <xpath expr="//field[@name='tag_ids']" position="before">
+                <field name="type_reclamation_display" readonly="1"/>
+            </xpath>
+            
+<!--            dev_helpdesk_due_reminder_ent-->
+            <xpath expr="//field[@name='email_cc']" position="after">
+                <field name="due_date" string='Date de clôture prévue'/>
+           </xpath>
+           
+<!--           dev_helpdesk_document_ent-->
+           <xpath expr="//div[@class='oe_button_box']" position="inside">
+				<button type="object" name="view_document" class="oe_stat_button" icon="fa-paperclip ">
+						<field name="attachment_count" widget="statinfo" string="Documents"/>
+				</button>
+    	</xpath>
+            
+        </field>
+    </record>
+    
+    
+    
+<!--     dev_helpdesk_ticket_number_ent-->
+    <record id="view_helpdesk_ticket_sequence_tree" model="ir.ui.view">
+        <field name="name">view.helpdesk.ticket.sequence.tree</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='name']" position="before">
+                <field name="ticket_sequnce"  />
+           </xpath>
+        </field>
+    </record>
+    
+    <record id="view_helpdesk_ticket_sequence_filter" model="ir.ui.view">
+        <field name="name">view.helpdesk.ticket.sequence.filter</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='name']" position="before">
+                <field name="ticket_sequnce"  />
+           </xpath>
+           
+<!--           dev_helpdesk_sub_ticket_ent-->
+           <xpath expr="//filter[@name='stage']" position="after">
+                    <filter name="parent_id" string="Parent" context="{'group_by':'parent_id'}"/>
+                    <filter name="expense" string="Expense" domain="[('expense_ticket_flag','=',True)]"/>
+                    <filter name="lead" string="Lead" domain="[('lead_ticket_flag','=',True)]"/>
+           </xpath>
+        </field>
+    </record>
+    
+    
+    
+    
+    
+    
+</odoo>
+
+
+

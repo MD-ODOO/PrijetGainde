@@ -1,0 +1,295 @@
+<odoo>
+  <record id="action_treasury_payroll_batch" model="ir.actions.act_window">
+    <field name="name">Lots décaissement paie</field>
+    <field name="res_model">treasury.payroll.batch</field>
+    <field name="view_mode">list,form,pivot,graph</field>
+    <field name="context">{'group_by': ['batch_type', 'state']}</field>
+  </record>
+
+  <record id="view_treasury_payroll_batch_tree" model="ir.ui.view">
+    <field name="model">treasury.payroll.batch</field>
+    <field name="arch" type="xml">
+      <list decoration-success="state == 'paid'"
+            decoration-warning="state == 'validated'"
+            decoration-info="state == 'scheduled'"
+            decoration-muted="state == 'to_pay'"
+            string="Lots de décaissement paie"
+            multi_edit="1">
+        <field name="name" string="Référence"/>
+        <field name="period_start" string="Période"/>
+        <field name="period_end" string="Fin" optional="hide"/>
+        <field name="batch_type" string="Type"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}" string="Total à payer"/>
+        <field name="total_net" widget="monetary" options="{'currency_field': 'currency_id'}" optional="show" string="Net salaires"/>
+        <field name="total_ipress" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
+        <field name="total_cfce" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
+        <field name="total_family_allowance" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
+        <field name="total_income_tax" widget="monetary" options="{'currency_field': 'currency_id'}" optional="hide"/>
+        <field name="partner_id" optional="show" string="Bénéficiaire"/>
+        <field name="journal_id" optional="show" string="Journal"/>
+        <field name="planned_payment_date" optional="show" string="Date prévue"/>
+        <field name="payroll_payment_id" optional="show" string="Ordre de décaissement"/>
+        <field name="state" widget="badge"
+               decoration-success="state == 'paid'"
+               decoration-warning="state == 'validated'"
+               decoration-info="state == 'scheduled'"
+               decoration-muted="state == 'to_pay'"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_payroll_batch_form" model="ir.ui.view">
+    <field name="model">treasury.payroll.batch</field>
+    <field name="arch" type="xml">
+      <form string="Lot de décaissement paie">
+        <header>
+          <!-- Étape 1 : Programmer le règlement (crée un ordre trésorerie, à régler plus tard) -->
+          <button name="action_schedule_payment" type="object"
+                  string="Programmer le règlement"
+                  class="btn-primary"
+                  invisible="state not in ['to_pay']"
+                  help="Crée un ordre de décaissement trésorerie avec la date prévue. Le paiement effectif se fait ultérieurement."/>
+          <!-- Étape 2 : Valider (contrôle bulletins + solde) -->
+          <button name="action_validate" type="object"
+                  string="Valider"
+                  class="btn-secondary"
+                  invisible="state not in ['to_pay','scheduled']"
+                  help="Vérifie les bulletins et le solde des comptes, puis valide le lot."/>
+          <!-- Étape 3 : Payer immédiatement -->
+          <button name="action_pay" type="object"
+                  string="Payer maintenant"
+                  class="btn-primary"
+                  invisible="state not in ['scheduled','validated']"
+                  help="Génère le paiement comptable et marque le lot comme payé."/>
+          <field name="state" widget="statusbar" statusbar_visible="to_pay,scheduled,validated,paid"/>
+        </header>
+        <sheet>
+          <!-- Smart buttons -->
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_payroll_payment" type="object"
+                    class="oe_stat_button" icon="fa-file-text-o"
+                    invisible="not payroll_payment_id">
+              <div class="o_stat_info">
+                <span class="o_stat_text">Ordre de décaissement</span>
+              </div>
+            </button>
+            <button name="action_view_payment" type="object"
+                    class="oe_stat_button" icon="fa-credit-card"
+                    invisible="not payment_id and not payment_move_id">
+              <div class="o_stat_info">
+                <span class="o_stat_text">Paiement comptable</span>
+              </div>
+            </button>
+            <button name="action_view_payslips" type="object"
+                    class="oe_stat_button" icon="fa-users"
+                    invisible="not payslip_ids">
+              <field name="payslip_ids" widget="statinfo" string="Bulletins"/>
+            </button>
+          </div>
+
+          <!-- Alertes -->
+          <div class="alert alert-info d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="state != 'to_pay'">
+            <i class="fa fa-info-circle fa-lg"/>
+            <div>
+              Renseignez le <strong>bénéficiaire</strong>, le <strong>journal</strong> et la
+              <strong>date de règlement prévue</strong>, puis cliquez sur
+              <em>Programmer le règlement</em> pour créer l'ordre de décaissement.
+            </div>
+          </div>
+          <div class="alert alert-warning d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="state not in ['to_pay'] or (partner_id and journal_id)">
+            <i class="fa fa-exclamation-triangle fa-lg"/>
+            <div>
+              <strong>Informations de paiement incomplètes.</strong>
+              Veuillez renseigner le bénéficiaire et le journal avant de programmer.
+            </div>
+          </div>
+          <div class="alert alert-primary d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="state != 'scheduled'">
+            <i class="fa fa-calendar-check-o fa-lg"/>
+            <div>
+              <strong>Règlement programmé.</strong>
+              L'ordre de décaissement a été créé. Cliquez sur <em>Payer maintenant</em>
+              lorsque vous souhaitez effectuer le règlement.
+            </div>
+          </div>
+          <div class="alert alert-success d-flex align-items-center gap-2 mb-3" role="alert"
+               invisible="state != 'paid'">
+            <i class="fa fa-check-circle fa-lg"/>
+            <div>
+              <strong>Lot payé.</strong>
+              Ce lot de décaissement a été réglé.
+            </div>
+          </div>
+
+          <div class="oe_title">
+            <h1><field name="name" readonly="1"/></h1>
+          </div>
+
+          <group>
+            <group string="Informations du lot">
+              <field name="batch_type" readonly="1"/>
+              <field name="period_start" readonly="1"/>
+              <field name="period_end" readonly="1"/>
+              <field name="company_id" readonly="1"/>
+              <field name="currency_id" invisible="1"/>
+              <field name="ignored_line_count" readonly="1" invisible="not ignored_line_count"
+                     string="Lignes ignorées (sans compte)"/>
+            </group>
+            <group string="Paramètres de règlement">
+              <field name="partner_id" readonly="state in ['validated','paid']"/>
+              <field name="journal_id" readonly="state in ['validated','paid']"/>
+              <field name="planned_payment_date" readonly="state in ['validated','paid']"
+                     string="Date de règlement prévue"/>
+              <field name="payroll_payment_id" readonly="1" invisible="not payroll_payment_id"
+                     string="Ordre de décaissement lié"/>
+            </group>
+          </group>
+
+          <group string="Récapitulatif des montants">
+            <group>
+              <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Total à décaisser"/>
+              <field name="total_net" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Net salaires"
+                     invisible="batch_type != '42'"/>
+            </group>
+            <group>
+              <field name="total_ipress" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="IPRESS / IPRES"
+                     invisible="batch_type not in ['42','43']"/>
+              <field name="total_cfce" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="CFCE"
+                     invisible="batch_type not in ['42','43']"/>
+              <field name="total_family_allowance" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Allocations familiales"
+                     invisible="batch_type not in ['42','43']"/>
+              <field name="total_income_tax" widget="monetary" options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Impôt sur le revenu"
+                     invisible="batch_type != '44'"/>
+            </group>
+          </group>
+
+          <field name="payment_id" invisible="1"/>
+          <field name="payment_move_id" invisible="1"/>
+          <notebook>
+            <page string="Bulletins de paie">
+              <field name="payslip_ids" readonly="1">
+                <list create="false" edit="false"
+                      decoration-success="state == 'done'"
+                      decoration-warning="state == 'verify'"
+                      decoration-muted="state == 'cancel'">
+                  <field name="number" string="Référence"/>
+                  <field name="employee_id" string="Employé"/>
+                  <field name="date_from" string="Début"/>
+                  <field name="date_to" string="Fin"/>
+                  <field name="net_wage" string="Net à payer" widget="monetary"
+                         optional="show"/>
+                  <field name="treasury_payment_id" string="Décaissement individuel" optional="show"/>
+                  <field name="state" widget="badge"
+                         decoration-success="state == 'done'"
+                         decoration-warning="state == 'verify'"
+                         decoration-danger="state == 'cancel'"/>
+                </list>
+              </field>
+            </page>
+            <page string="Lignes retenues">
+              <field name="payslip_line_ids" readonly="1">
+                <list create="false" edit="false">
+                  <field name="slip_id" string="Bulletin"/>
+                  <field name="code" string="Code"/>
+                  <field name="name" string="Rubrique"/>
+                  <field name="total" string="Montant"/>
+                  <field name="salary_rule_id" string="Règle" optional="hide"/>
+                </list>
+              </field>
+            </page>
+            <page string="Lignes ignorées" invisible="not ignored_line_count">
+              <p class="text-muted">
+                Ces lignes n'ont pas de compte de tiers correspondant aux racines 42/43/44
+                et ne sont pas incluses dans le décaissement.
+              </p>
+              <field name="ignored_line_ids" readonly="1">
+                <list create="false" edit="false">
+                  <field name="slip_id"/>
+                  <field name="code"/>
+                  <field name="name"/>
+                  <field name="total"/>
+                  <field name="salary_rule_id"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_treasury_payroll_batch_search" model="ir.ui.view">
+    <field name="model">treasury.payroll.batch</field>
+    <field name="arch" type="xml">
+      <search string="Recherche lot paie">
+        <field name="name"/>
+        <field name="batch_type"/>
+        <field name="state"/>
+        <field name="period_start"/>
+        <field name="period_end"/>
+        <filter name="filter_to_pay" string="À traiter" domain="[('state','=','to_pay')]"/>
+        <filter name="filter_scheduled" string="Programmé" domain="[('state','=','scheduled')]"/>
+        <filter name="filter_validated" string="Validé" domain="[('state','=','validated')]"/>
+        <filter name="filter_paid" string="Payé" domain="[('state','=','paid')]"/>
+        <filter name="filter_pending" string="En instance" domain="[('state','in',['to_pay','scheduled','validated'])]"/>
+        <separator/>
+        <filter name="filter_current_month" string="Mois en cours"
+                domain="[('period_start','&gt;=',(context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+                          ('period_end','&lt;=',(context_today() + relativedelta(months=1,day=1,days=-1)).strftime('%Y-%m-%d'))]"/>
+        <group expand="0" string="Group By">
+          <filter name="group_batch_type" string="Type" context="{'group_by': 'batch_type'}"/>
+          <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="view_treasury_payroll_batch_graph" model="ir.ui.view">
+    <field name="model">treasury.payroll.batch</field>
+    <field name="arch" type="xml">
+      <graph string="Lots paie" type="bar">
+        <field name="amount_total" type="measure"/>
+        <field name="batch_type" type="row"/>
+        <field name="state" type="col"/>
+      </graph>
+    </field>
+  </record>
+
+  <!-- Actions serveur pour opérations en masse depuis la liste -->
+  <record id="action_payroll_batch_schedule" model="ir.actions.server">
+    <field name="name">Programmer le règlement</field>
+    <field name="model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_view_types">list</field>
+    <field name="state">code</field>
+    <field name="code">records.action_schedule_payment()</field>
+  </record>
+
+  <record id="action_payroll_batch_validate" model="ir.actions.server">
+    <field name="name">Valider la sélection</field>
+    <field name="model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_view_types">list</field>
+    <field name="state">code</field>
+    <field name="code">records.action_validate()</field>
+  </record>
+
+  <record id="action_payroll_batch_pay" model="ir.actions.server">
+    <field name="name">Payer la sélection</field>
+    <field name="model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_model_id" ref="treasury_management.model_treasury_payroll_batch"/>
+    <field name="binding_view_types">list</field>
+    <field name="state">code</field>
+    <field name="code">records.action_pay()</field>
+  </record>
+</odoo>

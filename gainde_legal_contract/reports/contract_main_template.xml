@@ -1,0 +1,98 @@
+<template id="report_legal_contract_final">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <!-- On n'utilise PAS external_layout pour avoir un contrôle total sur le design GAINDE -->
+            <t t-call="web.basic_layout">
+
+                <!-- EN-TÊTE (Header) -->
+                <div class="header">
+                    <div class="row">
+                        <div class="col-6">
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                 style="max-height: 80px;" alt="Logo GAINDE"/>
+                        </div>
+                        <div class="col-6 text-end" style="font-size: 10pt; color: #444;">
+                            <strong t-field="doc.company_id.name"/>
+                            <br/>
+                            <span>Référence :</span>
+                            <span t-field="doc.name"/>
+                            <br/>
+                            <span>Date :</span>
+                            <span t-field="doc.date_start" t-options='{"widget": "date"}'/>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 2px solid #0055A4; margin-top: 10px;"/>
+                </div>
+
+                <!-- CONTENU (Page) -->
+                <div class="article mt-5" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id">
+                    <div class="page" style="font-family: 'Arial', sans-serif; text-align: justify; padding-top: 20px;">
+
+                        <!-- 2. BLOC IDENTIFICATION : Uniquement pour Personnel et Marchés -->
+                        <t t-if="doc.contract_category in ['employee', 'business']">
+                            <t t-call="gainde_legal_contract.report_contract_identification_header"/>
+                        </t>
+                        <!-- Appel dynamique des sous-templates (CDD, Marché, NDA...) -->
+                        <t t-if="doc.contract_category == 'employee'">
+                            <t t-call="gainde_legal_contract.report_contract_employee_body"/>
+                        </t>
+                        <t t-if="doc.contract_category == 'business'">
+                            <t t-call="gainde_legal_contract.report_contract_market_body"/>
+                        </t>
+                        <t t-if="doc.contract_category == 'nda'">
+                            <t t-call="gainde_legal_contract.report_contract_nda_body"/>
+                        </t>
+                        <t t-if="doc.contract_category == 'protocol'">
+                            <t t-call="gainde_legal_contract.report_contract_protocol_body"/>
+                        </t>
+
+                        <!-- Signatures (à la fin du contenu) -->
+                        <div class="row mt-5" style="page-break-inside: avoid;">
+                            <div class="col-6 text-center">
+                                <strong>Pour GAINDE 2000</strong>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <span>L'Administrateur Général</span>
+                            </div>
+                            <div class="col-6 text-center">
+                                <strong>Pour le
+                                    <t t-esc="doc.partner_role"/>
+                                </strong>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <span t-field="doc.representative_name"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PIED DE PAGE (Footer) -->
+                <div class="footer" style="border-top: 1px solid #ddd; font-size: 8pt; color: #777;">
+                    <div class="text-center">
+                        <ul class="list-inline mb-1">
+                            <li class="list-inline-item"><span t-field="doc.company_id.street"/>,<span
+                                    t-field="doc.company_id.city"/>,
+                                <span t-field="doc.company_id.country_id.name"/>
+                            </li>
+                            <li class="list-inline-item">- NINEA :
+                                <span t-field="doc.company_id.vat"/>
+                            </li>
+                            <li class="list-inline-item">- Tél :
+                                <span t-field="doc.company_id.phone"/>
+                            </li>
+                        </ul>
+                        <div class="text-muted">
+                            Page:
+                            <span class="page"/>
+                            /
+                            <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+            </t>
+        </t>
+    </t>
+</template>

@@ -1,0 +1,11 @@
+<odoo>
+    <record id="rule_hr_contract_block_employee" model="ir.rule">
+        <field name="name">HR Contract - Block Non HR</field>
+        <field name="model_id" ref="hr_contract.model_hr_contract"/>
+        <field name="groups" eval="[
+            (4, ref('group_employee_restricted')),
+            (4, ref('group_department_manager'))
+        ]"/>
+        <field name="domain_force">[('id','=',False)]</field>
+    </record>
+</odoo>

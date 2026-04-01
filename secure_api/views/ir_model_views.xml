@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>    
+        <record id="action_secure_api_form_from_model" model="ir.actions.act_window">
+            <field name="name">New API</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                'default_model_ids': [active_id]
+            }
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+            </field>
+        </record>
+
+        <record id="action_secure_api_model_common" model="ir.actions.act_window">
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <!-- ## v18 <field name="view_mode">list,form</field> -->
+            <field name="domain"></field>
+            <field name="search_view_id" ref="secure_api.secure_api_tree_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+            </field>
+        </record>
+
+        <record id="secure_api_ir_model_kanban_view" model="ir.ui.view">
+            <field name="name">secure_api_ir_model_kanban_view</field>
+            <field name="model">ir.model</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+                    <!-- <field name="color"/> -->
+                    <!-- <field name="code" readonly="1"/> -->
+                    <field name="api_count"/>
+                    <field name="api_count_active"/>
+                    <field name="api_count_draft"/>
+                    <field name="api_count_inactive"/>
+                    <!-- <field name="count_picking_backorders"/> -->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div name="secure_api_ir_model">
+                                <div>
+                                    <div t-attf-class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary" t-if="!selection_mode">
+                                                <a type="object" name="get_action_secure_api_model_all">
+                                                    <field name="name"/>
+                                                </a>
+                                            </div>
+                                            <div class="o_primary" t-if="selection_mode">
+                                                <field name="name"/>
+                                            </div>
+                                            <div class="o_secondary"><field class="o_secondary"  name="model" readonly="1"/></div>
+                                        </div>
+                                        <div class="o_kanban_manage_button_section" t-if="!selection_mode">
+                                            <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                        <div class="row">
+                                            <div class="col-6 o_kanban_primary_left">
+                                                <button t-if="record.api_count_active.raw_value>0" class="btn btn-primary" name="get_action_secure_api_model_published" type="object">
+                                                    <span t-if="record.api_count_active.raw_value==1"><t t-esc="record.api_count_active.value"/> Active API</span>
+                                                    <span t-if="record.api_count_active.raw_value>1"><t t-esc="record.api_count_active.value"/> Active APIs</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-6 o_kanban_primary_right">
+                                                <div t-if="record.api_count_active.raw_value > 0" class="row">
+                                                </div>
+
+                                                <div t-if="record.api_count_draft.raw_value > 0" class="row">
+                                                    <div class="col-12">
+                                                        <a name="get_action_secure_api_model_draft" type="object">
+                                                            <field name="api_count_draft"/>
+                                                            Draft
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div t-if="record.api_count_inactive.raw_value > 0" class="row">
+                                                    <div class="col-12">
+                                                        <a class="oe_kanban_stock_picking_type_list" name="get_action_secure_api_model_inactive" type="object">
+                                                            <field name="api_count_inactive"/>
+                                                            Inactive
+                                                        </a>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                        <div class="row">
+                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                                <div role="menuitem" class="o_kanban_card_manage_title">
+                                                    <span>APIs</span>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_model_all" type="object">All</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_model_published" type="object">Active</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_model_draft" type="object">Draft</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_model_inactive" type="object">Inactive</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">
+                                                <div role="menuitem" class="o_kanban_card_manage_title">
+                                                    <span>New</span>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="%(action_secure_api_form_from_model)d" type="action">Draft API</a>
+                                                </div>                                                
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_secure_api_exposed_model" model="ir.actions.act_window">
+            <field name="name">Model Registry</field>
+            <field name="res_model">ir.model</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="domain">[('api_count', '&gt;', 0)]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No models exposed for APIs.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem
+            id="menu_secure_api_exposed_model"
+            name="Model Registry"
+            action="action_secure_api_exposed_model"            
+            parent="secure_api.menu_secure_api" sequence="20"/>
+    </data>
+</odoo>

@@ -1,0 +1,558 @@
+{
+    "content": [
+        {
+            "montantFacture": 17700.0,
+            "referencePanier": "230220267661487479",
+            "numeroDossier": "GUDE200220265KSBR",
+            "numeroPaiement": "431320260223003840",
+            "datePaiement": "2026-02-23 00:34",
+            "dateGenerateReference": "2026-02-23 00:34",
+            "payer": true,
+            "transitaire": "08293",
+            "connaissement": "MEDUWP106976",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 17700.0,
+                    "reference": "REF6713091",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 4500.0,
+            "referencePanier": "23022026074096270R",
+            "numeroDossier": "GUDE23022026AX",
+            "numeroPaiement": "431320260223014752",
+            "datePaiement": "2026-02-23 01:44",
+            "dateGenerateReference": "2026-02-23 01:43",
+            "payer": true,
+            "transitaire": "TR101",
+            "connaissement": "263574978",
+            "destination": "GAMBIE",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 4500.0,
+                    "reference": "REF2002S87",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "230220264262368722",
+            "numeroDossier": "GUDE170220260UULS",
+            "numeroPaiement": "431320260223015609",
+            "datePaiement": "2026-02-23 01:52",
+            "dateGenerateReference": "2026-02-23 01:52",
+            "payer": true,
+            "transitaire": "TR101",
+            "connaissement": "HLCUSEL251150199",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF2S6713H",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 53100.0,
+            "referencePanier": "23022026792562092E",
+            "numeroDossier": "GUDE200220266E",
+            "numeroPaiement": "431320260223072821",
+            "datePaiement": "2026-02-23 07:24",
+            "dateGenerateReference": "2026-02-23 07:22",
+            "payer": true,
+            "transitaire": "00109",
+            "connaissement": "HLCUBKK251228110",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 53100.0,
+                    "reference": "REF3133QG6",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 17700.0,
+            "referencePanier": "2302202609476340D3",
+            "numeroDossier": "GUDE23022026FE",
+            "numeroPaiement": "2302202696802285F6",
+            "datePaiement": "2026-02-23 08:04",
+            "dateGenerateReference": "2026-02-23 08:04",
+            "payer": true,
+            "transitaire": "136120",
+            "connaissement": "MEDURQ164655",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 17700.0,
+                    "reference": "REF8158UJ1",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "2302202668993827ND",
+            "numeroDossier": "GUDE23022026OO",
+            "numeroPaiement": "430720260223143830",
+            "datePaiement": "2026-02-23 14:35",
+            "dateGenerateReference": "2026-02-23 08:05",
+            "payer": true,
+            "transitaire": "21654",
+            "connaissement": "TJN0801105",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF775111Y",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 53100.0,
+            "referencePanier": "2302202662630390O8",
+            "numeroDossier": "GUDE23022026H3",
+            "numeroPaiement": "430720260223143725",
+            "datePaiement": "2026-02-23 14:33",
+            "dateGenerateReference": "2026-02-23 08:05",
+            "payer": true,
+            "transitaire": "21654",
+            "connaissement": "MEDUWG028618",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 53100.0,
+                    "reference": "REF3A7EH46",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 53100.0,
+            "referencePanier": "230220260666443359",
+            "numeroDossier": "GUDE23022026M3",
+            "numeroPaiement": "23022026257976582F",
+            "datePaiement": "2026-02-23 08:05",
+            "dateGenerateReference": "2026-02-23 08:05",
+            "payer": true,
+            "transitaire": "136120",
+            "connaissement": "MEDURQ044394",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 53100.0,
+                    "reference": "REF2JE3F14",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "230220264580062173",
+            "numeroDossier": "GUDE2302202671",
+            "numeroPaiement": "430720260223143613",
+            "datePaiement": "2026-02-23 14:32",
+            "dateGenerateReference": "2026-02-23 08:05",
+            "payer": true,
+            "transitaire": "21654",
+            "connaissement": "MEDUWG034061",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF87388Y5",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 70800.0,
+            "referencePanier": "230220264018622916",
+            "numeroDossier": "GUDE23022026Y3",
+            "numeroPaiement": "430720260223143451",
+            "datePaiement": "2026-02-23 14:31",
+            "dateGenerateReference": "2026-02-23 08:06",
+            "payer": true,
+            "transitaire": "21654",
+            "connaissement": "MEDUJH831110",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 70800.0,
+                    "reference": "REF9718833",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 177000.0,
+            "referencePanier": "2302202663601610P3",
+            "numeroDossier": "GUDE23022026A7",
+            "numeroPaiement": "431320260223095021",
+            "datePaiement": "2026-02-23 09:46",
+            "dateGenerateReference": "2026-02-23 08:10",
+            "payer": true,
+            "transitaire": "28164",
+            "connaissement": "MEDURQ082717",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 177000.0,
+                    "reference": "REF3577IN4",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 88500.0,
+            "referencePanier": "2302202697915061MT",
+            "numeroDossier": "GUDE230220261U",
+            "numeroPaiement": "230220267167640000",
+            "datePaiement": "2026-02-23 08:13",
+            "dateGenerateReference": "2026-02-23 08:13",
+            "payer": true,
+            "transitaire": "31759",
+            "connaissement": "MEDURQ032159",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 88500.0,
+                    "reference": "REF434FPE7",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 442500.0,
+            "referencePanier": "23022026711742524L",
+            "numeroDossier": "GUDE2302202641",
+            "numeroPaiement": "230220268864988173",
+            "datePaiement": "2026-02-23 08:21",
+            "dateGenerateReference": "2026-02-23 08:21",
+            "payer": true,
+            "transitaire": "00002",
+            "connaissement": "MEDUW7040886",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 442500.0,
+                    "reference": "REF91E7331",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "2302202604807248I0",
+            "numeroDossier": "GUDE2302202684",
+            "numeroPaiement": "2302202694570765J8",
+            "datePaiement": "2026-02-23 08:22",
+            "dateGenerateReference": "2026-02-23 08:22",
+            "payer": true,
+            "transitaire": "34049",
+            "connaissement": "COP0298349",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF77R370I",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "23022026768854168K",
+            "numeroDossier": "GUDE2002202618",
+            "numeroPaiement": "431320260223082827",
+            "datePaiement": "2026-02-23 08:24",
+            "dateGenerateReference": "2026-02-23 08:24",
+            "payer": true,
+            "transitaire": "108551",
+            "connaissement": "CHN2954382",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF83S5H58",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "230220263746246624",
+            "numeroDossier": "GUDE230220267E",
+            "numeroPaiement": "230220266848478161",
+            "datePaiement": "2026-02-23 08:24",
+            "dateGenerateReference": "2026-02-23 08:24",
+            "payer": true,
+            "transitaire": "34049",
+            "connaissement": "COP0298339",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF63J7MO4",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "2302202640106651K4",
+            "numeroDossier": "GUDE23022026V9",
+            "numeroPaiement": "230220265693039307",
+            "datePaiement": "2026-02-23 08:30",
+            "dateGenerateReference": "2026-02-23 08:30",
+            "payer": true,
+            "transitaire": "163220",
+            "connaissement": "LHV3937581",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REFXK1R687",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 177000.0,
+            "referencePanier": "2302202636819787K8",
+            "numeroDossier": "GUDE230220269F",
+            "numeroPaiement": "2302202639951577L3",
+            "datePaiement": "2026-02-23 08:30",
+            "dateGenerateReference": "2026-02-23 08:30",
+            "payer": true,
+            "transitaire": "31759",
+            "connaissement": "CFA0871297",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 177000.0,
+                    "reference": "REFEZYR7R1",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 17700.0,
+            "referencePanier": "23022026986213411F",
+            "numeroDossier": "GUDE200220262YO5R",
+            "numeroPaiement": "230220263183156671",
+            "datePaiement": "2026-02-23 08:38",
+            "dateGenerateReference": "2026-02-23 08:38",
+            "payer": true,
+            "transitaire": "34049",
+            "connaissement": "260131120",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 17700.0,
+                    "reference": "REF8667771",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 45000.0,
+            "referencePanier": "2302202667908206G9",
+            "numeroDossier": "GUDE23022026Z4",
+            "numeroPaiement": "431320260223084643",
+            "datePaiement": "2026-02-23 08:43",
+            "dateGenerateReference": "2026-02-23 08:42",
+            "payer": true,
+            "transitaire": "91653",
+            "connaissement": "MEDUO9571870",
+            "destination": "GUINEE CONAKRY",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 45000.0,
+                    "reference": "REF79Y381T",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 9000.0,
+            "referencePanier": "2302202651511760N1",
+            "numeroDossier": "GUDE20022026JN",
+            "numeroPaiement": "431320260223103948",
+            "datePaiement": "2026-02-23 10:35",
+            "dateGenerateReference": "2026-02-23 08:42",
+            "payer": true,
+            "transitaire": "135574",
+            "connaissement": "263638392",
+            "destination": "GUINEE CONAKRY",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 9000.0,
+                    "reference": "REF1011F06",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 9000.0,
+            "referencePanier": "230220269892358077",
+            "numeroDossier": "GUDE200220269E",
+            "numeroPaiement": "431320260223103848",
+            "datePaiement": "2026-02-23 10:35",
+            "dateGenerateReference": "2026-02-23 08:43",
+            "payer": true,
+            "transitaire": "135574",
+            "connaissement": "262844122",
+            "destination": "GUINEE CONAKRY",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 9000.0,
+                    "reference": "REFR3740S0",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 9000.0,
+            "referencePanier": "23022026941101827D",
+            "numeroDossier": "GUDE20022026XA",
+            "numeroPaiement": "431320260223103735",
+            "datePaiement": "2026-02-23 10:33",
+            "dateGenerateReference": "2026-02-23 08:43",
+            "payer": true,
+            "transitaire": "135574",
+            "connaissement": "263221454",
+            "destination": "GUINEE CONAKRY",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 9000.0,
+                    "reference": "REF4267GQ1",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "230220262986630773",
+            "numeroDossier": "GUDE2302202687DWI",
+            "numeroPaiement": "431320260223085649",
+            "datePaiement": "2026-02-23 08:53",
+            "dateGenerateReference": "2026-02-23 08:52",
+            "payer": true,
+            "transitaire": "91283",
+            "connaissement": "HLCUANR260125180",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF97W78P4",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        },
+        {
+            "montantFacture": 35400.0,
+            "referencePanier": "230220269785013587",
+            "numeroDossier": "GUDE20022026V040K",
+            "numeroPaiement": "431320260223090032",
+            "datePaiement": "2026-02-23 08:56",
+            "dateGenerateReference": "2026-02-23 08:55",
+            "payer": true,
+            "transitaire": "91861",
+            "connaissement": "NGP3013216",
+            "destination": "SÉNÉGAL",
+            "collectionneur": false,
+            "factures": [
+                {
+                    "libelle": "Frais ORBUS INFINITY",
+                    "montant": 35400.0,
+                    "reference": "REF572XXOM",
+                    "code": "5000",
+                    "paid": true
+                }
+            ]
+        }
+    ],
+    "totalElements": 413,
+    "totalPages": 17,
+    "size": 25,
+    "number": 0
+}

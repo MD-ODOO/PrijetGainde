@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="asset_management_override.AssetDashboard">
+    <div class="o_asset_db_root">
+        <div class="o_asset_db_scroll">
+            <div class="o_asset_db_page">
+
+                <!-- ── Header ───────────────────────────────── -->
+                <div class="o_asset_db_topbar">
+                    <div class="o_asset_db_topbar_left">
+                        <div class="o_asset_db_topbar_icon">
+                            <i class="fa fa-building-o"/>
+                        </div>
+                        <div>
+                            <h1 class="o_asset_db_topbar_title">Tableau de bord</h1>
+                            <p class="o_asset_db_topbar_sub">Gestion des actifs immobilisés</p>
+                        </div>
+                    </div>
+                    <div class="o_asset_db_topbar_right">
+                        <div class="o_asset_db_filter_group">
+                            <span class="o_asset_db_filter_label" style="font-size:12px;color:#64748b;">
+                                État actuel du parc
+                            </span>
+                        </div>
+                        <div class="o_asset_db_filter_group">
+                            <label class="o_asset_db_filter_label">&#160;</label>
+                            <button class="o_asset_db_refresh_btn"
+                                    t-att-disabled="state.loading ? true : undefined"
+                                    t-on-click="onRefresh">
+                                <i t-att-class="state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh'"/>
+                                <span>Actualiser</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Loading ──────────────────────────────── -->
+                <t t-if="state.loading">
+                    <div class="o_asset_db_loading">
+                        <div class="o_asset_db_spinner"/>
+                        <span>Chargement des données…</span>
+                    </div>
+                </t>
+
+                <t t-if="!state.loading and state.data">
+
+                    <!-- ── KPI Row (3 columns) ───────────────── -->
+                    <div class="o_asset_db_kpi_row">
+
+                        <div class="o_asset_db_kpi o_asset_db_kpi_indigo o_asset_db_clickable"
+                             data-kpi="count"
+                             t-on-click="onClickKpi">
+                            <div class="o_asset_db_kpi_left">
+                                <span class="o_asset_db_kpi_label">Actifs en portefeuille</span>
+                                <span class="o_asset_db_kpi_num" t-esc="state.data.total_assets"/>
+                                <span class="o_asset_db_kpi_note">actifs en cours de cycle de vie</span>
+                            </div>
+                            <div class="o_asset_db_kpi_badge o_asset_db_badge_indigo">
+                                <i class="fa fa-cubes"/>
+                            </div>
+                            <i class="fa fa-arrow-right o_asset_db_kpi_arrow"/>
+                        </div>
+
+                        <div class="o_asset_db_kpi o_asset_db_kpi_teal o_asset_db_clickable"
+                             data-kpi="value"
+                             t-on-click="onClickKpi">
+                            <div class="o_asset_db_kpi_left">
+                                <span class="o_asset_db_kpi_label">Valeur globale du parc</span>
+                                <span class="o_asset_db_kpi_num o_asset_db_kpi_num_lg"
+                                      t-esc="formatCompact(state.data.total_value)"/>
+                                <span class="o_asset_db_kpi_note"
+                                      t-esc="formatCurrency(state.data.total_value)"/>
+                            </div>
+                            <div class="o_asset_db_kpi_badge o_asset_db_badge_teal">
+                                <i class="fa fa-line-chart"/>
+                            </div>
+                            <i class="fa fa-arrow-right o_asset_db_kpi_arrow"/>
+                        </div>
+
+                        <div class="o_asset_db_kpi o_asset_db_kpi_violet o_asset_db_clickable"
+                             data-kpi="affectation"
+                             t-on-click="onClickKpi">
+                            <div class="o_asset_db_kpi_left">
+                                <span class="o_asset_db_kpi_label">Taux d'affectation</span>
+                                <span class="o_asset_db_kpi_num o_asset_db_kpi_num_lg">
+                                    <t t-esc="affectationRate"/>%
+                                </span>
+                                <span class="o_asset_db_kpi_note">
+                                    <t t-esc="affectationCount"/> actifs affectés
+                                </span>
+                            </div>
+                            <div class="o_asset_db_kpi_badge o_asset_db_badge_violet">
+                                <i class="fa fa-check-circle"/>
+                            </div>
+                            <i class="fa fa-arrow-right o_asset_db_kpi_arrow"/>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Status section ───────────────────── -->
+                    <div class="o_asset_db_section_head">
+                        <span class="o_asset_db_section_title">Répartition par statut</span>
+                        
+                    </div>
+
+                    <div class="o_asset_db_status_panel">
+
+                        <!-- Donut chart -->
+                        <div class="o_asset_db_donut_panel">
+                            <svg class="o_asset_db_donut_svg"
+                                 viewBox="0 0 120 120"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="60" r="54"
+                                        fill="none"
+                                        stroke="#f1f5f9"
+                                        stroke-width="14"/>
+                                <t t-foreach="donutSegments" t-as="seg" t-key="seg_index">
+                                    <circle cx="60" cy="60" r="54"
+                                            fill="none"
+                                            t-att-stroke="seg.color"
+                                            stroke-width="14"
+                                            stroke-linecap="butt"
+                                            t-att-stroke-dasharray="seg.strokeDasharray"
+                                            t-att-stroke-dashoffset="seg.strokeDashoffset"/>
+                                </t>
+                                <text x="60" y="56"
+                                      text-anchor="middle"
+                                      class="o_asset_db_donut_total_num"
+                                      t-esc="state.data.total_assets"/>
+                                <text x="60" y="70"
+                                      text-anchor="middle"
+                                      class="o_asset_db_donut_total_lbl">actifs</text>
+                            </svg>
+                            <div class="o_asset_db_donut_legend">
+                                <t t-foreach="donutSegments" t-as="seg" t-key="seg_index">
+                                    <div class="o_asset_db_donut_legend_row">
+                                        <span class="o_asset_db_donut_legend_dot"
+                                              t-att-style="`background:${seg.color};`"/>
+                                        <span class="o_asset_db_donut_legend_label"
+                                              t-esc="seg.label"/>
+                                        <span class="o_asset_db_donut_legend_pct">
+                                            <t t-esc="seg.pct"/>%
+                                        </span>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+
+                        <!-- Status cards -->
+                        <div class="o_asset_db_status_grid">
+                            <t t-foreach="state.data.status_data" t-as="s" t-key="s.status">
+                                <div class="o_asset_db_stat_card o_asset_db_clickable"
+                                     t-att-data-status="s.status"
+                                     t-att-data-label="s.label"
+                                     t-on-click="onClickStatus">
+                                    <div class="o_asset_db_stat_top">
+                                        <div class="o_asset_db_stat_chip"
+                                             t-att-style="`background:${statusConfig(s.status).bg}; color:${statusConfig(s.status).color};`">
+                                            <i t-att-class="'fa ' + statusConfig(s.status).icon"/>
+                                            <span t-esc="s.label"/>
+                                        </div>
+                                        <span class="o_asset_db_stat_pct"
+                                              t-att-style="`color:${statusConfig(s.status).color};`">
+                                            <t t-esc="statusPercent(s.count)"/>%
+                                        </span>
+                                    </div>
+                                    <div class="o_asset_db_stat_count"
+                                         t-att-style="`color:${statusConfig(s.status).color};`"
+                                         t-esc="s.count"/>
+                                    <div class="o_asset_db_stat_bar_track">
+                                        <div class="o_asset_db_stat_bar_fill"
+                                             t-att-style="`width:${statusPercent(s.count)}%; background:${statusConfig(s.status).color};`"/>
+                                    </div>
+                                    <div class="o_asset_db_stat_value" t-esc="formatCurrency(s.value)"/>
+                                </div>
+                            </t>
+                        </div>
+
+                    </div>
+
+                    <!-- ── Location section ─────────────────── -->
+                    <div class="o_asset_db_section_head">
+                        <span class="o_asset_db_section_title">Répartition par localisation</span>
+                        <span class="o_asset_db_section_count">
+                            <t t-esc="state.data.location_data.length"/> site(s)
+                        </span>
+                    </div>
+
+                    <t t-if="state.data.location_data.length === 0">
+                        <div class="o_asset_db_empty">
+                            <i class="fa fa-map-o" style="font-size:28px; margin-bottom:8px;"/>
+                            <span>Aucune donnée de localisation disponible.</span>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_asset_db_loc_grid">
+                            <t t-foreach="state.data.location_data" t-as="loc" t-key="loc.location">
+                                <div class="o_asset_db_loc_card o_asset_db_clickable"
+                                     t-att-data-loc-id="loc.localisation_id"
+                                     t-att-data-loc-name="loc.location"
+                                     t-on-click="onClickLocation">
+                                    <div class="o_asset_db_loc_head">
+                                        <span class="o_asset_db_rank_badge"
+                                              t-att-style="rankBadge(loc_index).style"
+                                              t-esc="rankBadge(loc_index).text"/>
+                                        <div class="o_asset_db_loc_pin">
+                                            <i class="fa fa-map-marker"/>
+                                        </div>
+                                        <span class="o_asset_db_loc_name" t-esc="loc.location"/>
+                                    </div>
+                                    <div class="o_asset_db_loc_stats">
+                                        <div class="o_asset_db_loc_stat">
+                                            <span class="o_asset_db_loc_stat_val">
+                                                <strong t-esc="loc.count"/>
+                                            </span>
+                                            <span class="o_asset_db_loc_stat_lbl">actifs</span>
+                                        </div>
+                                        <div class="o_asset_db_loc_divider"/>
+                                        <div class="o_asset_db_loc_stat">
+                                            <span class="o_asset_db_loc_stat_val"
+                                                  t-esc="formatCompact(loc.value)"/>
+                                            <span class="o_asset_db_loc_stat_lbl">valeur</span>
+                                        </div>
+                                    </div>
+                                    <div class="o_asset_db_loc_bar_wrap">
+                                        <div class="o_asset_db_loc_bar_track">
+                                            <div class="o_asset_db_loc_bar_fill"
+                                                 t-att-style="`width:${locationPercent(loc.count)}%;`"/>
+                                        </div>
+                                        <span class="o_asset_db_loc_bar_pct">
+                                            <t t-esc="locationPercent(loc.count)"/>%
+                                        </span>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+
+                </t>
+            </div>
+        </div>
+    </div>
+</t>
+
+</templates>

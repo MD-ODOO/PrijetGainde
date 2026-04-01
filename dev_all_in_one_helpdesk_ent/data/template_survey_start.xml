@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle
+ -->
+<odoo>
+    <record id="template_start_survey_dev_helpdesk_survey" model="mail.template">
+        <field name="name">Ticket : Start Survey</field>
+        <field name="subject">Invitation to attend online survey</field>
+        <field name="model_id" ref="model_ticket_survey"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear,
+                    <b>
+                        <t t-out="object.ticket_id and object.ticket_id.partner_id and object.ticket_id.partner_id.name or ''"/>
+                    </b>
+                    <br/>
+                    <br/>
+                    We are conducting a survey of
+                    <strong t-out="object.survey_id and object.survey_id.title or ''"/>
+                    and your response would be appreciated.
+                    <br/><br/>
+                    <div>
+                        <a t-attf-href="{{object.get_survey_url()}}"
+                           style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color : #fff; border-radius: 5px; font-size:13px;">
+                            Start Survey
+                        </a>
+                    </div>
+                    <br/>
+                    Thank you for your interest.
+                </p>
+            </div>
+        </field>
+    </record>
+</odoo>

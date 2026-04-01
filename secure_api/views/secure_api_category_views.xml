@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_category_form_view" model="ir.ui.view">
+            <field name="name">secure_api_category_form_view</field>
+            <field name="model">secure.api.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="New API Category"/></h1>
+                            <!-- <label for="route" string="Route" class="oe_edit_only"/><h3><field name="route" placeholder="/rest/partner/" readonly="state == 'published'"/></h3> -->
+                        </div>
+                        <group name="apis" string="APIs">
+                            <group>
+                                <field name="api_count"/>
+                            </group>
+                            <group></group>
+                            <field name="secure_api_ids" colspan="2" nolabel="1" options="{'no_create_edit': True, 'no_create': True}">
+                                <list default_order="create_date desc">
+                                    <field name="create_date" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="route"/>
+                                    <field name="api_action"/>
+                                    <field name="model_ids" widget="many2many_tags"/>
+                                    <field name="method_ids" widget="many2many_tags"/>
+                                    <field name="rpc_method" optional="hide"/>
+                                    <field name="is_secure_record_id" optional="hide"/>
+                                    <field name="auth" optional="hide"/>
+                                    <field name="cors" optional="hide"/>
+                                    <field name="security_user_id" optional="hide"/>
+                                    <field name="category_id" optional="hide"/>
+                                    <field name="mode"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="secure_api_category_tree_view" model="ir.ui.view">
+            <field name="name">secure_api_category_tree_view</field>
+            <field name="model">secure.api.category</field>
+            <field name="arch" type="xml">
+                <list string="Categories">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="api_count"/>
+                </list>
+            </field>
+        </record>
+        
+        <record id="action_secure_api_form_from_category" model="ir.actions.act_window">
+            <field name="name">New API</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="domain"></field>
+            <field name="context">{
+                'default_category_id': active_id
+            }
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+                <!-- <p>
+                    Transfers allow you to move products from one location to another.
+                </p> -->
+            </field>
+        </record>
+
+        <record id="action_secure_api_category_all" model="ir.actions.act_window">
+            <field name="name">All APIs</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain"></field>
+            <!-- <field name="context">{'contact_display': 'partner_address', 'search_default_available': 1}</field> -->
+            <field name="search_view_id" ref="secure_api.secure_api_tree_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+                <!-- <p>
+                    Transfers allow you to move products from one location to another.
+                </p> -->
+            </field>
+        </record>
+
+        <record id="action_secure_api_category_published" model="ir.actions.act_window">
+            <field name="name">Active APIs</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state', '=', 'published')]</field>
+            <!-- <field name="context">{'contact_display': 'partner_address', 'search_default_available': 1}</field> -->
+            <field name="search_view_id" ref="secure_api.secure_api_tree_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+                <!-- <p>
+                    Transfers allow you to move products from one location to another.
+                </p> -->
+            </field>
+        </record>
+
+        <record id="action_secure_api_category_draft" model="ir.actions.act_window">
+            <field name="name">Draft APIs</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state', '=', 'draft')]</field>
+            <!-- <field name="context">{'contact_display': 'partner_address', 'search_default_available': 1}</field> -->
+            <field name="search_view_id" ref="secure_api.secure_api_tree_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No API found. Let's create one!
+                </p>
+                <!-- <p>
+                    Transfers allow you to move products from one location to another.
+                </p> -->
+            </field>
+        </record>
+
+        <record id="action_secure_api_category_inactive" model="ir.actions.act_window">
+            <field name="name">Inactive APIs</field>
+            <field name="res_model">secure.api</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('state', '=', 'deactivated')]</field>
+            <!-- <field name="context">{'contact_display': 'partner_address', 'search_default_available': 1}</field> -->
+            <field name="search_view_id" ref="secure_api.secure_api_tree_filter"/>
+        </record>
+
+        <record id="secure_api_category_kanban_view" model="ir.ui.view">
+            <field name="name">secure_api_category_kanban_view</field>
+            <field name="model">secure.api.category</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+                    <field name="color"/>
+                    <!-- <field name="code" readonly="1"/> -->
+                    <field name="api_count"/>
+                    <field name="api_count_active"/>
+                    <field name="api_count_draft"/>
+                    <field name="api_count_inactive"/>
+                    <!-- <field name="count_picking_backorders"/> -->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}" name="secure_api_category">
+                                <div>
+                                    <div t-attf-class="o_kanban_card_header">
+                                        <div class="o_kanban_card_header_title">
+                                            <div class="o_primary" t-if="!selection_mode">
+                                                <a type="object" name="get_action_secure_api_category_all">
+                                                    <field name="name"/>
+                                                </a>
+                                            </div>
+                                            <div class="o_primary" t-if="selection_mode">
+                                                <field name="name"/>
+                                            </div>
+                                            <!-- <div class="o_secondary"><field class="o_secondary"  name="warehouse_id" readonly="1" groups="stock.group_stock_multi_warehouses"/></div> -->
+                                        </div>
+                                        <div class="o_kanban_manage_button_section" t-if="!selection_mode">
+                                            <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                        <div class="row">
+                                            <div class="col-6 o_kanban_primary_left">
+                                                <button t-if="record.api_count_active.raw_value>0" class="btn btn-primary" name="get_action_secure_api_category_published" type="object">
+                                                    <span t-if="record.api_count_active.raw_value==1"><t t-esc="record.api_count_active.value"/> Active API</span>
+                                                    <span t-if="record.api_count_active.raw_value>1"><t t-esc="record.api_count_active.value"/> Active APIs</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-6 o_kanban_primary_right">
+                                                <div t-if="record.api_count_active.raw_value > 0" class="row">
+                                                </div>
+
+                                                <div t-if="record.api_count_draft.raw_value > 0" class="row">
+                                                    <div class="col-12">
+                                                        <a name="get_action_secure_api_category_draft" type="object">
+                                                            <field name="api_count_draft"/>
+                                                            Draft
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div t-if="record.api_count_inactive.raw_value > 0" class="row">
+                                                    <div class="col-12">
+                                                        <a class="oe_kanban_stock_picking_type_list" name="get_action_secure_api_category_inactive" type="object">
+                                                            <field name="api_count_inactive"/>
+                                                            Inactive
+                                                        </a>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                        <div class="row">
+                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                                <div role="menuitem" class="o_kanban_card_manage_title">
+                                                    <span>APIs</span>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_category_all" type="object">All</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_category_published" type="object">Active</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_category_draft" type="object">Draft</a>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="get_action_secure_api_category_inactive" type="object">Inactive</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">
+                                                <div role="menuitem" class="o_kanban_card_manage_title">
+                                                    <span>New</span>
+                                                </div>
+                                                <div role="menuitem">
+                                                    <a name="%(action_secure_api_form_from_category)d" type="action">Draft API</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                            <div class="col-8" role="menuitem" aria-haspopup="true">
+                                                <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                            </div>
+                                            <div role="menuitem" class="col-4">
+                                                <a class="dropdown-item" role="menuitem" type="edit">Configuration</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_secure_api_category" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api.category</field>
+            <!-- <field name="search_view_id" ref="secure_ap_tree_filter"/> -->
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'list', 'view_id': ref('secure_api_category_tree_view')}),
+                (0, 0, {'view_mode': 'form', 'view_id': ref('secure_api_category_form_view')})]"/>
+        </record>
+
+        <record id="action_secure_api_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="res_model">secure.api.category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="domain">[('api_count', '&gt;', 0)]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new category
+              </p><p>
+                The operation type system allows you to assign each stock
+                operation a specific type which will alter its views accordingly.
+                On the operation type you could e.g. specify if packing is needed by default,
+                if it should show the customer.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_secure_api_secure_api_category"
+            name="Categories"
+            action="action_secure_api_category"
+            sequence="20"
+            parent="secure_api.menu_secure_api_configuration"
+            groups="base.group_system"/>
+        
+        <menuitem
+            id="menu_secure_api_dashboard"
+            name="Dashboard"
+            action="action_secure_api_dashboard"            
+            parent="secure_api.menu_secure_api" sequence="0"/>
+    </data>
+</odoo>

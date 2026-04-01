@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.employee.loan</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="85"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Loan Management" string="Loan Management" name="xf_loan"
+                         logo="/xf_loan/static/description/icon.png"
+                         groups="xf_loan.group_xf_loan_administrator">
+                        <block title="Employee Loan Management">
+                            <setting id="max_loan_amount"
+                                     title="Maximum loan amount. No limit if set to zero. Values set here are company-specific."
+                                     help="Maximum loan amount. No limit if set to zero. Values set here are company-specific.">
+                                <field name="max_loan_amount" class="o_light_label"/>
+                            </setting>
+                            <setting id="max_num_months"
+                                     title="Maximum loan term in months. No limit if set to zero. Values set here are company-specific."
+                                     help="Maximum loan term in months. No limit if set to zero. Values set here are company-specific.">
+                                <field name="max_num_months" class="o_light_label"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_xf_loan_configuration" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'xf_loan', 'bin_size': False}</field>
+        </record>
+
+        <menuitem id="menu_xf_loan_global_settings" name="Settings"
+                  parent="menu_xf_loan_configuration" sequence="0"
+                  action="action_xf_loan_configuration"
+                  groups="base.group_system"/>
+    </data>
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default approval route for purchase.request -->
+        <record id="xf_route_purchase_request_default" model="approval.route">
+            <field name="name">Route par défaut - Demandes d'achat</field>
+            <field name="model_id" ref="model_purchase_request"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Étapes -->
+        <record id="xf_stage_n1_approval" model="approval.route.stage">
+            <field name="name">Approbation N+1</field>
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_rnd_approval" model="approval.route.stage">
+            <field name="name">Approbation RND</field>
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_approval" model="approval.route.stage">
+            <field name="name">Approbation RCB</field>
+            <field name="sequence">3</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+          <record id="xf_stage_rcg_approval" model="approval.route.stage">
+            <field name="name">Approbation RCG</field>
+            <field name="sequence">4</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+                                                <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_ra_approval" model="approval.route.stage">
+            <field name="name">Approbation RA</field>
+            <field name="sequence">5</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_final_approval" model="approval.route.stage">
+            <field name="name">Approbation finale RCB</field>
+            <field name="sequence">6</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+      <!-- Default approval route for purchase.request.line -->
+        <record id="xf_route_purchase_request_line_default" model="approval.route">
+            <field name="name">Route par défaut - Ligne de Demandes d'achat</field>
+            <field name="model_id" ref="model_purchase_request_line"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Étapes -->
+        <!-- <record id="xf_stage_n1_line_approval" model="approval.route.stage">
+            <field name="name">Approbation N+1</field>
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_root'))]"/>
+        </record> -->
+
+        <record id="xf_stage_rnd_line_approval" model="approval.route.stage">
+            <field name="name">Approbation RND</field>
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_line_approval" model="approval.route.stage">
+            <field name="name">Approbation RCB</field>
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+          <record id="xf_stage_rcg_line_approval" model="approval.route.stage">
+            <field name="name">Approbation RCG</field>
+            <field name="sequence">3</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+                                                <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_ra_line_approval" model="approval.route.stage">
+            <field name="name">Approbation RA</field>
+            <field name="sequence">4</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record id="xf_stage_rcb_final_line_approval" model="approval.route.stage">
+            <field name="name">Approbation finale RCB</field>
+            <field name="sequence">5</field>
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+            <field name="custom_user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <!-- Link route as default for company? Optionnel: set default template or association if your approval module supports it. -->
+        <record id="purchase_request_approval_route_default" model="purchase.request">
+            <field name="approval_route_id" ref="xf_route_purchase_request_default"/>
+        </record>
+        
+        <record id="purchase_request_line_approval_route_default" model="purchase.request.line">
+            <field name="approval_route_id" ref="xf_route_purchase_request_line_default"/>
+        </record>
+    </data>
+</odoo>

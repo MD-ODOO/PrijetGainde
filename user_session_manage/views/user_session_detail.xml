@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--User Session Detail List View -->
+        <record id="view_user_session_detail_list" model="ir.ui.view">
+            <field name="name">user.session.detail.list</field>
+            <field name="model">user.session.detail</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="is_current_login"/>
+                    <field name="user_id"/>
+                    <field name="ip_address"/>
+                    <field name="first_activity"/>
+                    <field name="last_activity"/>
+                    <field name="device_platform"/>
+                    <field name="browser"/>
+                    <button type="object" name="logout" string="Logout" class="btn btn-secondary"/>
+                </list>
+            </field>
+        </record>
+
+        <!--User Session Detail Action -->
+        <record id="action_user_session_detail" model="ir.actions.act_window">
+            <field name="name">User Session Detail</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">user.session.detail</field>
+            <field name="view_mode">list</field>
+        </record>
+    </data>
+</odoo>

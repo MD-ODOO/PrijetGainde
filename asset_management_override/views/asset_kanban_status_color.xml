@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Modifier la couleur du statut "Sorti" de gris à orange dans la vue kanban -->
+        <record id="asset_management_kanban_status_color" model="ir.ui.view">
+            <field name="name">asset.management.kanban.status.color</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Remplacer bg-secondary par bg-warning text-dark pour le statut destroyed -->
+                <xpath expr="//span[contains(@t-attf-class, 'badge rounded-pill text-white')]" position="replace">
+                    <span t-attf-class="badge rounded-pill lh-1 px-2 py-1
+                                                  #{record.status.raw_value == 'assign' ? 'bg-success text-white' :
+                                                    record.status.raw_value == 'return' ? 'bg-info text-white' :
+                                                    record.status.raw_value == 'on_hold' ? 'bg-warning text-dark' :
+                                                    record.status.raw_value == 'in_warehouse' ? 'bg-primary text-white' :
+                                                   record.status.raw_value == 'repair' ? 'bg-danger text-white' :
+                                                   record.status.raw_value == 'destroyed' ? 'bg-warning text-dark' : 'bg-secondary text-white'}">
+                        <field name="status"/>
+                    </span>
+                </xpath>
+                
+                <!-- Modifier la couleur du progressbar pour destroyed -->
+                <xpath expr="//progressbar[@field='status']" position="attributes">
+                    <attribute name="colors">{"assign":"success","return":"info","on_hold":"warning","in_warehouse":"primary","repair":"danger","destroyed":"warning"}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

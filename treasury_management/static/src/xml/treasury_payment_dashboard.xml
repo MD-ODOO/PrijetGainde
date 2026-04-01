@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="treasury_management.TreasuryPaymentDashboard">
+    <div class="o_tpd_dashboard">
+
+        <!-- ═══ Header ══════════════════════════════════════════════════════ -->
+        <div class="tpd-header">
+            <div class="tpd-header-left">
+                <div class="tpd-header-icon"><i class="fa fa-university"/></div>
+                <div>
+                    <h2 class="tpd-title">Tableau de bord Trésorerie</h2>
+                    <div class="tpd-subtitle">
+                        <i class="fa fa-calendar-o me-1"/>
+                        Situation au <t t-esc="state.data and state.data.today or ''"/>
+                    </div>
+                </div>
+            </div>
+            <button class="tpd-btn-refresh" t-on-click="refresh" t-att-disabled="state.loading">
+                <i t-att-class="state.loading ? 'fa fa-spinner fa-spin' : 'fa fa-refresh'"/>
+                Actualiser
+            </button>
+        </div>
+
+        <t t-if="state.loading">
+            <div class="tpd-loading">
+                <i class="fa fa-spinner fa-spin fa-2x"/>
+                <p>Chargement des données…</p>
+            </div>
+        </t>
+
+        <t t-if="!state.loading and state.data">
+
+            <!-- ═══ KPI Cards ════════════════════════════════════════════════ -->
+            <div class="tpd-section-title">
+                <i class="fa fa-tachometer me-2"/>Décaissements en instance
+            </div>
+            <div class="tpd-kpi-grid">
+                <div class="tpd-kpi-card tpd-kpi-pending" t-on-click="openPending">
+                    <div class="tpd-kpi-icon"><i class="fa fa-clock-o"/></div>
+                    <div class="tpd-kpi-body">
+                        <div class="tpd-kpi-label">Total en instance</div>
+                        <div class="tpd-kpi-count" t-esc="state.data.pending.count"/>
+                        <div class="tpd-kpi-amount" t-esc="formatCurrency(state.data.pending.amount)"/>
+                    </div>
+                    <div class="tpd-kpi-arrow"><i class="fa fa-chevron-right"/></div>
+                </div>
+                <div class="tpd-kpi-card tpd-kpi-urgent" t-on-click="openUrgent">
+                    <div class="tpd-kpi-icon"><i class="fa fa-exclamation-circle"/></div>
+                    <div class="tpd-kpi-body">
+                        <div class="tpd-kpi-label">Urgents (★★ / ★★★)</div>
+                        <div class="tpd-kpi-count" t-esc="state.data.urgent.count"/>
+                        <div class="tpd-kpi-amount" t-esc="formatCurrency(state.data.urgent.amount)"/>
+                    </div>
+                    <div class="tpd-kpi-arrow"><i class="fa fa-chevron-right"/></div>
+                </div>
+                <div class="tpd-kpi-card tpd-kpi-overdue" t-on-click="openOverdue">
+                    <div class="tpd-kpi-icon"><i class="fa fa-ban"/></div>
+                    <div class="tpd-kpi-body">
+                        <div class="tpd-kpi-label">En retard</div>
+                        <div class="tpd-kpi-count" t-esc="state.data.overdue.count"/>
+                        <div class="tpd-kpi-amount" t-esc="formatCurrency(state.data.overdue.amount)"/>
+                    </div>
+                    <div class="tpd-kpi-arrow"><i class="fa fa-chevron-right"/></div>
+                </div>
+                <div class="tpd-kpi-card tpd-kpi-upcoming" t-on-click="openUpcoming">
+                    <div class="tpd-kpi-icon"><i class="fa fa-calendar-check-o"/></div>
+                    <div class="tpd-kpi-body">
+                        <div class="tpd-kpi-label">À venir (7 jours)</div>
+                        <div class="tpd-kpi-count" t-esc="state.data.upcoming.count"/>
+                        <div class="tpd-kpi-amount" t-esc="formatCurrency(state.data.upcoming.amount)"/>
+                    </div>
+                    <div class="tpd-kpi-arrow"><i class="fa fa-chevron-right"/></div>
+                </div>
+            </div>
+
+            <!-- Alert banners -->
+            <t t-if="state.data.overdue.count > 0">
+                <div class="tpd-alert tpd-alert-danger">
+                    <i class="fa fa-exclamation-triangle me-2"/>
+                    <strong><t t-esc="state.data.overdue.count"/> paiement(s) en retard</strong>
+                    — Ces décaissements dépassent la date de règlement prévue.
+                    <span class="tpd-alert-link" t-on-click="openOverdue">Voir →</span>
+                </div>
+            </t>
+            <t t-if="state.data.urgent.count > 0 and state.data.overdue.count == 0">
+                <div class="tpd-alert tpd-alert-warning">
+                    <i class="fa fa-star me-2"/>
+                    <strong><t t-esc="state.data.urgent.count"/> paiement(s) urgent(s)</strong>
+                    — Des décaissements prioritaires nécessitent votre attention.
+                    <span class="tpd-alert-link" t-on-click="openUrgent">Voir →</span>
+                </div>
+            </t>
+
+            <!-- ═══ Onglets paiements ════════════════════════════════════════ -->
+            <div class="tpd-table-card">
+                <div class="tpd-tabs">
+                    <button t-att-class="'tpd-tab' + (state.activeTab === 'urgent' ? ' tpd-tab-active tpd-tab-urgent' : '')"
+                            t-on-click="() => this.setTab('urgent')">
+                        <i class="fa fa-exclamation-circle me-1"/>Urgents
+                        <span class="tpd-tab-badge" t-esc="state.data.urgent.count"/>
+                    </button>
+                    <button t-att-class="'tpd-tab' + (state.activeTab === 'overdue' ? ' tpd-tab-active tpd-tab-overdue' : '')"
+                            t-on-click="() => this.setTab('overdue')">
+                        <i class="fa fa-ban me-1"/>En retard
+                        <span class="tpd-tab-badge" t-esc="state.data.overdue.count"/>
+                    </button>
+                    <button t-att-class="'tpd-tab' + (state.activeTab === 'upcoming' ? ' tpd-tab-active tpd-tab-upcoming' : '')"
+                            t-on-click="() => this.setTab('upcoming')">
+                        <i class="fa fa-calendar me-1"/>À venir (7j)
+                        <span class="tpd-tab-badge" t-esc="state.data.upcoming.count"/>
+                    </button>
+                </div>
+                <t t-if="activeListEmpty">
+                    <div class="tpd-empty">
+                        <i class="fa fa-check-circle tpd-empty-icon"/>
+                        <p t-esc="tabEmptyMessage"/>
+                    </div>
+                </t>
+                <t t-if="!activeListEmpty">
+                    <table class="tpd-table">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Bénéficiaire</th>
+                                <th>Type</th>
+                                <th>Date prévue</th>
+                                <th class="text-end">Montant</th>
+                                <th class="text-center">Priorité</th>
+                                <th class="text-center">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="activeList" t-as="row" t-key="row.id">
+                                <tr t-on-click="() => this.openRecord(row.id)"
+                                    t-att-class="'tpd-row' + (row.is_overdue ? ' tpd-row-overdue' : (row.priority === '3' ? ' tpd-row-very-urgent' : (row.priority === '2' ? ' tpd-row-urgent' : '')))">
+                                    <td class="tpd-ref">
+                                        <i class="fa fa-file-text-o me-1 text-muted"/><t t-esc="row.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="row.partner"><i class="fa fa-user me-1 text-muted"/><t t-esc="row.partner"/></t>
+                                        <t t-else=""><span class="text-muted">—</span></t>
+                                    </td>
+                                    <td><span class="tpd-badge tpd-badge-type" t-esc="row.payment_type"/></td>
+                                    <td>
+                                        <t t-if="row.planned_date"><i class="fa fa-calendar-o me-1 text-muted"/><t t-esc="row.planned_date"/></t>
+                                        <t t-else=""><span class="text-muted">Non planifié</span></t>
+                                    </td>
+                                    <td class="tpd-amount text-end"><t t-esc="formatCurrency(row.amount)"/></td>
+                                    <td class="text-center">
+                                        <span t-att-class="priorityClass(row.priority)" t-att-title="priorityLabel(row.priority)">
+                                            <t t-esc="priorityStars(row.priority)"/>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-att-class="stateClass(row.state, row.is_overdue)">
+                                            <t t-esc="stateLabel(row.state, row.is_overdue, row.state_label)"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <t t-if="row.urgency_reason and (row.priority === '2' or row.priority === '3')">
+                                    <tr class="tpd-reason-row">
+                                        <td colspan="7">
+                                            <i class="fa fa-info-circle me-1 text-muted"/>
+                                            <em t-esc="row.urgency_reason"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </div>
+
+            <!-- ═══ Bas de page : Soldes journaux (gauche) + Prévisions (droite) ═ -->
+            <div class="tpd-bottom-layout">
+
+                <!-- ─── Colonne gauche : Soldes journaux ──────────────────── -->
+                <div class="tpd-bottom-left">
+                    <div class="tpd-section-title">
+                        <i class="fa fa-bank me-2"/>Soldes des comptes
+                    </div>
+                    <div class="tpd-journal-panel">
+                        <t t-if="!state.data.journal_balances or !state.data.journal_balances.length">
+                            <div class="tpd-empty" style="padding:24px;">
+                                <i class="fa fa-inbox tpd-empty-icon"/>
+                                <p>Aucun journal de trésorerie configuré.</p>
+                            </div>
+                        </t>
+                        <t t-if="state.data.journal_balances and state.data.journal_balances.length">
+                            <div class="tpd-journal-list-scroll">
+                                <t t-foreach="state.data.journal_balances" t-as="j" t-key="j.id">
+                                    <div t-att-class="'tpd-journal-row' + (j_last ? ' tpd-journal-row-last' : '')">
+                                        <div class="tpd-jrow-left">
+                                            <div t-att-class="'tpd-jrow-icon' + (j.type === 'cash' ? ' tpd-jrow-icon-cash' : ' tpd-jrow-icon-bank')">
+                                                <i t-att-class="j.type === 'cash' ? 'fa fa-money' : 'fa fa-credit-card'"/>
+                                            </div>
+                                            <div class="tpd-jrow-info">
+                                                <div class="tpd-jrow-name" t-esc="j.name"/>
+                                                <div class="tpd-jrow-type">
+                                                    <t t-esc="j.type === 'cash' ? 'Caisse' : 'Banque'"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div t-att-class="'tpd-jrow-balance' + (j.balance >= 0 ? ' tpd-text-positive' : ' tpd-text-negative')">
+                                            <t t-esc="formatJournalBalance(j.balance, j)"/>
+                                            <i t-att-class="(j.balance >= 0 ? 'fa fa-check-circle tpd-jrow-ok' : 'fa fa-exclamation-circle tpd-jrow-warn')"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- ─── Colonne droite : Prévisions ───────────────────────── -->
+                <div class="tpd-bottom-right">
+                    <div class="tpd-section-title">
+                        <i class="fa fa-line-chart me-2"/>Prévisions de trésorerie
+                    </div>
+
+                    <!-- Filtres -->
+                    <div class="tpd-forecast-filters">
+                        <div class="tpd-forecast-filter-group">
+                            <label class="tpd-filter-label">Période</label>
+                            <select class="tpd-select" t-att-value="state.forecastPreset"
+                                    t-on-change="onForecastPresetChange">
+                                <option value="current_month">Mois en cours</option>
+                                <option value="next_month">Mois prochain</option>
+                                <option value="current_quarter">Trimestre en cours</option>
+                                <option value="next_3_months">3 prochains mois</option>
+                                <option value="custom">Personnalisée</option>
+                            </select>
+                        </div>
+                        <div class="tpd-forecast-filter-group">
+                            <label class="tpd-filter-label">Du</label>
+                            <input type="date" class="tpd-input" t-att-value="state.forecastDateFrom"
+                                   t-on-change="(ev) => { this.state.forecastDateFrom = ev.target.value; this.onForecastDateChange(); }"/>
+                        </div>
+                        <div class="tpd-forecast-filter-group">
+                            <label class="tpd-filter-label">Au</label>
+                            <input type="date" class="tpd-input" t-att-value="state.forecastDateTo"
+                                   t-on-change="(ev) => { this.state.forecastDateTo = ev.target.value; this.onForecastDateChange(); }"/>
+                        </div>
+                    </div>
+
+                    <div class="tpd-forecast-card">
+                        <t t-if="state.forecastLoading">
+                            <div class="tpd-loading" style="padding:28px 0;">
+                                <i class="fa fa-spinner fa-spin fa-2x"/>
+                                <p>Calcul des prévisions…</p>
+                            </div>
+                        </t>
+
+                        <t t-if="!state.forecastLoading and state.forecast">
+                            <!-- Résumé total -->
+                            <div class="tpd-forecast-summary">
+                                <div class="tpd-fsum-card tpd-fsum-receipts">
+                                    <div class="tpd-fsum-icon"><i class="fa fa-arrow-circle-down"/></div>
+                                    <div>
+                                        <div class="tpd-fsum-label">Encaissements prévus</div>
+                                        <div class="tpd-fsum-value">
+                                            <t t-esc="formatCurrency(state.forecast.total.receipts_amount, state.forecast.company)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tpd-fsum-card tpd-fsum-payments">
+                                    <div class="tpd-fsum-icon"><i class="fa fa-arrow-circle-up"/></div>
+                                    <div>
+                                        <div class="tpd-fsum-label">Décaissements prévus</div>
+                                        <div class="tpd-fsum-value">
+                                            <t t-esc="formatCurrency(state.forecast.total.payments_amount, state.forecast.company)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div t-att-class="'tpd-fsum-card tpd-fsum-net' + (state.forecast.total.is_positive ? ' tpd-fsum-net-positive' : ' tpd-fsum-net-negative')">
+                                    <div class="tpd-fsum-icon">
+                                        <i t-att-class="state.forecast.total.is_positive ? 'fa fa-thumbs-up' : 'fa fa-thumbs-down'"/>
+                                    </div>
+                                    <div>
+                                        <div class="tpd-fsum-label">Solde net prévisionnel</div>
+                                        <div class="tpd-fsum-value">
+                                            <t t-esc="formatCurrency(state.forecast.total.net, state.forecast.company)"/>
+                                        </div>
+                                        <div class="tpd-fsum-sub">
+                                            <t t-esc="state.forecast.total.is_positive ? 'Excédent' : 'Déficit'"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tableau par mois -->
+                            <t t-if="state.forecast.months and state.forecast.months.length">
+                                <table class="tpd-forecast-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Période</th>
+                                            <th class="text-end">
+                                                <i class="fa fa-arrow-circle-down me-1 text-success"/>Encaissements
+                                            </th>
+                                            <th class="text-end">
+                                                <i class="fa fa-arrow-circle-up me-1 text-danger"/>Décaissements
+                                            </th>
+                                            <th class="text-end">Net</th>
+                                            <th>Répartition</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.forecast.months" t-as="m" t-key="m.label">
+                                            <tr t-att-class="'tpd-frow' + (m.is_positive ? '' : ' tpd-frow-deficit')">
+                                                <td class="tpd-fperiod">
+                                                    <i class="fa fa-calendar-o me-1"/>
+                                                    <strong t-esc="m.label"/>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="tpd-forecast-rec tpd-flink"
+                                                          t-on-click="() => this.openForecastReceipts(m)">
+                                                        <t t-esc="formatCurrency(m.receipts_amount, state.forecast.company)"/>
+                                                        <span class="tpd-fcount">(<t t-esc="m.receipts_count"/>)</span>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span class="tpd-forecast-pay tpd-flink"
+                                                          t-on-click="() => this.openForecastPayments(m)">
+                                                        <t t-esc="formatCurrency(m.payments_amount, state.forecast.company)"/>
+                                                        <span class="tpd-fcount">(<t t-esc="m.payments_count"/>)</span>
+                                                    </span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <span t-att-class="netClass(m.net)">
+                                                        <i t-att-class="netIcon(m.net) + ' me-1'"/>
+                                                        <t t-esc="formatCurrency(m.net, state.forecast.company)"/>
+                                                    </span>
+                                                </td>
+                                                <td class="tpd-fbar-cell">
+                                                    <div class="tpd-fbar-wrap">
+                                                        <div class="tpd-fbar-row">
+                                                            <span class="tpd-fbar-label">Enc.</span>
+                                                            <div class="tpd-fbar-track">
+                                                                <div class="tpd-fbar tpd-fbar-rec"
+                                                                     t-att-style="`width:${barWidth(m.receipts_amount, maxForecastAmount)}%`"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tpd-fbar-row">
+                                                            <span class="tpd-fbar-label">Déc.</span>
+                                                            <div class="tpd-fbar-track">
+                                                                <div class="tpd-fbar tpd-fbar-pay"
+                                                                     t-att-style="`width:${barWidth(m.payments_amount, maxForecastAmount)}%`"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="tpd-ftotal">
+                                            <td><strong>Total</strong></td>
+                                            <td class="text-end">
+                                                <strong class="tpd-forecast-rec">
+                                                    <t t-esc="formatCurrency(state.forecast.total.receipts_amount, state.forecast.company)"/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <strong class="tpd-forecast-pay">
+                                                    <t t-esc="formatCurrency(state.forecast.total.payments_amount, state.forecast.company)"/>
+                                                </strong>
+                                            </td>
+                                            <td class="text-end">
+                                                <strong t-att-class="netClass(state.forecast.total.net)">
+                                                    <i t-att-class="netIcon(state.forecast.total.net) + ' me-1'"/>
+                                                    <t t-esc="formatCurrency(state.forecast.total.net, state.forecast.company)"/>
+                                                </strong>
+                                            </td>
+                                            <td/>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </t>
+
+                            <t t-if="!state.forecast.months or !state.forecast.months.length">
+                                <div class="tpd-empty" style="padding:28px 0;">
+                                    <i class="fa fa-inbox tpd-empty-icon"/>
+                                    <p>Aucune donnée prévisionnelle sur cette période.</p>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+
+            </div><!-- /.tpd-bottom-layout -->
+
+        </t>
+
+    </div>
+</t>
+
+</templates>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Crée les profils par défaut (ceux de purchase_gainde + les nouveaux types Audit) -->
+        <function model="user.profiles" name="_gainde_ensure_default_profiles"/>
+    </data>
+</odoo>

@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+<data>
+
+    <!-- Declaration du rapport IPRES <record id="action_report_vrs" model="ir.actions.report">
+        <field name="name">Cotisation VRS</field>
+        <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paie_gainde.report_vrs_template</field>
+        <field name="report_file">paie_gainde.report_vrs_template</field>
+        <field name="paperformat_id" ref="paie_gainde.paperformat_vrs_landscape"/>
+    </record>-->
+   
+    
+    
+     <record id="report_ipres_xlsx" model="ir.actions.report">
+            <field name="name">IPRES XLSX</field>
+            <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">paie_gainde.report_ipres_xlsx</field>
+            <field name="report_file">IPRES</field>
+            <field name="print_report_name">'IPRES_%s' % (object.date_to)</field>
+        </record>
+        
+
+   
+
+    <!-- Formulaire Wizard IPRES -->
+    <record id="view_cerco_cotisation_ipres" model="ir.ui.view">
+        <field name="name">cerco.payslip.lines.cotisation.ipres</field>
+        <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+        <field name="arch" type="xml">
+            <form string="Contribution Register's Payslip Lines">
+                <group col="4" colspan="6">
+                    <field name="date_from"/>
+                    <newline/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button name="action_export_xlsx"
+        type="object"
+        string="Template IPRES"
+        class="oe_highlight"/>
+        
+          <button string="Annuler" class="btn-secondary" special="cancel"/>
+                   
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action serveur -->
+  
+
+ <record id="action_cerco_cotisation_ipres_action" model="ir.actions.act_window">
+            <field name="name">Déclarations IPRES</field>
+            <field name="res_model">cerco.payslip.lines.cotisation.ipres</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_cerco_cotisation_ipres"/>
+        </record>
+
+        
+        
+        <menuitem
+            id="menu_reporting"
+            name="Données GAINDE"
+            parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+            sequence="100"
+            groups="hr_contract.group_hr_contract_employee_manager" />
+        
+
+        <menuitem
+            id="menu_ipres_ipres"
+            name="IPRES TEMPLATE EXCEL"
+            parent="menu_reporting"
+            action="action_cerco_cotisation_ipres_action"
+            sequence="1"
+            groups="hr_contract.group_hr_contract_employee_manager" />
+        
+       
+            
+            <!-- Action serveur -->
+            
+            
+           
+        
+       
+            
+<record id="view_payroll_report_wizard" model="ir.ui.view">
+    <field name="name">payroll.report.wizard.form</field>
+    <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+    <field name="arch" type="xml">
+      <form string="Generation des rapports de paie">
+        <group>
+          <field name="date_from"/>
+          <field name="date_to"/>
+        </group>
+        <group>
+        <field name="company_id"/>
+        </group>
+        <footer>
+          <button name="action_print_report"
+                  string="IPRES"
+                  type="object"
+                  class="btn-primary"/>
+          <button name="action_print_vrs" type="object"
+                  string=" VRS" class="btn-primary"/>
+           <button name="action_print_livre_pdf"
+                            string=" Livre de Paie"
+                            type="object"
+                            class="btn-primary"/>
+           <button name="action_print_ras"
+                            string=" DRSS"
+                            type="object"
+                            class="btn-primary"/>
+           <button name="action_print_report_css"
+                            string=" Declaration CSS"
+                            type="object"
+                            class="btn-primary"/>
+          <button string="Annuler" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+  
+     
+        
+        
+   <record id="action_report_stat" model="ir.actions.act_window">
+            <field name="name">Déclarations</field>
+            <field name="res_model">cerco.payslip.lines.cotisation.ipres</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_payroll_report_wizard"/>
+        </record>
+   
+   <menuitem
+            id="menu_report_etat"
+            name="ETATS/RAPPORTS"
+            parent="menu_reporting"
+            action="action_report_stat"
+            sequence="2"
+            groups="hr_contract.group_hr_contract_employee_manager" />
+   
+   
+    <record id="paperformat_ipres_landscape" model="report.paperformat">
+            <field name="name">IPRES A4 Landscape</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+   
+    
+   <record id="action_report_ipres" model="ir.actions.report">
+        <field name="name">Cotisation IPRES</field>
+        <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paie_gainde.report_ipres_template</field>
+        <field name="report_file">paie_gainde.report_ipres_template</field>
+        <field name="paperformat_id" ref="paie_gainde.paperformat_ipres_landscape"/>
+    </record>
+    
+    
+    
+
+
+<template id="report_ipres_template">
+
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+
+            <style>
+                table.ipres_date {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 11px;
+                }
+                table.ipres {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 11px;
+                }
+                table.ipres th, table.ipres td {
+                    border: 1px solid #000;
+                    padding: 4px;
+                }
+                table.ipres th {
+                    background: #f2f2f2;
+                    text-align: center;
+                    font-weight: bold;
+                }
+                .right { text-align: right; }
+                .center { text-align: center; }
+                .bold { font-weight: bold; }
+            </style>
+
+            <div class="page">
+
+                <!-- ================= TITRE ================= -->
+                <h3 class="center">DECLARATION DES COTISATIONS IPRES</h3>
+
+                <!-- ================= INFOS ENTREPRISE ================= -->
+                <table class="ipres_date" style="margin-bottom:8px;">
+                    <tr>
+                       
+                        <td class="right">
+                            <strong>Période du :</strong>
+                            <t t-esc="date_from"/> au <t t-esc="date_to"/>
+                            <br/>
+                            <strong>Date d'impression :</strong>
+                            <t t-esc="print_date"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- ================= TABLEAU PRINCIPAL ================= -->
+                <table class="ipres">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">NUM</th>
+                            <th rowspan="2">Matricule</th>
+                            <th rowspan="2">Nom Employe</th>
+                            <th rowspan="2">Brut imposable</th>
+                            <th colspan="6">IPRES Régime Général</th>
+                            <th colspan="6">IPRES Régime Cadre</th>
+                            <th rowspan="2">Cotisation totale</th>
+                        </tr>
+                        <tr>
+                            <th>Base</th>
+                            <th>Employé</th>
+                            <th>Employeur</th>
+                            <th>Base Congés</th>
+                            <th>Employé</th>
+                            <th>Employeur</th>
+                            <th>Base</th>
+                            <th>Employé</th>
+                            <th>Employeur</th>
+                            <th>Base Congés</th>
+                            <th>Employé</th>
+                            <th>Employeur</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <!-- LIGNES EMPLOYES -->
+                        <t t-foreach="rows" t-as="r">
+                            <tr>
+                                <td class="center"><t t-esc="r['num']"/></td>
+                                <td><t t-esc="r['matricule']"/></td>
+                                <td><t t-esc="r['nom']"/></td>
+
+                                <td class="right"><t t-esc="r['brut']"/></td>
+
+                                <td class="right"><t t-esc="r['rg_base']"/></td>
+                                <td class="right"><t t-esc="r['rg_emp']"/></td>
+                                <td class="right"><t t-esc="r['rg_pat']"/></td>
+                                
+                                <td class="right"><t t-esc="r['rg_con_base']"/></td>
+                                <td class="right"><t t-esc="r['rg_con_emp']"/></td>
+                                <td class="right"><t t-esc="r['rg_con_pat']"/></td>
+
+                                <td class="right"><t t-esc="r['rc_base']"/></td>
+                                <td class="right"><t t-esc="r['rc_emp']"/></td>
+                                <td class="right"><t t-esc="r['rc_pat']"/></td>
+                                
+                                <td class="right"><t t-esc="r['rc_con_base']"/></td>
+                                <td class="right"><t t-esc="r['rc_con_emp']"/></td>
+                                <td class="right"><t t-esc="r['rc_con_pat']"/></td>
+
+                                <td class="right bold"><t t-esc="r['total']"/></td>
+                            </tr>
+                        </t>
+
+                        <!-- TOTAL GENERAL -->
+                        <tr class="bold">
+                            <td colspan="3" class="center">TOTAL GENERAL</td>
+
+                            <td class="right"><t t-esc="totals['brut']"/></td>
+
+                            <td class="right"><t t-esc="totals['rg_base']"/></td>
+                            <td class="right"><t t-esc="totals['rg_emp']"/></td>
+                            <td class="right"><t t-esc="totals['rg_pat']"/></td>
+                            
+                            <td class="right"><t t-esc="totals['rg_con_base']"/></td>
+                                <td class="right"><t t-esc="totals['rg_con_emp']"/></td>
+                                <td class="right"><t t-esc="totals['rg_con_pat']"/></td>
+
+                            <td class="right"><t t-esc="totals['rc_base']"/></td>
+                            <td class="right"><t t-esc="totals['rc_emp']"/></td>
+                            <td class="right"><t t-esc="totals['rc_pat']"/></td>
+                            
+                             <td class="right"><t t-esc="totals['rc_con_base']"/></td>
+                                <td class="right"><t t-esc="totals['rc_con_emp']"/></td>
+                                <td class="right"><t t-esc="totals['rc_con_pat']"/></td>
+
+                            <td class="right"><t t-esc="totals['total']"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </t>
+        </t>
+
+    </template>
+    
+
+
+    <record id="paperformat_ras_paie" model="report.paperformat">
+    <field name="name">RAS A4 Portrait</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+    <field name="margin_top">10</field>
+    <field name="margin_bottom">10</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">5</field>
+    <field name="dpi">90</field>
+</record>
+    
+    <record id="action_report_ras_dgid" model="ir.actions.report">
+        <field name="name">Déclaration RAS Salaires (DGID)</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paie_gainde.report_ras_template</field>
+        <field name="report_file">paie_gainde.report_ras_template</field>
+        <field name="print_report_name">'RAS_Salaires_%s' % (object[0].date_to.strftime("%m_%Y"))</field>
+        <field name="paperformat_id" ref="paie_gainde.paperformat_ras_paie"/>
+    </record>
+    
+    
+    
+
+     
+
+    <!-- ===================================================== -->
+    <!-- TEMPLATE QWEB DGID -->
+    <!-- ===================================================== -->
+  
+  <template id="report_ras_template">
+    <t t-call="web.html_container">
+      <t t-call="web.basic_layout">
+
+        <style>
+          .ras-dgid {
+              font-size: 13px;
+              line-height: 1.5;
+          }
+          .ras-dgid table {
+              font-size: 13px;
+              border-collapse: collapse;
+          }
+          .ras-dgid h1 {
+              font-size: 20px;
+              font-weight: bold;
+          }
+          .ras-dgid th {
+              font-weight: bold;
+              background-color: #f0f0f0;
+              text-align: center;
+          }
+          .ras-dgid td {
+              vertical-align: middle;
+          }
+          .no-border td, .no-border th {
+              border: none !important;
+          }
+        </style>
+
+        <div class="page ras-dgid">
+
+          <!-- LOGO DGID -->
+          <table class="no-border" width="100%">
+            <tr>
+              <td>
+                <img t-att-src="'/paie_gainde/static/description/DGID.PNG'" style="width:100%;"/>
+              </td>
+            </tr>
+          </table>
+
+          <br/>
+
+          <!-- INFORMATIONS FISCALES -->
+          <table width="100%">
+            <tr>
+              <td><strong>NINEA :</strong> <span t-esc="ninea"/></td>
+              <td><strong>NATURE IMPOT :</strong> RAS SALAIRES CONSOLIDEES</td>
+            </tr>
+            <tr>
+              <td><strong>PERIODE IMPOSITION :</strong> <span t-esc="periode_imposition"/></td>
+              <td><strong>ETABLISSEMENT :</strong> <span t-esc="company_name"/></td>
+            </tr>
+            <tr>
+              <td><strong>DATE LIMITE DEPOT :</strong> <span t-esc="date_limite_depot"/></td>
+              <td><strong>NOM DU CONTRIBUABLE :</strong> <span t-esc="company_name"/></td>
+            </tr>
+            <tr>
+              <td><strong>DATE LIMITE PAIEMENT :</strong> <span t-esc="date_limite_paiement"/></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>ADRESSE DE CORRESPONDANCE :</strong>
+                <span t-esc="adresse_correspondance"/>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>OBJET IMPOSABLE :</strong> Salaires
+              </td>
+            </tr>
+          </table>
+
+          <br/>
+          <h1 style="text-align:left; margin-bottom:10px;">
+Déclaration des retenues à la source sur les salaires
+        </h1>
+        <br/>
+
+          <!-- TABLEAU DGID -->
+          <table  width="100%" cellpadding="6">
+            <thead>
+              <tr>
+                <th></th>
+                <th width="10%">Ligne</th>
+                <th width="25%">Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td colspan="3"><strong>IR RAS SALAIRES</strong></td>
+              </tr>
+
+              <tr>
+                <td>Effectifs sénégalais rémunérés</td>
+                <td align="center">10</td>
+                <td align="right"><span t-esc="effectif_sn"/></td>
+              </tr>
+
+              <tr>
+                <td>Effectifs étrangers rémunérés</td>
+                <td align="center">20</td>
+                <td align="right"><span t-esc="effectif_ex"/></td>
+              </tr>
+
+              <tr>
+                <td>Total employés rémunérés</td>
+                <td align="center">30</td>
+                <td align="right"><span t-esc="effectif_total"/></td>
+              </tr>
+
+              <tr>
+                <td>Salaires versés aux employés sénégalais</td>
+                <td align="center">40</td>
+                <td align="right"><span t-esc="salaires_sn"/></td>
+              </tr>
+
+              <tr>
+                <td>Salaires versés aux employés étrangers</td>
+                <td align="center">50</td>
+                <td align="right"><span t-esc="salaires_ex"/></td>
+              </tr>
+
+              <tr>
+                <td>Masse salariale totale</td>
+                <td align="center">60</td>
+                <td align="right"><span t-esc="masse_salariale"/></td>
+              </tr>
+
+              <tr>
+                <td>Impôt sur le revenu retenu</td>
+                <td align="center">70</td>
+                <td align="right"><span t-esc="ir_retenu"/></td>
+              </tr>
+
+              <tr>
+                <td>Retenues GTA imputables</td>
+                <td align="center">80</td>
+                <td align="right"><span t-esc="gta"/></td>
+              </tr>
+
+              <tr>
+                <td>Montant net après GTA</td>
+                <td align="center">90</td>
+                <td align="right"><span t-esc="montant_net_ir"/></td>
+              </tr>
+
+              <tr>
+                <td>Impôt sur le revenu dû pour la période</td>
+                <td align="center">100</td>
+                <td align="right"><span t-esc="ir_du"/></td>
+              </tr>
+
+              <tr>
+                <td colspan="3"><strong>TRIMF</strong></td>
+              </tr>
+
+              <tr>
+                <td>TRIMF retenue durant la période</td>
+                <td align="center">110</td>
+                <td align="right"><span t-esc="trimf"/></td>
+              </tr>
+
+              <tr>
+                <td colspan="3"><strong>CFCE</strong></td>
+              </tr>
+
+              <tr>
+                <td>CFCE exigible pour la période</td>
+                <td align="center">120</td>
+                <td align="right"><span t-esc="cfce"/></td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <br/>
+
+          <!-- PIED DE PAGE -->
+          <hr/>
+
+          <table class="no-border" width="100%">
+            <tr>
+              <td>
+                <img t-att-src="'/paie_gainde/static/description/dgidfooter.PNG'" style="width:100%;"/>
+              </td>
+            </tr>
+          </table>
+
+          <br/>
+
+          <table width="100%" style="font-size:11px;">
+            <tr>
+              <td width="50%">
+                <strong>NINEA :</strong> <span t-esc="ninea"/><br/>
+                <strong>PERIODE :</strong> <span t-esc="periode_imposition"/><br/>
+                <strong>MONTANT PAYE :</strong> <span t-esc="montant_paye"/><br/>
+                <strong>DATE :</strong> <span t-esc="date_limite_depot"/>
+              </td>
+
+              <td width="50%">
+                <strong>IMPRIME LE :</strong> <span t-esc="impression_date"/><br/><br/>
+                <strong>GAINDE 2000</strong><br/>
+                <strong>NOM DU CONTRIBUABLE :</strong> <span t-esc="company_name"/><br/>
+                <strong>NATURE IMPOT :</strong> RAS SALAIRES CONSOLIDEES<br/>
+                <strong>CENTRE FISCAL :</strong> <span t-esc="centre_fiscal"/><br/>
+                <strong>CENTRE FISCAL DU CAISSIER :</strong> <span t-esc="centre_fiscal_caissier"/><br/>
+                <strong>SIGNATURE AGENT :</strong> ______________________
+              </td>
+            </tr>
+          </table>
+
+          <br/>
+
+          <table width="100%" style="font-size:11px;">
+            <tr>
+              <td><strong>NUM COMPTE :</strong> <span t-esc="numero_compte"/></td>
+              <td align="right"><strong>NUM DOCUMENT :</strong> <span t-esc="numero_document"/></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                Page <span t-esc="page"/> de <span t-esc="page_total"/>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+      </t>
+    </t>
+  </template>
+
+
+    
+     <record id="paperformat_vrs_landscape" model="report.paperformat">
+            <field name="name">VRS A4 Landscape</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="dpi">90</field>
+        </record>
+   
+    
+   
+    <record id="action_report_vrs" model="ir.actions.report">
+    <field name="name">Etat VRS</field>
+    <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">paie_gainde.report_vrs_template</field>
+    <field name="report_file">paie_gainde.report_vrs_template</field>
+    <field name="paperformat_id" ref="paie_gainde.paperformat_vrs_landscape"/>
+</record>
+  
+    
+<template id="report_vrs_template">
+<t t-call="web.html_container">
+<t t-call="web.external_layout">
+
+<style>
+body {
+  font-size: 12px;
+  color: #000;
+}
+
+/* ===== TITRE ===== */
+.vrs-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #1f4fd8;
+  text-decoration: underline;
+  margin: 12px 0 16px 0;
+}
+
+/* ===== BLOCS INFO ===== */
+.vrs-block {
+  font-size: 12px;
+  margin-bottom: 4px;
+  text-align: right;
+}
+
+/* ===== TABLE ===== */
+table.vrs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+table.vrs-table th,
+table.vrs-table td {
+  border: 1px solid #000;
+  padding: 6px;
+}
+
+table.vrs-table th {
+  font-weight: bold;
+  background: #f2f2f2;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+</style>
+
+<!-- ===== TITRE OFFICIEL ===== -->
+<div class="vrs-title">
+  Etat de déclaration mensuelle des impôts VRS
+</div>
+
+<!-- ===== ENTREPRISE ===== -->
+<div class="vrs-block">
+  <strong>Entreprise :</strong>
+  <t t-esc="env.company.name"/>
+</div>
+
+<div class="vrs-block">
+  <strong>Pays :</strong>
+  <t t-esc="env.company.country_id and env.company.country_id.name or ''"/>
+</div>
+
+<!-- ===== PERIODE ===== -->
+<div class="vrs-block">
+  <strong>Période :</strong>
+  <t t-esc="env.context.get('date_from') or ''"/>
+  au
+  <t t-esc="env.context.get('date_to') or ''"/>
+</div>
+
+<!-- ===== DATE IMPRESSION ===== -->
+<div class="vrs-block">
+  <strong>Date impression :</strong>
+  <t t-esc="env.context.get('print_date') or ''"/>
+</div>
+
+<br/>
+
+<!-- ===== DONNEES ===== -->
+<t t-set="payslips"
+   t-value="env['hr.payslip'].search([
+      ('state', '=', 'paid'),
+      ('date_from', '&lt;=', env.context.get('date_to')),
+      ('date_to', '&gt;=', env.context.get('date_from')),
+      ('company_id', '=', env.company.id),
+   ])"/>
+
+   
+
+
+<!-- ===== CUMULS ===== -->
+<t t-set="t_gross" t-value="0"/>
+<t t-set="t_ir" t-value="0"/>
+<t t-set="t_trimf" t-value="0"/>
+<t t-set="t_cfce" t-value="0"/>
+<t t-set="t_total" t-value="0"/>
+
+<table class="vrs-table">
+  <thead>
+    <tr>
+      <th class="text-center">Matricule</th>
+      <th>Nom et Prenom</th>
+      <th class="text-right">Brut imposable</th>
+      <th class="text-right">IR</th>
+      <th class="text-right">TRIMF</th>
+      <th class="text-right">CFCE</th>
+      <th class="text-right">Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <t t-foreach="payslips" t-as="slip">
+
+      <t t-set="gross"
+         t-value="sum(slip.line_ids.filtered(lambda l: l.code=='GROSS').mapped('amount'))"/>
+
+      <t t-set="ir"
+         t-value="sum(slip.line_ids.filtered(lambda l: l.code=='CSAL1').mapped('amount'))"/>
+
+      <t t-set="trimf"
+         t-value="sum(slip.line_ids.filtered(lambda l: l.code=='CSAL2').mapped('amount'))"/>
+
+      <t t-set="cfce"
+         t-value="sum(slip.line_ids.filtered(lambda l: l.code=='CPAT5').mapped('amount'))"/>
+
+      <t t-set="line_total" t-value="ir + trimf + cfce"/>
+
+      <tr>
+        <td class="text-center">
+          <t t-esc="slip.employee_id.identification_id"/>
+        </td>
+        <td>
+          <t t-esc="slip.employee_id.name"/>
+        </td>
+        <td class="text-right">
+          <t t-esc="gross"/>
+        </td>
+        <td class="text-right">
+          <t t-esc="ir"/>
+        </td>
+        <td class="text-right">
+          <t t-esc="trimf"/>
+        </td>
+        <td class="text-right">
+          <t t-esc="cfce"/>
+        </td>
+        <td class="text-right">
+          <t t-esc="line_total"/>
+        </td>
+      </tr>
+
+      <!-- CUMUL -->
+      <t t-set="t_gross" t-value="t_gross + gross"/>
+      <t t-set="t_ir" t-value="t_ir + ir"/>
+      <t t-set="t_trimf" t-value="t_trimf + trimf"/>
+      <t t-set="t_cfce" t-value="t_cfce + cfce"/>
+      <t t-set="t_total" t-value="t_total + line_total"/>
+
+    </t>
+
+    <!-- ===== TOTAL GENERAL (DERNIERE PAGE) ===== -->
+    <tr>
+      <th colspan="2">TOTAL</th>
+      <th class="text-right"><t t-esc="t_gross"/></th>
+      <th class="text-right"><t t-esc="t_ir"/></th>
+      <th class="text-right"><t t-esc="t_trimf"/></th>
+      <th class="text-right"><t t-esc="t_cfce"/></th>
+      <th class="text-right"><t t-esc="t_total"/></th>
+    </tr>
+
+  </tbody>
+</table>
+
+</t>
+</t>
+</template>
+
+
+
+
+
+
+
+ <record id="paperformat_livre_paie" model="report.paperformat">
+    <field name="name">Livre A4 Portrait</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+
+    <field name="margin_top">10</field>
+    <field name="margin_bottom">10</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">5</field>
+    <field name="dpi">90</field>
+</record>
+
+
+<record id="action_livre_paie_report" model="ir.actions.report">
+        <field name="name">Livre de paie</field>
+        <field name="model">cerco.payslip.lines.cotisation.ipres</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">paie_gainde.livre_paie_template</field>
+        <field name="report_file">paie_gainde.livre_paie_template</field>
+        <field name="paperformat_id" ref="paie_gainde.paperformat_livre_paie"/>
+    </record>
+    
+    
+    
+    
+<template id="livre_paie_template">
+<t t-call="web.html_container">
+<t t-call="web.basic_layout">
+
+<style>
+    body {
+        font-size: 11px;
+        color: #000;
+    }
+
+    /* TITRE PRINCIPAL */
+    h2 {
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+        color: #0B5394; 
+        text-transform: uppercase;
+    }
+
+    .period {
+        text-align: center;
+        margin-bottom: 12px;
+        font-weight: bold;
+    }
+
+    .matricule {
+        font-weight: bold;
+        margin: 10px 0 6px 0;
+    }
+    .year {
+        text-align: center;
+        font-weight: bold;
+        color: #1f4ea3;
+        margin-bottom: 6px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+
+    
+    thead th {
+        background-color: #1C6DD0; /* ?? Bleu */
+        color: #FFFFFF;
+        border: 1px solid #000;
+        padding: 5px 6px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    tbody td {
+        border: 1px solid #000;
+        padding: 4px 6px;
+        vertical-align: top;
+    }
+
+    td.amount {
+        text-align: right;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="page">
+
+    <!-- HEADER ENTREPRISE -->
+    <table class="no-border">
+        <tr>
+            <td>
+                <img t-if="company.logo"
+                     t-att-src="'data:image/png;base64,' + company.logo.decode('utf-8')"
+                     style="height:55px;"/><br/>
+                <strong><t t-esc="company.name"/></strong><br/>
+                <t t-esc="company.street or ''"/><br/>
+                <t t-esc="company.city or ''"/><br/>
+                <t t-esc="company.phone or ''"/>
+            </td>
+        </tr>
+    </table>
+
+    <h2>LIVRE DE PAIE ET CUMUL PAR MATRICULE ET PAR RUBRIQUE</h2>
+    <div class="year">Annee <t t-esc="year"/></div>
+    <div class="period">
+        Période du : <t t-esc="date_from"/> au <t t-esc="date_to"/>
+    </div>
+
+    <t t-foreach="employees.items()" t-as="emp_data">
+        <t t-set="employee" t-value="emp_data[0]"/>
+        <t t-set="lines" t-value="emp_data[1]"/>
+
+        <div class="matricule">
+            Matricule : <t t-esc="employee.registration_number or ''"/> 
+            <t t-esc="employee.name"/>
+        </div>
+        <div class="period">
+            Employé : 
+            <t t-esc="employee.name"/>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:15%;">Code</th>
+                    <th style="width:65%;">Rubrique</th>
+                    <th style="width:20%; text-align:right;">Cumul annuel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="lines.items()" t-as="item">
+                    <tr>
+                        <td><t t-esc="item[0][0]"/></td>
+                        <td><t t-esc="item[0][1]"/></td>
+                        <td class="amount">
+                            <t t-esc="('%.2f' % item[1])"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+
+        <div style="page-break-after:always;"></div>
+    </t>
+
+</div>
+
+</t>
+</t>
+</template>
+
+<record id="paperformat_css_paie" model="report.paperformat">
+    <field name="name">CSS Portrait</field>
+    <field name="default" eval="False"/>
+    <field name="format">A4</field>
+    <field name="orientation">Portrait</field>
+
+    <field name="margin_top">10</field>
+    <field name="margin_bottom">10</field>
+    <field name="margin_left">10</field>
+    <field name="margin_right">10</field>
+
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">5</field>
+    <field name="dpi">90</field>
+</record>
+
+
+
+<record id="action_report_css_declaration" model="ir.actions.report">
+    <field name="name">Déclaration mensuelle de cotisations CSS</field>
+    <field name="model">css.declaration.wizard</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">paie_gainde.report_css_declaration</field>
+    <field name="report_file">paie_gainde.report_css_declaration</field>
+    <field name="paperformat_id" ref="paie_gainde.paperformat_css_paie"/>
+</record>
+
+
+
+
+
+
+<template id="report_css_declaration">
+<t t-call="web.basic_layout">
+
+<style>
+/* =========================================================
+   STYLE OFFICIEL CSS SENEGAL  DECLARATION MENSUELLE
+   ========================================================= */
+
+.page {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #000;
+}
+
+img.img-full {
+    width: 100%;
+    display: block;
+}
+
+/* ---------- TITRE ---------- */
+.declaration-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 8px 0 12px 0;
+    letter-spacing: 0.5px;
+}
+
+/* ---------- TABLEAUX (SANS BORDURES) ---------- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+}
+
+th, td {
+    border: none !important;
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+th {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+/* ---------- ALIGNEMENTS ---------- */
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+/* ---------- TABLE INFOS ---------- */
+.info-table {
+    margin-top: 4px;
+    border-spacing: 0 4px;
+}
+
+.info-table td {
+    padding: 3px 6px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+/* ---------- EFFECTIFS / SALAIRES ---------- */
+.effectif-table td:nth-child(1) {
+    width: 6%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.effectif-table td:nth-child(2) { width: 44%; }
+.effectif-table td:nth-child(3) { width: 10%; text-align: center; }
+.effectif-table td:nth-child(4) { width: 25%; }
+.effectif-table td:nth-child(5) { width: 15%; text-align: right; }
+
+/* ---------- TOTAUX ---------- */
+.total-table th:last-child {
+    text-align: right;
+}
+
+/* ---------- COTISATIONS ---------- */
+.cotisation-table td:nth-child(2),
+.cotisation-table td:nth-child(4) {
+    text-align: right;
+}
+
+.cotisation-table td:nth-child(3) {
+    text-align: center;
+}
+
+/* ---------- ESPACEMENT ---------- */
+table + table {
+    margin-top: 10px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    font-size: 10px;
+    margin-top: 14px;
+}
+</style>
+
+<main>
+<div class="page">
+
+<!-- ================= IMAGE HAUT ================= -->
+<img t-att-src="'/paie_gainde/static/description/declarationhaut.PNG'"
+     class="img-full"/>
+
+
+
+<!-- ================= INFOS ENTREPRISE ================= -->
+<table class="info-table">
+<tr>
+    <td><span class="label">Site :</span> <t t-esc="site"/></td>
+    <td><span class="label">Période :</span> <t t-esc="periode"/></td>
+    
+</tr>
+<tr>
+    <td >
+        <span class="label">Nom ou Raison sociale :</span>
+        <t t-esc="company.name"/>
+    </td>
+    <td><span class="label">Date :</span> <t t-esc="date_declaration_str"/></td>
+</tr>
+<tr>
+    <td><span class="label">NINEA :</span> <t t-esc="ninea"/></td>
+    <td><span class="label">Type Employeur :</span> <t t-esc="type_employeur"/></td>
+    <td></td>
+</tr>
+<tr>
+    <td colspan="3">
+        <span class="label">Adresse :</span>
+        <t t-esc="adresse_complete"/>
+    </td>
+</tr>
+</table>
+
+<!-- ================= EFFECTIFS / SALAIRES ================= -->
+<table>
+
+
+<tr>
+    
+    <td>Effectif Global</td>
+    <td class="text-center"><t t-esc="effectif_global"/></td>
+    <td>Total salaires versés</td>
+    <td class="text-right">
+        <t t-esc="total_salaires"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td></td>
+</tr>
+
+<tr>
+    
+    <td>Nbre salariés permanents ayant 63000 ou plus</td>
+    <td class="text-center"><t t-esc="eff_perm_ge_63"/></td>
+    <td>Salaires plafonnés</td>
+    <td class="text-right">
+        <t t-esc="sal_perm_ge_63"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td>A</td>
+</tr>
+
+<tr>
+    
+    <td>Nbre de salaries permanents ayant moins de 63000</td>
+    <td class="text-center"><t t-esc="eff_perm_lt_63"/></td>
+    <td>Salaires correspondants</td>
+    <td class="text-right">
+        <t t-esc="sal_perm_lt_63"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td>B</td>
+</tr>
+
+<tr>
+    
+    <td>Nbre de temporaires / CDD ayant 63000 ou plus</td>
+    <td class="text-center"><t t-esc="eff_cdd_ge_63"/></td>
+    <td>Salaires plafonnés</td>
+    <td class="text-right">
+        <t t-esc="sal_cdd_ge_63"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td>C</td>
+</tr>
+
+<tr>
+    
+    <td>Nbre de temporaires / CDD ayant moins de 63000</td>
+    <td class="text-center"><t t-esc="eff_cdd_lt_63"/></td>
+    <td>Rémunérations versées</td>
+    <td class="text-right">
+        <t t-esc="sal_cdd_lt_63"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td>D</td>
+</tr>
+
+<tr>
+    
+    <td>Nombre de Journaliers</td>
+    <td class="text-center"><t t-esc="eff_journalier"/></td>
+    <td>Rémunérations versées</td>
+    <td class="text-right">
+        <t t-esc="sal_journalier"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+    <td>E</td>
+</tr>
+
+<tr>
+   
+    <td>Apprentis et Stagiaires</td>
+    <td class="text-center"><t t-esc="eff_apprenti"/></td>
+    <td>Allocations versées</td>
+    <td class="text-right">
+        <t t-esc="alloc_apprenti"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+     <td>F</td>
+</tr>
+</table>
+
+<!-- ================= TOTAUX ================= -->
+<table class="total-table">
+<tr>
+    <th colspan="4">Total salaires assujettis PF (A+B+C+D+E)</th>
+    <th class="text-right">
+        <t t-esc="base_pf"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </th>
+    <td>G</td>
+</tr>
+<tr>
+    <th colspan="4">Total salaires assujettis AT/MP (A+B+C+D+E+F)</th>
+    <th class="text-right">
+        <t t-esc="base_atmp"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </th>
+    <td>H</td>
+</tr>
+</table>
+
+<!-- ================= COTISATIONS ================= -->
+<table >
+<tr>
+    <th>Décompte des Cotisations</th>
+
+    <th></th>
+    <th></th>
+</tr>
+
+<tr>
+    <td >Cotisations branche Prestations Familiales</td>
+    
+    <td class="text-center"><t t-esc="taux_pf" t-options='{"widget":"integer"}'/>x G</td>
+    <td ></td>
+    <td>
+        <t t-esc="cot_pf"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+</tr>
+
+<tr>
+    <td >Cotisations branche Accidents du travail</td>
+    
+    <td class="text-center"><t t-esc="taux_atmp" t-options='{"widget":"integer"}'/>x H</td>
+    <td ></td>
+    <td>
+        <t t-esc="cot_atmp"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+</tr>
+
+<tr>
+    <td >Total cotisations dues</td>
+    <td ></td>
+    <td ></td>
+    <td class="text-right">
+        <t t-esc="cot_total"
+           t-options="{'widget':'monetary','display_currency':company.currency_id}"/>
+    </td>
+</tr>
+</table>
+
+<!-- ================= FOOTER ================= -->
+<div >
+    <img t-att-src="'/paie_gainde/static/description/cssfooter.PNG'"
+         class="img-full"/>
+    <div class="text-right">
+        Page <span class="page"/> / <span class="topage"/>
+    </div>
+</div>
+
+</div>
+</main>
+
+</t>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="purchase_order_approval_form" model="ir.ui.view">
+            <field name="name">purchase.order.approval.form</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+
+                <button name="button_approve" position="attributes">
+                    <attribute name="groups"></attribute>
+                    <attribute name="invisible">state != 'to approve' or is_current_approver == False</attribute>
+                </button>
+
+                <field name="currency_id" position="after">
+                    <field name="use_approval_route" invisible="True"/>
+                    <field name="approval_route_id"
+                           readonly="state != 'draft'"
+                           invisible="use_approval_route == 'no'"
+                           required="use_approval_route == 'required'"/>
+                </field>
+
+                <notebook position="inside">
+                    <page name="approval_route" string="Approval Route"
+                          invisible="state in ['draft', 'sent'] or approval_route_id == False">
+                        <field name="approval_route_stage_ids">
+                            <list>
+                                <field name="sequence" invisible="True" widget="handle"/>
+                                <field name="name"/>
+                                <field name="user_ids" widget="many2many_avatar_user"/>
+                                <field name="state"/>
+                                <field name="decisions_summary"/>
+                            </list>
+                        </field>
+                        <field name="is_current_approver" invisible="True"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

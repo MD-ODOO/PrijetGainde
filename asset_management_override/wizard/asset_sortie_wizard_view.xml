@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_asset_sortie_wizard_form" model="ir.ui.view">
+            <field name="name">asset.sortie.wizard.form</field>
+            <field name="model">asset.sortie.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Confirmer la sortie">
+                    <group>
+                        <field name="asset_id" readonly="1"/>
+                        <field name="confirmation"/>
+                    </group>
+                    <footer>
+                        <button string="Confirmer" name="action_confirm" type="object" class="btn-primary" 
+                                invisible="not confirmation"/>
+                        <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+

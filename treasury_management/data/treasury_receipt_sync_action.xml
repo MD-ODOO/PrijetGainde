@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="action_treasury_receipt_sync" model="ir.actions.server">
+    <field name="name">Encaissements (inclure factures ouvertes)</field>
+    <field name="model_id" ref="treasury_management.model_treasury_receipt"/>
+    <field name="state">code</field>
+    <field name="code">action = env['treasury.receipt'].action_sync_from_invoices()</field>
+  </record>
+</odoo>

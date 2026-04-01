@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_request_line_reject_form" model="ir.ui.view">
+            <field name="name">purchase.request.line.reject.form</field>
+            <field name="model">purchase.request.line.reject</field>
+            <field name="arch" type="xml">
+                <form string="Motif du rejet">
+                    <group>
+                        <field name="rejection_reason" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_confirm_rejection" string="Confirmer" type="object" class="btn-primary"/>
+                        <button string="Annuler" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+  <record id="action_purchase_request_line_reject" model="ir.actions.act_window">
+            <field name="name">Motif du rejet</field>
+            <field name="res_model">purchase.request.line.reject</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+      
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_label_custom_gainde" model="report.paperformat">
+            <field name="name">Custom Asset Label</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="disable_shrinking" eval="True"/>
+            <field name="dpi">96</field>
+        </record>
+
+        <record id="report_asset_label_custom_gainde" model="ir.actions.report">
+            <field name="name">Asset Label Custom (PDF)</field>
+            <field name="model">asset.management</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">asset_management_override.label_custom</field>
+            <field name="report_file">asset_management_override.label_custom</field>
+            <field name="paperformat_id" ref="paperformat_label_custom_gainde"/>
+            <field name="print_report_name">'Asset Label - %s' % (object.name)</field>
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">report</field>
+        </record>
+                   <record id="report_asset_template_label_2x7_n" model="ir.actions.report">
+            <field name="name">Asset Label 2x7 (PDF)</field>
+            <field name="model">asset.management</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">asset_management_override.report_assettemplatelabel2x7</field>
+            <field name="report_file">asset_management_override.report_assettemplatelabel2x7</field>
+            <field name="paperformat_id" ref="paperformat_label_custom_gainde"/>
+            <field name="print_report_name">'Assets Labels - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="asset_management.model_asset_management"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
+

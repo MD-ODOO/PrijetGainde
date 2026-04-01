@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintellecs.com>).
+
+For Module Support : devintelle@gmail.com  or Skype : devintelle 
+ -->
+<odoo>
+    <record id="ticket_menu_template" model="ir.actions.report">
+        <field name="name">Ticket Details</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dev_all_in_one_helpdesk_ent.report_ticket_template</field>
+        <field name="report_file">dev_all_in_one_helpdesk_ent.report_ticket_template</field>
+        <field name="binding_model_id" ref="helpdesk.model_helpdesk_ticket"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">('Ticket - %s' % (object.name))</field>
+    </record>
+</odoo>

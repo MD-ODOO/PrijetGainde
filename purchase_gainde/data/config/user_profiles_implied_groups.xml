@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--
+    Ce fichier est volontairement en noupdate="0" (par défaut) afin que les
+    groupes implicites soient appliqués lors des mises à jour du module.
+
+    Problème résolu:
+    - Les profils `user.profiles` créés en noupdate="1" ne recevaient pas de
+      groupes applicatifs (ex: purchase_request), donc les utilisateurs N+1
+      n'avaient pas d'accès lecture à purchase.request.
+    -->
+
+    <!--
+    Profils N+1 : donner les droits applicatifs Purchase Request User.
+
+    IMPORTANT : ne pas cibler uniquement un enregistrement XML (ex: un profil “demo”).
+    On applique le groupe à tous les profils existants dont profile_type = 'n1'
+    pour corriger les bases déjà en place.
+    -->
+    <function model="user.profiles" name="_gainde_apply_n1_implied_groups">
+      <value eval="[]"/>
+    </function>
+</odoo>

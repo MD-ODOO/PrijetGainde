@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modifier la vue kanban pour ouvrir le formulaire complet lors de la création -->
+    <record id="helpdesk_ticket_view_kanban_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.inherit</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_kanban"/>
+        <field name="arch" type="xml">
+            <!-- Désactiver le quick_create pour forcer l'ouverture du formulaire complet -->
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="on_create"></attribute>
+                <attribute name="quick_create_view"></attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

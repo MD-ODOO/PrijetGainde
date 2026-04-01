@@ -1,0 +1,127 @@
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_project_performance_critical" model="mail.template">
+            <field name="name">Projet : Alerte Performance Critique</field>
+            <field name="model_id" ref="project.model_project_project"/>
+            <field name="subject">⚠️ ALERTE CRITIQUE : Projet {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
+            <field name="partner_to">{{ ','.join(object.director_project_ids.mapped('partner_id.id')|map(str)) }}
+            </field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                        <br/>
+                        <br/>
+                        Le projet
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        vient de passer en statut
+                        <span style="color: red; font-weight: bold;">CRITIQUE</span>.
+                        <br/>
+                        <br/>
+                        <strong>Indicateurs actuels :</strong>
+                        <ul>
+                            <li>SPI (Planning) :
+                                <t t-out="format_decimal(object.spi)"/>
+                            </li>
+                            <li>CPI (Coûts) :
+                                <t t-out="format_decimal(object.cpi)"/>
+                            </li>
+                        </ul>
+                        <br/>
+                        Veuillez consulter la
+                        <a t-att-href="'/web#id=' + str(object.id) + '&amp;model=project.project&amp;view_type=form'"
+                           style="background-color: #875A7B; padding: 8px 16px; text-decoration: none; color: #fff; border-radius: 5px;">
+                            Vue d'ensemble du projet
+                        </a>
+                    </p>
+                </div>
+            </field>
+        </record>
+
+
+        <record id="email_template_timesheet_reminder" model="mail.template">
+            <field name="name">Rappel : Saisie timesheets</field>
+            <field name="model_id" ref="hr.model_hr_employee"/>
+            <field name="email_from">{{ (object.company_id.email_formatted or 'no-reply@company.com') }}</field>
+            <field name="email_to">{{ (object.work_email or object.user_id.email) }}</field>
+            <field name="subject">Rappel : Saisie des timesheets pour la semaine du {{ ctx.get('week_start') }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; font-size: 14px;">
+                    <p>Bonjour<t t-out="object.name"/>,
+                    </p>
+                    <p>Vous n'avez saisi que
+                        <strong>
+                            <t t-out="ctx.get('hours_filled')"/>
+                        </strong>
+                        heures pour la semaine du
+                        <strong>
+                            <t t-out="ctx.get('week_start')"/>
+                        </strong>
+                        au
+                        <strong>
+                            <t t-out="ctx.get('week_end')"/>
+                        </strong>
+                        .
+                    </p>
+                    <p>Le minimum attendu est de
+                        <strong>
+                            <t t-out="ctx.get('min_hours')"/>
+                        </strong>
+                        heures par semaine.
+                    </p>
+                    <p>Merci de compléter vos timesheets dès que possible via le menu <strong>Mes Timesheets</strong>.
+                    </p>
+
+                    <div style="margin: 20px 0;">
+                        <a t-att-href="'/web#action=hr_timesheet.act_hr_timesheet_line&amp;view_type=list'"
+                           style="background-color:#875A7B; color:white; padding:10px 20px; text-decoration:none; border-radius:4px;">
+                            Accéder à mes timesheets
+                        </a>
+                    </div>
+
+                    <p>Cordialement,<br/>L'équipe projet
+                    </p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="email_template_project_periodic_report" model="mail.template">
+        <field name="name">Projet : Bilan de Performance Périodique</field>
+        <field name="model_id" ref="project.model_project_project"/>
+        <field name="subject">Rapport {{ ctx.get('report_type') }} : {{ object.name }}</field>
+        <field name="email_from">{{ (object.company_id.email_formatted or user.email_formatted) }}</field>
+        <field name="email_to">{{ object.user_id.email_formatted }}</field>
+        <field name="description">Envoi automatique du bilan de performance au responsable</field>
+        <field name="body_html" type="html">
+            <div style="font-family: Arial, sans-serif; font-size: 14px;">
+                <p>Bonjour <t t-out="object.user_id.name"/>,</p>
+                <p>Voici le bilan <strong><t t-out="ctx.get('report_type')"/></strong> pour le projet <strong><t t-out="object.name"/></strong> au <t t-out="datetime.datetime.now().strftime('%d/%m/%Y')"/>.</p>
+
+                <div style="border: 1px solid #dee2e6; padding: 15px; border-radius: 5px; background-color: #f8f9fa;">
+                    <ul style="list-style: none; padding: 0;">
+                        <li><strong>Indice Délais (SPI) :</strong>
+                            <span t-attf-style="color: {{ 'green' if object.spi >= 1 else 'red' }}">
+                                <t t-out="'%.2f' % object.spi"/>
+                            </span>
+                        </li>
+                        <li><strong>Indice Coûts (CPI) :</strong>
+                            <span t-attf-style="color: {{ 'green' if object.cpi >= 1 else 'red' }}">
+                                <t t-out="'%.2f' % object.cpi"/>
+                            </span>
+                        </li>
+                        <li><strong>Progression :</strong> <t t-out="object.milestone_progress"/>%</li>
+                        <li><strong>Atterrissage (EAC) :</strong> <t t-out="'%.2f' % object.eac"/> <t t-out="object.currency_id.symbol"/></li>
+                    </ul>
+                </div>
+                <p>Retrouvez plus de détails sur votre <a t-att-href="'/odoo/project.project/%s' % object.id" style="color: #875A7B; text-decoration: none;">Dashboard Projet</a>.</p>
+                <p>Ceci est un envoi automatique, merci de ne pas répondre.</p>
+            </div>
+        </field>
+    </record>
+
+    </data>
+</odoo>

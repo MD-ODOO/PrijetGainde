@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_order_form_bc_gainde" model="ir.ui.view">
+            <field name="name">purchase.order.form.bc.gainde</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <!-- Bouton retiré : action report accessible via le menu d'impression -->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

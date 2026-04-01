@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="report_mission_template" name="audit_gainde.report_mission_template">
+        <t t-call="web.basic_layout">
+
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: Arial, sans-serif;
+                }
+
+                /* === @PAGE MULTI-PAGES (SEUL QUI MARCHE PDF) === */
+                @page {
+                    margin-top: 120px;    /* Espace header */
+                    margin-bottom: 80px;  /* Espace footer */
+
+                    /* HEADER SUR TOUTES PAGES */
+                    @top-left {
+                        content: element(header);
+                        height: 90px;
+                    }
+
+                    /* FOOTER SUR TOUTES PAGES */
+                    @bottom-left {
+                        content: element(footer);
+                        padding: 15px 20px;
+                        border-top: 3px solid #1f4e79;
+                        background: #f8f9fa;
+                        font-size: 11px;
+                        height: 60px;
+                    }
+                }
+
+                /* Éléments "running" pour @page */
+                .custom_header {
+                    position: running(header);
+                    height: 90px;
+                    padding: 15px;
+                    background: white;
+                }
+
+                footer_content {
+                    position: running(footer);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 60px;
+                    padding: 10px 20px;
+                    font-size: 11px;
+                    color: #666;
+                    border-top: 2px solid #1f4e79;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                /* CONTENU PRINCIPAL */
+                page_content {
+                    padding: 0 20px;
+                }
+
+                section-title {
+                    background: #f2f2f2;
+                    padding: 6px;
+                    margin-top: 20px;
+                    font-weight: bold;
+                    border-left: 4px solid #1f4e79;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                table.audit_table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 10px;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                table.audit_table th {
+                    background: #1f4e79;
+                    color: white;
+                    border: 1px solid black;
+                    padding: 6px;
+                    font-size: 12px;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                table.audit_table td {
+                    border: 1px solid black;
+                    padding: 6px;
+                    font-size: 11px;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                table.audit_table tr {
+                    border: 1px solid black;
+                    padding: 6px;
+                    font-size: 11px;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+
+                report-title {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    font-family: 'Times New Roman', Times, serif !important;
+                }
+            </style>
+
+            <!-- HEADER -->
+            <div>
+                <div class="container row">
+                    <div class="col-8" style="padding-right: 20px; height: 110px;">
+                        <img t-att-src="'/audit_gainde/static/src/img/logo.png'"
+                         style="height:100px; width:350px;"/>
+                    </div>
+                    <div class="col-4" style="line-height: 1.8; color:#1f4e79; padding-left: 20px; border-left: 2px solid #1f4e79; ">
+                        <p>Rév :  <br/> Date de Rév: </p>
+                    </div>
+                </div>
+                <div style="color:#1f4e79; text-align:center; border-top: 2px solid #1f4e79; border-bottom: 2px solid #1f4e79;">
+                    <strong>RAPPORT AUDIT <t t-esc="docs[0].name"/> - Exercice <t t-esc="docs[0].plan_id.year"/></strong>
+                </div>
+            </div>
+
+
+
+            <!-- CONTENU -->
+            <div class="page_content">
+
+                <t t-foreach="docs" t-as="mission">
+
+                    <div style="color:#1f4e79; text-align:left;">
+                     Direction audité : <strong> <t t-esc="mission.direction"/> </strong>
+                    </div>
+                    <div style="color:#1f4e79; text-align:left;">
+                     Domaine audité : <strong> <t t-esc="mission.domain.name"/> </strong>
+                    </div>
+                    <div style="color:#1f4e79; text-align:left;">
+                     Responsable du domaine audite : <strong> <t t-esc="mission.responsible_domaine_audit_id.name"/> </strong>
+                    </div>
+
+                    <div style="color:#1f4e79; text-align:left;">
+                        Période de l’audit : <strong> du <t t-esc="mission.period_start.day"/> au <span t-esc="mission.period_end.strftime('%d %B %Y')"/></strong>
+                    </div>
+                    <div style="color:#1f4e79; text-align:left;">
+                        Numéro de référence du rapport : <strong> <t t-esc="mission.reference"/> </strong>
+                    </div>
+                    <div class="section-title">Equipe d’audit</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Auditeurs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td t-esc="mission.responsible_id.name"/>
+                            </tr>
+                            <tr t-foreach="mission.team_ids" t-as="auditeur">
+                                <td t-esc="auditeur.name"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- RISQUES -->
+                    <div class="section-title">Tableau des risques identifiés</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Description</th>
+                                <th>Niveau</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="mission.risk_ids" t-as="risk">
+                                <td t-esc="risk.code"/>
+                                <td t-esc="risk.name"/>
+                                <td t-esc="dict(risk._fields['level'].selection).get(risk.level)"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- CONTROLES -->
+                    <div class="section-title">Tableau des contrôles existants</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Contrôle</th>
+                                <th>Fréquence</th>
+                                <th>Efficacité</th>
+                                <th>Risque lié</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="mission.control_ids" t-as="ctrl">
+                                <td t-esc="ctrl.description"/>
+                                <td t-esc="dict(ctrl._fields['frequency'].selection).get(ctrl.frequency)"/>
+                                <td t-esc="dict(ctrl._fields['efficacy'].selection).get(ctrl.efficacy)"/>
+                                <td t-esc="ctrl.risk_id.code"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- CONSTATS -->
+                    <div class="section-title">Tableau des constats</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Constat</th>
+                                <th>Gravité</th>
+                                <th>Risque lié</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="mission.finding_ids" t-as="finding">
+                                <td t-esc="finding.reference"/>
+                                <td t-esc="finding.name"/>
+                                <td t-esc="dict(finding._fields['severity'].selection).get(finding.severity)"/>
+                                <td t-esc="finding.risk_id.code"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- RECOMMANDATIONS -->
+                    <div class="section-title">Tableau des recommandations</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Recommandation</th>
+                                <th>Constat lié</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="mission.recommendation_ids" t-as="rec">
+                                <td t-esc="rec.reference"/>
+                                <td t-esc="rec.description"/>
+                                <td t-esc="rec.finding_id.reference"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- SUIVI -->
+                    <div class="section-title">Tableau de suivi des recommandations</div>
+                    <table class="audit_table">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Action corrective</th>
+                                <th>Recommandation liée</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="mission.corrective_action_ids" t-as="correc">
+                                <td t-esc="correc.reference"/>
+                                <td t-esc="correc.notes"/>
+                                <td t-esc="correc.recommendation_id.reference"/>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </t>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="footer" style="border-top: 2px solid #1f4e79;">
+        Réf : PP01.PR06.v01/19 11 2025 / Confidentiel | Page <span class="page"/> / <span class="topage"/>
+    </div>
+
+        </t>
+    </template>
+    </data>
+</odoo>

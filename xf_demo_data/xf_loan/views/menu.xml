@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_xf_loan_root" name="Loan Management"
+                  web_icon="xf_loan,static/description/icon.png"
+                  groups="xf_loan.group_xf_loan_employee"/>
+
+        <menuitem id="menu_xf_loan_configuration" name="Configuration"
+                  parent="menu_xf_loan_root"
+                  sequence="100"/>
+
+    </data>
+</odoo>

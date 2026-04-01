@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <!-- 1. VUE RECHERCHE -->
+    <record id="view_audit_gainde_domain_search" model="ir.ui.view">
+        <field name="name">audit.gainde.domain.search</field>
+        <field name="model">audit_gainde.domain</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher Domaine">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- 2. VUE LISTE -->
+    <record id="view_audit_gainde_domain_list" model="ir.ui.view">
+        <field name="name">audit.gainde.domaine.list</field>
+        <field name="model">audit_gainde.domain</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+
+    <!-- VUE FORMULAIRE -->
+    <record id="view_audit_gainde_domain_form" model="ir.ui.view">
+        <field name="name">audit.gainde.domain.form</field>
+        <field name="model">audit_gainde.domain</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id="action_audit_gainde_domain" model="ir.actions.act_window">
+        <field name="name">Domaine d'audit</field>
+        <field name="res_model">audit_gainde.domain</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_audit_gainde_domain_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créez votre première domaine d'audit.
+            </p>
+        </field>
+    </record>
+
+    <!-- MENUS -->
+    <menuitem id="menu_audit_gainde_parameters_root"
+              name="Paramétres"
+              parent="menu_audit_gainde_root"
+              sequence="21"/>
+
+      <menuitem id="menu_audit_gainde_domain_root"
+              name="Domaines d'audit"
+              parent="menu_audit_gainde_parameters_root"
+              action="action_audit_gainde_domain"
+              sequence="22"/>
+
+  </data>
+</odoo>

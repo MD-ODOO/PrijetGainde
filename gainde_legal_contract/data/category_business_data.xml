@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- TYPE : ACCORD DE CONFIDENTIALITÉ (NDA) -->
+
+        <record id="type_business" model="legal.contract.type">
+            <field name="name">Société de Prestation (Personne Morale)</field>
+            <field name="category">business</field>
+            <field name="code">BUSINESS-G2K</field>
+            <field name="description">Modèle Standard de Contrat de Prestation Société (B2B)</field>
+            <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                    Considerant GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    Depuis une vingtaine d’années, il s’est aussi orienté dans les activités de certification électronique pour la sécurisation de ses plateformes de services dans un premier temps, ensuite pour s’ouvrir au marché national, international et devenir l’un des premiers prestataires de service de certification du Sénégal.
+                    <br/><br/>
+                    Considérant que {{partner_name}} est .....;
+                    <br/><br/>
+                    Considérant que les parties souhaitent formaliser les bases d’une collaboration structurée autour d’objectifs communs, notamment en matière de ;
+                     </p>
+                     <p class="mt-3"><strong>Entre les parties, il a été convenu et arrêté ce qui suit :</strong></p>
+
+
+        ]]></field>
+        </record>
+
+        <record id="art_business_1" model="legal.article.template">
+            <field name="name">Article 1 : OBJET</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+            <p>Par le présent contrat, GAINDE 2000 confie au prestataire qui accepte,
+             une mission de : {{mission}}.</p>
+          <p>Les modalités d’exécution de la mission du prestataire sont ci-après définies.</p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_business_1" model="legal.article.template">
+            <field name="name">Article 2 : OBLIGATIONS DU PRESTATAIRE</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+             <p>2.1. Déroulement de la mission : Le prestataire déroule sa mission conformément à la
+                     feuille de route fournie.
+            </p>
+            <p>2.2. Exécution</p>
+            <p>Dans le cadre de sa mission, le prestataire s’engage :</p>
+            <p>- à mettre en œuvre les moyens et l’organisation nécessaires afin de respecter
+                les délais convenus au présent contrat ;
+            </p>
+            <p>- à travailler en étroite collaboration avec l’équipe désignée par GAINDE 2000
+                selon le planning d’intervention en présentiel pour le nombre de jours
+                nécessaire ou à distance selon les besoins.
+            </p>
+            <p>2.3. Résultats attendus</p>
+            <p>Les livrables et/ou résultats attendus sont :</p>
+
+            <p>2.4. Diligence</p>
+            <p>Le prestataire s’engage à exécuter sa mission dans les règles de l’art et à y apporter
+                tout le professionnalisme attendu par GAINDE 2000.
+            </p>
+            <p>Il s’engage à exécuter sa mission et à restituer les livrables dans les délais impartis
+                et
+                les conditions convenues avec GAINDE 2000.
+            </p>
+            <p>2.5 Intutule personel</p>
+            <p>Le présent contrat étant conclu en considération de la personne, le prestataire
+                s’interdit de le céder à une tierce personne.
+            </p>
+
+            ]]></field>
+        </record>
+
+
+        <record id="art_business_3" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 3 : OBLIGATIONS DE GAINDE 2000</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+            <p>En contrepartie, GAINDE 2000 paiera au prestataire une rémunération mensuelle brute de
+                <strong> {{salaire_brut}}</strong> francs CFA {{salaire_lettres}} sur présentation de la facture y afférente.
+                </p>
+
+            ]]></field>
+        </record>
+        <record id="art_business_4" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 4 : ENTRÉE EN VIGUEUR - DURÉE</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Le contrat est conclu pour une durée de {{duree}}. Il entre en vigueur le {{date_debut}}
+        et expire le {{date_fin}}.</p>
+            ]]></field>
+        </record>
+        <record id="art_business_5" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 5 : DOCUMENTS CONTRACTUELS</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+<p>Sont considérés comme documents contractuels pour y faire référence en cas de
+besoin, et admis comme tels par les parties  :
+<ul style="list-style-type: '-' ;">
+    <li><p> le présent contrat</p>
+    <li><p> l’Acte d’engagement de respect de la politique de sécurité de l’information de GAINDE 2000 ;</p>
+    <li><p> les livrables attendus ;</p>
+    <li><p> tout autre document portant sur l’exécution du présent contrat.</p>
+</ul>
+            ]]></field>
+        </record>
+        <record id="art_business_6" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 6 : PROPRIÉTÉ</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Le prestataire garantit la qualité, l’exactitude et la pertinence des livrables identifiés au 2.3.
+            </p>
+            <p>Tous les livrables produits par le prestataire, dans le cadre de l’exécution du contrat,
+                sont la propriété de GAINDE 2000.
+            </p>
+            <p>Toute utilisation ultérieure des livrables susvisés, des documents et/ou autres
+                informations portant sur l’exécution du présent contrat, par le prestataire, pour son
+                propre compte ou celui de tiers, emporte obligatoirement l’autorisation expresse de
+                GAINDE 2000.
+            </p>
+
+            ]]></field>
+        </record>
+        <record id="art_business_7" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 7 : CONFIDENTIALITÉ</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Toutes les informations auxquelles le prestataire aura eu connaissance dans le cadre
+                de l’exécution de sa mission sont confidentielles.
+            </p>
+            <p>Le prestataire s’engage en outre au respect de la confidentialité des informations
+                qu’il recevra dans l’exercice de sa mission, à conserver dans de bonnes dispositions
+                de sécurité et de confidentialité, les documents et informations dont il aura pris
+                connaissance dans l’exécution de sa présente mission.
+            </p>
+            <p>Le prestataire reconnaît avoir pris connaissance des dispositions des lois sénégalaises
+                N°2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel,
+                N°2008-08 du 25 janvier 2008 sur les transactions électroniques et N°2008-11 du 25
+                janvier 2008 sur la cybercriminalité.
+            </p>
+            <p>Par conséquent, il s’engage à garder ces informations confidentielles à l’égard des
+                tiers et à prendre toutes les mesures nécessaires pour respecter la présente clause,
+                aussi bien en cours d’exécution de la mission qu’après son terme.
+            </p>
+            <p>Le prestataire s’engage à se conformer aux procédures qualité et de sécurité de
+                l’information applicables à GAINDE 2000, mises à sa disposition.
+            </p>
+
+
+            ]]></field>
+        </record>
+        <record id="art_business_8" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 8 : RESPONSABILITÉ</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+<p>Chaque partie est responsable, dans les conditions du droit commun, de l’exécution
+        des obligations mises à sa charge par le présent contrat.
+    </p>
+    <p>Le prestataire est seul responsable de la bonne exécution des prestations qui lui sont
+        confiées. Il garantit GAINDE 2000 contre tout dommage, préjudice, réclamation ou
+        action émanant de tiers résultant d’une faute, d’une négligence ou d’un manquement
+        imputable à lui-même ou à son personnel dans l’exécution du présent contrat.
+    </p>
+
+            ]]></field>
+        </record>
+        <record id="art_business_9" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 9 : FORCE MAJEURE</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+            <p>En cas de survenance d’un événement de force majeure tel que défini par la loi et la
+                jurisprudence, les parties tenteront de poursuivre l’exécution du contrat dans la
+                mesure du possible.
+            </p>
+            <p>Aucune des parties ne pourra être tenue responsable des dommages directs ou
+                indirects subis par l’une ou l’autre, et consécutifs à la survenance de l’événement de
+                force majeure.
+            </p>
+            <p>La force majeure suspend de droit l’exécution du contrat. Les parties décideront d’un
+                commun accord de la suspension temporaire ou de la résiliation du contrat.
+            </p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_business_10" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 10 : RÉSILIATION</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Le présent contrat pourra être résilié de plein droit, par anticipation, en cas de
+                manquement par l’une des parties aux obligations qui en découlent.
+            </p>
+            <p>À l’initiative de la partie diligente, la résiliation intervient à l’expiration du délai
+                imparti par la lettre de mise en demeure, restée sans effet, enjoignant à l’autre
+                partie d’apporter un remède à son ou ses manquements.
+            </p>
+            <p>La partie qui prend l’initiative de la résiliation doit la notifier à son contractant par
+                lettre recommandée avec accusé de réception.
+            </p>
+            <p>La résiliation anticipée du présent contrat ne préjudiciera pas à l’exécution des
+                activités en cours, ni à l’obtention en justice de tous dommages et intérêts auxquels
+                pourrait prétendre la partie subissant un quelconque préjudice du fait de
+                l’inexécution, ou de la mauvaise exécution, par l’autre partie, de ses obligations.
+            </p>
+
+            ]]></field>
+        </record>
+        <record id="art_business_11" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 11 : AVENANT (S)</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+            <p>Le présent contrat pourra être modifié, d’accord parties, sous la forme d’un ou des
+            avenants qui y seront annexés et intégrés.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_business_12" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 12 : DROIT APPLICABLE</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Le présent contrat relève exclusivement du droit sénégalais.</p>
+        <p>
+            Tout différend né, entre les parties, à propos de son existence, de sa validité, de son
+            interprétation, de son exécution, ou de son terme, sera soumis aux juridictions
+            locales compétentes par la partie la plus diligente, à défaut d’accord amiable.
+        </p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_business_13" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 13 : CLAUSES DIVERSES</field>
+            <field name="contract_type_id" ref="type_business"/>
+            <field name="content"><![CDATA[
+        <p>Pour toute disposition non prévue dans le présent contrat, les parties se réfèreront à
+        la législation en vigueur.</p>
+
+            ]]></field>
+        </record>
+    </data>
+</odoo>

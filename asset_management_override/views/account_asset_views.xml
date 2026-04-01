@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ajouter le champ barcode après le nom -->
+    <record id="view_account_asset_form_inherit_barcode" model="ir.ui.view">
+        <field name="name">account.asset.form.barcode</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']//field[@name='name']" position="after">
+                <field name="barcode" placeholder="Code-barres de l'actif physique"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

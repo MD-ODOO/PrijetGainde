@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ================================================= -->
+        <!-- HR EMPLOYEE FORM - INHERIT (ODOO 18)               -->
+        <!-- Customisation RH / Paie / Situation familiale    -->
+        <!-- ================================================= -->
+        <record id="employee_inherit_view_form" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.family.payroll</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <!-- ================================ -->
+                <!-- Identification                  -->
+                <!-- ================================ -->
+                <group  >
+                <xpath expr="//field[@name='work_email']" position="before">
+                <group groups="hr.group_hr_user" >
+                <field name="registration_number" string='Matricule' />
+                <field name="ipres_number"/>
+                <field name="num_css"/>
+                </group >
+                <group >
+                     <group >
+                <field name="categ_for_prime" widget="many2many_tags"/>
+                     </group >
+                   <group string="Période d'essai" groups="hr.group_hr_user" >
+                    <field name="datessaidebu"/>
+                    <field name="datessaifin"/>
+                  </group>
+                  </group >
+                 </xpath>
+                 </group >
+                 
+                
+                <xpath expr="//field[@name='identification_id']" position="attributes">
+                    <attribute name="string">C.N.I</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='private_car_plate']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='certificate']" position="attributes">
+                    <attribute name="string">Niveau d'étude</attribute>
+                </xpath>
+                <xpath expr="//field[@name='study_field']" position="attributes">
+                    <attribute name="string">Domaine d'étude</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='study_school']" position="attributes">
+                    <attribute name="string">Etablissement</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='identification_id']" position="after">
+                    <field name="carte_consule" groups="hr.group_hr_user"  />
+                </xpath>
+
+                <!-- ================================ -->
+                <!-- Situation matrimoniale           -->
+                <!-- ================================ -->
+                <xpath expr="//field[@name='marital']" position="after">
+                    <field name="holder_of_disability_pension"
+                           invisible="marital not in ['married', 'cohabitant']"/>
+                </xpath>
+
+                <!-- ================================ -->
+                <!-- Onglets                          -->
+                <!-- ================================ -->
+                <xpath expr="//notebook" position="inside">
+
+                    <!-- ================================================= -->
+                    <!-- Onglet : Situation Familiale                     -->
+                    <!-- ================================================= -->
+                    <page string="Situation familiale" groups="hr.group_hr_user">
+                        
+                         <group><field name="marital"/> </group>
+
+                        <!-- ================================ -->
+                        <!-- Enfants                          -->
+                        <!-- ================================ -->
+                        <group string="Enfants à charge" groups="hr.group_hr_user">
+                            <field name="children_ids"  options="{'confirm': 'Attention !Voulez-vous vraiment continuer ?'}" >
+                                <list editable="top" >
+                                 
+                                    <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="age"/>
+                                    <field name="no_twenty_one" readonly="1"/>
+                                    <field name="supported"/>
+                                    <field name="deceased" string="Décédé"/>
+                                     <button name="action_open_documents"
+                                      type="object"
+                                      icon="fa-paperclip"
+                                      string="Justificatifs"
+                                       />
+                                     
+                                    
+                                    <!-- Documents justificatifs -->
+                                    
+                                    <field name="justificatif"/>
+                                    <!-- Justificatif bloqué sans document -->
+                                   
+                                    </list>  
+                            </field>
+                        </group>
+
+                        <!-- ================================ -->
+                        <!-- Conjointes / Femmes              -->
+                        <!-- ================================ -->
+                        <group string="Situation Matrimoniale" groups="hr.group_hr_user" >
+                              
+                            <field name="husband_ids"  invisible="marital in ['single', 'cohabitant','divorced','widower']" >
+                            
+                                <list editable="top" deletable="false" >
+                                    <field name="name"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="gender"/>
+                                    <field name="date_mariage"/>
+                                   
+                                   <!-- Justificatif revenu -->
+                                      <button name="action_open_income_justification"
+                                      type="object"
+                                      icon="fa-briefcase"
+                                      string="Justificatif"
+                                       
+                                       invisible="holder_of_disability_pension in ['false']"/>
+                                      
+                                    <!-- Champ verrouillé sans justificatif -->
+                                    <field name="holder_of_disability_pension"
+                                           />
+                                           <button name="action_open_marriage_certificate"
+                                      type="object"
+                                      icon="fa-heart"
+                                      string="Certificat de Mariage"
+                                        
+                                      />
+                      
+                              
+                                   
+                                </list>
+                                
+                            </field>
+                        </group>
+
+                        <!-- ================================ -->
+                        <!-- Synthèse fiscale                 -->
+                        <!-- ================================ -->
+                        <group string="Synthèse fiscale" groups="hr.group_hr_user">
+                            <field name="husband_all_count" string="Nombre total de conjointes"/>
+                         
+                            <field name="children" string="Nombre d’enfants"/>
+                            <field name="trimf"/>
+                            <field name="nb_part" string="Nombre de parts fiscales"/>
+                        </group>
+
+                    </page>
+
+                    <!-- ================================================= -->
+                    <!-- Onglet : Comptes bancaires                        -->
+                    <!-- ================================================= -->
+                    <page string="Comptes bancaires" groups="hr.group_hr_user">
+                        <group>
+                            <field name="bank_ids" widget="confirm_delete_o2m" options="{'confirm': 'Attention ! La suppression d’un compte bancaire peut empêcher le paiement du salaire et les virements automatiques.\n\nVoulez-vous vraiment continuer ?'}">
+                                <list editable="top">
+                                    <field name="bank_id"/>
+                                    
+                                    <field name="number" required='1'/>
+                                    <field name="code_rib" required ='1'/>
+                                    <field name="libelle" required ='1'/>
+                                    <field name="amount"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- ================================================= -->
+        <!-- HR CONTRACT FORM - INHERIT                        -->
+        <!-- ================================================= -->
+
+         <record id="view_hr_husband_list" model="ir.ui.view">
+                          <field name="name">hr.husband.tree</field>
+                          <field name="model">hr.employee.husband</field>
+                          <field name="arch" type="xml">
+                              <list editable="bottom" >
+                                     <field name="employee_id"/>
+                                     <field name="name"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="gender"/>
+                                    <field name="date_mariage"/>
+                                   
+                                   <!-- Justificatif revenu -->
+                                      <button name="action_open_income_justification"
+                                      type="object"
+                                      icon="fa-briefcase"
+                                      string="Justificatif"
+                                       invisible="holder_of_disability_pension in ['false']"/>
+                                       
+                                      
+                                    <!-- Champ verrouillé sans justificatif -->
+                                    <field name="holder_of_disability_pension"
+                                           />
+                                           <button name="action_open_marriage_certificate"
+                                      type="object"
+                                      icon="fa-heart"
+                                      string="Certificat de Mariage"
+                                      />
+                                </list>
+                            </field>
+                        </record>
+          
+          <record id="act_husby_emp" model="ir.actions.act_window">
+            <field name="name">Informations Conjoit(es)</field>
+            <field name="res_model">hr.employee.husband</field>
+            <field name="view_mode">list</field>
+           
+        </record>
+
+       
+        
+        <menuitem id="menu_husby_child"
+          name=" Conjoint(es) Employé"
+          parent="hr.menu_human_resources_configuration"
+          action="act_husby_emp"
+          />
+        
+
+        <!-- ============================= -->
+        <!-- Actions Enfant -->
+        <!-- ============================= -->
+
+          <record id="view_hr_child_list" model="ir.ui.view">
+                          <field name="name">hr.child.tree</field>
+                          <field name="model">hr.employee.child</field>
+                          <field name="arch" type="xml">
+                              <list editable="bottom" >
+                                    <field name="employee_id"/>
+                                     <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="age"/>
+                                    <field name="no_twenty_one" readonly="1"/>
+                                    <field name="supported"/>
+                                    <field name="deceased" string="Décédé"/>
+                                     <button name="action_open_documents"
+                                      type="object"
+                                      icon="fa-paperclip"
+                                      string="Justificatifs"
+                                      
+                                       />
+                                     
+                                    
+                                    <!-- Documents justificatifs -->
+                                    
+                                    <field name="justificatif"/>
+                                </list>
+                            </field>
+                        </record>
+          
+          <record id="act_child_emp" model="ir.actions.act_window">
+            <field name="name">Informations Enfants</field>
+            <field name="res_model">hr.employee.child</field>
+            <field name="view_mode">list</field>
+            
+        </record>
+
+       
+        
+        <menuitem id="menu_hr_child"
+          name="Enfants Employé"
+          parent="hr.menu_human_resources_configuration"
+          action="act_child_emp"
+          />
+       
+
+       
+
+        <!-- ============================= -->
+        <!-- Menus VPI et Catégorie -->
+        <!-- ============================= -->
+        
+        
+          
+                          <record id="view_hr_bank_list" model="ir.ui.view">
+                          <field name="name">hr.bank.tree</field>
+                          <field name="model">hr.bank.employee</field>
+                          <field name="arch" type="xml">
+                              <list editable="bottom" delete="true">
+                                    <field name="employee_id"/>
+                                    <field name="bank_id"/>
+                                    <field name="number"/>
+                                    <field name="code_rib"/>
+                                    <field name="libelle"/>
+                                    <field name="amount"/>
+                                </list>
+                            </field>
+                        </record>
+          
+          <record id="act_hr_bank" model="ir.actions.act_window">
+            <field name="name">Informations Bancaires</field>
+            <field name="res_model">hr.bank.employee</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_hr_bank_list"/>
+        </record>
+
+        <!-- ============================= -->
+        <!-- Menus VPI et Catégorie -->
+        <!-- ============================= -->
+        
+        <menuitem id="menu_hr_bank_bank"
+          name="Informations Bancaires"
+          parent="hr.menu_human_resources_configuration"
+          action="act_hr_bank"
+          />
+          
+          <record id="view_hr_virement_libelle_tree" model="ir.ui.view">
+    <field name="name">hr.virement.libelle.tree</field>
+    <field name="model">hr.virement.libelle</field>
+    <field name="arch" type="xml">
+        <list editable="bottom">
+            <field name="name"/>
+        </list>
+    </field>
+</record>
+
+
+
+<record id="view_res_bank_form_inherit_employee" model="ir.ui.view">
+        <field name="name">res.bank.form.inherit.employee</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Insertion sûre dans Odoo 18 Enterprise -->
+            <xpath expr="//sheet" position="inside">
+
+                <notebook>
+                    <page string="Comptes employés">
+
+                        <field name="employeebank_id" nolabel="1">
+                            <list editable="bottom">
+                                <field name="employee_id"/>
+                                <field name="number"/>
+                               <field name="libelle"/>
+                                <field name="amount"/>
+                            </list>
+                        </field>
+
+                    </page>
+                </notebook>
+
+            </xpath>
+
+        </field>
+    </record>
+    
+    
+          <record id="view_categ_prime_tree" model="ir.ui.view">
+      <field name="name">hr.categ.prime.tree</field>
+      <field name="model">hr.categ.prime</field>
+      <field name="arch" type="xml">
+          <list string="Catégories Prime">
+              <field name="name"/>
+              
+          </list>
+      </field>
+  </record>
+    
+        <record id="view_categ_prime_form" model="ir.ui.view">
+        <field name="name">hr.categ.prime.form</field>
+        <field name="model">hr.categ.prime</field>
+        <field name="arch" type="xml">
+            <form string="Catégorie Prime">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        
+                    </group>
+    
+                    <notebook>
+                        <page string="Employés">
+                            <field name="employee_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="job_title"/>
+                                    <field name="department_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+    
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+      
+       
+  
+     <record id="action_categ_prime" model="ir.actions.act_window">
+    <field name="name">Catégories Prime</field>
+    <field name="res_model">hr.categ.prime</field>
+    <field name="view_mode">list,form</field>
+     </record>
+     
+     <menuitem id="menu_categ_prime"
+          name="Catégories Prime"
+          parent="hr.menu_human_resources_configuration"
+          action="action_categ_prime"
+          sequence="30"/>
+
+      
+        
+
+    </data>
+</odoo>

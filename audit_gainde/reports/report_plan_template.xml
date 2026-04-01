@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_plan_template" name="audit_gainde.report_plan_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="plan">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- EN-TÊTE -->
+                        <div class="row text-center mb-5">
+                            <div class="col-12">
+                                <img t-if="plan.company_id.logo"
+                                     t-att-src="'data:image/png;base64,%s' % plan.company_id.logo"
+                                     style="max-height: 80px;"/>
+                                <h1 style="color: #2E7D32;">RAPPORT D'AUDIT GAINDE</h1>
+                                <h2 t-esc="plan.name" style="color: #1976D2;"/>
+                                <h4><strong>Année :</strong> <span t-esc="plan.year"/></h4>
+                            </div>
+                        </div>
+
+                        <!-- INFOS GÉNÉRALES -->
+                        <div class="row mb-4 p-3 bg-light rounded">
+                            <div class="col-md-6">
+                                <p><strong>Responsable :</strong> <span t-esc="plan.plan_responsible_id.name"/></p>
+                                <p><strong>Date création :</strong> <span t-esc="plan.create_date"/></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>État :</strong></p>
+                                <span t-att-style="plan.state == 'validated' and 'background: #4CAF50; color: white; padding: 4px 8px; border-radius: 4px;'
+                                                   or plan.state == 'cancelled' and 'background: #F44336; color: white; padding: 4px 8px; border-radius: 4px;'
+                                                   or 'background: #FF9800; color: white; padding: 4px 8px; border-radius: 4px;'">
+                                    <span t-esc="plan.state"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- KPI CARDS -->
+                        <div class="row mb-5">
+                            <div class="col-md-3 text-center p-4 bg-primary text-white rounded shadow">
+                                <h3 t-esc="plan.completed_missions_count"/>
+                                <p>Missions</p>
+                            </div>
+                            <div class="col-md-3 text-center p-4 bg-info text-white rounded shadow">
+                                <h3 t-esc="plan.total_risk_count"/>
+                                <p>Risques</p>
+                            </div>
+                            <div class="col-md-3 text-center p-4 bg-warning text-white rounded shadow">
+                                <h3 t-esc="plan.total_recommendation_count"/>
+                                <p>Recommandations</p>
+                            </div>
+                            <div class="col-md-3 text-center p-4 bg-success text-white rounded shadow">
+                                <h3 t-esc="plan.completion_rate"/>%
+                                <p>Réalisation</p>
+                            </div>
+                        </div>
+
+                        <!-- LISTE MISSIONS (PAS TABLEAU !) -->
+                        <h4>Missions réalisées</h4>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nom Mission</th>
+                                        <th>Responsable</th>
+                                        <th>État</th>
+                                        <th>Risques</th>
+                                        <th>Constats</th>
+                                        <th>Taux Compl.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="plan.mission_ids" t-as="mission">
+                                        <tr>
+                                            <td>
+                                                <strong t-esc="mission.name"/>
+                                            </td>
+                                            <td t-esc="mission.responsible_id.name"/>
+                                            <td>
+                                                <span t-att-class="'badge badge-' + ('success' if mission.state == 'done' else 'warning' if mission.state == 'progress' else 'secondary')">
+                                                    <t t-esc="mission.state"/>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-danger">
+                                                    <t t-esc="mission.risk_count"/>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-warning">
+                                                    <t t-esc="mission.finding_count"/>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-info">
+                                                    <t t-esc="mission.completion_rate"/>%
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <!-- PIED DE PAGE -->
+                        <div class="row mt-5 pt-4 border-top">
+                            <div class="col-8">
+                                <p><em>Généré le <span t-esc="plan.write_date"/> | Audit Gainde v1.0</em></p>
+                            </div>
+                            <div class="col-4 text-right">
+                                <p><strong>Société : <span t-esc="plan.company_id.name"/></strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="bf_portal_purchase_request.purchase_request_line">
+        <tr class="o_data_row">
+            <td>
+                <p class="o_input_product" t-attf-data-product-id="#{product and product.id}" t-esc='product and product.text'/>
+            </td>
+            <td t-if="0">
+                <textarea class="form-control o_input_description" rows="3"></textarea>
+            </td>
+            <td>
+                <textarea class="form-control o_input_portal_product_description" rows="3" t-att-value='portal_product_description'></textarea>
+            </td>
+            <td>
+                <input type="number" step="1" min="1" class="form-control o_input_quantity text-end" t-att-value='product_qty'/>
+            </td>
+            <td>
+                <div style="display: flex; align-items: center;">
+                    <span class="o_input_uom" t-attf-data-uom-id="#{uom and uom.id}" t-esc='uom and uom.text.trim()'/>
+                    <a href="#" class="btn o_purchase_line_js_delete" title="Delete">
+                        <i class="fa fa-trash fa-1x" role="img" aria-label="Open"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </t>
+</templates>

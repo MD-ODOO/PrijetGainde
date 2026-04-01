@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- TYPE : ACCORD DE CONFIDENTIALITÉ (NDA) -->
+        <record id="type_nda" model="legal.contract.type">
+            <field name="name">Accord de Confidentialité (NDA)</field>
+            <field name="code">NDA-G2K</field>
+            <field name="category">nda</field>
+            <field name="description">Modèle standard de protection des informations confidentielles.</field>
+                        <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                    GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    Depuis une vingtaine d’années, il s’est aussi orienté dans les activités de certification électronique pour la sécurisation de ses plateformes de services dans un premier temps, ensuite pour s’ouvrir au marché national, international et devenir l’un des premiers prestataires de service de certification du Sénégal.
+                    <br/><br/>
+                     {{partner_name}} est ..........;
+                    <br/><br/>
+Les parties, en vue de prévenir toute divulgation non autorisée d’informations jugées « confidentielles » (telles que définies ci-dessous), s’engagent à négocier en toute confidentialité, au titre des présentes.</p>
+
+        ]]></field>
+        </record>
+
+        <!-- Articles du NDA -->
+        <record id="art_nda_1" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 1 : DÉFINITION</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+                    <p>Les termes utilisés dans le présent accord s’entendent comme suit :</p>
+                        <p class="ps-3 mb-1">
+                            <strong>L’accord :</strong>
+                            le présent accord de confidentialité ;
+                        </p>
+                        <p class="ps-3 mb-1">
+                            <strong>Partie émettrice :</strong>
+                            partie qui transmet/émet l’information ;
+                        </p>
+                        <p class="ps-3 mb-1">
+                            <strong>Partie réceptrice :</strong>
+                            partie qui reçoit l’information ;
+                        </p>
+                        <p class="ps-3 mb-1"><strong>Information confidentielle :</strong>Pour les besoins du présent
+                            accord, le terme ‘Informations
+                            Confidentielles’ renvoie à toutes les informations et tous les renseignements transmis ou
+                            connus de l’une ou des deux des parties, dans le cadre de l’objet et du champ définis aux
+                            articles ci-dessous. Toutefois, les parties veilleront à estampiller tous les documents
+                            transmis avec la mention ‘Confidentiel’ ou une marque similaire. Si l’information est
+                            transmise oralement, la partie émettrice rappelle les présentes dispositions et, délivre
+                            sans délai, une note dans laquelle elle spécifie le caractère confidentiel de l’information
+                            ;
+                        </p>
+                        <p class="ps-3 mb-1">
+                            <strong>Tiers :</strong>
+                            toute personne physique ou morale (autres que les parties) et non visée par le
+                            présent accord.
+                        </p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_nda_2" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 2 : EXCLUSIONS</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3">Les obligations ne concernent pas les informations connues publiquement,
+                            découvertes avant divulgation ou divulguées avec consentement écrit.
+                        </p>
+
+                        <ol type="a">
+                            <li>
+                                <p>sont connues publiquement au moment de la divulgation ou qui tombent
+                                    subséquemment dans le domaine public par un moyen qui ne soit pas imputable à la
+                                    partie réceptrice ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>sont découvertes ou créées par la partie réceptrice avant qu’elles n’aient été
+                                    divulguées par la partie émettrice ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>sont acquises par la partie réceptrice de manière légitime par des canaux différents
+                                    que ceux de la partie émettrice ou ses représentants ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>sont divulguées par la partie réceptrice avec le consentement par écrit de la partie
+                                    émettrice ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>sont divulguées en vertu d’une obligation légale ou judiciaire.</p>
+                            </li>
+                        </ol>
+
+            ]]></field>
+        </record>
+
+        <record id="art_nda_3" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 3 : OBJET</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+           <p class="ps-3">Le présent accord formalise les négociations en toute confidentialité, convenues
+                            entre les parties.
+                        </p>
+                ]]>
+            </field>
+        </record>
+        <record id="art_nda_4" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 4 : OBLIGATIONS DES PARTIES</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p>Le partenaire est tenu de :</p>
+                        <ol>
+                            <li value="4">
+                                <ol>
+                                    <li value="1">
+                                        <p>Négocier avec GAINDE 2000 conformément à l’objet et aux modalités définis
+                                            dans le présent accord ;
+                                        </p>
+                                    </li>
+                                    <li value="2">
+                                        <p>Se garder de divulguer à des tiers toutes les informations se rapportant au
+                                            présent accord et jugées confidentielles. A moins d’y avoir été autorisée
+                                            préalablement par écrit, interdiction lui est faite d’utiliser à ses propres
+                                            fins, de publier,
+                                            de copier, de ermettre l’utilisation par des tiers, à leurs propres profits
+                                            ou au
+                                            détriment de GAINDE 2000 toute information confidentielle ;
+                                        </p>
+                                    </li>
+                                    <li value="3">
+                                        <p>Diligenter toutes les mesures nécessaires aux fins de restreindre
+                                            l’accès aux informations confidentielles ;
+                                        </p>
+                                    </li>
+                                    <li value="4">
+                                        <p>Communiquer les dispositions de l’accord aux personnes qui ont accès
+                                            aux informations confidentielles et/ou leur faire signer des accords
+                                            similaires;
+                                        </p>
+                                    </li>
+                                    <li value="5">
+                                        <p>Mettre à la disposition de GAINDE 2000, dans les délais requis, toutes
+                                            les informations nécessaires à la réalisation de l’objet de l’accord ;
+                                        </p>
+                                    </li>
+                                    <li value="6">
+                                        <p>Restituer immédiatement à GAINDE 2000 tous les renseignements, notes,
+                                            données, imprimés et supports en sa possession et estampillés ‘Informations
+                                            Confidentielles’ dès que ce dernier en fait la demande par écrit.
+                                        </p>
+                                    </li>
+                                    <li value="7">
+                                        <p>Négocier avec le partenaire conformément à l’objet et aux modalités
+                                            définis dans le présent accord ;
+                                        </p>
+                                    </li>
+                                    <li value="8">
+                                        <p>Se garder de divulguer à des tiers toutes les informations se
+                                            rapportant au présent accord et jugées confidentielles. A moins d’y avoir
+                                            été
+                                            autorisée préalablement par écrit, interdiction lui est faite d’utiliser à
+                                            ses
+                                            propres fins, de publier, de copier, de permettre l’utilisation par des
+                                            tiers, à
+                                            leurs propres profits ou au détriment de GAINDE 2000 toute information
+                                            confidentielle ;
+                                        </p>
+                                    </li>
+                                    <li value="9">
+                                        <p>Diligenter toutes les mesures nécessaires aux fins de restreindre
+                                            l’accès aux informations confidentielles ;
+                                        </p>
+                                    </li>
+                                    <li value="10">
+                                        <p>Communiquer les dispositions de l’accord aux personnes qui ont accès
+                                            aux informations confidentielles et/ou leur faire signer des accords
+                                            similaires;
+                                        </p>
+                                    </li>
+                                    <li value="11">
+                                        <p>Mettre à la disposition du partenaire, dans les délais requis, toutes
+                                            les informations nécessaires à la réalisation de l’objet de l’accord ;
+                                        </p>
+                                    </li>
+                                    <li value="12">
+                                        <p>Restituer immédiatement au partenaire tous les renseignements, notes,
+                                            données, imprimés et supports en sa possession et estampillés ‘Informations
+                                            Confidentielles’ dès que ce dernier en fait la demande par écrit.
+                                        </p>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+
+            ]]></field>
+        </record>
+        <record id="art_nda_5" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 5 : CHAMP DE LA CONFIDENTIALITE</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3">Le champ de la confidentialité couvre toutes les informations, de quelque nature
+                            et sur quelque support que ce soit (oral, écrit, électronique) et se rapportant à l’objet du
+                            présent accord.
+                        </p>
+
+            ]]></field>
+        </record>
+        <record id="art_nda_6" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 6 : DURÉE</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3">L’obligation de confidentialité survit au-delà du terme de l’accord jusqu’à ce
+                            que:
+                        </p>
+                        <ul style="list-style-type: '-' ;">
+                            <li>
+                                <p>les informations dites confidentielles ne soient plus classées secret commercial par
+                                    la partie émettrice ;
+                                </p>
+                            </li>
+                            <li>
+                                <p>la partie émettrice envoie une notification écrite à la partie réceptrice la
+                                    déchargeant de cette obligation.
+                                </p>
+                            </li>
+                        </ul>
+
+            ]]></field>
+        </record>
+        <record id="art_nda_7" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 7 : AVENANT</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3">Le présent accord pourra être amendé, d’un commun accord entre les parties, par
+                            avenant(s) qui sera (ont) annexé (s) et intégré (s) au présent accord.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_8" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 8 : RENONCIATION</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3">Le défaut d’exercice de tout ou partie des droits prévus aux termes du présent
+                            accord ne pourra être assimilé en aucun cas à une renonciation préalable ou subséquente de
+                            son titulaire.
+                        </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_9" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 9 : FORCE EXECUTOIRE</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+
+            <p class="ps-3">Le présent accord et les obligations qui en découlent ont une force exécutoire
+                pour les représentants, les employés ou toute personne habilitée à agir au nom ou pour le
+                compte de chaque partie.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_10" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 10 : GRATUITE</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3">Aux fins de l’exécution des présentes, chacune des parties prend en charge les
+                    frais inhérents à l’accomplissement de ses obligations.
+                </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_11" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 11 : SOUS TRAITANCE</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3">Le recours à un ou des sous-traitants par l’une des parties sera soumis à l’information
+                préalable de l’autre partie.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_12" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 12 : RESILIATION</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3">La violation par l’une des parties de son (ses) obligation (s) entraine la résiliation de
+            plein droit du présent accord, nonobstant le droit à réparation dont dispose la partie la plus diligente
+            du fait d’un quelconque préjudice consécutif aux manquements de l’autre partie.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_13" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 13 : LITIGES</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+
+            <p class="ps-3">Tout différend survenant entre les parties, au cours de l’exécution du présent
+                accord, sera soumis à l’arbitrage de la Chambre de Commerce et d’Arbitrage de Dakar (CCAD),
+                à défaut de règlement à l’amiable. La sentence arbitrale est définitive.
+            </p>
+            ]]></field>
+        </record>
+        <record id="art_nda_14" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 14 : ENTREE EN VIGUEUR</field>
+            <field name="contract_type_id" ref="type_nda"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3">Le présent accord entre en vigueur à compter de la date de sa signature par les parties.</p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

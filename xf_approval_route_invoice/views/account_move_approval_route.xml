@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+        <record id="account_move_approval_form" model="ir.ui.view">
+            <field name="name">account_move_approval_form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <button name="action_post" position="after">
+                    <button name="button_approve_invoice" string="Approve" type="object" class="oe_highlight"
+                            invisible="not is_current_approver"/>
+                    <button name="button_reject_invoice" string="Reject" type="object"
+                            invisible="not is_current_approver"/>
+                </button>
+                <xpath expr="//button[@name='button_cancel'][2]" position="attributes">
+                    <attribute name="invisible">not id or state not in ('draft', 'to approve', 'rejected') or move_type == 'entry'</attribute>
+                </xpath>
+
+
+                <xpath expr="//group[@id='header_right_group']" position="inside">
+                    <field name="use_approval_route" invisible="True"/>
+                    <field name="approval_route_id"
+                           readonly="state != 'draft'"
+                           invisible="use_approval_route == 'no'"
+                           required="use_approval_route == 'required'"/>
+                </xpath>
+
+                <notebook position="inside">
+                    <page name="approval_route" string="Approval Route"
+                          invisible="state in ['draft'] or not approval_route_id">
+                        <field name="approval_route_stage_ids">
+                            <list>
+                                <field name="sequence" invisible="True" widget="handle"/>
+                                <field name="name"/>
+                                <field name="user_ids" widget="many2many_avatar_user"/>
+                                <field name="state"/>
+                                <field name="decisions_summary"/>
+                            </list>
+                        </field>
+                        <field name="is_current_approver" invisible="True"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="view_account_move_search_extend_state_filters" model="ir.ui.view">
+            <field name="name">view_account_move_search_extend_state_filters</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <filter name="myinvoices" position="after">
+                    <filter domain="[('is_current_approver', '=', uid)]" name="under_my_approval" help="Need My Approval"/>
+                </filter>
+                <filter name="draft" position="after">
+                    <filter string="To Approve" name="state_to_approve" domain="[('state', '=', 'to approve')]"/>
+                    <filter string="Rejected" name="state_rejected" domain="[('state', '=', 'rejected')]"/>
+                </filter>
+            </field>
+        </record>
+    </data>
+</odoo>

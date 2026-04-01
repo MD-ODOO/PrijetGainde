@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Créer le button_box avec les boutons Réceptions et Actif comptable -->
+        <record id="asset_management_form_create_button_box" model="ir.ui.view">
+            <field name="name">asset.management.form.create.button.box</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_pickings"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-truck">
+                            <field name="picking_count" widget="statinfo" string="Réceptions"/>
+                        </button>
+                        <button name="action_open_account_asset"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-book"
+                                invisible="not account_asset_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Actif comptable</span>
+                            </div>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

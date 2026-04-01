@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_order_cancelled" model="mail.message.subtype">
+            <field name="name">Sales Order Cancelled</field>
+            <field name="res_model">sale.order</field>
+            <field name="default" eval="True"/>
+            <field name="description">Quotation was Cancelled</field>
+        </record>
+    </data>
+</odoo>

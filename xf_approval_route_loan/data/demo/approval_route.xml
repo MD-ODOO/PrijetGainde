@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_loan_route_1" model="approval.route">
+            <field name="name">Demo Route for Loan Requests</field>
+            <field name="model_id" ref="xf_loan.model_hr_employee_loan_request"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="user_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="employee_loan_route_1_stage_hr_officer" model="approval.route.stage">
+            <field name="sequence">1</field>
+            <field name="approval_route_id" ref="employee_loan_route_1"/>
+            <field name="name">HR Officer</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_hr_officer"/>
+            <field name="use_custom_conditions" eval="False"/>
+        </record>
+
+        <record id="employee_loan_route_1_fin_analyst" model="approval.route.stage">
+            <field name="sequence">2</field>
+            <field name="approval_route_id" ref="employee_loan_route_1"/>
+            <field name="name">Financial Analyst</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_financial_analyst"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_amount_field_id" ref="xf_loan.field_hr_employee_loan_request__principal_amount"/>
+            <field name="condition_amount_operator">&gt;=</field>
+            <field name="condition_amount">1000</field>
+            <field name="condition_amount_currency_id" ref="base.USD"/>
+        </record>
+
+        <record id="employee_loan_route_1_accountant" model="approval.route.stage">
+            <field name="sequence">3</field>
+            <field name="approval_route_id" ref="employee_loan_route_1"/>
+            <field name="name">Accountant</field>
+            <field name="approval_role_id" ref="xf_approval_route_base.approval_role_accountant"/>
+            <field name="use_custom_conditions" eval="True"/>
+            <field name="condition_amount_field_id" ref="xf_loan.field_hr_employee_loan_request__principal_amount"/>
+            <field name="condition_amount_operator">&gt;=</field>
+            <field name="condition_amount">5000</field>
+            <field name="condition_amount_currency_id" ref="base.USD"/>
+        </record>
+    </data>
+</odoo>

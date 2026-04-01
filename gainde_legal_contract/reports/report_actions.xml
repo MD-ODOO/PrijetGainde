@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. Personnel (Physique) -->
+<!--    <record id="action_report_contract_employee" model="ir.actions.report">-->
+<!--        <field name="name">Contrat Personnel (RH) &#45;&#45;&#45;&#45;</field>-->
+<!--        <field name="model">legal.contract</field>-->
+<!--        <field name="report_type">qweb-pdf</field>-->
+<!--        <field name="report_name">gainde_legal_contract.report_contract_employee</field>-->
+<!--        <field name="binding_model_id" ref="model_legal_contract"/>-->
+<!--    </record>-->
+
+    <!-- 1. Prestation (Morale) -->
+    <record id="action_report_contract_business" model="ir.actions.report">
+        <field name="name">Contrat de Prestation (Personne Morale)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_business</field>
+        <field name="report_file">gainde_legal_contract.report_contract_business</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+
+    <!-- 2. Confidentialité (NDA) -->
+    <record id="action_report_contract_nda" model="ir.actions.report">
+        <field name="name">Accord de Confidentialité (NDA)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_nda</field>
+        <field name="report_file">gainde_legal_contract.report_contract_nda</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+    <!-- 3. Protocole d'Accord -->
+    <record id="action_report_contract_protocol" model="ir.actions.report">
+        <field name="name">Protocole d'Accord (MoU)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_protocol</field>
+        <field name="report_file">gainde_legal_contract.report_contract_protocol</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+
+    <!-- 4. Personnes Physiques (Consultant/Prestation) -->
+    <record id="action_report_contract_individual" model="ir.actions.report">
+        <field name="name">Contrat Consultant (Physique)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_individual</field>
+        <field name="report_file">gainde_legal_contract.report_contract_individual</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+
+
+     <!-- 5. Marché  (Morale) -->
+    <record id="action_report_contract_market" model="ir.actions.report">
+        <field name="name">Contrat de Marché </field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_market</field>
+        <field name="report_file">gainde_legal_contract.report_contract_market</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+
+    <!-- 6. ORBUS BANK -->
+    <record id="action_report_contract_subscription_orbus_bank" model="ir.actions.report">
+        <field name="name">Contrat de Souscription Orbus Bank (SOB)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_subscription_orbus_bank</field>
+        <field name="report_file">gainde_legal_contract.report_contract_subscription_orbus_bank</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+
+    <!-- 7. Orbus Insurance -->
+    <record id="action_report_contract_subscription_orbus_insurance" model="ir.actions.report">
+        <field name="name">Contrat de Souscription Orbus Insurance (SOI)</field>
+        <field name="model">legal.contract</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gainde_legal_contract.report_contract_subscription_orbus_insurance</field>
+        <field name="report_file">gainde_legal_contract.report_contract_subscription_orbus_insurance</field>
+        <field name="binding_model_id" ref="model_legal_contract"/>
+    </record>
+</odoo>

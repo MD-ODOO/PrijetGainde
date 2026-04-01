@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vue liste -->
+    <record id="view_hr_rate_profile_list" model="ir.ui.view">
+        <field name="name">hr.employee.rate.profile.list</field>
+        <field name="model">hr.employee.rate.profile</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="hourly_rate" widget="monetary"/>
+                <field name="min_years"/>
+                <field name="max_years"/>
+<!--                <field name="autonomy_level" widget="badge"/>-->
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire -->
+    <record id="view_hr_rate_profile_form" model="ir.ui.view">
+        <field name="name">hr.employee.rate.profile.form</field>
+        <field name="model">hr.employee.rate.profile</field>
+        <field name="arch" type="xml">
+            <form string="Profil de coût horaire">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="hourly_rate" widget="monetary"/>
+                        </group>
+                        <group>
+<!--                            <field name="autonomy_level" widget="selection"/>-->
+                            <field name="min_years"/>
+                            <field name="max_years"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue recherche -->
+    <record id="view_hr_rate_profile_search" model="ir.ui.view">
+        <field name="name">hr.employee.rate.profile.search</field>
+        <field name="model">hr.employee.rate.profile</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+<!--                <field name="autonomy_level"/>-->
+                <filter string="Junior" name="junior" domain="[('min_years', '&lt;=', 2)]"/>
+                <filter string="Senior / Expert" name="senior" domain="[('min_years', '&gt;', 5)]"/>
+<!--                <group expand="1" string="Groupes">-->
+<!--                    <filter string="Par autonomie" name="group_autonomy" context="{'group_by': 'autonomy_level'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+      <!-- 2. Action (référence les IDs corrigés) -->
+    <record id="action_hr_rate_profile" model="ir.actions.act_window">
+        <field name="name">Profils de coût horaire</field>
+        <field name="res_model">hr.employee.rate.profile</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_hr_rate_profile_list"/> <!-- Corrigé ist -> list -->
+        <field name="search_view_id" ref="view_hr_rate_profile_search"/>
+    </record>
+
+    <menuitem id="menu_hr_rate_profile"
+          name="Profils de coût horaire"
+          parent="hr.menu_hr_root"
+          action="action_hr_rate_profile"
+          sequence="50"/>
+
+
+    <record id="view_employee_form_inherit_rate_profile" model="ir.ui.view">
+    <field name="name">hr.employee.form.inherit.rate.profile</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+        <!-- On cible le champ dans l'onglet Configuration RH / Timesheet -->
+         <xpath expr="//field[@name='job_id']" position="after">
+            <field name="rate_profile_id" options="{'no_create': True}"/>
+        </xpath>
+        <!-- On rend le champ hourly_cost readonly pour forcer l'usage du profil -->
+       <xpath expr="//group[@name='active_group']" position="inside">
+             <field name="hourly_cost" readonly="1" force_save="1" invisible="not rate_profile_id"/>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

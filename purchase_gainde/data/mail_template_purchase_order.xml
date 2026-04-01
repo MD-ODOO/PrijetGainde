@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_purchase_order_retourner" model="mail.template">
+        <field name="name">Bon de commande : Retourné en brouillon</field>
+        <field name="model_id" ref="purchase.model_purchase_order"/>
+        <field name="subject">Bon de commande retourné en brouillon : {{ object.name }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-family: 'Segoe UI', Roboto, sans-serif;">
+                <p>Bonjour,</p>
+                <p>Le bon de commande
+                    <strong><t t-out="object.name"/></strong>
+                    a été retourné en brouillon par
+                    <strong><t t-out="user.name"/></strong>.
+                </p>
+                <p>Fournisseur : <t t-out="object.partner_id.name"/></p>
+                <p>Montant total : <t t-out="object.amount_total"/> <t t-out="object.currency_id.name"/></p>
+                <div style="margin: 16px 0px 16px 0px;">
+                    <a t-att-href="'/web#id=%s&amp;model=purchase.order&amp;view_type=form' % (object.id)"
+                       style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                        Voir le Bon de Commande
+                    </a>
+                </div>
+                <p>Cordialement,</p>
+                <p style="color: #666666;">Ceci est un message automatique du système de gestion des achats.</p>
+            </div>
+        </field>
+    </record>
+</odoo>

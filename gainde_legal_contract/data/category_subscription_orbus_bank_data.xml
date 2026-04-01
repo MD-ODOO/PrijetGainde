@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- TYPE : Souscription Orbus Bank -->
+        <record id="type_bank" model="legal.contract.type">
+            <field name="name">Souscription Orbus Bank (SOB)</field>
+            <field name="code">SOB-G2K</field>
+            <field name="category">bank</field>
+            <field name="description">Contrat d'abonnement entre GAINDE 2000 et ses clients pour Orbus Bank.</field>
+            <field name="header_template"><![CDATA[
+                <p><strong>Entre</strong></p>
+                <p class="ps-3 small">
+                    <strong>GAINDE 2000</strong>, Groupement d’intérêt Économique au capital 300.000.000 FCFA, immatriculé sous le RC SN DKR 2002 B 1149, NINEA 0021516952G6, dont le siège social est sis à l’Immeuble ORBUS, 1 Allées Thierno Seydou Nourou TALL, Point E, Dakar, représenté par Monsieur Ibrahima Nour Eddine DIAGNE, en qualité d’Administrateur Général ;
+                    <br/>Ci-après dénommé <strong>« GAINDE 2000 »</strong> ;
+                </p>
+
+                <p><strong>Et</strong></p>
+                <p class="ps-3 small">
+                    <strong>{{partner_name}}</strong>, Société au capital de ____________, immatriculé(e) au Registre du Commerce et du Crédit Mobilier de Dakar sous le numéro <strong>{{rccm}}</strong>, NINEA <strong>{{ninea}}</strong>, dont le siège social est sis à <strong>{{adresse}}</strong>, représenté(e) par Monsieur {{representant}}, en sa qualité de ____________, dûment habilité aux fins des présentes ;
+                    <br/>Ci-après dénommé <strong>« Le Client »</strong> ;
+                </p>
+
+                <p class="small"><i>Ci-après dénommés, individuellement par « la Partie » ou collectivement par « les Parties ».</i></p>
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PREAMBULE</h6>
+                <p class="ps-3 small text-justify">
+                    GAINDE 2000 est un Groupement d’Intérêt Économique créé au Sénégal, avec pour mission principale la dématérialisation des formalités du commerce extérieur. Il est l’initiateur et l’exploitant, depuis 2002, de la plateforme de pré-dédouanement dénommée ‘ORBUS’.
+                    <br/><br/>
+                    GAINDE 2000 a fait une proposition technique et financière pour la mise en place d’une plateforme web sécurisée de suivi des dossiers de domiciliation (enregistrement) jusqu’à l’apurement.
+                    <br/><br/>
+                    Le Client ayant manifesté la volonté de se doter de la plateforme, les parties se sont rapprochées pour signer le présent contrat dans les conditions ci-dessous ;
+                </p>
+
+                <p class="mt-3"><strong>Entre les parties, il a été convenu et arrêté ce qui suit :</strong></p>
+
+                <h6 class="text-primary border-bottom border-primary d-inline-block mt-3 mb-2">PRELIMINAIRE : DEFINITIONS</h6>
+                <p class="ps-3 small">
+                    Aux fins de l’exécution du présent contrat, les termes ci-après auront le sens qui leur est donné dans les définitions susvisées :
+                    <br/><br/>
+                    <strong>FTPS (File Transfer Protocol Secure) :</strong> un protocole de communication destiné à l'échange informatique de fichiers sur un réseau sécurisé avec les protocoles SSL ou TLS.
+                    <br/>
+                    <strong>Tiers :</strong> toute personne (physique ou morale) autres que les parties aux présentes.
+                </p>
+            ]]></field>
+        </record>
+
+        <!-- Articles de la souscription -->
+        <record id="art_sob_1" model="legal.article.template">
+            <field name="sequence">10</field>
+            <field name="name">Article 1 : OBJET</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Le présent contrat a pour objet de définir les conditions et modalités de conception,
+             de développement et de mise en place d’une plateforme pour dématérialiser tout le processus de gestion et
+              de suivi des domiciliations en vue:
+            </p>
+            <ul style="list-style-type: '-' ;">
+               <li><p>D’automatiser les opérations d’enregistrement de la domiciliation, de règlement, d'apurement et de Reporting ;</p></li>
+               <li><p>D’améliorer le suivi des opérations (en centralisant le traitement) ;</p></li>
+               <li><p>D’échanger des données entre les systèmes d’information (ORBUS et Orbus Bank);</p></li>
+               <li><p>De renforcer la sécurité et la conformité des opérations.</p></li>
+            </ul>
+
+]]>
+            </field>
+        </record>
+
+        <record id="art_sob_2" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 2 : CARACTERISTIQUES ET COMMODITES D’USAGE DE LA PLATEFORME</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">La plateforme est une solution Web sécurisée qui permet d’automatiser le processus
+             de traitement et de suivi des opérations de domiciliation des dossiers ORBUS jusqu’à leurs apurements.</p>
+            <p>Ses caractéristiques sont les suivantes:</p>
+            <p><strong>2.1 LES CARACTERISTIQUES DE LA PLATEFORME </strong></p>
+            <p><strong>2.1.1 Les principales fonctionnalités</strong></p>
+            <p>Les principales fonctionnalités sont:</p>
+            <ul style="list-style-type: '-' ;">
+               <li><p>Le suivi et la gestion des dossiers après traitement dans ORBUS (domiciliés et non domiciliés);</p></li>
+               <li><p>Le traitement et le suivi des règlements des dossiers ;</p></li>
+               <li><p>L’apurement des dossiers ;</p></li>
+               <li><p>L’annulation des dossiers ;</p></li>
+               <li><p>Le module d’administration (gestion autonome des comptes et accès des utilisateurs);</p></li>
+               <li><p>Les états statistiques et les Reporting.</p></li>
+            </ul>
+
+            <p><strong>2.1.2 Les principales caractéristiques techniques </strong></p>
+            <p>Les principales caractéristiques techniques sont:</p>
+            <ul style="list-style-type: '-' ;">
+                <li><p>La disponibilité des données;</p></li>
+                <li><p>La sécurisation de la plateforme; </p></li>
+                <li><p>L’intégrité des données;</p></li>
+                <li><p>L’évolutivité de la plateforme;</p></li>
+                <li><p>L’utilisation des protocoles standards web.</p></li>
+            </ul>
+            <p><strong>2.2 LES COMMODITES D’USAGE DE LA PLATEFORME</strong></p>
+            <p>Les commodités liées à l’utilisation de la plateforme sont les suivantes:</p>
+            <ul style="list-style-type: '-' ;">
+                <li><p>La disponibilité permanente de la plateforme 24/7 ;</p></li>
+                <li><p>La création d’un profil personnalisé pour chaque service ; </p></li>
+                <li><p>La fluidité des opérations;</p></li>
+                <li><p>Une meilleure gestion du flux informationnel;</p></li>
+                <li><p>un gain de temps et de productivité;</p></li>
+                <li><p>La réduction des risques de perte de données;</p></li>
+                <li><p>Le Reporting des fichiers en PDF et Excel.</p></li>
+            </ul>
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_3" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 3 : OBLIGATIONS DES PARTIES</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+            <p><strong>3.1 Les obligations de GAINDE 2000</strong></p>
+            <p class="ps-3 small">Pour l’exécution des présentes, GAINDE 2000 s’engage à réaliser les prestations
+            suivantes, consécutivement à la souscription du Client à la PLATEFORME : </p>
+            <ul style="list-style-type: '-' ;">
+                <li><p>Réaliser la solution technique et fournir un environnement stable et correct pour héberger
+                la plateforme en mode 24/7;</p></li>
+                <li><p>Veiller au bon fonctionnement (disponibilité/intégrité/accessibilité) de la plateforme, gage d’une
+                 jouissance paisible des commodités susvisées;</p></li>
+                <li><p>Veiller au déploiement correct de la plateforme;</p></li>
+                <li><p>Assurer la maintenance corrective et évolutive de la plateforme ;</p></li>
+                <li><p>Accompagner le client dans l’identification et la satisfaction des prérequis nécessaires à
+                l’exploitation et à l’utilisation de la plateforme ;</p></li>
+                <li><p>Assurer la veille technologique requise pour une bonne sécurisation du service et des données traitées;</p></li>
+                <li><p>Veiller à la bonne appropriation de la plateforme par le Client;</p></li>
+                <li><p>Se conformer aux dispositions de la loi portant sur les données à caractère personnel,
+                relativement au traitement et à la sécurisation des données personnelles du Client;</p></li>
+                <li><p>Assurer la reprise de l’activité auprès du client en cas d’indisponibilité prolongée ou d’incident
+                 sur lesystème et déclare à cet effet au client disposer d’un plan de continuité de l’activité.</p></li>
+                <li><p>Déclarer également au client que les serveurs hébergeant les données sont disponible dans l’espace UEMOA.</p></li>
+            </ul>
+
+            <p><strong>3.2.	Les Obligations du Client</strong></p>
+
+            <p>Le Client s’oblige aux prestations suivantes : </p>
+            <ul style="list-style-type: '-' ;">
+                <li><p>Être conforme par rapport aux exigences et prérequis techniques définis au point 4.1 du présent contrat ;</p></li>
+                <li><p>La mobilisation et la sensibilisation des parties prenantes et autres agents impliqués dans l’utilisation du service ;</p></li>
+                <li><p>La conservation en toute sécurité et confidentialité des paramètres de connexion remis par GAINDE 2000 (liens, identifiants, mots de passe..);</p></li>
+                <li><p>La satisfaction aux dispositions financières du 4.2;</p></li>
+                <li><p>La notification à GAINDE 2000 sans délai et par tout moyen, de tout cas d’incident de sécurité relevant de son fait.</p></li>
+            </ul>
+
+            <p><strong>3.3.	Les obligations communes des parties</strong></p>
+            <p>En sus de l’obligation de confidentialité qui incombe aux parties, celles-ci conviennent de collaborer de
+             bonne foi aux fins des présentes.</p>
+             <p>À cet égard, les parties s’interdisent toutes les manœuvres intentionnelles ou délibérées et les pratiques
+              dilatoires de nature à entacher la bonne exécution du contrat.</p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_4" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 4 : CONDITIONS D’ACCES / SOUSCRIPTION A LA PLATEFORME</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Pour accéder à la plateforme, le Client doit s’acquitter, préalablement,
+                des conditions techniques et financières ci-après. </p>
+                <p><strong>4.1.	Prérequis techniques</strong></p>
+                <p>Le Client s’engage à satisfaire aux exigences techniques définies par GAINDE 2000 qui constituent
+                un préalable à tout accès au service, à savoir disposer de :</p>
+                <ul style="list-style-type: '-' ;">
+                <li><p>Veille sécuritaire permanente (logiciels de sécurité) ;</p></li>
+                <li><p>Une connexion sécurisée;  </p></li>
+                <li><p>Une bande passante adéquate pour une bonne connexion des utilisateurs</p></li>
+
+            </ul>
+            <p>En outre, le Client prendra toutes les dispositions techniques requises pour faciliter l’exploitation de la PLATEFORME.</p>
+
+            <p><strong>4.2.	Conditions financières</strong></p>
+            <p>Le Client s’acquittera des frais dont les montants sont détaillés en ANNEXE. Ils sont libérés
+            préalablement à toute implémentation et sont non remboursables, sauf en cas de non-exécution ou d’exécution
+            partielle des charges incombant de GAINDE 2000.</p>
+
+            <p>Les modalités de paiement sont:</p>
+            <ul style="list-style-type: '-' ;">
+                <li><p>50% du montant hors taxe à la signature</p></li>
+                <li><p>50% après recette définitive : déploiement, installation et formation;</p></li>
+                <li><p>Les frais de maintenance s’élèvent à 20% du montant global hors taxes payables chaque année sur présentation de la facture.</p></li>
+
+            </ul>
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_5" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 5 : RESPONSABILITE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+            <p class="ps-3 small">Chacune des parties engage sa responsabilité en cas d’inexécution de ses obligations,
+             sauf lorsque le manquement résulte d’un cas de force majeure ou du fait de l’autre partie. </p>
+
+             <p><strong>5.1. Responsabilités de GAINDE 2000</strong></p>
+             <p>GAINDE 2000 est responsable de la bonne exécution des prestations listées aux 2.1, 2.2, 3.1, 3.3 et 7.
+              Leurs défaillances engagent sa responsabilité pleine et entière. </p>
+             <p>Toutefois, la responsabilité de GAINDE 2000 ne saurait être engagée en cas d’indisponibilité ou de difficultés
+              d’accès au service liées au réseau de connexion internet, aux prérequis techniques visés au point 4.1
+              ou à une mauvaise conservation des paramètres de connexion.</p>
+
+              <p><strong>5.2. Responsabilités du Client</strong></p>
+              <p>Le Client est responsable de la bonne exécution des prestations listées aux 3.2, 3.3, 4.1, 4.2.
+              Et 7. Leurs défaillances engagent sa responsabilité pleine et entière.</p>
+
+
+              <p><strong>5.3. Force majeure</strong></p>
+              <p>La responsabilité de l’une ou l'autre des parties ne peut être engagée lorsque l’inexécution partielle
+              ou totale de l’une ou de leurs obligations résulte d'un cas de force majeure, entendu comme un événement
+              extérieur, imprévisible, insurmontable, irrésistible et indépendant de la volonté des parties .</p>
+
+              <p>Toute Partie qui se prévaut d’un cas de force majeure dispose d’un délai de trois (3) jours pour le notifier par tout moyen.
+              Dès la notification par une Partie de la survenance d’un cas de force majeure, les Parties rechercheront ensemble et de bonne foi,
+               les meilleures solutions permettant de le circonscrire, et d’en limiter les conséquences.</p>
+               <p>L’existence d’un cas de force majeure pendant une période supérieure à un (1) mois pourra entraîner la résiliation
+               du présent accord sans indemnité versée à l’une ou l’autre des Parties sous réserve de notification préalable.
+               Cette résiliation prendra effet quinze (15) jours après l’envoi de la notification de la décision de résiliation.
+                Toutes les obligations contractées avant la survenance d'un cas de force majeure restent dues.</p>
+
+
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_6" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 6 : INDEPENDANCE DES PARTIES</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat vise à mettre en œuvre un partenariat d’affaires entre les parties.
+                Celles-ci déclarent et reconnaissent qu’elles sont et restent, pendant toute la durée du présent contrat
+                 des partenaires professionnels, indépendants assumant chacun les risques de leur propre activité.</p>
+
+                 <p>Excepté, les obligations découlant des présentes, chaque partie reste indépendante à la fois,
+                  de par sa nature juridique, que de par ses règles d’organisation et de fonctionnement.</p>
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_7" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 7 : CONFIDENTIALITE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les termes de ce contrat sont strictement confidentiels. Les parties entendent
+                ne divulguer aucune information ou donnée sans le consentement écrit et préalable de l’autre partie.
+                À cet égard, elles s’engagent à :</p>
+                <ul style="list-style-type: '-' ;">
+                <li><p>S’abstenir de divulguer à des tiers toute information relative à ce contrat à l’exception de
+                ses employés qui sont tenus d’en prendre connaissance en raison de leurs fonctions ;</p></li>
+                <li><p>Considérer les informations y afférentes comme confidentielles. À moins de requérir l’autorisation
+                 écrite préalable de l’autre partie, il est formellement interdit d’utiliser toute information confidentielle
+                 relative à ce contrat pour son propre compte ou de favoriser leur utilisation par des tiers,
+                 pour leurs propres bénéfices, au détriment de l’autre partie.</p></li>
+                <li><p>Prendre toutes les mesures nécessaires pour restreindre l’accès aux informations confidentielles ;</p></li>
+                <li><p>Communiquer la présente clause à toute personne qui a accès aux informations confidentielles;</p></li>
+                <li><p>Restituer immédiatement tous les supports, de quelque nature qu’ils soient (physiques, électroniques) dès que l’autre partie en fait la demande par écrit.</p></li>
+
+            </ul>
+            <p>L’obligation de confidentialité survit au terme du contrat pendant au moins une période de 05 ans.</p>
+
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_8" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 8 : Protection des données personnelles</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Chacune des Parties s’engage à se conformer en toutes circonstances à la réglementation
+                en vigueur en matière de protection des données à caractère personnel, en particulier,
+                aux dispositions de la loi n°2008-12 du 25 janvier 2008 relatif à la protection des données à caractère personnel. </p>
+                <p>Chacune des Parties reconnaît que l’ensemble de ses collaborateurs et salariés ont été sensibilisés,
+                formés et organisés pour présenter et offrir des garanties suffisantes de sécurité et de confidentialité
+                 des données à caractère personnel.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_9" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 9 : Lutte contre la corruption</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Chacune des Parties s’engage vis-à-vis de l’autre Partie et vis-à-vis de tiers à
+                respecter l’ensemble des législations et réglementations nationales et internationales relatives
+                à la lutte contre la corruption.</p>
+                <p>A ce titre, chacune des Parties s’engage à sensibiliser l’ensemble de ses collaborateurs et salariés à ces règles. </p>
+                <p>Dans l’hypothèse où l’une des Parties viendrait à avoir connaissance de pratiques prohibées par
+                les réglementations nationales et internationales relatives à la lutte contre la corruption,
+                elle en informera immédiatement l’autre Partie. </p>
+                <p>Chacune des Parties confirme à l’autre qu’elle n’a connaissance, à la date de signature du présent Contrat,
+                 d’aucune violation de ces réglementations nationales et internationales relatives à la lutte contre la corruption.</p>
+
+
+
+            ]]></field>
+        </record>
+
+        <record id="art_sob_10" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 10 : MODIFICATIONS</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le contrat est modifiable par avenant (s), sur initiative d’une des parties,
+                après accord de l’autre partie. L’avenant signé par les parties sera annexé aux présentes et
+                fera partie intégrante du contrat. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_11" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 11 : DUREE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat entre en vigueur à compter de sa date de signature.
+                Il est conclu pour une durée d’...... renouvelable par tacite reconduction pour des périodes d’égale durée,
+                 sauf notification d’un avis de non-renouvellement à l’autre partie, au moins un (01) mois avant
+                 son terme par lettre au porteur contre décharge. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_12" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 12 : RESILIATION</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Ce contrat pourra être résilié par l’une ou l’autre des parties:</p>
+                <ul style="list-style-type: '-' ;">
+                <li><p>Moyennant un préavis notifié un (1) mois avant le terme contractuel, à l’autre partie, par lettre
+                 remise contre récépissé au porteur.</p></li>
+                <li><p>Sans préjudice de ce qui précède, en cas de manquement, par l’une des parties aux obligations des présentes,
+                 huit (8) jours après une mise en demeure par lettre au porteur restée sans effet.</p></li>
+                <li><p>En dehors de tout manquement, GAINDE 2000 reconnait au Client la possibilité de rompre à tout moment
+                 le présent contrat sans pouvoir à justifier d’un quel conque motif en envoyant simplement une lettre de résiliation
+                  avec un préavis de huit (8) jours.</p></li>
+
+            </ul>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_13" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 13 : PROPRIETE INTELLECTUELLE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">La plateforme est une propriété exclusive de GAINDE 2000.</p>
+                <p>Toute représentation ou reproduction, totale ou partielle, permanente ou temporaire, par quelque procédé
+                 que ce soit, de l’un ou l’autre de ses composantes, sans l’accord préalable et exprès de GAINDE 2000
+                 emporte la responsabilité pleine et entière de son auteur.</p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_14" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 14 : CESSION</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Ce contrat est conclu intuitu personae c’est à dire en considération de la capacité
+                 et de la nature intrinsèque des parties. Il est incessible, non transférable et inaliénable</p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_15" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 15 : DIVISIBILITE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">L’invalidité ou l’illégalité d’une des dispositions de ce présent contrat,
+                dans la mesure où elle n’affecte pas les obligations essentielles des parties,
+                n’a aucune incidence sur la validité des autres dispositions qui garderont toute leur force et leur portée et
+                 seront interprétées au mieux pour répondre à l’intention et à la bonne foi des parties. </p>
+            ]]></field>
+        </record>
+
+        <record id="art_sob_16" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 16 : APPLICABILITE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le présent contrat et les obligations qui en découlent ont une force exécutoire
+                pour les parties, leurs représentants, leurs employés ou toute autre personne autorisée à agir en leur nom
+                et pour leur compte. </p>
+            ]]></field>
+        </record>
+        <record id="art_sob_17" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 17 : DIFFEREND</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Le Présent contrat est soumis au droit sénégalais. </p>
+                <p class="ps-3 small">Tout différend né entre les parties, à propos de l’existence, de la validité,
+                de l’interprétation, de l’exécution, ou du terme du présent contrat sera soumis à la compétence
+                du Tribunal du Commerce Hors Classe de Dakar, à défaut de règlement amiable </p>
+            ]]></field>
+        </record>
+        <record id="art_sob_18" model="legal.article.template">
+            <field name="sequence">20</field>
+            <field name="name">Article 18 : ELECTION DE DOMICILE</field>
+            <field name="contract_type_id" ref="type_bank"/>
+            <field name="content"><![CDATA[
+                <p class="ps-3 small">Les parties élisent domicile à leurs sièges sociaux respectifs désignés supra où toutes
+                 les notifications seront adressées. </p>
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

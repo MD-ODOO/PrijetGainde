@@ -1,0 +1,187 @@
+<odoo>
+  <record id="action_treasury_receipt" model="ir.actions.act_window">
+    <field name="name">Encaissements</field>
+    <field name="res_model">treasury.receipt</field>
+    <field name="view_mode">list,form,graph,pivot</field>
+    <field name="context">{'search_default_to_collect': 1}</field>
+  </record>
+
+  <record id="action_treasury_receipt_dashboard" model="ir.actions.act_window">
+    <field name="name">Tableau de bord encaissements</field>
+    <field name="res_model">treasury.receipt</field>
+    <field name="view_mode">graph,pivot</field>
+    <field name="context">{"group_by": ["state", "receipt_type"]}</field>
+    <field name="groups_id" eval="[(4, ref('treasury_management.group_treasury_df'))]"/>
+  </record>
+
+  <record id="view_treasury_receipt_list" model="ir.ui.view">
+    <field name="model">treasury.receipt</field>
+    <field name="arch" type="xml">
+      <list decoration-danger="is_overdue"
+            decoration-warning="priority in ('2','3') and state != 'paid'"
+            decoration-success="state == 'paid'"
+            decoration-info="state == 'partial' and not is_overdue"
+            decoration-muted="state in ('draft', 'cancelled')"
+            string="Encaissements"
+            multi_edit="1">
+        <field name="name" string="Référence"/>
+        <field name="partner_id" string="Client"/>
+        <field name="category_id" optional="show"/>
+        <field name="planned_receipt_date" string="Date prévue"/>
+        <field name="currency_id" invisible="1"/>
+        <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+        <field name="amount_remaining_currency" widget="monetary" string="Reliquat"
+               options="{'currency_field': 'currency_id'}" optional="show"/>
+        <field name="receipt_type" optional="show"/>
+        <field name="responsible_user_id" optional="hide"/>
+        <field name="priority" widget="priority"/>
+        <field name="is_overdue" invisible="1"/>
+        <field name="state" widget="badge"
+               decoration-success="state == 'paid'"
+               decoration-info="state == 'partial' and not is_overdue"
+               decoration-danger="is_overdue"
+               decoration-muted="state in ('draft', 'cancelled')"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_treasury_receipt_search" model="ir.ui.view">
+    <field name="model">treasury.receipt</field>
+    <field name="arch" type="xml">
+      <search string="Recherche encaissements">
+        <field name="name" string="Référence"/>
+        <field name="partner_id"/>
+        <field name="category_id"/>
+        <field name="journal_id"/>
+        <field name="responsible_user_id"/>
+        <separator/>
+        <filter name="to_collect" string="À encaisser"
+                domain="[('state','in',('draft','partial'))]"
+                help="Encaissements brouillon ou partiellement encaissés (à encaisser)."/>
+        <filter name="partial" string="Partiel"
+                domain="[('state','=','partial')]"/>
+        <filter name="paid" string="Encaissé"
+                domain="[('state','=','paid')]"/>
+        <filter name="overdue" string="En retard"
+                domain="['&amp;', ('state','!=','paid'), ('planned_receipt_date','&lt;', context_today())]"/>
+        <separator/>
+        <filter name="type_customer" string="Clients"
+                domain="[('receipt_type','=','customer')]"/>
+        <filter name="type_other" string="Autres"
+                domain="[('receipt_type','=','other')]"/>
+        <group expand="0" string="Regrouper par">
+          <filter name="group_state" string="État" context="{'group_by': 'state'}"/>
+          <filter name="group_receipt_type" string="Type" context="{'group_by': 'receipt_type'}"/>
+          <filter name="group_category" string="Catégorie" context="{'group_by': 'category_id'}"/>
+          <filter name="group_partner" string="Client" context="{'group_by': 'partner_id'}"/>
+          <filter name="group_journal" string="Journal" context="{'group_by': 'journal_id'}"/>
+          <filter name="group_responsible" string="Responsable" context="{'group_by': 'responsible_user_id'}"/>
+          <filter name="group_month" string="Mois prévu" context="{'group_by': 'planned_receipt_date:month'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="view_treasury_receipt_form" model="ir.ui.view">
+    <field name="model">treasury.receipt</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="action_pay" type="object" string="Encaisser"
+                  class="btn-primary"
+                  groups="treasury_management.group_treasury_df,treasury_management.group_treasury_manager,treasury_management.group_treasury_cashier"
+                  invisible="state not in ['draft','partial']"/>
+          <button name="action_cancel" type="object" string="Annuler"
+                  class="btn-secondary"
+                  groups="treasury_management.group_treasury_df"
+                  invisible="state == 'cancelled'"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,partial,paid,cancelled"/>
+        </header>
+        <sheet>
+          <!-- Smart buttons -->
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_payment" type="object"
+                    class="oe_stat_button" icon="fa-credit-card"
+                    invisible="not payment_id">
+              <div class="o_stat_info">
+                <span class="o_stat_text">Paiement</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="oe_title">
+            <h1>
+              <field name="name" readonly="1"/>
+            </h1>
+          </div>
+
+          <group>
+            <group string="Informations générales">
+              <field name="receipt_type" readonly="state == 'paid'"/>
+              <field name="partner_id" readonly="state == 'paid'"/>
+              <field name="invoice_id" readonly="state == 'paid'"/>
+              <field name="category_id" readonly="state == 'paid'"/>
+              <field name="journal_id" readonly="state == 'paid'"/>
+            </group>
+            <group string="Planification">
+              <field name="planned_receipt_date" readonly="state == 'paid'"/>
+              <field name="receipt_date" readonly="state == 'paid'"/>
+              <field name="priority" widget="priority" readonly="state == 'paid'"/>
+              <field name="responsible_user_id" readonly="state == 'paid'"/>
+            </group>
+          </group>
+
+          <group string="Montants">
+            <group>
+              <field name="currency_id" invisible="1"/>
+              <field name="amount_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     string="Montant prévu" readonly="state == 'paid'"/>
+              <field name="amount" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="1" string="Montant (société)"/>
+            </group>
+            <group>
+              <field name="amount_collected_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}" readonly="1"
+                     string="Déjà encaissé"/>
+              <field name="payment_amount_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}"
+                     readonly="state == 'paid'"
+                     string="Montant à encaisser ce jour"/>
+              <field name="amount_remaining_currency" widget="monetary"
+                     options="{'currency_field': 'currency_id'}" readonly="1"
+                     string="Reliquat"/>
+            </group>
+          </group>
+
+          <field name="is_overdue" invisible="1"/>
+          <field name="payment_id" invisible="1"/>
+          <chatter/>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_treasury_receipt_graph" model="ir.ui.view">
+    <field name="model">treasury.receipt</field>
+    <field name="arch" type="xml">
+      <graph string="Encaissements" type="bar">
+        <field name="amount" type="measure"/>
+        <field name="state" type="row"/>
+        <field name="receipt_type" type="col"/>
+      </graph>
+    </field>
+  </record>
+
+  <record id="view_treasury_receipt_pivot" model="ir.ui.view">
+    <field name="model">treasury.receipt</field>
+    <field name="arch" type="xml">
+      <pivot string="Encaissements">
+        <field name="amount" type="measure"/>
+        <field name="state" type="row"/>
+        <field name="receipt_type" type="col"/>
+      </pivot>
+    </field>
+  </record>
+</odoo>

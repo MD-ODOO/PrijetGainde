@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="secure_api_form_view" model="ir.ui.view">
+            <field name="name">secure_api_form_view</field>
+            <field name="model">secure.api</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_publish_api" type="object"
+                            string="Publish API" class="oe_highlight"
+                            invisible="state == 'published'"/>
+                        <button name="btn_back_to_draft" type="object"
+                            string="Back to Draft" class="oe_default"
+                            invisible="state in ['draft', 'published']"/>
+                        <button name="btn_deactivate_api" type="object"
+                            string="Deactivate API" class="oe_default"
+                            invisible="state in ['draft', 'deactivated']"/>
+                        <!-- <field name="state" widget="statusbar" statusbar_visible=" "/> -->
+                        <field name="state" widget="statusbar"/>
+					</header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="button_open_total_hit_stats" type="object"
+                                    class="oe_stat_button" icon="fa-bars"
+                                    invisible="is_stats == False">
+                                <field name="stats_total_hit" readonly="1"/>
+                                <span invisible="stats_total_hit &gt; 1">Requests</span>
+                                <span invisible="stats_total_hit &lt;= 1">Requests</span>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="Name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="API Name (e.g., Customer Data)"/></h1>
+                            <label for="route" string="Route" class="oe_edit_only"/><h3><field name="route" placeholder="/api/v1/resource" readonly="state == 'published'"/></h3>
+
+                            <label for="mode" string="Mode" class="oe_edit_only"/><h3><field name="mode"/></h3>
+                            <div class="text-muted" invisible="mode != 'test'">Enable Test Mode to use the API in a sandbox environment. No real data or actions will be affected. Perfect for testing and development.</div>
+                        </div>
+                        <group name="api_info">
+                            <group name="api_info_config" string="API Configuration">
+                                <field name="api_action" readonly="state == 'published'"/>
+                                <field name="model_ids" options="{'no_create_edit': True, 'no_create': True}" widget="many2many_tags" readonly="state == 'published'" invisible="api_action == 'rpc'"/>
+                                <field name="model_id_alias" options="{'no_create_edit': True, 'no_create': True}" readonly="state == 'published'" invisible="api_action != 'rpc'"/>
+                                <!-- <field name="is_allow_multi" invisible="api_action in ['search']" readonly="state == 'published'"/> -->
+                                <field name="auth"/>
+                                <!-- <field name="is_secure_record_id"/> -->
+                                <field name="cors" readonly="state == 'published'" placeholder="domain.com or * for all origins"/>
+                                <field name="method_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}" required="api_action == 'rpc'" readonly="api_action != 'rpc'"/>
+                                <!-- <field name="method_ids" widget="many2many_tags"/> -->
+                                <!-- <field name="security_user_id" invisible="auth != 'none'" options="{'no_create_edit': True, 'no_open': True}"/> -->
+                                <field name="rpc_method" placeholder="Method name (e.g., search_read, get_data)" invisible="api_action != 'rpc'" required="api_action == 'rpc'" readonly="state == 'published'"/>
+                                <field name="related_model_domain_ids" invisible="1"/>
+                                <!-- <field name="listing_limit" invisible="api_action not in ['search', 'rest']"/> -->
+                                <field name="is_stats"/>
+                                <label for="secure_api_stats_id" string=""/>
+                                <field name="secure_api_stats_id" nolabel="1" readonly="1" invisible="is_stats == False"/>
+                                <field name="stats_total_hit" invisible="1"/>
+                                <field name="app_ids" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}"/>
+                            </group>
+                            <group name="api_info_config_extra" string="&#160;">
+                                <field name="is_secure_record_id"/>
+                                <field name="hashids_salt" placeholder="Leave empty to use default from settings" invisible="is_secure_record_id == False"/>
+                                <field name="hashids_min_length" placeholder="Leave empty to use default from settings" invisible="is_secure_record_id == False"/>
+                                <field name="secure_record_id_example" readonly="1"/>
+                                <!-- <field name="category_id" options="{'no_create_edit': True, 'no_create': True}"/> -->
+                                <field name="category_id"/>
+                                <field name="security_user_id" invisible="auth != 'none'" options="{'no_create_edit': True, 'no_open': True}"/>
+                                <field name="domain" placeholder="[('id', '>', 10)]" invisible="api_action not in ['rest', 'search']"/>
+                                <field name="listing_limit" placeholder="Default record limit (e.g., 20)" invisible="api_action not in ['search', 'rest']"/>
+                                <field name="is_allow_multi" invisible="api_action in ['search']" readonly="state == 'published'"/>
+                                <!-- <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True, 'no_quick_create': True}"/> -->
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                                <field name="note" placeholder="Additional information about this API..."/>
+                            </group>
+                        </group>
+
+                        <group name="exposed_fields" string="Exposed Fields" invisible="api_action in ['delete', 'rpc']">
+                            <group>
+                                <field name="binary_field_return" invisible="api_action in ['add', 'delete', 'update', 'rpc']"/>
+                                <field name="allowed_field_type"/>
+                                <field name="domain_search_fields" invisible="1"/>
+                                <field name="search_field_ids" widget="many2many_tags"
+                                       invisible="api_action not in ['rest', 'search']"
+                                       domain="[('id', 'in', domain_search_fields)]"
+                                       options="{'no_create_edit': True, 'no_create': True}"/>
+                            </group>
+                            <group>
+                                <label for="default_field_ids" colspan="1" invisible="(model_ids == False) or (api_action not in ['create', 'rest'])"/><span class="text-muted" invisible="(model_ids == False) or (api_action not in ['create', 'rest'])">Default values for new record. Examples: True, 2.37, [6, 0, [ref("base.user_admin")]], fields.Date.today() + relativedelta(days=10), datetime.today() + timedelta(days=10), ...</span>
+                                <field name="default_field_ids" colspan="2" nolabel="1" invisible="(model_ids == False) or (api_action not in ['create', 'rest'])" context="{'model_ids': model_ids}" options="{'no_create_edit': True, 'no_create': True}">
+                                    <list string="Default Values" editable="bottom" limit="5">
+                                        <control>
+                                            <create name="add_line_control" string="Add a field"/>
+                                        </control>
+                                        <field name="model_id" domain="[('id', 'in', context.get('model_ids', []))]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                        <field name="field_id" domain="[('model_id', '=', model_id)]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                        <field name="value"/>
+                                        <field name="field_type" readonly="1"/>
+                                    </list>
+                                </field>
+
+                                <label for="alias_field_ids" colspan="1" invisible="model_ids == False"/><span class="text-muted" invisible="model_ids == False">Define alias names for fields in API responses and requests</span>
+                                <field name="alias_field_ids" colspan="2" nolabel="1" invisible="model_ids == False" context="{'model_ids': model_ids, 'related_model_domain_ids': related_model_domain_ids}" options="{'no_create_edit': True, 'no_create': True}">
+                                    <list string="Field Aliases" editable="bottom" limit="5">
+                                        <control>
+                                            <create name="add_line_control" string="Add a field"/>
+                                        </control>
+                                        <field name="model_id" domain="['|', ('id', 'in', context.get('model_ids', [])), ('id', 'in', context.get('related_model_domain_ids', []))]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                        <field name="field_id" domain="[('model_id', '=', model_id)]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                        <field name="field_name" readonly="1"/>
+                                        <field name="alias"/>
+                                    </list>
+                                </field>
+                            </group>
+                            <!-- <field name="field_ids" colspan="2" nolabel="1" domain="[('model_id', 'in', model_ids)]" invisible="(model_ids == False) or (allowed_field_type == 'all')" options="{'no_create_edit': True, 'no_create': True}" width="80%"> -->
+                            <label for="field_ids" colspan="2" invisible="(model_ids == False) or (allowed_field_type == 'all')"/><span class="text-muted" invisible="(model_ids == False) or (allowed_field_type == 'all')">Limit the exposed fields</span>
+                            <field name="field_ids" colspan="2" nolabel="1" domain="[('model_id', 'in', model_ids)]" invisible="(model_ids == False) or (allowed_field_type == 'all')" options="{'no_create_edit': True, 'no_create': True}">
+                                <list string="Fields" editable="bottom" limit="15" default_order="model_id asc">
+                                    <control>
+                                        <create name="add_line_control" string="Add a field"/>
+                                    </control>
+                                    <field name="model_id" readonly="1"/>
+                                    <field name="field_description" readonly="1"/>
+                                    <field name="name" readonly="1"/>                                        
+                                    <field name="ttype" readonly="1"/>
+                                    <field name="required" readonly="1"/>
+                                    <field name="relation" readonly="1"/>
+                                </list>
+                            </field>
+                        </group>
+
+                        <group name="related_model_field_ids" string="Fields on Related Models" invisible="api_action in ['delete', 'rpc']">
+                            <div class="text-muted" colspan="2">
+                                When configured, this extracts and includes specific fields from related models in the API response. For example, instead of just returning foreign key ID and name, you can include selected fields from the related record.
+                                <br/><br/>
+                                <b>Example:</b> If you select fields "id", "name", "email" and "website" from model "res.company", the response will include:
+                                <pre style="background-color: #f8f9fa; padding: 8px; border-radius: 4px; font-size: 12px; color: #444444">
+{ # ...
+  "result": { # ...    
+    "company_id": [2, {
+        "id": 2,
+        "name": "Example Company",
+        "email": "company@example.com",
+        # ...
+    }]
+  }
+}</pre>
+                                Instead of just: <code>{"company_id": [2, "Example Company"]}</code>
+                            </div>
+                            <field name="related_model_field_ids" colspan="2" nolabel="1" invisible="related_model_domain_ids == False" context="{'related_model_domain_ids': related_model_domain_ids}" options="{'no_create_edit': True, 'no_create': True}">
+                                <list string="Related Model Fields" editable="bottom" limit="15">
+                                    <control>
+                                        <create name="add_line_control" string="Add a field"/>
+                                    </control>
+                                    <field name="model_id" domain="[('id', 'in', context.get('related_model_domain_ids', []))]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                    <field name="field_ids" widget="many2many_tags" domain="[('model_id', '=', model_id)]" options="{'no_create_edit': True, 'no_create': True}"/>
+                                </list>
+                            </field>
+                        </group>
+
+                        <group name="api_info_endpoint" string="Endpoints">
+                            <field name="endpoint_ids" colspan="2" nolabel="1" options="{'no_create_edit': True}" readonly="1">
+                                <list string="Endpoints" default_order="http_method_id asc" create="0" edit="0" delete="0">
+                                    <control>
+                                        <create name="add_line_control" string="Add an endpoint"/>
+                                    </control>
+                                    <field name="http_method_id" readonly="1"/>
+                                    <field name="route" readonly="1"/>
+                                    <field name="data" readonly="1"/>
+                                    <field name="api_action" readonly="1"/>
+                                    <field name="is_bulk_operation" readonly="1"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'active'" decoration-danger="state == 'inactive'"/>
+                                    <button name="action_deactivate" type="object" string="Deactivate" icon="fa-ban" invisible="state == 'inactive'" class="btn btn-secondary oe_edit_only"/>
+                                    <button name="action_activate" type="object" string="Activate" icon="fa-check" invisible="state == 'active'" class="btn btn-primary oe_edit_only"/>
+                                    <!-- <field name="curl" readonly="1" widget="CopyClipboardChar" style="width: 30%%"/> -->
+                                    <!-- <button name="btn_test_endpoint" type="object" string="Test Endpoint" class="oe_highlight"/> -->
+                                </list>
+                            </field>
+                        </group>
+                        <group invisible="state != 'published'">
+                            <group string="Test Params">
+                                <field name="is_multi_model" invisible="1"/>
+                                <field name="live_test_method" placeholder="HTTP Method (GET, POST, PATCH, DELETE)" invisible="api_action not in ['rpc', 'rest']"/>
+                                <field name="live_test_model" placeholder="Model name (e.g., res.partner)" invisible="is_multi_model == False"/>
+                                <field name="live_test_id" placeholder='Record ID or ID with params (e.g., 5 or 5?filter=active)' invisible="(is_multi_model == True) or (api_action in ['search', 'create'])"/>
+                                <field name="live_test_ids" placeholder="Multiple IDs (e.g., 1,2,3)" invisible="(is_multi_model == False) and (api_action != 'read') or (api_action in ['search'])"/>
+                                <field name="live_test_data" placeholder='{"field": "value", "another_field": 123}' invisible="api_action in ['search', 'read', 'delete']"/>
+                                <field name="live_test_domain" placeholder='[("id", ">", 0)]' invisible="api_action not in ['search', 'rest']"/>
+                                <field name="live_test_offset" placeholder="Starting position (e.g., 0)" invisible="api_action not in ['search', 'rest']"/>
+                                <field name="live_test_limit" placeholder="Number of records (e.g., 10)" invisible="api_action not in ['search', 'rest']"/>
+                                <field name="live_test_order" placeholder="name asc, id desc" invisible="api_action not in ['search', 'rest']"/>
+                                <br/>
+                                <button name="btn_live_test" type="object" string="TEST API" class="oe_highlight" icon="fa-play" colspan="2"/>
+                                <br/>
+                                <span invisible="(api_action in ['search', 'read']) or (mode == 'test')" colspan="2" class="o_form_label" style="font-weight: bold; font-style: italic; color: #d9534f;">⚠️ Warning: Testing on production may modify data</span>
+                            </group>
+                            <group string="Test Result">
+                                <label for="live_test_curl_command" colspan="2" invisible="live_test_curl_command == False"/>
+                                <field name="live_test_curl_command" colspan="2" nolabel="1" readonly="1" widget="CopyClipboardChar" invisible="live_test_curl_command == False"/>
+                                <label for="live_test_response" colspan="2"/>
+                                <field name="live_test_response" colspan="2" nolabel="1" rows="5" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Test History" invisible="state != 'published'">
+                            <field name="test_ids" colspan="2" nolabel="1" options="{'no_create_edit': True}" readonly="1">
+                                <list string="Test History" default_order="write_date desc" create="0" edit="0" delete="0" form_view_ref="secure_api.secure_api_test_form_view">
+                                    <control>
+                                        <create name="add_line_control" string="Add a test"/>
+                                    </control>
+                                    <field name="live_test_method" string="Method" readonly="1"/>
+                                    <field name="name" style="max-width:10vw;" readonly="1"/>
+                                    <!-- <field name="api_action" /> -->                                                                                    
+                                    <!-- <field name="live_test_computed_ids" /> -->
+                                    <field name="live_test_computed_list_data" style="max-width:10vw;" readonly="1"/>
+                                    <field name="status" readonly="1"/>
+                                    <field name="status_text" readonly="1"/>
+                                    <field name="response" style="max-width:15vw;" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="secure_api_tree_view" model="ir.ui.view">
+            <field name="name">secure_api_tree_view</field>
+            <field name="model">secure.api</field>
+            <field name="arch" type="xml">
+                <!-- <list string="APIs" default_order="create_date desc"> -->
+                <list string="APIs">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="route"/>
+                    <field name="api_action"/>
+                    <field name="model_ids" widget="many2many_tags"/>
+                    <field name="allowed_field_type"/>
+                    <field name="method_ids" widget="many2many_tags"/>
+                    <field name="rpc_method" optional="show"/>
+                    <field name="is_secure_record_id" optional="show"/>
+                    <field name="auth" optional="show"/>
+                    <field name="cors" optional="show"/>
+                    <field name="security_user_id" optional="show"/>
+                    <field name="category_id"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="mode"/>
+                    <field name="state" widget="badge" decoration-success="state == 'published'" decoration-warning="state == 'deactivated'" decoration-muted="state == 'draft'"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="secure_api_tree_filter" model="ir.ui.view">
+            <field name="name">secure_api_tree_filter</field>
+            <field name="model">secure.api</field>
+            <field name="arch" type="xml">
+                <search string="APIs">
+                    <field name="name" string="API Name or Route" filter_domain="['|',('name','ilike',self),('route','ilike',self)]"/>
+                    <field name="model_ids" string="Model"/>
+                    <field name="category_id" string="Category"/>
+                    <filter string="Auth User" name="auth_user" domain="[('auth', '=', 'user')]" help="APIs for user"/>
+                    <filter string="Auth Public" name="auth_public" domain="[('auth', '=', 'none')]" help="APIs for public user"/>
+                    <separator/>
+                    <filter string="Active APIs" name="active_api" domain="[('active', '=', True)]" help="Active APIs"/>
+                    <filter string="Inactive APIs" name="inactive_api" domain="[('active', '=', False)]" help="Inactive APIs"/>
+                    <separator/>
+                    <filter string="REST APIs" name="api_action_rest" domain="[('api_action', '=', 'rest')]" help="REST APIs"/>
+                    <filter string="Search APIs" name="api_action_search" domain="[('api_action', '=', 'search')]" help="Search APIs"/>
+                    <filter string="Create record APIs" name="api_action_create" domain="[('api_action', '=', 'create')]" help="Create record APIs"/>
+                    <filter string="Read record APIs" name="api_action_read" domain="[('api_action', '=', 'read')]" help="Read record APIs"/>
+                    <filter string="Update record APIs" name="api_action_update" domain="[('api_action', '=', 'update')]" help="Update record APIs"/>
+                    <filter string="Delete record APIs" name="api_action_delete" domain="[('api_action', '=', 'delete')]" help="Delete record APIs"/>
+                    <filter string="RPC APIs" name="api_action_rpc" domain="[('api_action', '=', 'rpc')]" help="RPC APIs"/>
+                    <group>
+                        <filter string="Category" name="grp_category_id" domain="[]" context="{'group_by': 'category_id'}"/>
+                        <filter string="API Type" name="grp_api_action" domain="[]" context="{'group_by': 'api_action'}"/>
+                        <filter string="Obfuscated IDs" name="grp_is_secure_record_id" domain="[]" context="{'group_by': 'is_secure_record_id'}"/>
+                        <filter string="Authentication" name="grp_auth" domain="[]" context="{'group_by': 'auth'}"/>
+                        <filter string="CORS" name="grp_cors" domain="[]" context="{'group_by': 'cors'}"/>
+                        <filter string="Run as User" name="grp_security_user_id" domain="[]" context="{'group_by': 'security_user_id'}"/>
+                        <filter string="State" name="grp_state" domain="[]" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_secure_api" model="ir.actions.act_window">
+            <field name="name">APIs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">secure.api</field>
+            <field name="search_view_id" ref="secure_api_tree_filter"/>
+        </record>
+
+        <menuitem id="menu_secure_api"
+            name="APIs"
+            sequence="100"
+            groups="base.group_system"/>
+
+        <menuitem id="menu_secure_api_secure_api"
+            name="APIs"
+            action="action_secure_api"
+            sequence="10"
+            parent="menu_secure_api"
+            groups="base.group_system"/>
+
+        <!-- Config menu and sub menus -->
+        <menuitem id="menu_secure_api_configuration"
+            name="Configuration"
+            parent="menu_secure_api"
+            sequence="100"
+            groups="base.group_system"/>
+    </data>
+</odoo>

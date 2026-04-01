@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- VUE Search -->
+        <record id="view_audit_gainde_corrective_action_search" model="ir.ui.view">
+            <field name="name">audit_gainde.corrective.action.search</field>
+            <field name="model">audit_gainde.corrective.action</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="reference"/>
+                    <field name="state"/>
+                    <field name="responsible_id"/>
+                    <field name="recommendation_id"/>
+
+                    <!-- Filtre Mes actions correctives -->
+                    <filter
+                        name="my_corrective_actions"
+                        string="Mes correctives actions"
+                        domain="[('responsible_id','=',uid)]"
+                    />
+
+                </search>
+            </field>
+        </record>
+
+        <!-- VUE LIST -->
+        <record id="view_audit_gainde_corrective_action_list" model="ir.ui.view">
+            <field name="name">audit_gainde.corrective.action.list</field>
+            <field name="model">audit_gainde.corrective.action</field>
+            <field name="arch" type="xml">
+                <list string="Actions correctives">
+                    <field name="reference"/>
+                    <field name="recommendation_id"/>
+                    <field name="responsible_id"/>
+                    <field name="date_target"/>
+                    <field name="days_delayed" decoration-danger="days_delayed > 0"/>
+                    <field name="progress" widget="progressbar"/>
+                    <field name="state" widget="badge"/>
+                    <field name="priority" widget="priority"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- VUE FORMULAIRE -->
+        <record id="view_audit_gainde_corrective_action_form" model="ir.ui.view">
+            <field name="name">audit_gainde.corrective.action.form</field>
+            <field name="model">audit_gainde.corrective.action</field>
+            <field name="arch" type="xml">
+                <form string="Action corrective">
+                    <header>
+                        <button name="action_planned" string="Planifier"
+                                type="object"
+                                invisible="state not in ['in_progress']"/>
+                        <button name="action_in_progress" string="Démarrer"
+                                type="object"
+                                invisible="state not in ['planned', 'completed']"/>
+                        <button name="action_completed" string="Terminée"
+                                type="object" class="btn-success"
+                                invisible="state not in ['verified', 'in_progress']"/>
+                        <button name="action_verify" string="Vérifier"
+                                type="object" class="btn-info"
+                                invisible="state not in ['completed', 'closed']"/>
+                        <button name="action_close" string="Clôturer"
+                                type="object" class="btn-success"
+                                invisible="state not in ['verified']"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                          <group>
+                            <field name="reference"/>
+                          </group>
+                        <group>
+                            <group>
+                                <field name="recommendation_id"/>
+                                <field name="responsible_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="date_start"/>
+                                <field name="date_completed"/>
+                            </group>
+                            <group>
+                                <field name="progress" widget="progressbar"/>
+                                <field name="days_delayed" decoration-danger="days_delayed > 0"/>
+                                
+                                <field name="date_target"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="notes"/>
+                                </group>
+                            </page>
+                            <page string="Pièces jointes (preuves de correction)">
+                                
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_audit_gainde_corrective_action_kanban" model="ir.ui.view">
+    <field name="name">audit_gainde.corrective.action.kanban</field>
+    <field name="model">audit_gainde.corrective.action</field>
+    <field name="arch" type="xml">
+        <!-- default_group_by permet d'afficher le pipeline -->
+        <kanban default_group_by="state">
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record">
+
+                        <div class="o_kanban_record_title">
+                            <strong><field name="reference"/></strong>
+                        </div>
+
+                        <div class="o_kanban_record_body">
+                            <div>
+                                <strong>Mission :</strong>
+                                <field name="mission_id"/>
+                            </div>
+
+                            <div>
+                                <strong>Constat :</strong>
+                                <field name="finding_id"/>
+                            </div>
+
+                            <div>
+                                <strong>Recommandation :</strong>
+                                <field name="recommendation_id"/>
+                            </div>
+
+                            <div><strong>Etat :</strong> <field name="state"/></div>
+                            <div><strong>Date cible :</strong> <field name="date_completed"/></div>
+                        </div>
+
+                        <!-- bas droite -->
+                        <div class="o_kanban_record_bottom">
+                            <div class="o_kanban_bottom_right">
+                                <span class="badge bg-primary">
+                                    Responsable: <field name="responsible_id"/>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+        <!-- ACTION -->
+        <record id="action_audit_gainde_corrective_action" model="ir.actions.act_window">
+            <field name="name">Suivi des actions correctives</field>
+            <field name="res_model">audit_gainde.corrective.action</field>
+            <field name="view_mode">list,form,kanban</field>
+            <field name="context">{'search_default_my_corrective_actions': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Créez votre première action corrective !
+                </p>
+            </field>
+        </record>
+
+        <!-- MENU -->
+        <menuitem id="menu_audit_gainde_corrective_actions"
+                  name="Actions correctives"
+                  parent="menu_audit_gainde_missions"
+                  action="action_audit_gainde_corrective_action"
+                  sequence="50"/>
+    </data>
+</odoo>

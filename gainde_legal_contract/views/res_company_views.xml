@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_inherit_sign_cert" model="ir.ui.view">
+        <field name="name">res.company.form.inherit.sign.cert</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <!-- On retire 'groups' pour être sûr que l'admin le voit -->
+                <page string="Signature GED" name="sig_ged">
+                    <group>
+                        <field name="sign_certificate_filename" invisible="1"/>
+                        <field name="sign_certificate_file"
+                               filename="sign_certificate_filename"
+                               widget="binary"/>
+                        <field name="sign_certificate_password"
+                               password="True"
+                               invisible="not sign_certificate_file"/>
+                        <button name="action_test_certificate"
+                                type="object"
+                                string="Tester le certificat"
+                                class="btn-primary"
+                                icon="fa-check"
+                                invisible="not sign_certificate_file"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

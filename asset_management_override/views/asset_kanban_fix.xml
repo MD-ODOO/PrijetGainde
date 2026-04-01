@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="asset_management_kanban_fix_overflow" model="ir.ui.view">
+            <field name="name">asset.management.kanban.fix.overflow</field>
+            <field name="model">asset.management</field>
+            <field name="inherit_id" ref="asset_management.view_asset_kanban"/>
+            <field name="arch" type="xml">
+                <!-- Fixer la largeur des cartes -->
+                <xpath expr="//div[@class='oe_kanban_global_click o_kanban_card oe_kanban_content']" position="attributes">
+                    <attribute name="style">max-width: 350px; min-width: 300px; overflow: hidden;</attribute>
+                </xpath>
+                
+                <!-- Limiter la largeur du titre avec ellipsis -->
+                <xpath expr="//strong[@class='text-truncate d-block']" position="attributes">
+                    <attribute name="style">font-size: 1.1em; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block;</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

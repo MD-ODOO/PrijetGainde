@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_gainde_hr_expense_sheet_approval_route_admin" model="ir.ui.view">
+        <field name="name">hr.expense.sheet.approval.route.admin.only</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="xf_approval_route_expense.hr_expense_sheet_approval_form"/>
+        <field name="arch" type="xml">
+            <page name="approval_route" position="attributes">
+                <attribute name="invisible">not is_admin_ui</attribute>
+            </page>
+            <field name="approval_route_stage_ids" position="attributes">
+                <attribute name="readonly">not is_admin_ui</attribute>
+            </field>
+            <field name="approval_route_stage_ids" position="inside">
+                <list>
+                    <field name="sequence" readonly="1"/>
+                    <field name="name" readonly="1"/>
+                    <field name="user_ids" readonly="not is_admin_ui"/>
+                    <field name="state" readonly="1"/>
+                    <field name="decisions_summary" readonly="1"/>
+                </list>
+            </field>
+        </field>
+    </record>
+</odoo>
