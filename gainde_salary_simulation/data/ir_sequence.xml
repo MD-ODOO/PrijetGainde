@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_gainde_salary_simulation" model="ir.sequence">
+        <field name="name">Simulation de salaire</field>
+        <field name="code">gainde.salary.simulation</field>
+        <field name="prefix">SIM-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+</odoo>
