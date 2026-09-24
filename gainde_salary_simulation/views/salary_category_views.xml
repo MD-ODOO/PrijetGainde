@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gainde_salary_category_list" model="ir.ui.view">
+        <field name="name">gainde.salary.category.list</field>
+        <field name="model">gainde.salary.category</field>
+        <field name="arch" type="xml">
+            <list string="Catégories socio-professionnelles">
+                <field name="sequence" optional="hide"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="base_salary" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="currency_id" optional="hide"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_gainde_salary_category_form" model="ir.ui.view">
+        <field name="name">gainde.salary.category.form</field>
+        <field name="model">gainde.salary.category</field>
+        <field name="arch" type="xml">
+            <form string="Catégorie socio-professionnelle">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="base_salary" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group><field name="note" placeholder="Grille ou convention de référence..."/></group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_gainde_salary_category" model="ir.actions.act_window">
+        <field name="name">Catégories socio-professionnelles</field>
+        <field name="res_model">gainde.salary.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('active', '=', True)]</field>
+    </record>
+</odoo>
