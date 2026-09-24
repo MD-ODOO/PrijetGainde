@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_gainde_salary_simulation"
+        name="Simulations de salaire"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_root"
+        action="action_gainde_salary_simulation"
+        sequence="75"
+        groups="hr_payroll.group_hr_payroll_user"/>
+    <menuitem
+        id="menu_gainde_salary_simulation_category"
+        name="Catégories socio-professionnelles"
+        parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+        action="action_gainde_salary_category"
+        sequence="90"
+        groups="hr_payroll.group_hr_payroll_manager"/>
+</odoo>
