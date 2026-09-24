@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_gainde_salary_simulation_list" model="ir.ui.view">
+        <field name="name">gainde.salary.simulation.list</field>
+        <field name="model">gainde.salary.simulation</field>
+        <field name="arch" type="xml">
+            <list string="Simulations de salaire">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="category_id"/>
+                <field name="status"/>
+                <field name="net_target" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="gross" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="ir_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="trimf_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="ipres_rg" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="ipres_rc" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="net_to_pay" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="currency_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_gainde_salary_simulation_form" model="ir.ui.view">
+        <field name="name">gainde.salary.simulation.form</field>
+        <field name="model">gainde.salary.simulation</field>
+        <field name="arch" type="xml">
+            <form string="Simulation de salaire net">
+                <header>
+                    <button name="action_recompute" type="object" string="Recalculer" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group string="Paramètres de simulation">
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="category_id"/>
+                            <field name="status"/>
+                            <field name="net_target" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group>
+                            <field name="marital"/>
+                            <field name="children_count"/>
+                            <field name="spouse_has_income" invisible="marital != 'married'"/>
+                            <field name="part_ir" readonly="1"/>
+                            <field name="trimf_parts" readonly="1"/>
+                        </group>
+                    </group>
+                    <separator string="Simulation"/>
+                    <group>
+                        <group string="Éléments de salaire">
+                            <field name="base_salary" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="sursalaire" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="ir_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="trimf_amount" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="ipres_rg" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="ipres_rc" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="transport" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        </group>
+                        <group string="Résultat">
+                            <field name="gross" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="net_before_transport" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="net_to_pay" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="note" readonly="1" nolabel="1"/>
+                        </group>
+                    </group>
+                    <field name="currency_id" invisible="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_gainde_salary_simulation" model="ir.actions.act_window">
+        <field name="name">Simulations de salaire</field>
+        <field name="res_model">gainde.salary.simulation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
